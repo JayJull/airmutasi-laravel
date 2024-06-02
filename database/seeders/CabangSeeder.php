@@ -55,6 +55,9 @@ class CabangSeeder extends Seeder
             'nama' => 'Yogyakarta',
             'alamat' => 'Jl. Malioboro No. 1',
             'thumbnail' => '/cabang/yogyakarta.png',
+            'jumlah_personel' => 100,
+            'formasi' => 200,
+            'frms' => 10,
         ]);
         CabangCoord::create([
             'cabang_id' => 1,
@@ -65,11 +68,17 @@ class CabangSeeder extends Seeder
             'nama' => 'Sleman',
             'alamat' => 'Jl. Kaliurang No. 1',
             'thumbnail' => '/cabang/sleman.png',
+            'jumlah_personel' => 200,
+            'formasi' => 300,
+            'frms' => 20,
         ]);
         Cabang::create([
             'nama' => 'Surabaya',
             'alamat' => 'Jl. Gubeng No. 1',
             'thumbnail' => '/cabang/surabaya.png',
+            'jumlah_personel' => 300,
+            'formasi' => 400,
+            'frms' => 30,
         ]);
         CabangCoord::create([
             'cabang_id' => 3,
@@ -80,6 +89,9 @@ class CabangSeeder extends Seeder
             'nama' => 'Semarang',
             'alamat' => 'Jl. Pemuda No. 1',
             'thumbnail' => '/cabang/semarang.png',
+            'jumlah_personel' => 400,
+            'formasi' => 500,
+            'frms' => 40,
         ]);
         CabangCoord::create([
             'cabang_id' => 4,

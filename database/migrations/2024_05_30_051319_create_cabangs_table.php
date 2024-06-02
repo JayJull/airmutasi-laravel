@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('nama');
             $table->text("alamat");
             $table->string('thumbnail');
+            $table->integer("jumlah_personel");
+            $table->integer("formasi");
+            $table->integer("frms");
             $table->timestamps();
         });
     }

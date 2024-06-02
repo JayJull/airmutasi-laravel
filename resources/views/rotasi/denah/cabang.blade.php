@@ -16,6 +16,9 @@
                     {{-- <img src="/images/icons/Full Image.svg" alt="image" /> --}}
                     <img src="/storage/{{ $cabang->thumbnail }}" alt="foto cabang" class="w-full h-full object-cover rounded-lg">
                 </div>
+                <h1 id="nama" class="text-white p-2 font-semibold text-lg">
+                    {{ $cabang->nama }}
+                </h1>
                 <p class="text-white p-2">
                     {{ $cabang->alamat }}
                 </p>
@@ -27,11 +30,19 @@
                 <div class="flex items-center justify-center bg-white rounded-lg p-4">
                     <img src="/images/icons/Bell Curve.svg" alt="image" />
                 </div>
-                <div class="flex items-center justify-center bg-white rounded-lg p-4">
-                    <img src="/images/icons/Businessman.svg" alt="image" />
-                </div>
-                <div class="flex items-center justify-center bg-white rounded-lg p-4">
-                    <img src="/images/icons/Businessman.svg" alt="image" />
+                <div class="col-span-2 grid grid-cols-2 gap-2 bg-white rounded-lg p-4">
+                    <div>
+                        <h2>Jumlah Personel</h2>
+                        <p>{{ $cabang->jumlah_personel }} Orang</p>
+                    </div>
+                    <div>
+                        <h2>Formasi</h2>
+                        <p>{{ $cabang->formasi }} Orang</p>
+                    </div>
+                    <div>
+                        <h2>Prediksi personel</h2>
+                        <p>{{ $cabang->jumlah_personel + count($cabang->in) - count($cabang->out) }}</p>
+                    </div>
                 </div>
             </aside>
         </section>

@@ -53,6 +53,10 @@ class SelektifAdminController extends Controller
         } else if ($request->status == 'diterima') {
             $pengajuan->status = 'diterima';
             $pengajuan->save();
+            $pengajuan->lokasiAwal->jumlah_personel -= 1;
+            $pengajuan->lokasiAwal->save();
+            $pengajuan->lokasiTujuan->jumlah_personel += 1;
+            $pengajuan->lokasiTujuan->save();
             return redirect()->back()->with('success', 'Data berhasil diupdate');
         }
         return redirect()->back();
