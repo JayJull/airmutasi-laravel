@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Cabang;
+use App\Models\CabangCoord;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -54,6 +55,9 @@ class CabangSeeder extends Seeder
             'nama' => 'Yogyakarta',
             'alamat' => 'Jl. Malioboro No. 1',
             'thumbnail' => '/cabang/yogyakarta.png',
+        ]);
+        CabangCoord::create([
+            'cabang_id' => 1,
             'latitude' => -7.7956,
             'longitude' => 110.3695,
         ]);
@@ -61,14 +65,14 @@ class CabangSeeder extends Seeder
             'nama' => 'Sleman',
             'alamat' => 'Jl. Kaliurang No. 1',
             'thumbnail' => '/cabang/sleman.png',
-            'latitude' => -7.7328,
-            'longitude' => 110.3773,
-            'cabang_induk_id' => 1,
         ]);
         Cabang::create([
             'nama' => 'Surabaya',
             'alamat' => 'Jl. Gubeng No. 1',
             'thumbnail' => '/cabang/surabaya.png',
+        ]);
+        CabangCoord::create([
+            'cabang_id' => 3,
             'latitude' => -7.2575,
             'longitude' => 112.7521,
         ]);
@@ -76,6 +80,9 @@ class CabangSeeder extends Seeder
             'nama' => 'Semarang',
             'alamat' => 'Jl. Pemuda No. 1',
             'thumbnail' => '/cabang/semarang.png',
+        ]);
+        CabangCoord::create([
+            'cabang_id' => 4,
             'latitude' => -6.9932,
             'longitude' => 110.4203,
         ]);

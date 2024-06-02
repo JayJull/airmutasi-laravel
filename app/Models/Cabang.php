@@ -9,14 +9,9 @@ class Cabang extends Model
 {
     use HasFactory;
 
-    public function induk()
+    public function coord()
     {
-        return $this->belongsTo(Cabang::class, 'cabang_induk_id');
-    }
-
-    public function anak()
-    {
-        return $this->hasMany(Cabang::class, 'cabang_induk_id');
+        return $this->hasOne(CabangCoord::class);
     }
 
     public function in()

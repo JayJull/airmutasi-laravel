@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cabangs', function (Blueprint $table) {
+        Schema::create('cabang_coords', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->text("alamat");
-            $table->string('thumbnail');
+            $table->foreignId('cabang_id')->constrained('cabangs');
+            $table->decimal('latitude', 10, 8);
+            $table->decimal('longitude', 11, 8);
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cabangs');
+        Schema::dropIfExists('cabang_coords');
     }
 };

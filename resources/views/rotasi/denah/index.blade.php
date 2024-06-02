@@ -16,8 +16,8 @@
             <div id="map" class="w-full h-full z-40"></div>
         </section>
         <section class="p-4 flex flex-col items-center gap-2 bg-[#29367688]">
-            <input id="search" class="w-full sm:w-3/4 md:w-2/3 border-[6px] rounded-xl px-2 py-1 border-[#293676]" type="search"
-                placeholder="Search ..." />
+            <input id="search" class="w-full sm:w-3/4 md:w-2/3 border-[6px] rounded-xl px-2 py-1 border-[#293676]"
+                type="search" placeholder="Search ..." />
             <section class="w-full sm:w-3/4 md:w-2/3 flex flex-col-reverse sm:flex-row gap-2 sm:max-h-[50vh]">
                 <aside id="anak-cabang"
                     class="bg-[#293676] sm:max-w-[50%] h-[50vh] sm:h-auto flex-grow text-[#474747] p-2 rounded-xl flex flex-col gap-2 overflow-y-auto">
@@ -31,6 +31,7 @@
                         <img id="thumbnail-placeholder" src="/images/icons/Full Image.svg" alt="image" />
                         <img id="thumbnail" class="hidden w-full h-full object-cover" />
                     </div>
+                    <h1 id="nama" class="text-white px-2 font-semibold text-lg hidden"></h1>
                     <p id="alamat" class="text-white p-2">
                         Pilih Cabang
                     </p>
@@ -53,9 +54,11 @@
             document.getElementById('alamat').innerText = cabang.alamat;
             document.getElementById('detail').classList.remove('hidden');
             document.getElementById('detail').href = `/rotasi/denah/${cabang.id}`;
-            if (cabang.anak_cabang) {
-                document.getElementById('anak-cabang').innerHTML = [cabang, ...cabang.anak_cabang].map(cabang =>
-                    `@include('rotasi.components.cabang-item', ['cabang' => false])`).join('');
+            document.getElementById('nama').classList.remove('hidden');
+            document.getElementById('nama').innerText = cabang.nama;
+            if (cabang.longitude || cabang.latitude) {
+                document.getElementById('anak-cabang').innerHTML = `@include('rotasi.components.cabang-item', ['cabang' => false])`;
+                document.getElementById("search").value = cabang.nama;
             }
         }
 

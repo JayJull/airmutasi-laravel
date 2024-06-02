@@ -33,22 +33,14 @@ class DenahController extends Controller
     }
     public function listCabangInduk()
     {
-        $cabang = Cabang::whereNull('cabang_induk_id')->get()->map(function ($cabang) {
+        $cabang = Cabang::has("coord")->get()->map(function ($cabang) {
             return [
                 'id' => $cabang->id,
                 'nama' => $cabang->nama,
                 'alamat' => $cabang->alamat,
                 'thumbnail' => $cabang->thumbnail,
-                'latitude' => $cabang->latitude,
-                'longitude' => $cabang->longitude,
-                'anak_cabang' => $cabang->anak->map(function ($anak) {
-                    return [
-                        'id' => $anak->id,
-                        'nama' => $anak->nama,
-                        'alamat' => $anak->alamat,
-                        'thumbnail' => $anak->thumbnail
-                    ];
-                })
+                'latitude' => $cabang->coord->latitude,
+                'longitude' => $cabang->coord->longitude,
             ];
         });
         return response()->json($cabang);
