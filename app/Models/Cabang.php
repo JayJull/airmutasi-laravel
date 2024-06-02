@@ -16,11 +16,11 @@ class Cabang extends Model
 
     public function in()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id');
+        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')->where('status', '=', 'dapat');
     }
     
     public function out()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id');
+        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')->where('status', '=', 'dapat');
     }
 }

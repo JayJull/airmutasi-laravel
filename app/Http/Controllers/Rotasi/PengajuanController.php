@@ -44,7 +44,7 @@ class PengajuanController extends Controller
         ]);
 
         $pengajuan = $request->all();
-        $pengajuan['status'] = 'selektif';
+        $pengajuan['status'] = 'diajukan';
         Pengajuan::create($pengajuan);
 
         return redirect()->route("rotasi.denah")->with('success', 'Data berhasil disimpan');

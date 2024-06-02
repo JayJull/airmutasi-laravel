@@ -17,7 +17,7 @@
                 ? 'Mohon isi semua kolom'
                 : (str_contains($errors->first(), 'must be a number')
                     ? 'Terdapat format data yang salah'
-                    : 'Terjadi kesalahan, mohon coba lagi'),
+                    : $errors->first()),
         ])
     @endif
     @if (count($pengajuans) > 0)
@@ -60,11 +60,16 @@
         <section class="flex flex-col-reverse md:grid md:grid-cols-2 m-4 gap-4 md:h-screen">
             <aside
                 class="flex flex-col {{ count($pengajuans) === 0 ? 'justify-center col-span-2' : '' }} gap-2 bg-white text-[#474747] border-2 border-[#DEDEDE] rounded-xl p-2 h-[50vh] md:h-full overflow-y-auto">
+                <div class="py-2 w-full flex gap-2 {{ count($pengajuans) === 0 ? 'justify-center' : ''}}">
+                    <a class="text-blue-500 {{ !$tab || $tab === 'diajukan' ? 'underline' : '' }}" href="/rotasi/selektif">Diajukan</a>
+                    <a class="text-blue-500 {{ $tab === 'dapat' ? 'underline' : '' }}" href="/rotasi/selektif?tab=dapat">Dapat</a>
+                    <a class="text-blue-500 {{ $tab === 'tidak_dapat' ? 'underline' : '' }}" href="/rotasi/selektif?tab=tidak_dapat">Tidak Dapat</a>
+                </div>
                 @if (count($pengajuans) === 0)
                     <h1 class="font-bold text-2xl text-center">Tidak Ada Pengajuan</h1>
                 @endif
                 @foreach ($pengajuans as $currPengajuan)
-                    <a href="/rotasi/selektif?id={{ $currPengajuan->id }}"
+                    <a href="/rotasi/selektif?id={{ $currPengajuan->id }}{{ $tab ? '&tab=' . ($tab === 'dapat' ? 'dapat' : ($tab === 'tidak_dapat' ? 'tidak_dapat' : '')) : '' }}"
                         class="pengajuan-item border-2 {{ $currPengajuan->id === $pengajuan->id ? 'pengajuan-active border-slate-700' : '' }} bg-[#D6D6D6] px-8 py-3 rounded-lg flex flex-col sm:flex-row items-center justify-between gap-2">
                         <aside class="flex flex-col items-center sm:items-start">
                             <h3 class="font-semibold text-lg">{{ $currPengajuan->nama_lengkap }}</h3>
@@ -106,13 +111,19 @@
                     <button type="button" class="bg-[#293676] text-white px-6 py-2 font-semibold rounded-lg"
                         popovertarget="detail-pengajuan">Detail</button>
                     <div>
-                        <h2 class="font-semibold">Status Pemindahan</h2>
-                        <input type="radio" name="status" id="dapat" value="dapat"
-                            {{ old('status') == 'dapat' ? 'checked' : '' }} />
-                        <label for="dapat">Dapat Pemindahan</label><br />
-                        <input type="radio" name="status" id="tidak_dapat" value="tidak"
-                            {{ old('status') == 'tidak' ? 'checked' : '' }} />
-                        <label for="tidak_dapat">Tidak Dapat Pemindahan</label>
+                        @if ($tab === 'dapat')
+                            <h2 class="font-semibold">Status Pemindahan</h2>
+                            <input type="checkbox" name="status" id="diterima" value="diterima">
+                            <label for="diterima">Diterima</label><br />
+                        @else
+                            <h2 class="font-semibold">Status Pemindahan</h2>
+                            <input type="radio" name="status" id="dapat" value="dapat"
+                                {{ old('status') == 'dapat' ? 'checked' : '' }} />
+                            <label for="dapat">Dapat Pemindahan</label><br />
+                            <input type="radio" name="status" id="tidak_dapat" value="tidak"
+                                {{ old('status') == 'tidak' ? 'checked' : '' }} />
+                            <label for="tidak_dapat">Tidak Dapat Pemindahan</label>
+                        @endif
                     </div>
                     <div id="keterangan-field" class="hidden">
                         <label class="font-semibold" for="keterangan">Keterangan Penolakan</label>
@@ -136,13 +147,14 @@
                 if (radio.value === "dapat") {
                     document.getElementById("keterangan-field").classList.add("hidden");
                     document.getElementById("rekomendasi-field").classList.add("hidden");
-                } else {
+                } else if (radio.value === "tidak") {
                     document.getElementById("keterangan-field").classList.remove("hidden");
                     document.getElementById("rekomendasi-field").classList.remove("hidden");
                 }
             });
         });
-        if (document.querySelector('input[name="status"]:checked').value === "tidak") {
+        if (document.querySelector('input[name="status"]:checked') && document.querySelector('input[name="status"]:checked')
+            .value === "tidak") {
             document.getElementById("keterangan-field").classList.remove("hidden");
             document.getElementById("rekomendasi-field").classList.remove("hidden");
         }

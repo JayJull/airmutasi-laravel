@@ -12,33 +12,34 @@ class SelektifAdminController extends Controller
     public function index(Request $request)
     {
         $id = $request->id;
-        $pengajuans = Pengajuan::where('status', 'selektif')->get()->map(function ($pengajuan) {
+        $tab = $request->tab;
+        $pengajuans = Pengajuan::where('status', $tab === "dapat" ? 'dapat' : ($tab === "tidak_dapat" ? "tidak_dapat" : 'diajukan'))->get()->map(function ($pengajuan) {
             $pengajuan->tanggal_pengajuan = Carbon::parse($pengajuan->created_at)->format('d-m-Y');
             return $pengajuan;
         });
         if ($id !== null) {
             $pengajuan = Pengajuan::find($id);
-            if (!$pengajuan || $pengajuan->status !== 'selektif') {
+            if (!$pengajuan || $pengajuan->status !== ($tab === "dapat" ? "dapat" : ($tab === "tidak_dapat" ? "tidak_dapat" : 'diajukan'))) {
                 return redirect()->route('rotasi.selektif');
             }
             $pengajuan->tanggal_pengajuan = Carbon::parse($pengajuan->created_at)->format('d-m-Y');
-            return view('rotasi.selektif.index', ['pengajuans' => $pengajuans, 'pengajuan' => $pengajuan]);
+        }else{
+            $pengajuan = $pengajuans->first();
         }
-        $pengajuan = $pengajuans->first();
-        return view('rotasi.selektif.index', ['pengajuans' => $pengajuans, 'pengajuan' => $pengajuan]);
+        return view('rotasi.selektif.index', ['pengajuans' => $pengajuans, 'pengajuan' => $pengajuan, 'tab' => $tab]);
     }
 
     public function selektif($id, Request $request)
     {
         $request->validate([
-            'status' => 'required|in:dapat,tidak'
+            'status' => 'required|in:dapat,tidak,diterima'
         ]);
         $pengajuan = Pengajuan::find($id);
         if (!$pengajuan) {
             return response()->json(['message' => 'Data not found'], 404);
         }
         if ($request->status == 'dapat') {
-            $pengajuan->status = 'diterima';
+            $pengajuan->status = 'dapat';
             $pengajuan->save();
             return redirect()->back()->with('success', 'Data berhasil diupdate');
         } else if ($request->status == 'tidak') {
@@ -46,7 +47,11 @@ class SelektifAdminController extends Controller
                 'keterangan' => 'required',
                 'rekomendasi' => 'required'
             ]);
-            $pengajuan->status = 'ditolak';
+            $pengajuan->status = 'tidak_dapat';
+            $pengajuan->save();
+            return redirect()->back()->with('success', 'Data berhasil diupdate');
+        } else if ($request->status == 'diterima') {
+            $pengajuan->status = 'diterima';
             $pengajuan->save();
             return redirect()->back()->with('success', 'Data berhasil diupdate');
         }

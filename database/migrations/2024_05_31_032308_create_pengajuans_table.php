@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('kompetensi');
             $table->string('tujuan_rotasi');
             $table->text('keterangan');
-            $table->enum('status', ['selektif', 'diterima', 'ditolak']);
+            $table->enum('status', ['diajukan', 'dapat', 'tidak_dapat', 'diterima']);
             $table->timestamps();
         });
     }
