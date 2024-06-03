@@ -18,15 +18,15 @@
         <section class="p-4 flex flex-col items-center gap-2 bg-[#29367688]">
             <input id="search" class="w-full sm:w-3/4 md:w-2/3 border-[6px] rounded-xl px-2 py-1 border-[#293676]"
                 type="search" placeholder="Search ..." />
-            <section class="w-full sm:w-3/4 md:w-2/3 flex flex-col-reverse sm:flex-row gap-2 sm:max-h-[50vh]">
+            <section class="w-full sm:w-3/4 md:w-2/3 flex flex-col-reverse sm:grid sm:grid-cols-2 gap-2 sm:max-h-[50vh]">
                 <aside id="anak-cabang"
-                    class="bg-[#293676] sm:max-w-[50%] h-[50vh] sm:h-auto flex-grow text-[#474747] p-2 rounded-xl flex flex-col gap-2 overflow-y-auto">
+                    class="bg-[#293676] col-span-2 sm:col-span-1 h-[50vh] sm:h-auto text-[#474747] p-2 rounded-xl flex flex-col gap-2 overflow-y-auto">
                     @foreach ($cabangs as $cabang)
                         @include('rotasi.components.cabang-item', ['cabang' => $cabang])
                     @endforeach
                 </aside>
                 <aside
-                    class="bg-[#293676] sm:max-w-[50%] flex-grow text-[#474747] p-2 rounded-xl flex flex-col gap-2 overflow-y-auto">
+                    class="bg-[#293676] col-span-2 sm:col-span-1 text-[#474747] p-2 rounded-xl flex flex-col gap-2 overflow-y-auto">
                     <div class="flex items-center justify-center bg-white h-40 rounded-lg">
                         <img id="thumbnail-placeholder" src="/images/icons/Full Image.svg" alt="image" />
                         <img id="thumbnail" class="hidden w-full h-full object-cover" />
