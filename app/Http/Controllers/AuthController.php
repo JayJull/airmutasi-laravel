@@ -21,7 +21,7 @@ class AuthController extends Controller
             Auth::login(Auth::user());
             return redirect()->route('landing');
         }
-        return redirect()->route('login')->with('invalid', 'Invalid email or password');
+        return redirect()->route('login')->with('invalid', 'Email atau password salah');
     }
 
     public function logout()

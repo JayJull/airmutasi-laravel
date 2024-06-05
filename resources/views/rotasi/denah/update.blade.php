@@ -8,18 +8,7 @@
 
 <body class="bg-[#CED0FF] font-poppins">
     @include('rotasi.components.header', ['static' => true])
-    @if (session('success'))
-        @include('components.modal', ['message' => session('success')])
-    @endif
-    @if ($errors->any())
-        @include('components.modal', [
-            'message' => str_contains($errors->first(), 'required')
-                ? 'Mohon isi semua kolom'
-                : (str_contains($errors->first(), 'must be a number')
-                    ? 'Terdapat format data yang salah'
-                    : $errors->first()),
-        ])
-    @endif
+    @include('components.modal-component')
     <main class="min-h-[90vh] flex justify-center items-center p-4">
         <form action="/rotasi/denah/input/{{ $cabang->id }}" method="post"
             class="w-2/3 flex flex-col gap-2 bg-white p-4 rounded-lg" enctype="multipart/form-data">

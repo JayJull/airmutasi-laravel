@@ -8,15 +8,7 @@
 
 <body class="bg-[#CED0FF] font-poppins relative">
     @include('rotasi.components.header', ['static' => true])
-    @if ($errors->any())
-        @include('components.modal', [
-            'message' => str_contains($errors->first(), 'required')
-                ? 'Mohon isi semua kolom'
-                : (str_contains($errors->first(), 'must be a number')
-                    ? 'Terdapat format data yang salah'
-                    : 'Terjadi kesalahan, mohon coba lagi'),
-        ])
-    @endif
+    @include('components.modal-component')
     <main>
         <section class="flex flex-col items-center my-4 px-2">
             <div class="w-full md:w-2/3 flex gap-1 flex-col md:flex-row my-2">

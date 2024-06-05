@@ -8,7 +8,7 @@
 
 <body class="bg-[#CED0FF] font-poppins">
     @include('components.header', ['static' => true])
-
+    @include('components.modal-component')
     <main class="w-screen h-[70vh] flex items-center justify-center">
         <form action="/login" method="post" class="flex flex-col gap-2 bg-white p-4 rounded-lg">
             @csrf

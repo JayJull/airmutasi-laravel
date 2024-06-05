@@ -8,18 +8,7 @@
 
 <body class="bg-[#CED0FF] font-poppins">
     @include('rotasi.components.header', ['static' => true])
-    @if (session('success'))
-        @include('components.modal', ['message' => session('success')])
-    @endif
-    @if ($errors->any())
-        @include('components.modal', [
-            'message' => str_contains($errors->first(), 'required')
-                ? 'Mohon isi semua kolom'
-                : (str_contains($errors->first(), 'must be a number')
-                    ? 'Terdapat format data yang salah'
-                    : $errors->first()),
-        ])
-    @endif
+    @include('components.modal-component')
     @if (count($pengajuans) > 0)
         <div id="detail-pengajuan" class="border-2 rounded-lg p-4 w-1/2 max-h-[90vh]" popover>
             <h1 class="font-bold text-xl">Detail</h1>

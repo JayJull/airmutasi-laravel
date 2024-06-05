@@ -8,9 +8,7 @@
 
 <body class="bg-[#CED0FF] font-poppins">
     @include('rotasi.components.header')
-    @if (session('success'))
-        @include('components.modal', ['message' => session('success')])
-    @endif
+    @include('components.modal-component')
     <main>
         <section class="h-[50vh] md:h-screen w-full">
             <div id="map" class="w-full h-full z-40"></div>
