@@ -23,7 +23,7 @@
                 <button popovertarget="lokasi-awal"
                     class="md:max-w-[50%] flex-grow p-4 bg-[#383A83] text-white border-2 border-slate-400 rounded-xl md:rounded-none md:rounded-s-xl">
                     <h2 class="font-medium">Bandara Lokasi Awal</h2>
-                    <h3 class="font-bold text-3xl underline" id="cabang-awal">Cabang {{ $cabangs[0]->nama }}</h3>
+                    <h3 class="font-bold text-3xl underline" id="cabang-awal">{{ $cabangs[0]->nama }}</h3>
                 </button>
                 <button popovertarget="lokasi-tujuan"
                     class="md:max-w-[50%] flex-grow p-4 bg-[#383A83] text-white border-2 border-slate-400 rounded-xl md:rounded-none md:rounded-e-xl">
@@ -155,7 +155,7 @@
             .forEach(
                 radio => radio.addEventListener('change', function(e) {
                     document.querySelector('#cabang-awal').textContent =
-                        `Cabang ${e.target.parentElement.textContent.trim()}`;
+                        `${e.target.parentElement.textContent.trim()}`;
                     document.getElementById('lokasi-awal').hidePopover();
                 })
             );
@@ -164,16 +164,16 @@
             .forEach(
                 radio => radio.addEventListener('change', function(e) {
                     document.querySelector('#cabang-tujuan').textContent =
-                        `Cabang ${e.target.parentElement.textContent.trim()}`;
+                        `${e.target.parentElement.textContent.trim()}`;
                     document.getElementById('lokasi-tujuan').hidePopover();
                 })
             );
         const lokasiAwalChecked = document.querySelector('[name=lokasi_awal_id]:checked');
         document.querySelector('#cabang-awal').textContent = lokasiAwalChecked ?
-            `Cabang ${lokasiAwalChecked.parentElement.textContent.trim()}` : "Pilih";
+            `${lokasiAwalChecked.parentElement.textContent.trim()}` : "Pilih";
         const lokasiTujuanChecked = document.querySelector('[name=lokasi_tujuan_id]:checked');
         document.querySelector('#cabang-tujuan').textContent = lokasiTujuanChecked ?
-            `Cabang ${lokasiTujuanChecked.parentElement.textContent.trim()}` : "Pilih";
+            `${lokasiTujuanChecked.parentElement.textContent.trim()}` : "Pilih";
     </script>
 </body>
 

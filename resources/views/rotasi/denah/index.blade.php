@@ -16,23 +16,26 @@
             <div id="map" class="w-full h-full z-40"></div>
         </section>
         <section class="p-4 flex flex-col items-center gap-2 bg-[#29367688]">
-            <input id="search" class="w-full sm:w-3/4 md:w-2/3 border-[6px] rounded-xl px-2 py-1 border-[#293676]"
+            <input id="search" class="w-full sm:w-5/6 md:w-2/3 border-[0.5rem] rounded-xl px-2 py-1 border-[#293676]"
                 type="search" placeholder="Search ..." />
-            <section class="w-full sm:w-3/4 md:w-2/3 flex flex-col-reverse sm:grid sm:grid-cols-2 gap-2 sm:max-h-[50vh]">
+            <section class="w-full sm:w-5/6 md:w-2/3 flex flex-col-reverse sm:grid sm:grid-cols-2 gap-2">
                 <aside id="anak-cabang"
-                    class="bg-[#293676] col-span-2 sm:col-span-1 h-[50vh] sm:h-auto text-[#474747] p-2 rounded-xl flex flex-col gap-2 overflow-y-auto">
+                    class="bg-[#293676] col-span-2 sm:col-span-1 text-[#474747] p-2 rounded-xl flex flex-col gap-2 max-h-[70vh] overflow-y-auto">
+                    @if (count($cabangs) === 0)
+                        <p class="text-center text-white my-auto">Tidak ada data</p>
+                    @endif
                     @foreach ($cabangs as $cabang)
                         @include('rotasi.components.cabang-item', ['cabang' => $cabang])
                     @endforeach
                 </aside>
                 <aside
-                    class="bg-[#293676] col-span-2 sm:col-span-1 text-[#474747] p-2 rounded-xl flex flex-col gap-2 overflow-y-auto">
+                    class="bg-[#293676] col-span-2 sm:col-span-1 text-[#474747] p-2 rounded-xl flex flex-col gap-2 max-h-[70vh] overflow-y-auto">
                     <div class="flex items-center justify-center bg-white h-40 rounded-lg">
                         <img id="thumbnail-placeholder" src="/images/icons/Full Image.svg" alt="image" />
                         <img id="thumbnail" class="hidden w-full h-full object-cover" />
                     </div>
                     <h1 id="nama" class="text-white px-2 font-semibold text-lg hidden"></h1>
-                    <p id="alamat" class="text-white p-2">
+                    <p id="alamat" class="text-white p-2 text-center">
                         Pilih Cabang
                     </p>
                     <a id="detail" class="bg-white p-2 rounded-lg text-center font-semibold hidden">
@@ -40,6 +43,10 @@
                     </a>
                 </aside>
             </section>
+            @if (Auth::user()->role->name === 'admin')
+                <a href="/rotasi/denah/input"
+                    class="bg-[#293676] text-white w-full sm:w-5/6 md:w-2/3 text-center p-2 rounded-lg font-semibold">Tambah Cabang</a>
+            @endif
         </section>
     </main>
     @include('components.footer')
@@ -48,9 +55,10 @@
     <script src="/script/debounce.js"></script>
     <script>
         function setCabang(cabang) {
-            document.getElementById('thumbnail').src = `/storage${cabang.thumbnail}`;
+            document.getElementById('thumbnail').src = cabang.thumbnail_url || "/images/default_tower.jpg";
             document.getElementById('thumbnail-placeholder').classList.add('hidden');
             document.getElementById('thumbnail').classList.remove('hidden');
+            document.getElementById('alamat').classList.remove('text-center');
             document.getElementById('alamat').innerText = cabang.alamat;
             document.getElementById('detail').classList.remove('hidden');
             document.getElementById('detail').href = `/rotasi/denah/${cabang.id}`;

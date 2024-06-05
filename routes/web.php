@@ -34,6 +34,18 @@ Route::group(['prefix' => 'rotasi'], function () {
     Route::group(['prefix' => 'denah', 'middleware' => [
         'auth:web'
     ]], function () {
+        Route::group(['prefix' => 'input', 'middleware' => [
+            'is.admin'
+        ]], function () {
+            Route::get('/', [RotasiDenahController::class, 'inputCabangView']);
+            Route::post('/', [RotasiDenahController::class, 'inputCabang']);
+
+            Route::get('/{id}', [RotasiDenahController::class, 'updateCabangView']);
+            Route::post('/{id}', [RotasiDenahController::class, 'updateCabang']);
+
+            Route::get('/{id}/delete', [RotasiDenahController::class, 'deleteCabang']);
+        });
+
         Route::get('/', [RotasiDenahController::class, 'index'])->name('rotasi.denah');
         Route::get("/{id}", [RotasiDenahController::class, 'cabang']);
     });

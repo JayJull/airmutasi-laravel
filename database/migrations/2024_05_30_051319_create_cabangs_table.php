@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->text("alamat");
-            $table->string('thumbnail');
+            $table->string('thumbnail_url')->nullable();
             $table->integer("jumlah_personel");
             $table->integer("formasi");
             $table->integer("frms");

@@ -76,9 +76,9 @@
                             <p>{{ $currPengajuan->nik }}</p>
                         </aside>
                         <aside class="flex items-center gap-4">
-                            <h4 class="font-semibold">{{ $currPengajuan->lokasiAwal->nama }}</h4>
+                            <h4 class="font-semibold text-center">{{ $currPengajuan->lokasiAwal->nama }}</h4>
                             <img src="/images/icons/Arrow.svg" alt="arrow" />
-                            <h4 class="font-semibold">{{ $currPengajuan->lokasiTujuan->nama }}</h4>
+                            <h4 class="font-semibold text-center">{{ $currPengajuan->lokasiTujuan->nama }}</h4>
                         </aside>
                     </a>
                 @endforeach

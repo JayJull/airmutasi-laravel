@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Cabang extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nama',
+        'alamat',
+        'thumbnail',
+        'jumlah_personel',
+        'formasi',
+        'frms',
+    ];
 
     public function coord()
     {

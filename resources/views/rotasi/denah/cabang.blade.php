@@ -13,8 +13,8 @@
             <aside class="col-span-3 md:col-span-1 sm:h-full flex flex-col">
                 <div class="flex items-center justify-center bg-white flex-grow h-[50vh] md:max-h-[50%] rounded-lg">
                     {{-- <img src="/images/icons/Full Image.svg" alt="image" /> --}}
-                    <img src="/storage/{{ $cabang->thumbnail }}" alt="foto cabang"
-                        class="w-full h-full object-cover rounded-lg">
+                    <img src="{{ $cabang->thumbnail_url ? $cabang->thumbnail_url : '/images/default_tower.jpg' }}"
+                        alt="foto cabang" class="w-full h-full object-cover rounded-lg">
                 </div>
                 <h1 id="nama" class="text-white p-2 font-semibold text-lg">
                     {{ $cabang->nama }}
@@ -22,6 +22,14 @@
                 <p class="text-white p-2">
                     {{ $cabang->alamat }}
                 </p>
+                @if (Auth::user()->role->name === 'admin')
+                    <a href="/rotasi/denah/input/{{ $cabang->id }}"
+                        class="bg-[#293676] text-white w-full text-center p-2 rounded-lg font-semibold mb-2">Update
+                        Cabang</a>
+                    <a href="/rotasi/denah/input/{{ $cabang->id }}/delete"
+                        class="bg-red-500 text-white w-full text-center p-2 rounded-lg font-semibold">Hapus
+                        Cabang</a>
+                @endif
             </aside>
             <aside class="flex-grow col-span-3 md:col-span-2 md:h-screen grid md:grid-cols-2 md:grid-rows-2 gap-4">
                 <div class="col-span-2 md:col-span-1 flex items-center justify-center bg-white rounded-lg p-4">
@@ -31,17 +39,20 @@
                     <div id="stats-pie" class="w-full h-full"></div>
                 </div>
                 <div class="col-span-2 grid grid-cols-2 gap-2 bg-white rounded-lg p-4">
-                    <div class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col items-center justify-center p-2">
+                    <div
+                        class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col items-center justify-center p-2">
                         <h2 class="font-medium">Jumlah Personel</h2>
                         <p class="font-bold text-2xl">{{ $cabang->jumlah_personel }} Orang</p>
                     </div>
-                    <div class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col items-center justify-center p-2">
+                    <div
+                        class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col items-center justify-center p-2">
                         <h2 class="font-medium">Formasi</h2>
                         <p class="font-bold text-2xl">{{ $cabang->formasi }} Orang</p>
                     </div>
                     <div class="border-4 rounded-lg col-span-2 flex flex-col items-center justify-center p-2">
                         <h2 class="font-medium">Prediksi personel</h2>
-                        <p class="font-bold text-2xl">{{ $cabang->jumlah_personel + count($cabang->in) - count($cabang->out) }} Orang</p>
+                        <p class="font-bold text-2xl">
+                            {{ $cabang->jumlah_personel + count($cabang->in) - count($cabang->out) }} Orang</p>
                     </div>
                 </div>
             </aside>

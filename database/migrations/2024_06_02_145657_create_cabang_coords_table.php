@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cabang_coords', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cabang_id')->constrained('cabangs');
+            $table->foreignId('cabang_id')->constrained('cabangs')->onDelete('cascade');
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
             $table->timestamps();
