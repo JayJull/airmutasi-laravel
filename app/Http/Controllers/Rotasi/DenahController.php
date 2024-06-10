@@ -23,7 +23,7 @@ class DenahController extends Controller
     {
         $search = $request->search;
 
-        $cabangs = Cabang::whereRaw('UPPER(nama) LIKE ?', ['%'.strtoupper($search).'%'])->get();
+        $cabangs = Cabang::whereRaw('UPPER(nama) LIKE ?', ['%' . strtoupper($search) . '%'])->get();
         return response()->json($cabangs);
     }
     public function cabangSummary($id)
@@ -46,10 +46,12 @@ class DenahController extends Controller
         return response()->json($cabang);
     }
 
-    public function inputCabangView(){
+    public function inputCabangView()
+    {
         return view('rotasi.denah.input');
     }
-    public function inputCabang(Request $request){
+    public function inputCabang(Request $request)
+    {
         $request->validate([
             'nama' => 'required',
             'alamat' => 'required',
@@ -65,7 +67,7 @@ class DenahController extends Controller
         $cabang->formasi = $request->formasi;
         $cabang->frms = $request->frms;
 
-        if($request->has('induk')){
+        if ($request->has('induk')) {
             $request->validate([
                 'latitude' => 'required',
                 'longitude' => 'required',
@@ -75,20 +77,22 @@ class DenahController extends Controller
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
             ]);
-        }else{
+        } else {
             $cabang->save();
         }
-        return redirect()->back()->with('success', 'Cabang berhasil ditambahkan');
+        return redirect()->route("rotasi.denah")->with('success', 'Cabang berhasil ditambahkan');
     }
 
-    public function updateCabangView($id){
+    public function updateCabangView($id)
+    {
         $cabang = Cabang::find($id);
-        if (!$cabang){
+        if (!$cabang) {
             return redirect()->back()->with('invalid', 'Cabang tidak ditemukan');
         }
         return view('rotasi.denah.update', ['cabang' => $cabang]);
     }
-    public function updateCabang(Request $request, $id){
+    public function updateCabang(Request $request, $id)
+    {
         $request->validate([
             'nama' => 'required',
             'alamat' => 'required',
@@ -104,7 +108,7 @@ class DenahController extends Controller
         $cabang->formasi = $request->formasi;
         $cabang->frms = $request->frms;
 
-        if($request->has('induk')){
+        if ($request->has('induk')) {
             $request->validate([
                 'latitude' => 'required',
                 'longitude' => 'required',
@@ -114,17 +118,18 @@ class DenahController extends Controller
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
             ]);
-        }else{
+        } else {
             if ($cabang->coord()->exists())
                 $cabang->coord()->delete();
             $cabang->save();
         }
-        return redirect()->back()->with('success', 'Cabang berhasil diupdate');
+        return redirect()->route("rotasi.denah")->with('success', 'Cabang berhasil diupdate');
     }
 
-    public function deleteCabang($id){
+    public function deleteCabang($id)
+    {
         $cabang = Cabang::find($id);
-        if (!$cabang){
+        if (!$cabang) {
             return redirect()->back()->with('invalid', 'Cabang tidak ditemukan');
         }
         $cabang->delete();

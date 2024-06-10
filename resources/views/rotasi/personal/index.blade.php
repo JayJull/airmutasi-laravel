@@ -31,7 +31,7 @@
                         <h2 class="font-bold text-xl">Lokasi awal</h2>
                         <input type="search" id="search-lokasi-awal" class="px-2 py-1 border-2 rounded-md"
                             placeholder="Search ...">
-                        <div class="flex flex-col gap-1">
+                        <div class="flex flex-col gap-1 max-h-[70vh] overflow-y-auto">
                             @foreach ($cabangs as $cabang)
                                 <label>
                                     <input type="radio" name="lokasi_awal_id" id="lokasi-awal-{{ $cabang->id }}"
@@ -48,7 +48,7 @@
                         <h2 class="font-bold text-xl">Lokasi tujuan</h2>
                         <input type="search" id="search-lokasi-tujuan" class="px-2 py-1 border-2 rounded-md"
                             placeholder="Search ...">
-                        <div class="flex flex-col gap-1">
+                        <div class="flex flex-col gap-1 max-h-[70vh] overflow-y-auto">
                             @foreach ($cabangs as $cabang)
                                 <label>
                                     <input type="radio" name="lokasi_tujuan_id" id="lokasi-tujuan-{{ $cabang->id }}"

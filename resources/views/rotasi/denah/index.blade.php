@@ -43,7 +43,8 @@
             </section>
             @if (Auth::user()->role->name === 'admin')
                 <a href="/rotasi/denah/input"
-                    class="bg-[#293676] text-white w-full sm:w-5/6 md:w-2/3 text-center p-2 rounded-lg font-semibold">Tambah Cabang</a>
+                    class="bg-[#293676] text-white w-full sm:w-5/6 md:w-2/3 text-center p-2 rounded-lg font-semibold">Tambah
+                    Cabang</a>
             @endif
         </section>
     </main>
@@ -68,9 +69,19 @@
             }
         }
 
+        
+        var activated;
         function bindCabangItemClick() {
+            activated = null;
             document.querySelectorAll('.cabang-item').forEach(cabangItem => {
                 cabangItem.addEventListener('click', () => {
+                    if (activated) {
+                        activated.classList.remove('bg-gray-400');
+                        activated.classList.add('bg-white');
+                    }
+                    cabangItem.classList.add('bg-gray-400');
+                    cabangItem.classList.remove('bg-white');
+                    activated = cabangItem;
                     fetch(`/api/rotasi/cabang-summary/${cabangItem.value}`)
                         .then(response => response.json())
                         .then(data => {
@@ -104,6 +115,7 @@
                         }),
                     }).addTo(map).on('click', () => {
                         setCabang(element);
+                        document.querySelector('.cabang-item').classList.add('bg-gray-400');
                     });
                 });
             });
