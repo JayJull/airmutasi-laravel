@@ -66,6 +66,7 @@ class AccountController extends Controller
         $akun = User::find(Auth::user()->id);
         $akun->name = $request->name;
         $akun->email = $request->email;
+        $akun->save();
         if(!$akun->profile) {
             $akun->profile = new Profile();
             $akun->profile->user_id = $akun->id;
@@ -81,7 +82,6 @@ class AccountController extends Controller
             $akun->password = bcrypt($request->password);
         }
         $akun->profile->save();
-        $akun->save();
         return redirect()->route('akun')->with('success', 'Akun berhasil diubah');
     }
 }
