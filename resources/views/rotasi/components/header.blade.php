@@ -11,7 +11,7 @@
                 <a class="text-center" href="/rotasi/selektif">Selektif Admin</a>
             @endif
         @endauth
-        <a class="text-center" href="#">Akun</a>
+        <a class="text-center" href="/akun">Akun</a>
         <a class="text-center" href="/logout">Logout</a>
     </nav>
 </header>

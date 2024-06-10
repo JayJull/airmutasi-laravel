@@ -11,7 +11,11 @@
     @include('components.modal-component')
     <main>
         <section class="h-[50vh] md:h-screen w-full">
-            <div id="map" class="w-full h-full z-40"></div>
+            <div id="map" class="w-full h-full z-40">
+                <div class="w-full h-full flex items-center justify-center" id="loading">
+                    <img src="/images/icons/ripples.svg" alt="loading" class="w-20 h-20 z-40 p-2 bg-white rounded-full">
+                </div>
+            </div>
         </section>
         <section class="p-4 flex flex-col items-center gap-2 bg-[#29367688]">
             <input id="search" class="w-full sm:w-5/6 md:w-2/3 border-[0.5rem] rounded-xl px-2 py-1 border-[#293676]"
@@ -69,10 +73,10 @@
             }
         }
 
-        
         var activated;
+
         function bindCabangItemClick() {
-            activated = null;
+            if (activated) activated = null;
             document.querySelectorAll('.cabang-item').forEach(cabangItem => {
                 cabangItem.addEventListener('click', () => {
                     if (activated) {
@@ -115,6 +119,7 @@
                         }),
                     }).addTo(map).on('click', () => {
                         setCabang(element);
+                        document.querySelector('.cabang-item').classList.remove('bg-white');
                         document.querySelector('.cabang-item').classList.add('bg-gray-400');
                     });
                 });

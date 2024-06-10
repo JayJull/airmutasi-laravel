@@ -21,6 +21,8 @@ function InitMap() {
                     fillOpacity: 0.5,
                 },
             }).addTo(newMap);
+            document.getElementById("loading") &&
+                document.getElementById("loading").classList.add("hidden");
         });
     return newMap;
 }

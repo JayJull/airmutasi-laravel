@@ -5,9 +5,7 @@
     @include('components.modal', [
         'message' => str_contains($errors->first(), 'required')
             ? 'Mohon isi semua kolom'
-            : (str_contains($errors->first(), 'must be a number')
-                ? 'Terdapat format data yang salah'
-                : 'Terjadi kesalahan'),
+            : 'Terdapat format data yang salah',
     ])
 @endif
 @if (session('invalid'))

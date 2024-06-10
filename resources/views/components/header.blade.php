@@ -6,5 +6,11 @@
         <a href="/rotasi">Rotasi</a>
         <a href="#">Demosi</a>
         <a href="#">Promosi</a>
+        @auth
+            <a href="/akun">Akun</a>
+            <a href="/logout">Logout</a>
+        @else
+            <a href="/login">Login</a>
+        @endauth
     </nav>
 </header>

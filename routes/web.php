@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
@@ -29,11 +30,21 @@ Route::middleware("guest")->get("/login", [AuthController::class, 'loginView'])-
 Route::middleware("guest")->post("/login", [AuthController::class, 'login']);
 Route::middleware("auth:web")->get("/logout", [AuthController::class, 'logout'])->name('logout');
 
-Route::group(['prefix' => 'rotasi'], function () {
+Route::group(['prefix' => 'akun', 'middleware' => [
+    'auth:web'
+]], function () {
+    Route::get("/", [AccountController::class, 'index'])->name('akun');
+    Route::get('/add', [AccountController::class, 'addView']);
+    Route::post('/add', [AccountController::class, 'add']);
+    Route::get('/edit', [AccountController::class, 'editView']);
+    Route::post('/edit', [AccountController::class, 'edit']);
+});
+
+Route::group(['prefix' => 'rotasi', 'middleware' => [
+    'auth:web'
+]], function () {
     Route::get('/', [RotasiHomeController::class, 'index'])->name('rotasi');
-    Route::group(['prefix' => 'denah', 'middleware' => [
-        'auth:web'
-    ]], function () {
+    Route::group(['prefix' => 'denah'], function () {
         Route::group(['prefix' => 'input', 'middleware' => [
             'is.admin'
         ]], function () {
@@ -50,15 +61,12 @@ Route::group(['prefix' => 'rotasi'], function () {
         Route::get("/{id}", [RotasiDenahController::class, 'cabang']);
     });
     Route::group(['prefix' => 'selektif', 'middleware' => [
-        'auth:web',
         'is.admin'
     ]], function () {
         Route::get('/', [RotasiSelektifAdminController::class, 'index'])->name('rotasi.selektif');
         Route::post("/{id}", [RotasiSelektifAdminController::class, 'selektif']);
     });
-    Route::group(['prefix' => 'personal', 'middleware' => [
-        'auth:web'
-    ]], function () {
+    Route::group(['prefix' => 'personal'], function () {
         Route::get('/', [RotasiPersonalController::class, 'index']);
         Route::post('/', [RotasiPersonalController::class, 'register']);
     });
