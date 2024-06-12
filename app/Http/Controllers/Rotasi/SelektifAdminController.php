@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Rotasi;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Cabang;
 use App\Models\Pengajuan;
 use Carbon\Carbon;
 
@@ -12,21 +13,49 @@ class SelektifAdminController extends Controller
     public function index(Request $request)
     {
         $id = $request->id;
-        $tab = $request->tab;
-        $pengajuans = Pengajuan::where('status', $tab === "dapat" ? 'dapat' : ($tab === "tidak_dapat" ? "tidak_dapat" : 'diajukan'))->get()->map(function ($pengajuan) {
+        $tab = $request->tab === null ? 'diajukan' : $request->tab;
+        // get semua pengajuan
+        $pengajuans = Pengajuan::where('status', $tab)->get()->map(function ($pengajuan) {
             $pengajuan->tanggal_pengajuan = Carbon::parse($pengajuan->created_at)->format('d-m-Y');
             return $pengajuan;
         });
+        $query = "";
+        // filter pengajuan
+        if ($request->search_nama) {
+            $query .= "&search_nama=".$request->search_nama;
+            $pengajuans = $pengajuans->filter(function ($pengajuan) use ($request) {
+                return str_contains(strtolower($pengajuan->nama_lengkap), strtolower($request->search_nama));
+            });
+        }
+        if ($request->nik) {
+            $query .= "&nik=".$request->nik;
+            $pengajuans = $pengajuans->filter(function ($pengajuan) use ($request) {
+                return $pengajuan->nik === $request->nik;
+            });
+        }
+        if ($request->lokasi_awal) {
+            $query .= "&lokasi_awal=".$request->lokasi_awal;
+            $pengajuans = $pengajuans->filter(function ($pengajuan) use ($request) {
+                return $pengajuan->lokasiAwal->nama === $request->lokasi_awal;
+            });
+        }
+        if ($request->lokasi_tujuan) {
+            $query .= "&lokasi_tujuan=".$request->lokasi_tujuan;
+            $pengajuans = $pengajuans->filter(function ($pengajuan) use ($request) {
+                return $pengajuan->lokasiTujuan->nama === $request->lokasi_tujuan;
+            });
+        }
+        // get pengajuan yang dipilih
         if ($id !== null) {
             $pengajuan = Pengajuan::find($id);
-            if (!$pengajuan || $pengajuan->status !== ($tab === "dapat" ? "dapat" : ($tab === "tidak_dapat" ? "tidak_dapat" : 'diajukan'))) {
+            if (!$pengajuan || $pengajuan->status !== $tab) {
                 return redirect()->route('rotasi.selektif');
             }
             $pengajuan->tanggal_pengajuan = Carbon::parse($pengajuan->created_at)->format('d-m-Y');
-        }else{
+        } else {
             $pengajuan = $pengajuans->first();
         }
-        return view('rotasi.selektif.index', ['pengajuans' => $pengajuans, 'pengajuan' => $pengajuan, 'tab' => $tab]);
+        return view('rotasi.selektif.index', ['pengajuans' => $pengajuans, 'pengajuan' => $pengajuan, 'query' => $query, 'tab' => $tab, 'cabangs' => Cabang::all(), 'request' => $request]);
     }
 
     public function selektif($id, Request $request)

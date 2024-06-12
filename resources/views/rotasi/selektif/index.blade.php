@@ -45,20 +45,48 @@
             <p>{{ $pengajuan->keterangan }}</p>
         </div>
     @endif
+    <div id="filter" class="border-2 rounded-lg p-4 w-1/2 max-h-[90vh]" popover>
+        <form method="get" class="flex flex-col gap-1">
+            <input type="hidden" name="tab" value="{{ $tab }}">
+            <input type="text" class="px-2 py-1 border-2 rounded-md" name="search_nama" id="search_nama"
+                placeholder="Nama" value="{{ $request->search_nama }}">
+            <input type="text" class="px-2 py-1 border-2 rounded-md" name="nik" id="nik" placeholder="NIK" value="{{ $request->nik }}">
+            <select class="px-2 py-1 border-2 rounded-md" name="lokasi_awal" id="lokasi_awal">
+                <option value>--- Lokasi awal ---</option>
+                @foreach ($cabangs as $cabang)
+                    <option value="{{ $cabang->nama }}" {{ $request->lokasi_awal === $cabang->nama ? 'selected' : '' }}>{{ $cabang->nama }}</option>
+                @endforeach
+            </select>
+            <select class="px-2 py-1 border-2 rounded-md" name="lokasi_tujuan" id="lokasi_tujuan">
+                <option value>--- Lokasi tujuan ---</option>
+                @foreach ($cabangs as $cabang)
+                    <option value="{{ $cabang->nama }}" {{ $request->lokasi_tujuan === $cabang->nama ? 'selected' : '' }}>{{ $cabang->nama }}</option>
+                @endforeach
+            </select>
+
+            <button class="bg-[#293676] text-white px-2 py-1 font-semibold rounded-lg" type="submit">Filter</button>
+        </form>
+    </div>
     <main>
         <section class="flex flex-col-reverse md:grid md:grid-cols-2 m-4 gap-4 md:h-screen">
             <aside
                 class="flex flex-col {{ count($pengajuans) === 0 ? 'justify-center col-span-2' : '' }} gap-2 bg-white text-[#474747] border-2 border-[#DEDEDE] rounded-xl p-2 h-[50vh] md:h-full overflow-y-auto">
-                <div class="py-2 w-full flex gap-2 {{ count($pengajuans) === 0 ? 'justify-center' : ''}}">
-                    <a class="text-blue-500 {{ !$tab || $tab === 'diajukan' ? 'underline' : '' }}" href="/rotasi/selektif">Diajukan</a>
-                    <a class="text-blue-500 {{ $tab === 'dapat' ? 'underline' : '' }}" href="/rotasi/selektif?tab=dapat">Dapat</a>
-                    <a class="text-blue-500 {{ $tab === 'tidak_dapat' ? 'underline' : '' }}" href="/rotasi/selektif?tab=tidak_dapat">Tidak Dapat</a>
+                <div
+                    class="py-2 w-full flex gap-2 items-center {{ count($pengajuans) === 0 ? 'justify-center' : '' }}">
+                    <a class="text-blue-500 {{ !$tab || $tab === 'diajukan' ? 'underline' : '' }}"
+                        href="/rotasi/selektif?tab=diajukan{{ $query }}">Diajukan</a>
+                    <a class="text-blue-500 {{ $tab === 'dapat' ? 'underline' : '' }}"
+                        href="/rotasi/selektif?tab=dapat{{ $query }}">Dapat</a>
+                    <a class="text-blue-500 {{ $tab === 'tidak_dapat' ? 'underline' : '' }}"
+                        href="/rotasi/selektif?tab=tidak_dapat{{ $query }}">Tidak Dapat</a>
+                    <button popovertarget="filter"
+                        class="bg-[#293676] text-white px-2 py-1 font-semibold rounded-lg">Filter</button>
                 </div>
                 @if (count($pengajuans) === 0)
                     <h1 class="font-bold text-2xl text-center">Tidak Ada Pengajuan</h1>
                 @endif
                 @foreach ($pengajuans as $currPengajuan)
-                    <a href="/rotasi/selektif?id={{ $currPengajuan->id }}{{ $tab ? '&tab=' . ($tab === 'dapat' ? 'dapat' : ($tab === 'tidak_dapat' ? 'tidak_dapat' : '')) : '' }}"
+                    <a href="/rotasi/selektif?id={{ $currPengajuan->id }}&tab={{ $tab }}{{ $query }}"
                         class="pengajuan-item border-2 {{ $currPengajuan->id === $pengajuan->id ? 'pengajuan-active border-slate-700' : '' }} bg-[#D6D6D6] px-8 py-3 rounded-lg flex flex-col sm:flex-row items-center justify-between gap-2">
                         <aside class="flex flex-col items-center sm:items-start">
                             <h3 class="font-semibold text-lg">{{ $currPengajuan->nama_lengkap }}</h3>
