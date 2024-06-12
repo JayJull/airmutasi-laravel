@@ -95,10 +95,15 @@
                             class="w-full px-2 py-1 mt-1 bg-white border-2 border-slate-400 rounded-md">
                             <option value disabled {{ !old('posisi_sekarang') ? 'selected' : '' }}>--- Pilih Posisi ---
                             </option>
-                            <option value="posisi1" {{ old('posisi_sekarang') == 'posisi1' ? 'selected' : '' }}>Posisi
-                                1</option>
-                            <option value="posisi2" {{ old('posisi_sekarang') == 'posisi2' ? 'selected' : '' }}>Posisi
-                                2</option>
+                            <option value="ATC (TWR)" {{ old('posisi_sekarang') == 'ATC (TWR)' ? 'selected' : '' }}>ATC
+                                (TWR)</option>
+                            <option value="ATC (APS)" {{ old('posisi_sekarang') == 'ATC (APS)' ? 'selected' : '' }}>ATC
+                                (APS)</option>
+                            <option value="ATC (ACS)" {{ old('posisi_sekarang') == 'ATC (ACS)' ? 'selected' : '' }}>ATC
+                                (ACS)</option>
+                            <option value="AC0" {{ old('posisi_sekarang') == 'AC0' ? 'selected' : '' }}>AC0</option>
+                            <option value="STAFF" {{ old('posisi_sekarang') == 'STAFF' ? 'selected' : '' }}>STAFF
+                            </option>
                         </select>
                     </aside>
                     <aside>
@@ -107,10 +112,15 @@
                             class="w-full px-2 py-1 mt-1 bg-white border-2 border-slate-400 rounded-md">
                             <option value disabled {{ !old('posisi_tujuan') ? 'selected' : '' }}>--- Pilih Posisi ---
                             </option>
-                            <option value="posisi1" {{ old('posisi_tujuan') == 'posisi1' ? 'selected' : '' }}>Posisi
-                                1</option>
-                            <option value="posisi2" {{ old('posisi_tujuan') == 'posisi2' ? 'selected' : '' }}>Posisi
-                                2</option>
+                            <option value="ATC (TWR)" {{ old('posisi_tujuan') == 'ATC (TWR)' ? 'selected' : '' }}>ATC
+                                (TWR)</option>
+                            <option value="ATC (APS)" {{ old('posisi_tujuan') == 'ATC (APS)' ? 'selected' : '' }}>ATC
+                                (APS)</option>
+                            <option value="ATC (ACS)" {{ old('posisi_tujuan') == 'ATC (ACS)' ? 'selected' : '' }}>ATC
+                                (ACS)</option>
+                            <option value="AC0" {{ old('posisi_tujuan') == 'AC0' ? 'selected' : '' }}>AC0</option>
+                            <option value="STAFF" {{ old('posisi_tujuan') == 'STAFF' ? 'selected' : '' }}>STAFF
+                            </option>
                         </select>
                     </aside>
                 </div>

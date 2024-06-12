@@ -15,7 +15,7 @@
             <div class="z-10 flex flex-col items-center gap-2 text-[#EDEDED]">
                 <h1 class="text-6xl 2xl:text-8xl font-bold my-2">Air Mutasi</h1>
                 <p class="text-2xl 2xl:text-4xl font-medium my-1">
-                    Solusi mutasi anda
+                    Aplikasi operasi AirNav Indonesia
                 </p>
             </div>
         </section>

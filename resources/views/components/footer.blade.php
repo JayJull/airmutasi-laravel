@@ -2,22 +2,22 @@
     <aside class="md:max-w-[33%] flex-grow flex flex-col gap-2">
         <h2 class="font-bold text-center">KONTAK</h2>
         <p class="text-center md:text-left">
-            Jl. Adi Sucipto No.KM.12, Pinang Kencana, Kec. Tanjungpinang Tim.,
-            Kota Tanjung Pinang, Kepulauan Riau 29125
+            KANTOR PUSAT AIRNAV INDONESIA <br>
+            Gedung AirNav Indonesia <br>
+            Jl. Ir. H. Juanda No.1 Tangerang 15121 <br>
+            Banten - Indonesia
         </p>
         <ul class="flex flex-col items-center md:items-start">
-            <li>Telp: 0771-7335581</li>
-            <li>Email: airnavtnj@gmail.com</li>
+            <li>P. +62 21 5591 5000</li>
+            <li>F. +62 21 5591 5000</li>
         </ul>
     </aside>
     <aside class="md:max-w-[33%] flex-grow md:flex-grow-0 flex flex-col items-center md:items-start gap-2">
         <h2 class="font-bold text-center md:text-right">LAYANAN</h2>
         <ul class="md:ms-4 flex flex-col items-center md:items-start md:[&_li]:list-disc">
-            <li><a href="#">Beranda</a></li>
-            <li><a href="#">Artikel</a></li>
-            <li><a href="#">Pembelajaran</a></li>
-            <li><a href="#">Organisasi Cabang</a></li>
-            <li><a href="#">Akun</a></li>
+            <li><a href="/rotasi/denah">Denah Rotasi</a></li>
+            <li><a href="/rotasi/personal">Input Personal (IP)</a></li>
+            <li><a href="/akun">Akun</a></li>
         </ul>
     </aside>
     <img class="md:max-w-[34%] flex-grow" src="/images/logo.svg" alt="logo" />

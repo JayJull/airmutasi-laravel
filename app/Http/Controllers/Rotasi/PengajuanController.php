@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cabang;
 use App\Models\Pengajuan;
 use Carbon\Carbon;
+use Illuminate\Validation\Rule;
 
 class PengajuanController extends Controller
 {
@@ -30,6 +31,7 @@ class PengajuanController extends Controller
 
     public function register(Request $request)
     {
+        $posisi = ['ATC (TWR)', 'ATC (APS)', 'ATC (ACS)', 'AC0', 'STAFF'];
         $request->validate([
             'lokasi_awal_id' => 'required',
             'lokasi_tujuan_id' => 'required',
@@ -37,8 +39,8 @@ class PengajuanController extends Controller
             'nik' => 'required|numeric',
             'masa_kerja' => 'required',
             'jabatan' => 'required',
-            'posisi_sekarang' => 'required',
-            'posisi_tujuan' => 'required',
+            'posisi_sekarang' => ['required', Rule::in($posisi)],
+            'posisi_tujuan' => ['required', Rule::in($posisi)],
             'kompetensi' => 'required',
             'tujuan_rotasi' => 'required',
         ]);
