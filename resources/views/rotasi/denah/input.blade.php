@@ -35,7 +35,7 @@
                     atau
                     <label class="bg-blue-300 px-2 py-1 rounded-md font-medium text-white hover:cursor-pointer">
                         Upload Foto (max 2MB)
-                        <input type="file" name="thumbnail" id="thumbnail" class="h-0 w-0">
+                        <input type="file" name="thumbnail" id="thumbnail" class="h-0 w-0" accept=".jpg,.jpeg,.png">
                     </label>
                 </div>
             </div>

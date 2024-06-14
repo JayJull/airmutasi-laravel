@@ -5,7 +5,9 @@
     @include('components.modal', [
         'message' => str_contains($errors->first(), 'required')
             ? 'Mohon isi semua kolom'
-            : 'Terdapat format data yang salah',
+            : (str_contains($errors->first(), 'thumbnail failed to upload')
+                ? 'Format thumbnail tidak sesuai (max 2MB dan .jpg, .jpeg, .png)'
+                : 'Terdapat format data yang salah'),
     ])
 @endif
 @if (session('invalid'))
