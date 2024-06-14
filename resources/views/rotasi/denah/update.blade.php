@@ -21,9 +21,26 @@
             <textarea name="alamat" id="alamat" cols="30" rows="10" placeholder="Alamat ..."
                 class="resize-none w-full p-2 border-2 border-slate-400 rounded-md">{{ old('alamat') === null ? $cabang->alamat : old('alamat') }}</textarea>
             <label for="thumbnail" class="font-semibold mt-1">Foto Tower</label>
-            <input type="text" name="thumbnail_url" id="thumbnail"
-                class="resize-none w-full p-2 border-2 border-slate-400 rounded-md" placeholder="URL Foto"
-                value="{{ old('thumbnail_url') === null ? $cabang->thumbnail_url : old('thumbnail_url') }}">
+            <button class="bg-blue-300 px-2 py-1 rounded-md font-medium text-white" type="button"
+                popovertarget="thumbnail-popover">Pilih file</button>
+            <img id="thumbnail-preview" src="" alt="default" class="hidden">
+            <div id="thumbnail-popover" class="border-2 rounded-lg p-4 w-1/2 max-h-[90vh]" popover>
+                <div class="flex flex-col items-center gap-2">
+                    <div class="flex w-full">
+                        <input type="text" name="thumbnail_url" id="thumbnail_url"
+                            class="resize-none flex-grow p-2 border-2 border-slate-400 rounded-s-md"
+                            placeholder="URL Foto"
+                            value="{{ old('thumbnail_url') === null ? $cabang->thumbnail_url : old('thumbnail_url') }}">
+                        <button id="thumbnail_url_set" type="button"
+                            class="bg-[#383A83] text-white p-2 rounded-e-lg font-semibold">Set</button>
+                    </div>
+                    atau
+                    <label class="bg-blue-300 px-2 py-1 rounded-md font-medium text-white hover:cursor-pointer">
+                        Upload Foto (max 2MB)
+                        <input type="file" name="thumbnail" id="thumbnail" class="h-0 w-0">
+                    </label>
+                </div>
+            </div>
             <label for="jumlah_personel" class="font-semibold mt-1">Jumlah Personel Terkini</label>
             <input type="number" name="jumlah_personel" id="jumlah_personel" placeholder="Jumlah Personel ..."
                 class="resize-none w-full p-2 border-2 border-slate-400 rounded-md"
@@ -43,7 +60,8 @@
             </label>
             <div id="map" class="h-0">
                 <div class="w-full h-full flex items-center justify-center" id="loading">
-                    <img src="/images/icons/ripples.svg" alt="loading" class="w-20 h-20 z-40 p-2 bg-white rounded-full">
+                    <img src="/images/icons/ripples.svg" alt="loading"
+                        class="w-20 h-20 z-40 p-2 bg-white rounded-full">
                 </div>
             </div>
             <div class="hidden" id="latlng">
@@ -64,6 +82,26 @@
     @include('components.footer')
     <script src="/script/nav.js"></script>
     <script src="/script/map.js"></script>
+    <script>
+        document.getElementById("thumbnail").addEventListener("change", function() {
+            var file = this.files[0];
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.querySelector("#thumbnail-preview").src = e.target.result;
+                document.querySelector("#thumbnail-preview").classList.remove("hidden");
+                document.querySelector("#thumbnail-popover").hidePopover();
+                document.querySelector("#thumbnail_url").value = "";
+            }
+            reader.readAsDataURL(file);
+        });
+        document.getElementById("thumbnail_url_set").addEventListener("click", function() {
+            var url = document.getElementById("thumbnail_url").value;
+            document.querySelector("#thumbnail-preview").src = url;
+            document.querySelector("#thumbnail-preview").classList.remove("hidden");
+            document.querySelector("#thumbnail-popover").hidePopover();
+            document.querySelector("#thumbnail").value = "";
+        });
+    </script>
     <script>
         var marker;
         const setInduk = () => {

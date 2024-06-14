@@ -58,11 +58,16 @@ class DenahController extends Controller
             'jumlah_personel' => 'required|numeric',
             'formasi' => 'required|numeric',
             'frms' => 'required|numeric',
+            'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         $cabang = new Cabang();
         $cabang->nama = $request->nama;
         $cabang->alamat = $request->alamat;
-        $cabang->thumbnail_url = $request->thumbnail_url;
+        if ($request->has('thumbnail')) {
+            $cabang->thumbnail_url = '/storage/' . $request->thumbnail->store('cabang', 'public');
+        } else {
+            $cabang->thumbnail_url = $request->thumbnail_url;
+        }
         $cabang->jumlah_personel = $request->jumlah_personel;
         $cabang->formasi = $request->formasi;
         $cabang->frms = $request->frms;
@@ -99,11 +104,16 @@ class DenahController extends Controller
             'jumlah_personel' => 'required|numeric',
             'formasi' => 'required|numeric',
             'frms' => 'required|numeric',
+            'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         $cabang = Cabang::find($id);
         $cabang->nama = $request->nama;
         $cabang->alamat = $request->alamat;
-        $cabang->thumbnail_url = $request->thumbnail_url;
+        if ($request->has('thumbnail')) {
+            $cabang->thumbnail_url = '/storage/' . $request->thumbnail->store('cabang', 'public');
+        } else {
+            $cabang->thumbnail_url = $request->thumbnail_url;
+        }
         $cabang->jumlah_personel = $request->jumlah_personel;
         $cabang->formasi = $request->formasi;
         $cabang->frms = $request->frms;
