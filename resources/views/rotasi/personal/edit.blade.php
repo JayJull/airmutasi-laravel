@@ -79,13 +79,13 @@
                 <div class="grid md:grid-cols-2 gap-2">
                     <aside class="w-full">
                         <label class="font-semibold" for="masa_kerja">Masa Kerja</label><br />
-                        <div class="flex mt-1 gap-2 items-center">
+                        <div class="grid grid-cols-4 mt-1 gap-2 items-center">
                             <input type="number" name="masa_kerja" id="masa_kerja"
-                                class="flex-grow px-2 py-1 border-2 border-slate-400 rounded-md"
+                                class="col-span-3 px-2 py-1 border-2 border-slate-400 rounded-md"
                                 placeholder="Ketik Disini ..."
                                 value="{{ old('masa_kerja') ? old('masa_kerja') : $pengajuan->masa_kerja }}" />
                             <button type="button" id="sk_mutasi_file_button"
-                                class="bg-blue-300 border-2 border-blue-300 px-2 py-1 rounded-md font-medium text-white"
+                                class="col-span-1 bg-blue-300 border-2 border-blue-300 px-2 py-1 rounded-md font-medium text-white"
                                 popovertarget="sk_mutasi_popover">{{ $pengajuan->sk_mutasi_url ? 'Ubah' : 'Berkas' }}</button>
                             @include('rotasi.components.file-popover', [
                                 'id' => 'sk_mutasi',
