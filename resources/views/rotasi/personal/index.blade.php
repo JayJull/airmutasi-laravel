@@ -24,7 +24,8 @@
                 </button>
             </div>
             <form method="POST" action="/rotasi/personal"
-                class="w-full md:w-2/3 bg-[#ECECEC] px-8 py-4 rounded-xl border-2 border-slate-400 flex flex-col gap-2">
+                class="w-full md:w-2/3 bg-[#ECECEC] px-8 py-4 rounded-xl border-2 border-slate-400 flex flex-col gap-2"
+                enctype="multipart/form-data">
                 @csrf
                 <div id="lokasi-awal" class="p-4 border-2 rounded-lg" popover>
                     <div class="flex flex-col gap-2">
@@ -77,9 +78,19 @@
                 <div class="grid md:grid-cols-2 gap-2">
                     <aside class="w-full">
                         <label class="font-semibold" for="masa_kerja">Masa Kerja</label><br />
-                        <input type="number" name="masa_kerja" id="masa_kerja"
-                            class="w-full px-2 py-1 mt-1 border-2 border-slate-400 rounded-md"
-                            placeholder="Ketik Disini ..." value="{{ old('masa_kerja') }}" />
+                        <div class="flex mt-1 gap-2 items-center">
+                            <input type="number" name="masa_kerja" id="masa_kerja"
+                                class="flex-grow px-2 py-1 border-2 border-slate-400 rounded-md"
+                                placeholder="Ketik Disini ..." value="{{ old('masa_kerja') }}" />
+                            <button type="button" id="sk_mutasi_file_button"
+                                class="bg-blue-300 border-2 border-blue-300 px-2 py-1 rounded-md font-medium text-white"
+                                popovertarget="sk_mutasi_popover">Berkas</button>
+                            @include('rotasi.components.file-popover', [
+                                'id' => 'sk_mutasi',
+                                'url' => 'sk_mutasi_url',
+                                'file' => 'sk_mutasi_file',
+                            ])
+                        </div>
                     </aside>
                     <aside class="w-full">
                         <label class="font-semibold" for="jabatan">Jabatan</label><br />
@@ -95,13 +106,17 @@
                             class="w-full px-2 py-1 mt-1 bg-white border-2 border-slate-400 rounded-md">
                             <option value disabled {{ !old('posisi_sekarang') ? 'selected' : '' }}>--- Pilih Posisi ---
                             </option>
-                            <option value="ATC (TWR)" {{ old('posisi_sekarang') == 'ATC (TWR)' ? 'selected' : '' }}>ATC
+                            <option value="ATC (TWR)" {{ old('posisi_sekarang') == 'ATC (TWR)' ? 'selected' : '' }}>
+                                ATC
                                 (TWR)</option>
-                            <option value="ATC (APS)" {{ old('posisi_sekarang') == 'ATC (APS)' ? 'selected' : '' }}>ATC
+                            <option value="ATC (APS)" {{ old('posisi_sekarang') == 'ATC (APS)' ? 'selected' : '' }}>
+                                ATC
                                 (APS)</option>
-                            <option value="ATC (ACS)" {{ old('posisi_sekarang') == 'ATC (ACS)' ? 'selected' : '' }}>ATC
+                            <option value="ATC (ACS)" {{ old('posisi_sekarang') == 'ATC (ACS)' ? 'selected' : '' }}>
+                                ATC
                                 (ACS)</option>
-                            <option value="AC0" {{ old('posisi_sekarang') == 'AC0' ? 'selected' : '' }}>AC0</option>
+                            <option value="ACO" {{ old('posisi_sekarang') == 'ACO' ? 'selected' : '' }}>ACO
+                            </option>
                             <option value="STAFF" {{ old('posisi_sekarang') == 'STAFF' ? 'selected' : '' }}>STAFF
                             </option>
                         </select>
@@ -118,25 +133,53 @@
                                 (APS)</option>
                             <option value="ATC (ACS)" {{ old('posisi_tujuan') == 'ATC (ACS)' ? 'selected' : '' }}>ATC
                                 (ACS)</option>
-                            <option value="AC0" {{ old('posisi_tujuan') == 'AC0' ? 'selected' : '' }}>AC0</option>
+                            <option value="ACO" {{ old('posisi_tujuan') == 'ACO' ? 'selected' : '' }}>ACO</option>
                             <option value="STAFF" {{ old('posisi_tujuan') == 'STAFF' ? 'selected' : '' }}>STAFF
                             </option>
                         </select>
                     </aside>
                 </div>
                 <hr class="border-1 border-slate-400 w-full my-4" />
-                <div class="grid md:grid-cols-2 gap-2">
+                <div class="grid md:grid-cols-2 auto-rows-auto gap-2">
                     <aside>
                         <label class="font-semibold" for="kompetensi">Kompetensi</label><br />
-                        <textarea name="kompetensi" id="kompetensi" class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                            rows="4" placeholder="Ketik Disini ...">{{ old('kompetensi') }}</textarea>
+                        <div id="kompetensi">
+                            @if (old('kompetensi'))
+                                @foreach (old('kompetensi') as $index => $kompetensi)
+                                    @include('rotasi.components.kompetensi-item', [
+                                        'index' => $index,
+                                        'id' => 'kompetensi_' . $index,
+                                        'nama' => $kompetensi['nama'],
+                                    ])
+                                @endforeach
+                            @else
+                                @include('rotasi.components.kompetensi-item', [
+                                    'index' => 1,
+                                    'id' => 'kompetensi_1',
+                                ])
+                            @endif
+                        </div>
+                        <button class="bg-[#383A83] text-white py-2 rounded-lg font-semibold w-full mt-1"
+                            type="button" id="kompetensi_tambah">Tambah +</button>
                     </aside>
-                    <aside>
-                        <label class="font-semibold" for="tujuan_rotasi">Tujuan Rotasi</label><br />
+                    <aside class="flex flex-col justify-center gap-0">
+                        <label class="font-semibold" for="tujuan_rotasi">Tujuan Rotasi</label>
                         <textarea name="tujuan_rotasi" id="tujuan_rotasi"
-                            class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md" rows="4"
+                            class="resize-none flex-grow w-full px-2 py-1 mt-1 border-2 border-slate-400 rounded-md" rows="4"
                             placeholder="Ketik Disini ...">{{ old('tujuan_rotasi') }}</textarea>
                     </aside>
+                </div>
+                <div>
+                    <label class="font-semibold">Surat Persetujuan Pejabat Setempat</label>
+                    <br>
+                    <button type="button" id="surat_persetujuan_file_button"
+                        class="w-full bg-blue-300 border-2 border-blue-300 px-2 py-1 mt-1 rounded-md font-medium text-white"
+                        popovertarget="surat_persetujuan_popover">Berkas</button>
+                    @include('rotasi.components.file-popover', [
+                        'id' => 'surat_persetujuan',
+                        'url' => 'surat_persetujuan_url',
+                        'file' => 'surat_persetujuan_file',
+                    ])
                 </div>
                 <div>
                     <label class="font-semibold" for="keterangan">Keterangan Tambahan</label><br />
@@ -151,6 +194,35 @@
     </main>
     @include('components.footer')
     <script src="/script/nav.js"></script>
+    <script src="/script/filePopover.js"></script>
+    <script>
+        function kompetensiBindDeleteBtn(id) {
+            document.querySelector(`#${id} > button`).addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        }
+    </script>
+    <script>
+        var kompetensiCount = 1;
+        initFilePopover('sk_mutasi');
+        initFilePopover('surat_persetujuan');
+        document.querySelectorAll(".kompetensi-item").forEach(kompetensi => {
+            kompetensiBindDeleteBtn(kompetensi.id);
+            initFilePopover(kompetensi.id);
+        });
+        document.querySelector("#kompetensi_tambah").addEventListener('click', function() {
+            const kompetensiContainer = document.getElementById('kompetensi');
+            kompetensiContainer.innerHTML += `@include('rotasi.components.kompetensi-item', [
+                'index' => '${kompetensiCount + 1}',
+                'id' => 'kompetensi_${kompetensiCount + 1}',
+            ])`;
+            document.querySelectorAll(".kompetensi-item").forEach(kompetensi => {
+                kompetensiBindDeleteBtn(kompetensi.id);
+                initFilePopover(kompetensi.id);
+            });
+            kompetensiCount++;
+        });
+    </script>
     <script>
         document
             .querySelectorAll('[name=lokasi_awal_id]')

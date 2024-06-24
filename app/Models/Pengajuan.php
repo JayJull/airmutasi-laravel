@@ -20,6 +20,8 @@ class Pengajuan extends Model
         'kompetensi',
         'tujuan_rotasi',
         'keterangan',
+        'sk_mutasi_url',
+        'surat_persetujuan_url',
         'status'
     ];
 
@@ -30,5 +32,9 @@ class Pengajuan extends Model
     public function lokasiTujuan()
     {
         return $this->belongsTo(Cabang::class, 'lokasi_tujuan_id');
+    }
+    public function kompetensis()
+    {
+        return $this->hasMany(Kompetensi::class);
     }
 }

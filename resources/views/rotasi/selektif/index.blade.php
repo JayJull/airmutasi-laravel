@@ -10,7 +10,7 @@
     @include('rotasi.components.header', ['static' => true])
     @include('components.modal-component')
     @if (count($pengajuans) > 0)
-        <div id="detail-pengajuan" class="border-2 rounded-lg p-4 w-1/2 max-h-[90vh]" popover>
+        <div id="detail-pengajuan" class="border-2 rounded-lg p-4 w-5/6 sm:w-2/3 md:w-1/2 max-h-[90vh]" popover>
             <h1 class="font-bold text-xl">Detail</h1>
             <p class="my-1">
                 <span>{{ $pengajuan->lokasiAwal->nama }}</span>
@@ -38,9 +38,29 @@
                 <span>{{ $pengajuan->posisi_tujuan }}</span>
             </p>
             <p class="font-semibold mt-2">Kompetensi</p>
-            <p>{{ $pengajuan->kompetensi }}</p>
+            <ul>
+                @foreach ($pengajuan->kompetensis as $kompetensi)
+                    <li class="flex gap-2 items-center">
+                        {{ $kompetensi->nama }}
+                        @if ($kompetensi->file_url)
+                            <a class="bg-[#293676] text-white px-2 py-1 font-semibold rounded-lg"
+                                href="{{ $kompetensi->file_url }}">Berkas</a>
+                        @endif
+                    </li>
+                @endforeach
+            </ul>
             <p class="font-semibold mt-2">Tujuan</p>
             <p>{{ $pengajuan->tujuan_rotasi }}</p>
+            @if ($pengajuan->sk_mutasi_url)
+                <p class="font-semibold mt-2">SK Mutasi</p>
+                <a class="bg-[#293676] text-white px-2 py-1 mt-1 font-semibold rounded-lg"
+                    href="{{ $kompetensi->file_url }}">SK Mutasi</a>
+            @endif
+            @if ($pengajuan->surat_persetujuan_url)
+                <p class="font-semibold mt-2">Surat Persetujuan</p>
+                <a class="bg-[#293676] text-white px-2 py-1 mt-1 font-semibold rounded-lg"
+                    href="{{ $kompetensi->surat_persetujuan_url }}">Surat Persetujuan</a>
+            @endif
             <p class="font-semibold mt-2">Keterangan</p>
             <p>{{ $pengajuan->keterangan }}</p>
         </div>
@@ -50,17 +70,20 @@
             <input type="hidden" name="tab" value="{{ $tab }}">
             <input type="text" class="px-2 py-1 border-2 rounded-md" name="search_nama" id="search_nama"
                 placeholder="Nama" value="{{ $request->search_nama }}">
-            <input type="text" class="px-2 py-1 border-2 rounded-md" name="nik" id="nik" placeholder="NIK" value="{{ $request->nik }}">
+            <input type="text" class="px-2 py-1 border-2 rounded-md" name="nik" id="nik" placeholder="NIK"
+                value="{{ $request->nik }}">
             <select class="px-2 py-1 border-2 rounded-md" name="lokasi_awal" id="lokasi_awal">
                 <option value>--- Lokasi awal ---</option>
                 @foreach ($cabangs as $cabang)
-                    <option value="{{ $cabang->nama }}" {{ $request->lokasi_awal === $cabang->nama ? 'selected' : '' }}>{{ $cabang->nama }}</option>
+                    <option value="{{ $cabang->nama }}"
+                        {{ $request->lokasi_awal === $cabang->nama ? 'selected' : '' }}>{{ $cabang->nama }}</option>
                 @endforeach
             </select>
             <select class="px-2 py-1 border-2 rounded-md" name="lokasi_tujuan" id="lokasi_tujuan">
                 <option value>--- Lokasi tujuan ---</option>
                 @foreach ($cabangs as $cabang)
-                    <option value="{{ $cabang->nama }}" {{ $request->lokasi_tujuan === $cabang->nama ? 'selected' : '' }}>{{ $cabang->nama }}</option>
+                    <option value="{{ $cabang->nama }}"
+                        {{ $request->lokasi_tujuan === $cabang->nama ? 'selected' : '' }}>{{ $cabang->nama }}</option>
                 @endforeach
             </select>
 

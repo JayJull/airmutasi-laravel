@@ -18,11 +18,12 @@ return new class extends Migration
             $table->string('nama_lengkap');
             $table->string('nik');
             $table->integer('masa_kerja');
+            $table->string('sk_mutasi_url')->nullable();
             $table->string('jabatan');
             $table->string('posisi_sekarang');
             $table->string('posisi_tujuan');
-            $table->string('kompetensi');
             $table->string('tujuan_rotasi');
+            $table->string('surat_persetujuan_url')->nullable();
             $table->text('keterangan');
             $table->enum('status', ['diajukan', 'dapat', 'tidak_dapat', 'diterima']);
             $table->timestamps();
