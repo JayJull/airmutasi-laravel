@@ -148,6 +148,8 @@
                         <input class="w-full border-2 border-[#B6B6B6] px-2 py-1 mt-1 bg-[#C6C6C6]" type="text"
                             id="nik" name="nik" value="{{ $pengajuan->nik }}" disabled />
                     </div>
+                    <a href="/rotasi/personal/{{ $pengajuan->id }}"
+                        class="bg-[#293676] text-white px-6 py-2 font-semibold rounded-lg text-center">Ubah</a>
                     <button type="button" class="bg-[#293676] text-white px-6 py-2 font-semibold rounded-lg"
                         popovertarget="detail-pengajuan">Detail</button>
                     <div>

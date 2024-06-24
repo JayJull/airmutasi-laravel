@@ -69,5 +69,7 @@ Route::group(['prefix' => 'rotasi', 'middleware' => [
     Route::group(['prefix' => 'personal'], function () {
         Route::get('/', [RotasiPersonalController::class, 'index']);
         Route::post('/', [RotasiPersonalController::class, 'register']);
+        Route::middleware("is.admin")->get('/{id}', [RotasiPersonalController::class, 'editView']);
+        Route::middleware("is.admin")->post('/{id}', [RotasiPersonalController::class, 'edit']);
     });
 });
