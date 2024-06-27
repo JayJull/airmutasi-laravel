@@ -17,7 +17,6 @@ class Cabang extends Model
         'frms',
         'jumlah_personel_aco',
         'formasi_aco',
-        'frms_aco'
     ];
 
     public function coord()
@@ -27,11 +26,11 @@ class Cabang extends Model
 
     public function inAll()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id');
+        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')->where('status', '=', 'dapat');
     }
     public function outAll()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id');
+        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')->where('status', '=', 'dapat');
     }
 
     public function in()
