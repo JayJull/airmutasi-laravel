@@ -77,6 +77,7 @@
                             <aside>
                                 <h2 class="font-bold">{{ $pengajuan->nama_lengkap }}</h2>
                                 <p>{{ $pengajuan->nik }}</p>
+                                <p>{{ $pengajuan->posisi_tujuan }}</p>
                             </aside>
                         </div>
                     @endforeach
@@ -97,6 +98,7 @@
                             <aside>
                                 <h2 class="font-bold">{{ $pengajuan->nama_lengkap }}</h2>
                                 <p>{{ $pengajuan->nik }}</p>
+                                <p>{{ $pengajuan->posisi_sekarang }}</p>
                             </aside>
                         </div>
                     @endforeach
