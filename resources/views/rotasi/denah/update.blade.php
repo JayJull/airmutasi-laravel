@@ -53,9 +53,20 @@
             <input type="number" name="frms" id="frms" placeholder="FRMS ..."
                 class="resize-none w-full p-2 border-2 border-slate-400 rounded-md"
                 value="{{ old('frms') === null ? $cabang->frms : old('frms') }}">
+            <label for="jumlah_personel_aco" class="font-semibold">Jumlah Personel ACO Terkini</label>
+            <input type="number" name="jumlah_personel_aco" id="jumlah_personel_aco" placeholder="Jumlah Personel ACO ..."
+                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                value="{{ old('jumlah_personel_aco') === null ? $cabang->jumlah_personel_aco : old('jumlah_personel_aco') }}">
+            <label for="formasi_aco" class="font-semibold">Formasi ACO</label>
+            <input type="number" name="formasi_aco" id="formasi_aco" placeholder="Formasi ACO ..."
+                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                value="{{ old('formasi_aco') === null ? $cabang->formasi_aco : old('formasi_aco') }}">
+            <label for="frms_aco" class="font-semibold">FRMS ACO</label>
+            <input type="number" name="frms_aco" id="frms_aco" placeholder="FRMS ACO ..."
+                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md" value="{{ old('frms_aco') === null ? $cabang->frms_aco : old('frms_aco') }}">
             <label class="select-none">
                 <input type="checkbox" name="induk" id="induk"
-                    {{ old('induk') === null || $cabang->coord !== null ? 'checked' : '' }}>
+                    {{ old('induk') !== null || $cabang->coord !== null ? 'checked' : '' }}>
                 Cabang Induk
             </label>
             <div id="map" class="h-0">

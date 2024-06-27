@@ -22,25 +22,25 @@ class SelektifAdminController extends Controller
         $query = "";
         // filter pengajuan
         if ($request->search_nama) {
-            $query .= "&search_nama=".$request->search_nama;
+            $query .= "&search_nama=" . $request->search_nama;
             $pengajuans = $pengajuans->filter(function ($pengajuan) use ($request) {
                 return str_contains(strtolower($pengajuan->nama_lengkap), strtolower($request->search_nama));
             });
         }
         if ($request->nik) {
-            $query .= "&nik=".$request->nik;
+            $query .= "&nik=" . $request->nik;
             $pengajuans = $pengajuans->filter(function ($pengajuan) use ($request) {
                 return $pengajuan->nik === $request->nik;
             });
         }
         if ($request->lokasi_awal) {
-            $query .= "&lokasi_awal=".$request->lokasi_awal;
+            $query .= "&lokasi_awal=" . $request->lokasi_awal;
             $pengajuans = $pengajuans->filter(function ($pengajuan) use ($request) {
                 return $pengajuan->lokasiAwal->nama === $request->lokasi_awal;
             });
         }
         if ($request->lokasi_tujuan) {
-            $query .= "&lokasi_tujuan=".$request->lokasi_tujuan;
+            $query .= "&lokasi_tujuan=" . $request->lokasi_tujuan;
             $pengajuans = $pengajuans->filter(function ($pengajuan) use ($request) {
                 return $pengajuan->lokasiTujuan->nama === $request->lokasi_tujuan;
             });
@@ -82,9 +82,19 @@ class SelektifAdminController extends Controller
         } else if ($request->status == 'diterima') {
             $pengajuan->status = 'diterima';
             $pengajuan->save();
-            $pengajuan->lokasiAwal->jumlah_personel -= 1;
+            
+            if ($pengajuan->posisi_sekarang == "ACO") {
+                $pengajuan->lokasiAwal->jumlah_personel_aco -= 1;
+            } else {
+                $pengajuan->lokasiAwal->jumlah_personel -= 1;
+            }
+
+            if ($pengajuan->posisi_tujuan == "ACO") {
+                $pengajuan->lokasiTujuan->jumlah_personel_aco += 1;
+            } else {
+                $pengajuan->lokasiTujuan->jumlah_personel += 1;
+            }
             $pengajuan->lokasiAwal->save();
-            $pengajuan->lokasiTujuan->jumlah_personel += 1;
             $pengajuan->lokasiTujuan->save();
             return redirect()->back()->with('success', 'Data berhasil diupdate');
         }

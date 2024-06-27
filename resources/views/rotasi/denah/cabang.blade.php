@@ -41,18 +41,22 @@
                 <div class="col-span-2 grid grid-cols-2 gap-2 bg-white rounded-lg p-4">
                     <div
                         class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col items-center justify-center p-2">
-                        <h2 class="font-medium">Jumlah Personel</h2>
-                        <p class="font-bold text-2xl">{{ $cabang->jumlah_personel }} Orang</p>
+                        <h2 class="font-bold text-xl">Jumlah Personel</h2>
+                        <p class="font-medium">ATC {{ $cabang->jumlah_personel }} Orang</p>
+                        <p class="font-medium">ACO {{ $cabang->jumlah_personel_aco }} Orang</p>
                     </div>
                     <div
                         class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col items-center justify-center p-2">
-                        <h2 class="font-medium">Formasi</h2>
-                        <p class="font-bold text-2xl">{{ $cabang->formasi }} Orang</p>
+                        <h2 class="font-bold text-xl">Formasi</h2>
+                        <p class="font-medium">ATC {{ $cabang->formasi }} Orang</p>
+                        <p class="font-medium">ACO {{ $cabang->formasi_aco }} Orang</p>
                     </div>
                     <div class="border-4 rounded-lg col-span-2 flex flex-col items-center justify-center p-2">
-                        <h2 class="font-medium">Prediksi personel</h2>
-                        <p class="font-bold text-2xl">
-                            {{ $cabang->jumlah_personel + count($cabang->in) - count($cabang->out) }} Orang</p>
+                        <h2 class="font-bold text-xl">Prediksi personel</h2>
+                        <p class="font-medium">
+                            ATC {{ $cabang->jumlah_personel + count($cabang->in) - count($cabang->out) }} Orang</p>
+                        <p class="font-medium">
+                            ACO {{ $cabang->jumlah_personel_aco + count($cabang->inACO) - count($cabang->outACO) }} Orang</p>
                     </div>
                 </div>
             </aside>
@@ -63,10 +67,10 @@
                     Personel IN
                 </h1>
                 <div class="flex flex-col gap-2 p-4">
-                    @if ($cabang->in->isEmpty())
+                    @if ($cabang->inAll->isEmpty())
                         <p class="text-center">Tidak ada data</p>
                     @endif
-                    @foreach ($cabang->in as $pengajuan)
+                    @foreach ($cabang->inAll as $pengajuan)
                         <div
                             class="px-4 py-2 border-2 border-slate-400 bg-slate-200 rounded-lg flex items-center gap-2">
                             <img class="h-14" src="/images/icons/Businessman.svg" alt="business" />
@@ -83,10 +87,10 @@
                     Personel OUT
                 </h1>
                 <div class="flex flex-col gap-2 p-4">
-                    @if ($cabang->out->isEmpty())
+                    @if ($cabang->outAll->isEmpty())
                         <p class="text-center">Tidak ada data</p>
                     @endif
-                    @foreach ($cabang->out as $pengajuan)
+                    @foreach ($cabang->outAll as $pengajuan)
                         <div
                             class="px-4 py-2 border-2 border-slate-400 bg-slate-200 rounded-lg flex items-center gap-2">
                             <img class="h-14" src="/images/icons/Businessman.svg" alt="business" />
