@@ -21,7 +21,6 @@ return new class extends Migration
             $table->integer("frms");
             $table->integer("jumlah_personel_aco")->default(0);
             $table->integer("formasi_aco")->default(0);
-            $table->integer("frms_aco")->default(0);
             $table->timestamps();
         });
     }

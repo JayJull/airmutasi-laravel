@@ -41,15 +41,15 @@
                     </label>
                 </div>
             </div>
-            <label for="jumlah_personel" class="font-semibold mt-1">Jumlah Personel Terkini</label>
+            <label for="jumlah_personel" class="font-semibold mt-1">Jumlah Personel ATC Terkini</label>
             <input type="number" name="jumlah_personel" id="jumlah_personel" placeholder="Jumlah Personel ..."
                 class="resize-none w-full p-2 border-2 border-slate-400 rounded-md"
                 value="{{ old('jumlah_personel') === null ? $cabang->jumlah_personel : old('jumlah_personel') }}">
-            <label for="formasi" class="font-semibold mt-1">Formasi</label>
+            <label for="formasi" class="font-semibold mt-1">Formasi ATC</label>
             <input type="number" name="formasi" id="formasi" placeholder="Formasi ..."
                 class="resize-none w-full p-2 border-2 border-slate-400 rounded-md"
                 value="{{ old('formasi') === null ? $cabang->formasi : old('formasi') }}">
-            <label for="frms" class="font-semibold mt-1">FRMS</label>
+            <label for="frms" class="font-semibold mt-1">FRMS ATC</label>
             <input type="number" name="frms" id="frms" placeholder="FRMS ..."
                 class="resize-none w-full p-2 border-2 border-slate-400 rounded-md"
                 value="{{ old('frms') === null ? $cabang->frms : old('frms') }}">
@@ -62,8 +62,6 @@
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                 value="{{ old('formasi_aco') === null ? $cabang->formasi_aco : old('formasi_aco') }}">
             <label for="frms_aco" class="font-semibold">FRMS ACO</label>
-            <input type="number" name="frms_aco" id="frms_aco" placeholder="FRMS ACO ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md" value="{{ old('frms_aco') === null ? $cabang->frms_aco : old('frms_aco') }}">
             <label class="select-none">
                 <input type="checkbox" name="induk" id="induk"
                     {{ old('induk') !== null || $cabang->coord !== null ? 'checked' : '' }}>

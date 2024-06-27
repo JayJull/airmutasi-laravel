@@ -60,7 +60,6 @@ class DenahController extends Controller
             'frms' => 'required|numeric',
             'jumlah_personel_aco' => 'required|numeric',
             'formasi_aco' => 'required|numeric',
-            'frms_aco' => 'required|numeric',
             'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         $cabang = new Cabang();
@@ -77,7 +76,6 @@ class DenahController extends Controller
 
         $cabang->jumlah_personel_aco = $request->jumlah_personel_aco;
         $cabang->formasi_aco = $request->formasi_aco;
-        $cabang->frms_aco = $request->frms_aco;
 
         if ($request->has('induk')) {
             $request->validate([
@@ -113,7 +111,6 @@ class DenahController extends Controller
             'frms' => 'required|numeric',
             'jumlah_personel_aco' => 'required|numeric',
             'formasi_aco' => 'required|numeric',
-            'frms_aco' => 'required|numeric',
             'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         $cabang = Cabang::find($id);
@@ -130,7 +127,6 @@ class DenahController extends Controller
 
         $cabang->jumlah_personel_aco = $request->jumlah_personel_aco;
         $cabang->formasi_aco = $request->formasi_aco;
-        $cabang->frms_aco = $request->frms_aco;
 
         if ($request->has('induk')) {
             $request->validate([

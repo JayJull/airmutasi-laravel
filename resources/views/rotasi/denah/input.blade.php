@@ -39,14 +39,14 @@
                     </label>
                 </div>
             </div>
-            <label for="jumlah_personel" class="font-semibold">Jumlah Personel Terkini</label>
+            <label for="jumlah_personel" class="font-semibold">Jumlah Personel ATC Terkini</label>
             <input type="number" name="jumlah_personel" id="jumlah_personel" placeholder="Jumlah Personel ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                 value="{{ old('jumlah_personel') }}">
-            <label for="formasi" class="font-semibold">Formasi</label>
+            <label for="formasi" class="font-semibold">Formasi ATC</label>
             <input type="number" name="formasi" id="formasi" placeholder="Formasi ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md" value="{{ old('formasi') }}">
-            <label for="frms" class="font-semibold">FRMS</label>
+            <label for="frms" class="font-semibold">FRMS ATC</label>
             <input type="number" name="frms" id="frms" placeholder="FRMS ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md" value="{{ old('frms') }}">
             <label for="jumlah_personel_aco" class="font-semibold">Jumlah Personel ACO Terkini</label>
@@ -56,9 +56,6 @@
             <label for="formasi_aco" class="font-semibold">Formasi ACO</label>
             <input type="number" name="formasi_aco" id="formasi_aco" placeholder="Formasi ACO ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md" value="{{ old('formasi_aco') }}">
-            <label for="frms_aco" class="font-semibold">FRMS ACO</label>
-            <input type="number" name="frms_aco" id="frms_aco" placeholder="FRMS ACO ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md" value="{{ old('frms_aco') }}">
             <label class="select-none">
                 <input type="checkbox" name="induk" id="induk" {{ old('induk') ? 'checked' : '' }}>
                 Cabang Induk
