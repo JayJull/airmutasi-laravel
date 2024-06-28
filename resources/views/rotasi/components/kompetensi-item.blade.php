@@ -13,7 +13,7 @@
         value="{{ isset($nama) ? $nama : '' }}">
     <button id="{{ $id }}_file_button"
         class="col-span-3 bg-blue-300 border-2 border-blue-300 px-2 py-1 rounded-md font-medium text-white" type="button"
-        popovertarget="{{ $id }}_popover">{{ isset($file_url) ? 'Ubah' : 'Berkas' }}</button>
+        popovertarget="{{ $id }}_popover">{{ isset($file_url) ? '✅️ Ubah' : 'Berkas' }}</button>
     @include('rotasi.components.file-popover', [
         'id' => $id,
         'url' => "kompetensi[{$index}][url]",

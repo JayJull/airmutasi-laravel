@@ -84,11 +84,12 @@
                                 placeholder="Ketik Disini ..." value="{{ old('masa_kerja') }}" />
                             <button type="button" id="sk_mutasi_file_button"
                                 class="col-span-1 bg-blue-300 border-2 border-blue-300 px-2 py-1 rounded-md font-medium text-white"
-                                popovertarget="sk_mutasi_popover">Berkas</button>
+                                popovertarget="sk_mutasi_popover">{{ old('sk_mutasi_url') ? '✅️ Ubah' : 'Berkas' }}</button>
                             @include('rotasi.components.file-popover', [
                                 'id' => 'sk_mutasi',
                                 'url' => 'sk_mutasi_url',
                                 'file' => 'sk_mutasi_file',
+                                'file_url' => old('sk_mutasi_url'),
                             ])
                         </div>
                     </aside>
@@ -150,6 +151,7 @@
                                         'index' => $index,
                                         'id' => 'kompetensi_' . $index,
                                         'nama' => $kompetensi['nama'],
+                                        'file_url' => $kompetensi['url'],
                                     ])
                                 @endforeach
                             @else
@@ -174,11 +176,12 @@
                     <br>
                     <button type="button" id="surat_persetujuan_file_button"
                         class="w-full bg-blue-300 border-2 border-blue-300 px-2 py-1 mt-1 rounded-md font-medium text-white"
-                        popovertarget="surat_persetujuan_popover">Berkas</button>
+                        popovertarget="surat_persetujuan_popover">{{ old('surat_persetujuan_url') ? '✅️ Ubah' : 'Berkas' }}</button>
                     @include('rotasi.components.file-popover', [
                         'id' => 'surat_persetujuan',
                         'url' => 'surat_persetujuan_url',
                         'file' => 'surat_persetujuan_file',
+                        'file_url' => old('surat_persetujuan_url'),
                     ])
                 </div>
                 <div>

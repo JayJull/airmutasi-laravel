@@ -44,13 +44,11 @@ class PengajuanController extends Controller
             'posisi_tujuan' => ['required', Rule::in($posisi)],
             'kompetensi' => 'required|array',
             'kompetensi.*.nama' => 'required',
-            'kompetensi.*.file' => 'required_without:kompetensi.*.url|file|max:2048|mimes:pdf,doc,docx,jpg,jpeg,png',
-            'kompetensi.*.url' => 'required_without:kompetensi.*.file',
-            'sk_mutasi_file' => 'required_without:sk_mutasi_url|file|max:2048|mimes:pdf,doc,docx,jpg,jpeg,png',
-            'sk_mutasi_url' => 'required_without:sk_mutasi_file',
-            'surat_persetujuan_file' => 'required_without:surat_persetujuan_url|file|max:2048|mimes:pdf,doc,docx,jpg,jpeg,png',
-            'surat_persetujuan_url' => 'required_without:surat_persetujuan_file',
+            'kompetensi.*.url' => 'required',
+            'sk_mutasi_url' => 'required',
+            'surat_persetujuan_url' => 'required',
             'tujuan_rotasi' => 'required',
+            'keterangan' => 'required',
         ]);
 
         $pengajuan = $request->only([
@@ -65,18 +63,8 @@ class PengajuanController extends Controller
             'tujuan_rotasi',
             'keterangan',
         ]);
-        if ($request->hasFile('sk_mutasi_file')) {
-            $file = $request->file('sk_mutasi_file');
-            $pengajuan['sk_mutasi_url'] = "/storage/" . $file->store('sk_mutasi', 'public');
-        } else {
-            $pengajuan['sk_mutasi_url'] = $request->sk_mutasi_url;
-        }
-        if ($request->hasFile('surat_persetujuan_file')) {
-            $file = $request->file('surat_persetujuan_file');
-            $pengajuan['surat_persetujuan_url'] = "/storage/" . $file->store('surat_persetujuan', 'public');
-        } else {
-            $pengajuan['surat_persetujuan_url'] = $request->surat_persetujuan_url;
-        }
+        $pengajuan['sk_mutasi_url'] = $request->sk_mutasi_url;
+        $pengajuan['surat_persetujuan_url'] = $request->surat_persetujuan_url;
         DB::beginTransaction();
         $pengajuan['status'] = 'diajukan';
         $pengajuan = Pengajuan::create([
@@ -94,18 +82,13 @@ class PengajuanController extends Controller
             'surat_persetujuan_url' => $pengajuan['surat_persetujuan_url'],
             'status' => $pengajuan['status'],
         ]);
-        $kompetensi = array_map(function ($kom, $index) use ($request) {
-            if (isset($kom["file"]) && $kom["file"]) {
-                $file = $request->file("kompetensi")[$index]["file"];
-                $kom["file_url"] = "/storage/" . $file->store('kompetensi', 'public');
-            } else if (isset($kom["url"])) {
-                if (!(str_contains($kom["url"], "http://") || str_contains($kom["url"], "https://"))) {
-                    $kom["url"] = "http://" . $kom["url"];
-                }
-                $kom["file_url"] = $kom["url"];
-            } else $kom["file_url"] = null;
+        $kompetensi = array_map(function ($kom) {
+            if (!(str_contains($kom["url"], "http://") || str_contains($kom["url"], "https://"))) {
+                $kom["url"] = "http://" . $kom["url"];
+            }
+            $kom["file_url"] = $kom["url"];
             return ['nama' => $kom["nama"], 'file_url' => $kom["file_url"]];
-        }, $request->kompetensi, array_keys($request->kompetensi));
+        }, $request->kompetensi);
         $pengajuan->kompetensis()->createMany($kompetensi);
         DB::commit();
 
@@ -139,11 +122,11 @@ class PengajuanController extends Controller
             'posisi_tujuan' => ['required', Rule::in($posisi)],
             'kompetensi' => 'required|array',
             'kompetensi.*.nama' => 'required',
-            'kompetensi.*.file' => 'required_without_all:kompetensi.*.file_url,kompetensi.*.url|file|max:2048|mimes:pdf,doc,docx,jpg,jpeg,png',
-            'kompetensi.*.url' => 'required_without_all:kompetensi.*.file_url,kompetensi.*.file',
-            'sk_mutasi_file' => 'file|max:2048|mimes:pdf,doc,docx,jpg,jpeg,png',
-            'surat_persetujuan_file' => 'file|max:2048|mimes:pdf,doc,docx,jpg,jpeg,png',
+            'kompetensi.*.url' => 'required',
+            'sk_mutasi_url' => 'required',
+            'surat_persetujuan_url' => 'required',
             'tujuan_rotasi' => 'required',
+            'keterangan' => 'required',
         ]);
 
         $pengajuanR = $request->only([
@@ -160,28 +143,12 @@ class PengajuanController extends Controller
         ]);
         DB::beginTransaction();
         $pengajuan = Pengajuan::find($id);
-        if (!$pengajuan->sk_mutasi_url) {
-            $request->validate([
-                'sk_mutasi_file' => 'required|file|max:2048|mimes:pdf,doc,docx,jpg,jpeg,png',
-            ]);
-        }
-        if (!$pengajuan->surat_persetujuan_url) {
-            $request->validate([
-                'surat_persetujuan_file' => 'required|file|max:2048|mimes:pdf,doc,docx,jpg,jpeg,png',
-            ]);
-        }
-        if ($request->hasFile('sk_mutasi_file')) {
-            $file = $request->file('sk_mutasi_file');
-            $pengajuanR['sk_mutasi_url'] = "/storage/" . $file->store('sk_mutasi', 'public');
-        } else if ($request->sk_mutasi_url) {
+        if ($request->sk_mutasi_url) {
             $pengajuanR['sk_mutasi_url'] = $request->sk_mutasi_url;
         } else {
             $pengajuanR['sk_mutasi_url'] = $pengajuan->sk_mutasi_url;
         }
-        if ($request->hasFile('surat_persetujuan_file')) {
-            $file = $request->file('surat_persetujuan_file');
-            $pengajuanR['surat_persetujuan_url'] = "/storage/" . $file->store('surat_persetujuan', 'public');
-        } else if ($request->surat_persetujuan_url) {
+        if ($request->surat_persetujuan_url) {
             $pengajuanR['surat_persetujuan_url'] = $request->surat_persetujuan_url;
         } else {
             $pengajuanR['surat_persetujuan_url'] = $pengajuan->surat_persetujuan_url;
@@ -200,13 +167,11 @@ class PengajuanController extends Controller
             'sk_mutasi_url' => $pengajuanR['sk_mutasi_url'],
             'surat_persetujuan_url' => $pengajuanR['surat_persetujuan_url'],
         ]);
-        $kompetensi = array_map(function ($kom, $index) use ($request) {
+        $kompetensi = array_map(function ($kom){
             if (isset($kom["file_url"])) {
                 $kom["file_url"] = $kom["file_url"];
-            } else if (isset($kom["file"]) && $kom["file"]) {
-                $file = $request->file("kompetensi")[$index]["file"];
-                $kom["file_url"] = "/storage/" . $file->store('kompetensi', 'public');
-            } else if (isset($kom["url"])) {
+            }
+            if (isset($kom["url"])) {
                 if (!(str_contains($kom["url"], "http://") || str_contains($kom["url"], "https://"))) {
                     $kom["url"] = "http://" . $kom["url"];
                 }

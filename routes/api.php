@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +31,5 @@ Route::group(['prefix' => 'rotasi'], function () {
 Route::group(['prefix' => 'pengajuan'], function () {
     Route::get('/{id}', [RotasiPengajuanController::class, 'pengajuanById']);
 });
+
+Route::post('/upload-doc', [FileController::class, 'uploadDoc']);

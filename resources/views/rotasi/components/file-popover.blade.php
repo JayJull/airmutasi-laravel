@@ -6,7 +6,8 @@
         @endif
         <div class="flex w-full">
             <input type="text" name="{{ $url }}" id="{{ $id }}_url"
-                class="resize-none flex-grow p-2 border-2 border-slate-400 rounded-s-md" placeholder="URL Berkas">
+                class="resize-none flex-grow p-2 border-2 border-slate-400 rounded-s-md" placeholder="URL Berkas"
+                value="{{ isset($file_url) ? $file_url : '' }}">
             <button id="{{ $id }}_url_set" type="button"
                 class="bg-[#383A83] text-white p-2 rounded-e-lg font-semibold">Set</button>
         </div>
@@ -16,5 +17,6 @@
             <input type="file" name="{{ $file }}" id="{{ $id }}_file" class="h-0 w-0"
                 accept=".pdf,.doc,.docx">
         </label>
+        <p id="{{ $id }}_errors" class="text-center text-red-500 text-sm hidden"></p>
     </div>
 </div>

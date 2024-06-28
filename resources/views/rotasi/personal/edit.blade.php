@@ -86,12 +86,12 @@
                                 value="{{ old('masa_kerja') ? old('masa_kerja') : $pengajuan->masa_kerja }}" />
                             <button type="button" id="sk_mutasi_file_button"
                                 class="col-span-1 bg-blue-300 border-2 border-blue-300 px-2 py-1 rounded-md font-medium text-white"
-                                popovertarget="sk_mutasi_popover">{{ $pengajuan->sk_mutasi_url ? 'Ubah' : 'Berkas' }}</button>
+                                popovertarget="sk_mutasi_popover">{{ $pengajuan->sk_mutasi_url ? '✅️ Ubah' : 'Berkas' }}</button>
                             @include('rotasi.components.file-popover', [
                                 'id' => 'sk_mutasi',
                                 'url' => 'sk_mutasi_url',
                                 'file' => 'sk_mutasi_file',
-                                'file_url' => $pengajuan->sk_mutasi_url,
+                                'file_url' => old('sk_mutasi_url') ? old('sk_mutasi_url') : $pengajuan->sk_mutasi_url,
                             ])
                         </div>
                     </aside>
@@ -172,8 +172,8 @@
                                         'index' => $index,
                                         'id' => 'kompetensi_' . $index,
                                         'nama' => $kompetensi['nama'],
-                                        'file_url' => isset($kompetensi['file_url'])
-                                            ? $kompetensi['file_url']
+                                        'file_url' => isset($kompetensi['url'])
+                                            ? $kompetensi['url']
                                             : null,
                                         'db_id' => isset($kompetensi['id']) ? $kompetensi['id'] : null,
                                     ])
@@ -205,12 +205,12 @@
                     <br>
                     <button type="button" id="surat_persetujuan_file_button"
                         class="w-full bg-blue-300 border-2 border-blue-300 px-2 py-1 mt-1 rounded-md font-medium text-white"
-                        popovertarget="surat_persetujuan_popover">{{ $pengajuan->sk_mutasi_url ? 'Ubah' : 'Berkas' }}</button>
+                        popovertarget="surat_persetujuan_popover">{{ $pengajuan->sk_mutasi_url ? '✅️ Ubah' : 'Berkas' }}</button>
                     @include('rotasi.components.file-popover', [
                         'id' => 'surat_persetujuan',
                         'url' => 'surat_persetujuan_url',
                         'file' => 'surat_persetujuan_file',
-                        'file_url' => $pengajuan->surat_persetujuan_url,
+                        'file_url' => old('surat_persetujuan_url') ? old('surat_persetujuan_url') : $pengajuan->surat_persetujuan_url,
                     ])
                 </div>
                 <div>
