@@ -17,39 +17,43 @@
                 </div>
             </div>
         </section>
-        <section class="p-4 flex flex-col items-center gap-2 bg-[#29367688]">
-            <input id="search" class="w-full sm:w-5/6 md:w-2/3 border-[0.5rem] rounded-xl px-2 py-1 border-[#293676]"
-                type="search" placeholder="Search ..." />
-            <section class="w-full sm:w-5/6 md:w-2/3 flex flex-col-reverse sm:grid sm:grid-cols-2 gap-2">
-                <aside id="anak-cabang"
-                    class="bg-[#293676] col-span-2 sm:col-span-1 text-[#474747] p-2 rounded-xl flex flex-col gap-2 max-h-[70vh] overflow-y-auto">
-                    @if (count($cabangs) === 0)
-                        <p class="text-center text-white my-auto">Tidak ada data</p>
-                    @endif
-                    @foreach ($cabangs as $cabang)
-                        @include('rotasi.components.cabang-item', ['cabang' => $cabang])
-                    @endforeach
-                </aside>
+        <section class="p-4 flex flex-col items-center gap-2">
+            <section class="w-full flex flex-col-reverse sm:grid sm:grid-cols-2 gap-2">
                 <aside
-                    class="bg-[#293676] col-span-2 sm:col-span-1 text-[#474747] p-2 rounded-xl flex flex-col gap-2 max-h-[70vh] overflow-y-auto">
-                    <div class="flex items-center justify-center bg-white h-40 rounded-lg">
-                        <img id="thumbnail-placeholder" src="/images/icons/Full Image.svg" alt="image" />
-                        <img id="thumbnail" class="hidden w-full h-full object-cover" />
+                    class="col-span-2 sm:col-span-1 text-[#474747] pb-2 pe-2 flex flex-col gap-2 max-h-[70vh] overflow-y-auto">
+                    <input id="search" class="w-full rounded-lg px-2 py-1 border-2 border-[#656B8E]" type="search"
+                        placeholder="Search ..." />
+                    <div id="anak-cabang" class="flex flex-col gap-2">
+                        @if (count($cabangs) === 0)
+                            <p class="text-center text-white my-auto">Tidak ada data</p>
+                        @endif
+                        @foreach ($cabangs as $cabang)
+                            @include('rotasi.components.cabang-item', ['cabang' => $cabang])
+                        @endforeach
                     </div>
-                    <h1 id="nama" class="text-white px-2 font-semibold text-lg hidden"></h1>
-                    <p id="alamat" class="text-white p-2 text-center">
-                        Pilih Cabang
-                    </p>
-                    <a id="detail" class="bg-white p-2 rounded-lg text-center font-semibold hidden">
-                        Detail
-                    </a>
+                </aside>
+                <aside class="col-span-2 sm:col-span-1 text-[#474747] flex flex-col gap-2 sm:max-h-[70vh]">
+                    @if (Auth::user()->role->name === 'admin')
+                        <a href="/rotasi/denah/input"
+                            class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white w-full text-center p-2 rounded-lg font-semibold">Tambah
+                            Cabang</a>
+                    @endif
+                    <div class="p-2 bg-[#293676] flex-grow flex flex-col gap-2 rounded-lg overflow-y-auto w-full">
+                        <div class="flex items-center justify-center bg-white h-40 rounded-lg">
+                            <img id="thumbnail-placeholder" src="/images/icons/Full Image.svg" alt="image" />
+                            <img id="thumbnail" class="hidden w-full h-full object-cover" />
+                        </div>
+                        <h1 id="nama" class="text-white px-2 font-semibold text-lg hidden"></h1>
+                        <p id="alamat" class="text-white p-2 text-center">
+                            Pilih Cabang
+                        </p>
+                        <a id="detail"
+                            class="self-end bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg text-center font-semibold hidden">
+                            Lihat Detail
+                        </a>
+                    </div>
                 </aside>
             </section>
-            @if (Auth::user()->role->name === 'admin')
-                <a href="/rotasi/denah/input"
-                    class="bg-[#293676] text-white w-full sm:w-5/6 md:w-2/3 text-center p-2 rounded-lg font-semibold">Tambah
-                    Cabang</a>
-            @endif
         </section>
     </main>
     @include('components.footer')
@@ -58,7 +62,8 @@
     <script src="/script/debounce.js"></script>
     <script>
         function setCabang(cabang) {
-            document.getElementById('thumbnail').src = cabang.thumbnail_url || "/images/default_tower.jpg";
+            document.getElementById('thumbnail').src = cabang.thumbnail_url !== 'NULL' ? cabang.thumbnail_url :
+                "/images/default_tower.jpg";
             document.getElementById('thumbnail-placeholder').classList.add('hidden');
             document.getElementById('thumbnail').classList.remove('hidden');
             document.getElementById('alamat').classList.remove('text-center');
@@ -80,11 +85,13 @@
             document.querySelectorAll('.cabang-item').forEach(cabangItem => {
                 cabangItem.addEventListener('click', () => {
                     if (activated) {
-                        activated.classList.remove('bg-gray-400');
+                        activated.classList.remove('bg-[#293676]');
                         activated.classList.add('bg-white');
+                        activated.classList.remove('text-white');
                     }
-                    cabangItem.classList.add('bg-gray-400');
+                    cabangItem.classList.add('bg-[#293676]');
                     cabangItem.classList.remove('bg-white');
+                    cabangItem.classList.add('text-white');
                     activated = cabangItem;
                     fetch(`/api/rotasi/cabang-summary/${cabangItem.value}`)
                         .then(response => response.json())
@@ -119,8 +126,10 @@
                         }),
                     }).addTo(map).on('click', () => {
                         setCabang(element);
-                        document.querySelector('.cabang-item').classList.remove('bg-white');
-                        document.querySelector('.cabang-item').classList.add('bg-gray-400');
+                        const selected = document.querySelector('.cabang-item');
+                        selected.classList.add('bg-[#293676]');
+                        selected.classList.remove('bg-white');
+                        selected.classList.add('text-white');
                     });
                 });
             });
