@@ -16,9 +16,10 @@ function InitMap() {
         .then((data) => {
             L.geoJson(data, {
                 style: {
-                    color: "blue",
-                    fillColor: "blue",
-                    fillOpacity: 0.5,
+                    color: "#CACACA",
+                    weight: 1.5,
+                    fillColor: "#293676",
+                    fillOpacity: 1,
                 },
             }).addTo(newMap);
             document.getElementById("loading") &&

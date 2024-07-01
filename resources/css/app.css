@@ -7,7 +7,7 @@
 }
 
 .leaflet-container {
-    background-color: rgba(0, 0, 0, 0.0) !important;
+    background-color: #CACACA !important;
 }
 
 ::-webkit-scrollbar {
