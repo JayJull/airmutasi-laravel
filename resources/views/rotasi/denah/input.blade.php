@@ -7,7 +7,7 @@
 </head>
 
 <body class="bg-[#CED0FF] font-poppins">
-    @include('rotasi.components.header', ['static' => true])
+    @include('components.header', ['static' => true])
     @include('components.modal-component')
     <main class="min-h-[90vh] flex justify-center items-center p-4">
         <form action="/rotasi/denah/input" method="post" class="w-2/3 flex flex-col gap-1 bg-white p-4 rounded-lg"

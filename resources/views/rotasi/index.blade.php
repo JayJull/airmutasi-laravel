@@ -7,7 +7,7 @@
 </head>
 
 <body class="bg-[#373737] font-poppins">
-    @include('rotasi.components.header')
+    @include('components.header')
     <main class="h-[70vh] sm:h-screen">
         <section class="h-full w-full p-4">
             <div id="map" class="w-full h-full z-40">

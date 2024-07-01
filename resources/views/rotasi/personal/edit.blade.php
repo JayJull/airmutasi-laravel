@@ -7,7 +7,7 @@
 </head>
 
 <body class="bg-[#CED0FF] font-poppins relative">
-    @include('rotasi.components.header', ['static' => true])
+    @include('components.header', ['static' => true])
     @include('components.modal-component')
     <main>
         <section class="flex flex-col items-center my-4 px-2">

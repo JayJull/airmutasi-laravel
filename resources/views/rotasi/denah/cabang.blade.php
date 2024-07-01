@@ -7,7 +7,7 @@
 </head>
 
 <body class="bg-[#CED0FF] font-poppins">
-    @include('rotasi.components.header', ['static' => true])
+    @include('components.header', ['static' => true])
     <main>
         <section class="bg-[#29367688] text-[#474747] p-8 flex flex-col md:grid md:grid-cols-3 gap-8">
             <aside class="col-span-3 md:col-span-1 sm:h-full flex flex-col">

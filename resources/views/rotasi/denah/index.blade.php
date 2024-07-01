@@ -7,7 +7,7 @@
 </head>
 
 <body class="bg-[#CED0FF] font-poppins">
-    @include('rotasi.components.header')
+    @include('components.header')
     @include('components.modal-component')
     <main>
         <section class="h-[50vh] md:h-screen w-full">

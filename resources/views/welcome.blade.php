@@ -31,7 +31,7 @@
                 </p>
             </div>
             <div class="grid md:grid-cols-3 gap-4">
-                <a href="/rotasi"
+                <a href="/rotasi/denah"
                     class="bg-[#293676] font-semibold text-lg 2xl:text-xl flex justify-center items-center gap-3 p-4 rounded-xl 2xl:rounded-2xl">Rotasi
                     <img src="/images/icons/rotasi.svg" alt="rotasi" /></a>
                 <a href="/"

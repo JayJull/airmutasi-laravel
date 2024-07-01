@@ -7,7 +7,7 @@
 </head>
 
 <body class="bg-[#CED0FF] font-poppins">
-    @include('rotasi.components.header', ['static' => true])
+    @include('components.header', ['static' => true])
     @include('components.modal-component')
     @if (count($pengajuans) > 0)
         <div id="detail-pengajuan" class="border-2 rounded-lg p-4 w-5/6 sm:w-2/3 md:w-1/2 max-h-[90vh]" popover>
