@@ -13,10 +13,10 @@ class DenahController extends Controller
         $cabangs = Cabang::all();
         return view('rotasi.denah.index', ['cabangs' => $cabangs]);
     }
-    public function cabang($id)
+    public function cabang(Request $request, $id)
     {
-        $cabang = Cabang::find($id);
-        return view('rotasi.denah.cabang', ['cabang' => $cabang]);
+        $cabang = Cabang::with(["inAll", "outAll", "in", "out", "inACO", "outACO"])->find($id);
+        return view('rotasi.denah.cabang', ['cabang' => $cabang, 'tab' => $request->tab]);
     }
 
     public function cabangSearch(Request $request)

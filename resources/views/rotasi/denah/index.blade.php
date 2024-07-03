@@ -33,13 +33,13 @@
                     </div>
                 </aside>
                 <aside class="col-span-2 sm:col-span-1 text-[#474747] flex flex-col gap-2 sm:max-h-[70vh]">
-                    @if (Auth::user()->role->name === 'admin')
+                    @can ('admin')
                         <a href="/rotasi/denah/input"
                             class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white w-full text-center p-2 rounded-lg font-semibold">Tambah
                             Cabang</a>
-                    @endif
+                    @endcan
                     <div class="p-2 bg-[#293676] flex-grow flex flex-col gap-2 rounded-lg overflow-y-auto w-full">
-                        <div class="flex items-center justify-center bg-white h-40 rounded-lg">
+                        <div class="flex items-center justify-center bg-white h-64 rounded-lg">
                             <img id="thumbnail-placeholder" src="/images/icons/Full Image.svg" alt="image" />
                             <img id="thumbnail" class="hidden w-full h-full object-cover" />
                         </div>

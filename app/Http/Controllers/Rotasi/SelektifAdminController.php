@@ -15,7 +15,7 @@ class SelektifAdminController extends Controller
         $id = $request->id;
         $tab = $request->tab === null ? 'diajukan' : $request->tab;
         // get semua pengajuan
-        $pengajuans = Pengajuan::where('status', $tab)->get()->map(function ($pengajuan) {
+        $pengajuans = Pengajuan::with(["lokasiAwal", "lokasiTujuan"])->where('status', $tab)->get()->map(function ($pengajuan) {
             $pengajuan->tanggal_pengajuan = Carbon::parse($pengajuan->created_at)->format('d-m-Y');
             return $pengajuan;
         });
@@ -82,7 +82,7 @@ class SelektifAdminController extends Controller
         } else if ($request->status == 'diterima') {
             $pengajuan->status = 'diterima';
             $pengajuan->save();
-            
+
             if ($pengajuan->posisi_sekarang == "ACO") {
                 $pengajuan->lokasiAwal->jumlah_personel_aco -= 1;
             } else {

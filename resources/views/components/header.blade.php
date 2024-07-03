@@ -1,16 +1,22 @@
 <header
-    class="bg-[#293676] text-[#D2D2D2] font-bold flex flex-col md:flex-row items-center justify-between px-8 py-4 gap-4 {{ !empty($static) && $static ? 'sticky' : 'fixed' }} top-0 left-0 z-50 w-full">
+    class="bg-[#293676] text-[#D2D2D2] font-bold flex flex-col md:flex-row items-center justify-between px-8 py-4 gap-4 {{ !empty($static) && $static ? 'sticky' : 'fixed' }} top-0 left-0 z-50 w-full shadow-black drop-shadow-lg">
     <a href="/"><img src="/images/logo.svg" alt="logo" /></a>
     <button class="md:hidden">☰</button>
     <nav class="md:min-w-1/4 hidden md:flex flex-col sm:flex-row items-center justify-around gap-2 sm:gap-4">
         <div id="rotasi-nav">
-            <button class="flex items-center gap-1">Rotasi <img src="/images/icons/moreArrow.svg" class="duration-300"></button>
-            <div class="max-h-0 duration-300 absolute flex flex-col gap-1 bg-white mt-4 text-gray-800 text-base font-light overflow-hidden [&_a]:py-1 [&_a]:px-2">
-                <a href="/rotasi/denah">Denah Rotasi</a>
-                <hr>
-                <a href="/rotasi/personal">Input Personal (IP)</a>
-                <hr>
-                <a href="/rotasi/selektif">Selektif Admin</a>
+            <button class="flex items-center gap-1">Rotasi <img src="/images/icons/moreArrow.svg"
+                    class="duration-300"></button>
+            <div
+                class="max-h-0 duration-300 absolute flex flex-col gap-1 bg-white mt-4 text-gray-800 text-base font-light overflow-hidden">
+                <div class="border-2 flex flex-col gap-1 px-2 py-1">
+                    <a href="/rotasi/denah">Denah Rotasi</a>
+                    <hr>
+                    <a href="/rotasi/personal">Input Personal (IP)</a>
+                    @can('admin')
+                        <hr>
+                        <a href="/rotasi/selektif">Selektif Admin</a>
+                    @endcan
+                </div>
             </div>
         </div>
         <a class="text-gray-400" href="#">Demosi</a>
@@ -19,7 +25,7 @@
             <a href="/akun">Akun</a>
             <a href="/logout">Logout</a>
         @else
-            <a href="/login">Login</a>
+            <a class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-1" href="/login">Login</a>
         @endauth
     </nav>
 </header>
