@@ -10,20 +10,20 @@
     @include('components.header', ['static' => true])
     @include('components.modal-component')
     @if (count($pengajuans) > 0)
-        <div id="detail-pengajuan" class="bg-[#0000] w-5/6 sm:w-2/3 md:w-1/2 max-h-[90vh]" popover>
-            <div class="bg-white flex flex-col items-center border-2 rounded-lg p-4">
+        <div id="detail-pengajuan" class="border-2 rounded-lg p-4 w-5/6 sm:w-2/3 md:w-1/2 max-h-[90vh]" popover>
+            <div class="bg-white flex flex-col items-center">
                 <h1 class="font-bold text-xl">Detail</h1>
                 <p class="my-1 text-center">
                     <span>{{ $pengajuan->lokasiAwal->nama }}</span>
                     ->
                     <span>{{ $pengajuan->lokasiTujuan->nama }}</span>
                 </p>
-                <div class="flex gap-5">
+                <div class="grid grid-cols-2 gap-5 w-full">
                     <aside class="flex flex-col items-end">
-                        <p class="font-semibold mt-2">Nama</p>
-                        <p>{{ $pengajuan->nama_lengkap }}</p>
+                        <p class="font-semibold mt-2 text-right">Nama</p>
+                        <p class="text-right">{{ $pengajuan->nama_lengkap }}</p>
                         <p class="font-semibold mt-2">NIK</p>
-                        <p>{{ $pengajuan->nik }}</p>
+                        <p class="text-right">{{ $pengajuan->nik }}</p>
                     </aside>
                     <aside>
                         <p class="font-semibold mt-2">Masa Kerja</p>
@@ -63,9 +63,9 @@
                     @endif
                 </div>
                 <p class="font-semibold mt-2">Tujuan</p>
-                <p>{{ $pengajuan->tujuan_rotasi }}</p>
+                <p class="text-justify">{{ $pengajuan->tujuan_rotasi }}</p>
                 <p class="font-semibold mt-2">Keterangan</p>
-                <p>{{ $pengajuan->keterangan }}</p>
+                <p class="text-justify">{{ $pengajuan->keterangan }}</p>
             </div>
         </div>
     @endif
@@ -90,6 +90,8 @@
                         {{ $request->lokasi_tujuan === $cabang->nama ? 'selected' : '' }}>{{ $cabang->nama }}</option>
                 @endforeach
             </select>
+
+            <button id="filter-reset" type="button" class="underline self-end">Reset</button>
 
             <button class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-2 py-1 font-semibold rounded-lg"
                 type="submit">Filter</button>
@@ -166,6 +168,12 @@
                                 <h2 class="font-semibold">Status Pemindahan</h2>
                                 <input type="checkbox" name="status" id="diterima" value="diterima">
                                 <label for="diterima">Diterima</label><br />
+                            @elseif ($tab === 'tidak_dapat')
+                                <h2 class="font-semibold">Keterangan Penolakan</h2>
+                                <p>{{ $pengajuan->keteranganPenolakan ? $pengajuan->keteranganPenolakan->catatan : '-' }}
+                                </p>
+                                <h2 class="font-semibold">Rekomendasi</h2>
+                                <p>{{ $pengajuan->rekomendasi ? $pengajuan->rekomendasi->catatan : '-' }}</p>
                             @else
                                 <h2 class="font-semibold">Status Pemindahan</h2>
                                 <input type="radio" name="status" id="dapat" value="dapat"
@@ -207,6 +215,14 @@
     </main>
     @include('components.footer')
     <script src="/script/nav.js"></script>
+    <script>
+        document.getElementById("filter-reset").addEventListener("click", () => {
+            document.getElementById("search_nama").value = "";
+            document.getElementById("nik").value = "";
+            document.getElementById("lokasi_awal").value = "";
+            document.getElementById("lokasi_tujuan").value = "";
+        });
+    </script>
     <script>
         document.querySelectorAll('input[name="status"]').forEach((radio) => {
             radio.addEventListener("change", () => {

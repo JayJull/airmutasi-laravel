@@ -37,4 +37,12 @@ class Pengajuan extends Model
     {
         return $this->hasMany(Kompetensi::class);
     }
+    public function keteranganPenolakan()
+    {
+        return $this->hasOne(Catatan::class)->where('tipe', 'keterangan_penolakan');
+    }
+    public function rekomendasi()
+    {
+        return $this->hasOne(Catatan::class)->where('tipe', 'rekomendasi');
+    }
 }

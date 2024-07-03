@@ -77,8 +77,18 @@ class SelektifAdminController extends Controller
                 'keterangan' => 'required',
                 'rekomendasi' => 'required'
             ]);
+            DB::beginTransaction();
             $pengajuan->status = 'tidak_dapat';
+            $pengajuan->keteranganPenolakan()->create([
+                'tipe' => 'keterangan_penolakan',
+                'catatan' => $request->keterangan
+            ]);
+            $pengajuan->rekomendasi()->create([
+                'tipe' => 'rekomendasi',
+                'catatan' => $request->rekomendasi
+            ]);
             $pengajuan->save();
+            DB::commit();
             return redirect()->back()->with('success', 'Data berhasil diupdate');
         } else if ($request->status == 'diterima') {
             DB::beginTransaction();
