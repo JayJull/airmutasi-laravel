@@ -22,9 +22,9 @@
                 @endif
                 <p class="text-center">Email: {{ $akun->email }}</p>
             </div>
-            <a href="/akun/edit" class="bg-[#383A83] text-white px-4 py-2 rounded-lg font-semibold text-center">Edit</a>
+            <a href="/akun/edit" class="bg-yellow-300 hover:bg-yellow-400 duration-200 text-gray-800 px-4 py-2 rounded-lg font-semibold text-center">Edit</a>
             @if ($akun->role->name == 'admin')
-                <a href="/akun/add" class="bg-[#383A83] text-white px-4 py-2 rounded-lg font-semibold text-center">Buat
+                <a href="/akun/add" class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold text-center">Buat
                     akun personel baru</a>
             @endif
         </section>

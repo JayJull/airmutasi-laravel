@@ -95,7 +95,7 @@ class PengajuanController extends Controller
     public function updateView($id)
     {
         $cabangs = Cabang::all();
-        $pengajuan = Pengajuan::find($id);
+        $pengajuan = Pengajuan::with(['lokasiAwal', 'lokasiTujuan'])->find($id);
         if (!$pengajuan) {
             return response()->json(['message' => 'Data not found'], 404);
         }
