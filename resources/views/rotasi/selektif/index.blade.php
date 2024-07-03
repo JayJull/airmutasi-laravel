@@ -55,11 +55,11 @@
                 <div class="flex gap-2">
                     @if ($pengajuan->sk_mutasi_url)
                         <a class="flex-grow text-center bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-2 py-1 mt-1 font-semibold rounded-lg"
-                            href="{{ $kompetensi->file_url }}">SK Mutasi</a>
+                            href="{{ $pengajuan->file_url }}">SK Mutasi</a>
                     @endif
                     @if ($pengajuan->surat_persetujuan_url)
                         <a class="flex-grow text-center bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-2 py-1 mt-1 font-semibold rounded-lg"
-                            href="{{ $kompetensi->surat_persetujuan_url }}">Surat Persetujuan</a>
+                            href="{{ $pengajuan->surat_persetujuan_url }}">Surat Persetujuan</a>
                     @endif
                 </div>
                 <p class="font-semibold mt-2">Tujuan</p>
