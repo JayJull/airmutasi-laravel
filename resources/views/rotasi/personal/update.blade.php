@@ -215,6 +215,7 @@
     @include('components.footer')
     <script src="/script/nav.js"></script>
     <script src="/script/filePopover.js"></script>
+    {{-- same as rotasi/personal/input.blade --}}
     <script>
         function kompetensiBindDeleteBtn(id) {
             document.querySelector(`#${id} > button`).addEventListener('click', function() {
@@ -242,32 +243,6 @@
             });
             kompetensiCount++;
         });
-    </script>
-    <script>
-        document
-            .querySelectorAll('[name=lokasi_awal_id]')
-            .forEach(
-                radio => radio.addEventListener('change', function(e) {
-                    document.querySelector('#cabang-awal').textContent =
-                        `${e.target.parentElement.textContent.trim()}`;
-                    document.getElementById('lokasi-awal').hidePopover();
-                })
-            );
-        document
-            .querySelectorAll('[name=lokasi_tujuan_id]')
-            .forEach(
-                radio => radio.addEventListener('change', function(e) {
-                    document.querySelector('#cabang-tujuan').textContent =
-                        `${e.target.parentElement.textContent.trim()}`;
-                    document.getElementById('lokasi-tujuan').hidePopover();
-                })
-            );
-        const lokasiAwalChecked = document.querySelector('[name=lokasi_awal_id]:checked');
-        document.querySelector('#cabang-awal').textContent = lokasiAwalChecked ?
-            `${lokasiAwalChecked.parentElement.textContent.trim()}` : "Pilih";
-        const lokasiTujuanChecked = document.querySelector('[name=lokasi_tujuan_id]:checked');
-        document.querySelector('#cabang-tujuan').textContent = lokasiTujuanChecked ?
-            `${lokasiTujuanChecked.parentElement.textContent.trim()}` : "Pilih";
     </script>
 </body>
 

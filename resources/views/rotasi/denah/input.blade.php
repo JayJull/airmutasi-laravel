@@ -84,6 +84,7 @@
     <script src="/script/nav.js"></script>
     <script src="/script/map.js"></script>
     <script>
+        // set preview when thumbnail file value is changed
         document.getElementById("thumbnail").addEventListener("change", function() {
             var file = this.files[0];
             var reader = new FileReader();
@@ -95,6 +96,7 @@
             }
             reader.readAsDataURL(file);
         });
+        // set preview when thumbnail url is set
         document.getElementById("thumbnail_url_set").addEventListener("click", function() {
             var url = document.getElementById("thumbnail_url").value;
             document.querySelector("#thumbnail-preview").src = url;
@@ -104,13 +106,18 @@
         });
     </script>
     <script>
+        // marker / pointer container
         var marker;
+
+        // set the map input if induk is checked
         const setInduk = () => {
             if (document.getElementById("induk").checked) {
                 document.getElementById("map").classList.remove("h-0");
                 document.getElementById("map").classList.add("h-[50vh]");
                 document.getElementById("latlng").classList.remove("hidden");
                 map = InitMap();
+
+                // set marker on click
                 map.on('click', function(e) {
                     var lat = e.latlng.lat;
                     var lng = e.latlng.lng;
@@ -134,6 +141,8 @@
                 document.getElementById("latlng").classList.add("hidden");
             }
         }
+
+        // set marker from coordinate input value
         const setMarkerFromCoord = () => {
             var lat = document.getElementById("latitude").value;
             var lng = document.getElementById("longitude").value;

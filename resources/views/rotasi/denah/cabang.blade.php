@@ -91,6 +91,7 @@
     <script src="/script/nav.js"></script>
     <script src="/script/chart.js"></script>
     <script>
+        // get statistics data
         const series = [{
             name: "Jumlah Personel",
             data: [
@@ -100,12 +101,14 @@
             ],
         }, ];
 
+        // create bar chart
         var chartBar = new ApexCharts(
             document.querySelector("#stats-bar"),
             generateBarChart("Grafik Personel", series)
         );
         chartBar.render();
 
+        // create pie chart
         var chartPie = new ApexCharts(
             document.querySelector("#stats-pie"),
             generatePieChart("Distribusi Personel", series[0].data)

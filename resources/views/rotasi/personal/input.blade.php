@@ -187,6 +187,7 @@
     <script src="/script/nav.js"></script>
     <script src="/script/filePopover.js"></script>
     <script>
+        // (re)bind delete button event for kompetensi item by id
         function kompetensiBindDeleteBtn(id) {
             document.querySelector(`#${id} > button`).addEventListener('click', function() {
                 this.parentElement.remove();
@@ -194,13 +195,19 @@
         }
     </script>
     <script>
+        // counter for kompetensi id
         var kompetensiCount = 1;
+
+        // set file popover behaviour
         initFilePopover('sk_mutasi');
         initFilePopover('surat_persetujuan');
+        // bind delete button event for initial kompetensi item
         document.querySelectorAll(".kompetensi-item").forEach(kompetensi => {
             kompetensiBindDeleteBtn(kompetensi.id);
             initFilePopover(kompetensi.id);
         });
+
+        // add kompetensi item
         document.querySelector("#kompetensi_tambah").addEventListener('click', function() {
             const kompetensiContainer = document.getElementById('kompetensi');
             kompetensiContainer.innerHTML += `@include('rotasi.components.kompetensi-item', [
@@ -213,32 +220,6 @@
             });
             kompetensiCount++;
         });
-    </script>
-    <script>
-        document
-            .querySelectorAll('[name=lokasi_awal_id]')
-            .forEach(
-                radio => radio.addEventListener('change', function(e) {
-                    document.querySelector('#cabang-awal').textContent =
-                        `${e.target.parentElement.textContent.trim()}`;
-                    document.getElementById('lokasi-awal').hidePopover();
-                })
-            );
-        document
-            .querySelectorAll('[name=lokasi_tujuan_id]')
-            .forEach(
-                radio => radio.addEventListener('change', function(e) {
-                    document.querySelector('#cabang-tujuan').textContent =
-                        `${e.target.parentElement.textContent.trim()}`;
-                    document.getElementById('lokasi-tujuan').hidePopover();
-                })
-            );
-        const lokasiAwalChecked = document.querySelector('[name=lokasi_awal_id]:checked');
-        document.querySelector('#cabang-awal').textContent = lokasiAwalChecked ?
-            `${lokasiAwalChecked.parentElement.textContent.trim()}` : "Pilih";
-        const lokasiTujuanChecked = document.querySelector('[name=lokasi_tujuan_id]:checked');
-        document.querySelector('#cabang-tujuan').textContent = lokasiTujuanChecked ?
-            `${lokasiTujuanChecked.parentElement.textContent.trim()}` : "Pilih";
     </script>
 </body>
 

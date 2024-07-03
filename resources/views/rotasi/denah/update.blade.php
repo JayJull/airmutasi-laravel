@@ -91,6 +91,7 @@
     @include('components.footer')
     <script src="/script/nav.js"></script>
     <script src="/script/map.js"></script>
+    {{-- same as rotasi/denah/input.blade --}}
     <script>
         document.getElementById("thumbnail").addEventListener("change", function() {
             var file = this.files[0];

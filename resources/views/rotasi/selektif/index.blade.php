@@ -216,6 +216,7 @@
     @include('components.footer')
     <script src="/script/nav.js"></script>
     <script>
+        // reset all filter value to empty
         document.getElementById("filter-reset").addEventListener("click", () => {
             document.getElementById("search_nama").value = "";
             document.getElementById("nik").value = "";
@@ -224,6 +225,7 @@
         });
     </script>
     <script>
+        // show or hide keterangan and rekomendasi field by the status choosed
         document.querySelectorAll('input[name="status"]').forEach((radio) => {
             radio.addEventListener("change", () => {
                 if (radio.value === "dapat") {
@@ -235,6 +237,8 @@
                 }
             });
         });
+
+        // hide keterangan and rekomendasi at initial
         if (document.querySelector('input[name="status"]:checked') && document.querySelector('input[name="status"]:checked')
             .value === "tidak") {
             document.getElementById("keterangan-field").classList.remove("hidden");
