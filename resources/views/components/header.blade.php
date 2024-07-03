@@ -22,8 +22,18 @@
         <a class="text-gray-400" href="#">Demosi</a>
         <a class="text-gray-400" href="#">Promosi</a>
         @auth
-            <a href="/akun">Akun</a>
-            <a href="/logout">Logout</a>
+            <div id="akun-nav">
+                <button class="flex items-center gap-1">Akun <img src="/images/icons/moreArrow.svg"
+                        class="duration-300"></button>
+                <div
+                    class="max-h-0 duration-300 absolute flex flex-col gap-1 bg-white mt-4 text-gray-800 text-base font-light overflow-hidden">
+                    <div class="border-2 flex flex-col gap-1 px-2 py-1">
+                        <a href="/akun">Profile</a>
+                        <hr>
+                        <a class="text-red-500" href="/logout">Logout</a>
+                    </div>
+                </div>
+            </div>
         @else
             <a class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-1" href="/login">Login</a>
         @endauth
@@ -37,5 +47,12 @@
         dropdown.classList.toggle('max-h-0');
         dropdown.classList.toggle('max-h-[170%]');
         rotasiNav.querySelector('button > img').classList.toggle('rotate-90');
+    });
+    const akunNav = document.getElementById('akun-nav');
+    akunNav.addEventListener('click', () => {
+        const dropdown = akunNav.querySelector('div');
+        dropdown.classList.toggle('max-h-0');
+        dropdown.classList.toggle('max-h-[170%]');
+        akunNav.querySelector('button > img').classList.toggle('rotate-90');
     });
 </script>
