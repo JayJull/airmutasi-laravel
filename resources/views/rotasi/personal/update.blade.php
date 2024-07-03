@@ -206,7 +206,7 @@
                     <textarea name="keterangan" id="keterangan" class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                         rows="3" placeholder="Ketik Disini ...">{{ old('keterangan') ? old('keterangan') : $pengajuan->keterangan }}</textarea>
                 </div>
-                <button type="submit" class="bg-[#383A83] text-white py-2 rounded-lg font-semibold">
+                <button type="submit" class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white py-2 rounded-lg font-semibold">
                     Kirim
                 </button>
             </form>
