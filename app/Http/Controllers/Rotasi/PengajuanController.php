@@ -44,9 +44,6 @@ class PengajuanController extends Controller
             'posisi_tujuan' => ['required', Rule::in($posisi)],
             'kompetensi' => 'required|array',
             'kompetensi.*.nama' => 'required',
-            'kompetensi.*.url' => 'required',
-            'sk_mutasi_url' => 'required',
-            'surat_persetujuan_url' => 'required',
             'tujuan_rotasi' => 'required',
             'keterangan' => 'required',
         ]);
@@ -122,9 +119,6 @@ class PengajuanController extends Controller
             'posisi_tujuan' => ['required', Rule::in($posisi)],
             'kompetensi' => 'required|array',
             'kompetensi.*.nama' => 'required',
-            'kompetensi.*.url' => 'required',
-            'sk_mutasi_url' => 'required',
-            'surat_persetujuan_url' => 'required',
             'tujuan_rotasi' => 'required',
             'keterangan' => 'required',
         ]);
