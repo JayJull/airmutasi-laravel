@@ -116,26 +116,30 @@
                     <hr class="bg-[#293676] p-[1px] w-full">
                 </div>
                 @if (count($pengajuans) === 0)
-                    <h1 class="font-bold text-2xl text-center">Tidak Ada Pengajuan</h1>
+                    <div class="h-full flex items-center justify-center">
+                        <h1 class="font-bold text-2xl text-center">Tidak Ada Pengajuan</h1>
+                    </div>
+                @else
+                    @foreach ($pengajuans as $currPengajuan)
+                        <a href="/rotasi/selektif?id={{ $currPengajuan->id }}&tab={{ $tab }}{{ $query }}"
+                            class="pengajuan-item border-2 border-[#293676] {{ $currPengajuan->id === $pengajuan->id ? 'pengajuan-active bg-[#293676] text-white' : 'bg-white text-[#293676]' }} px-8 py-3 rounded-lg grid grid-cols-1 sm:grid-cols-2 items-center justify-between gap-2">
+                            <aside class="flex flex-col items-center sm:items-start">
+                                <h3 class="font-semibold text-lg">{{ $currPengajuan->nama_lengkap }}</h3>
+                                <p>{{ $currPengajuan->nik }}</p>
+                            </aside>
+                            <aside class="flex items-center gap-4">
+                                <h4 class="font-semibold text-center">{{ $currPengajuan->lokasiAwal->nama }}</h4>
+                                <img src="/images/icons/{{ $currPengajuan->id === $pengajuan->id ? 'switch_white' : 'switch_blue' }}.svg"
+                                    alt="switch" />
+                                <h4 class="font-semibold text-center">{{ $currPengajuan->lokasiTujuan->nama }}</h4>
+                            </aside>
+                        </a>
+                    @endforeach
                 @endif
-                @foreach ($pengajuans as $currPengajuan)
-                    <a href="/rotasi/selektif?id={{ $currPengajuan->id }}&tab={{ $tab }}{{ $query }}"
-                        class="pengajuan-item border-2 border-[#293676] {{ $currPengajuan->id === $pengajuan->id ? 'pengajuan-active bg-[#293676] text-white' : 'bg-white text-[#293676]' }} px-8 py-3 rounded-lg grid grid-cols-1 sm:grid-cols-2 items-center justify-between gap-2">
-                        <aside class="flex flex-col items-center sm:items-start">
-                            <h3 class="font-semibold text-lg">{{ $currPengajuan->nama_lengkap }}</h3>
-                            <p>{{ $currPengajuan->nik }}</p>
-                        </aside>
-                        <aside class="flex items-center gap-4">
-                            <h4 class="font-semibold text-center">{{ $currPengajuan->lokasiAwal->nama }}</h4>
-                            <img src="/images/icons/{{ $currPengajuan->id === $pengajuan->id ? 'switch_white' : 'switch_blue' }}.svg"
-                                alt="switch" />
-                            <h4 class="font-semibold text-center">{{ $currPengajuan->lokasiTujuan->nama }}</h4>
-                        </aside>
-                    </a>
-                @endforeach
             </aside>
             @if (count($pengajuans) > 0)
-                <form method="POST" action="/rotasi/selektif/{{ $pengajuan->id }}" class="flex flex-col gap-2">
+                <form method="POST" action="/rotasi/selektif/{{ $pengajuan->id }}"
+                    class="flex flex-col gap-2 md:max-h-full overflow-y-auto">
                     <div
                         class="flex flex-col flex-grow gap-4 bg-white text-[#474747] border-2 border-[#293676] rounded-lg p-4 overflow-y-auto">
                         @csrf
@@ -195,7 +199,9 @@
                     </button>
                 </form>
             @else
-                <div></div>
+                <div class="h-full bg-white flex items-center justify-center border-2 border-[#293676] rounded-lg">
+                    <h1 class="font-bold text-2xl text-center">Tidak Ada Pengajuan</h1>
+                </div>
             @endif
         </section>
     </main>
