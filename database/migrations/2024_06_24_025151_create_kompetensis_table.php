@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('file_url')->nullable();
-            $table->foreignId('pengajuan_id')->constrained('pengajuans');
+            $table->foreignId('pengajuan_id')->constrained('pengajuans')->cascadeOnDelete();
             $table->timestamps();
         });
     }
