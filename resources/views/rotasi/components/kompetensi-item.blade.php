@@ -12,7 +12,7 @@
         name="kompetensi[{{ $index }}][nama]" id="{{ $id }}_nama" placeholder="Nama kompetensi ..."
         value="{{ isset($nama) ? $nama : '' }}">
     <button id="{{ $id }}_file_button"
-        class="col-span-3 bg-blue-300 border-2 border-blue-300 px-2 py-1 rounded-md font-medium text-white" type="button"
+        class="col-span-3 bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-2 py-1 rounded-md font-medium" type="button"
         popovertarget="{{ $id }}_popover">{{ isset($file_url) ? '✅️ Ubah' : 'Berkas' }}</button>
     @include('rotasi.components.file-popover', [
         'id' => $id,
