@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Rotasi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Cabang;
+use Illuminate\Support\Facades\DB;
 
-class DenahController extends Controller
+class CabangController extends Controller
 {
     public function index()
     {
@@ -46,11 +47,11 @@ class DenahController extends Controller
         return response()->json($cabang);
     }
 
-    public function inputCabangView()
+    public function inputView()
     {
         return view('rotasi.denah.input');
     }
-    public function inputCabang(Request $request)
+    public function input(Request $request)
     {
         $request->validate([
             'nama' => 'required',
@@ -62,6 +63,7 @@ class DenahController extends Controller
             'formasi_aco' => 'required|numeric',
             'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
+        DB::beginTransaction();
         $cabang = new Cabang();
         $cabang->nama = $request->nama;
         $cabang->alamat = $request->alamat;
@@ -90,10 +92,11 @@ class DenahController extends Controller
         } else {
             $cabang->save();
         }
+        DB::commit();
         return redirect()->route("rotasi.denah")->with('success', 'Cabang berhasil ditambahkan');
     }
 
-    public function updateCabangView($id)
+    public function updateView($id)
     {
         $cabang = Cabang::find($id);
         if (!$cabang) {
@@ -101,7 +104,7 @@ class DenahController extends Controller
         }
         return view('rotasi.denah.update', ['cabang' => $cabang]);
     }
-    public function updateCabang(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'nama' => 'required',
@@ -113,6 +116,7 @@ class DenahController extends Controller
             'formasi_aco' => 'required|numeric',
             'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
+        DB::beginTransaction();
         $cabang = Cabang::find($id);
         $cabang->nama = $request->nama;
         $cabang->alamat = $request->alamat;
@@ -143,10 +147,11 @@ class DenahController extends Controller
                 $cabang->coord()->delete();
             $cabang->save();
         }
+        DB::commit();
         return redirect()->route("rotasi.denah")->with('success', 'Cabang berhasil diupdate');
     }
 
-    public function deleteCabang($id)
+    public function delete($id)
     {
         $cabang = Cabang::find($id);
         if (!$cabang) {

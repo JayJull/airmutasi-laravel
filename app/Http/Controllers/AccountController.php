@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Profile;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class AccountController extends Controller
 {
@@ -16,12 +17,12 @@ class AccountController extends Controller
         return view('account.index', ['akun' => $akun]);
     }
 
-    public function addView()
+    public function inputView()
     {
-        return view('account.add');
+        return view('account.input');
     }
 
-    public function add(Request $request)
+    public function input(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -31,13 +32,14 @@ class AccountController extends Controller
             'jabatan' => 'required',
             'password' => 'required|min:8'
         ]);
+        DB::beginTransaction();
         $akun = new User();
         $akun->name = $request->name;
         $akun->email = $request->email;
         $akun->password = bcrypt($request->password);
         $akun->role_id = Role::where('name', 'personel')->first()->id;
         $akun->save();
-        if(!$akun->profile) {
+        if (!$akun->profile) {
             $akun->profile = new Profile();
             $akun->profile->user_id = $akun->id;
         }
@@ -45,16 +47,17 @@ class AccountController extends Controller
         $akun->profile->masa_kerja = $request->masa_kerja;
         $akun->profile->jabatan = $request->jabatan;
         $akun->profile->save();
+        DB::commit();
         return redirect()->route('akun')->with('success', 'Akun berhasil ditambahkan');
     }
 
-    public function editView()
+    public function updateView()
     {
         $akun = auth()->user();
-        return view('account.edit', ['akun' => $akun]);
+        return view('account.update', ['akun' => $akun]);
     }
 
-    public function edit(Request $request)
+    public function update(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -63,11 +66,12 @@ class AccountController extends Controller
             'masa_kerja' => 'required',
             'jabatan' => 'required',
         ]);
+        DB::beginTransaction();
         $akun = User::find(Auth::user()->id);
         $akun->name = $request->name;
         $akun->email = $request->email;
         $akun->save();
-        if(!$akun->profile) {
+        if (!$akun->profile) {
             $akun->profile = new Profile();
             $akun->profile->user_id = $akun->id;
         }
@@ -82,6 +86,7 @@ class AccountController extends Controller
             $akun->password = bcrypt($request->password);
         }
         $akun->profile->save();
+        DB::commit();
         return redirect()->route('akun')->with('success', 'Akun berhasil diubah');
     }
 }

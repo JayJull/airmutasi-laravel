@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cabang;
 use App\Models\Pengajuan;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class SelektifAdminController extends Controller
 {
@@ -80,6 +81,7 @@ class SelektifAdminController extends Controller
             $pengajuan->save();
             return redirect()->back()->with('success', 'Data berhasil diupdate');
         } else if ($request->status == 'diterima') {
+            DB::beginTransaction();
             $pengajuan->status = 'diterima';
             $pengajuan->save();
 
@@ -96,6 +98,7 @@ class SelektifAdminController extends Controller
             }
             $pengajuan->lokasiAwal->save();
             $pengajuan->lokasiTujuan->save();
+            DB::commit();
             return redirect()->back()->with('success', 'Data berhasil diupdate');
         }
         return redirect()->back();

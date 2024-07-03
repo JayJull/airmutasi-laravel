@@ -12,12 +12,6 @@ use Illuminate\Validation\Rule;
 
 class PengajuanController extends Controller
 {
-    public function index()
-    {
-        $cabangs = Cabang::all();
-        return view('rotasi.personal.index', ['cabangs' => $cabangs]);
-    }
-
     public function pengajuanById($id)
     {
         $pengajuan = Pengajuan::find($id);
@@ -30,7 +24,13 @@ class PengajuanController extends Controller
         return response()->json($pengajuan);
     }
 
-    public function register(Request $request)
+    public function inputView()
+    {
+        $cabangs = Cabang::all();
+        return view('rotasi.personal.input', ['cabangs' => $cabangs]);
+    }
+
+    public function input(Request $request)
     {
         $posisi = ['ATC (TWR)', 'ATC (APS)', 'ATC (ACS)', 'ACO', 'STAFF'];
         $request->validate([
@@ -92,7 +92,7 @@ class PengajuanController extends Controller
         return redirect()->route("rotasi.denah")->with('success', 'Data berhasil disimpan');
     }
 
-    public function editView($id)
+    public function updateView($id)
     {
         $cabangs = Cabang::all();
         $pengajuan = Pengajuan::find($id);
@@ -102,10 +102,10 @@ class PengajuanController extends Controller
         $pengajuan->tanggal_pengajuan = Carbon::parse($pengajuan->created_at)->format('d-m-Y');
         $pengajuan->lokasi_awal = $pengajuan->lokasiAwal;
         $pengajuan->lokasi_tujuan = $pengajuan->lokasiTujuan;
-        return view('rotasi.personal.edit', ['pengajuan' => $pengajuan, 'cabangs' => $cabangs]);
+        return view('rotasi.personal.update', ['pengajuan' => $pengajuan, 'cabangs' => $cabangs]);
     }
 
-    public function edit(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $posisi = ['ATC (TWR)', 'ATC (APS)', 'ATC (ACS)', 'ACO', 'STAFF'];
         $request->validate([

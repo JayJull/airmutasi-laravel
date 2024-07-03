@@ -4,7 +4,7 @@ use App\Http\Controllers\FileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Rotasi\DenahController as RotasiDenahController;
+use App\Http\Controllers\Rotasi\CabangController as RotasiCabangController;
 use App\Http\Controllers\Rotasi\PengajuanController as RotasiPengajuanController;
 
 /*
@@ -23,9 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'rotasi'], function () {
-    Route::get('/cabang-induk', [RotasiDenahController::class, 'listCabangInduk']);
-    Route::get('/cabang-summary/{id}', [RotasiDenahController::class, 'cabangSummary']);
-    Route::get('/cabang-search', [RotasiDenahController::class, 'cabangSearch']);
+    Route::get('/cabang-induk', [RotasiCabangController::class, 'listCabangInduk']);
+    Route::get('/cabang-summary/{id}', [RotasiCabangController::class, 'cabangSummary']);
+    Route::get('/cabang-search', [RotasiCabangController::class, 'cabangSearch']);
 });
 
 Route::group(['prefix' => 'pengajuan'], function () {
