@@ -80,7 +80,7 @@ class PengajuanController extends Controller
             'status' => $pengajuan['status'],
         ]);
         $kompetensi = array_map(function ($kom) {
-            if (!(str_contains($kom["url"], "http://") || str_contains($kom["url"], "https://"))) {
+            if (!(str_contains($kom["url"], "http://") || str_contains($kom["url"], "https://")) && $kom["url"] !== null) {
                 $kom["url"] = "http://" . $kom["url"];
             }
             $kom["file_url"] = $kom["url"];
@@ -161,11 +161,11 @@ class PengajuanController extends Controller
             'sk_mutasi_url' => $pengajuanR['sk_mutasi_url'],
             'surat_persetujuan_url' => $pengajuanR['surat_persetujuan_url'],
         ]);
-        $kompetensi = array_map(function ($kom){
+        $kompetensi = array_map(function ($kom) {
             if (isset($kom["file_url"])) {
                 $kom["file_url"] = $kom["file_url"];
             }
-            if (isset($kom["url"])) {
+            if (isset($kom["url"]) && $kom["url"] !== null) {
                 if (!(str_contains($kom["url"], "http://") || str_contains($kom["url"], "https://"))) {
                     $kom["url"] = "http://" . $kom["url"];
                 }

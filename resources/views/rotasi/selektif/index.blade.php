@@ -41,7 +41,7 @@
                 <p class="font-semibold mt-2">Kompetensi</p>
                 <div class="flex gap-2">
                     @foreach ($pengajuan->kompetensis as $kompetensi)
-                        @if ($kompetensi->file_url)
+                        @if ($kompetensi->file_url && $kompetensi->file_url !== 'null')
                             <a class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-2 py-1 font-semibold rounded-lg"
                                 href="{{ $kompetensi->file_url }}">{{ $kompetensi->nama }}</a>
                         @else
