@@ -67,7 +67,7 @@
                     {{ old('induk') !== null || $cabang->coord !== null ? 'checked' : '' }}>
                 Cabang Induk
             </label>
-            <div id="map" class="h-0">
+            <div id="map" class="h-0 z-10">
                 <div class="w-full h-full flex items-center justify-center" id="loading">
                     <img src="/images/icons/ripples.svg" alt="loading"
                         class="w-20 h-20 z-40 p-2 bg-white rounded-full">
