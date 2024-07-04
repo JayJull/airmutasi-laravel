@@ -71,19 +71,19 @@ class CabangController extends Controller
             'frms' => 'required|numeric',
             'jumlah_personel_aco' => 'required|numeric',
             'formasi_aco' => 'required|numeric',
-            'frms_aco' => 'required|numeric',
+            // 'frms_aco' => 'required|numeric',
             'jumlah_personel_ais' => 'required|numeric',
             'formasi_ais' => 'required|numeric',
-            'frms_ais' => 'required|numeric',
+            // 'frms_ais' => 'required|numeric',
             'jumlah_personel_atfm' => 'required|numeric',
             'formasi_atfm' => 'required|numeric',
-            'frms_atfm' => 'required|numeric',
+            // 'frms_atfm' => 'required|numeric',
             'jumlah_personel_tapor' => 'required|numeric',
             'formasi_tapor' => 'required|numeric',
-            'frms_tapor' => 'required|numeric',
+            // 'frms_tapor' => 'required|numeric',
             'jumlah_personel_ats_system' => 'required|numeric',
             'formasi_ats_system' => 'required|numeric',
-            'frms_ats_system' => 'required|numeric',
+            // 'frms_ats_system' => 'required|numeric',
             'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         DB::beginTransaction();
@@ -101,23 +101,23 @@ class CabangController extends Controller
 
         $cabang->jumlah_personel_aco = $request->jumlah_personel_aco;
         $cabang->formasi_aco = $request->formasi_aco;
-        $cabang->frms_aco = $request->frms_aco;
+        // $cabang->frms_aco = $request->frms_aco;
 
         $cabang->jumlah_personel_ais = $request->jumlah_personel_ais;
         $cabang->formasi_ais = $request->formasi_ais;
-        $cabang->frms_ais = $request->frms_ais;
+        // $cabang->frms_ais = $request->frms_ais;
 
         $cabang->jumlah_personel_atfm = $request->jumlah_personel_atfm;
         $cabang->formasi_atfm = $request->formasi_atfm;
-        $cabang->frms_atfm = $request->frms_atfm;
+        // $cabang->frms_atfm = $request->frms_atfm;
 
         $cabang->jumlah_personel_tapor = $request->jumlah_personel_tapor;
         $cabang->formasi_tapor = $request->formasi_tapor;
-        $cabang->frms_tapor = $request->frms_tapor;
+        // $cabang->frms_tapor = $request->frms_tapor;
 
         $cabang->jumlah_personel_ats_system = $request->jumlah_personel_ats_system;
         $cabang->formasi_ats_system = $request->formasi_ats_system;
-        $cabang->frms_ats_system = $request->frms_ats_system;
+        // $cabang->frms_ats_system = $request->frms_ats_system;
 
         if ($request->has('induk')) {
             $request->validate([
@@ -162,19 +162,14 @@ class CabangController extends Controller
             'frms' => 'required|numeric',
             'jumlah_personel_aco' => 'required|numeric',
             'formasi_aco' => 'required|numeric',
-            'frms_aco' => 'required|numeric',
             'jumlah_personel_ais' => 'required|numeric',
             'formasi_ais' => 'required|numeric',
-            'frms_ais' => 'required|numeric',
             'jumlah_personel_atfm' => 'required|numeric',
             'formasi_atfm' => 'required|numeric',
-            'frms_atfm' => 'required|numeric',
             'jumlah_personel_tapor' => 'required|numeric',
             'formasi_tapor' => 'required|numeric',
-            'frms_tapor' => 'required|numeric',
             'jumlah_personel_ats_system' => 'required|numeric',
             'formasi_ats_system' => 'required|numeric',
-            'frms_ats_system' => 'required|numeric',
             'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         DB::beginTransaction();
@@ -192,23 +187,23 @@ class CabangController extends Controller
 
         $cabang->jumlah_personel_aco = $request->jumlah_personel_aco;
         $cabang->formasi_aco = $request->formasi_aco;
-        $cabang->frms_aco = $request->frms_aco;
+        // $cabang->frms_aco = $request->frms_aco;
 
         $cabang->jumlah_personel_ais = $request->jumlah_personel_ais;
         $cabang->formasi_ais = $request->formasi_ais;
-        $cabang->frms_ais = $request->frms_ais;
+        // $cabang->frms_ais = $request->frms_ais;
 
         $cabang->jumlah_personel_atfm = $request->jumlah_personel_atfm;
         $cabang->formasi_atfm = $request->formasi_atfm;
-        $cabang->frms_atfm = $request->frms_atfm;
+        // $cabang->frms_atfm = $request->frms_atfm;
 
         $cabang->jumlah_personel_tapor = $request->jumlah_personel_tapor;
         $cabang->formasi_tapor = $request->formasi_tapor;
-        $cabang->frms_tapor = $request->frms_tapor;
+        // $cabang->frms_tapor = $request->frms_tapor;
 
         $cabang->jumlah_personel_ats_system = $request->jumlah_personel_ats_system;
         $cabang->formasi_ats_system = $request->formasi_ats_system;
-        $cabang->frms_ats_system = $request->frms_ats_system;
+        // $cabang->frms_ats_system = $request->frms_ats_system;
 
         if ($request->has('induk')) {
             $request->validate([

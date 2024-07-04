@@ -178,10 +178,10 @@
                                 <h2 class="font-semibold">Status Pemindahan</h2>
                                 <input type="radio" name="status" id="dapat" value="dapat"
                                     {{ old('status') == 'dapat' ? 'checked' : '' }} />
-                                <label for="dapat">Dapat Pemindahan</label><br />
+                                <label for="dapat">Diterima</label><br />
                                 <input type="radio" name="status" id="tidak_dapat" value="tidak"
                                     {{ old('status') == 'tidak' ? 'checked' : '' }} />
-                                <label for="tidak_dapat">Tidak Dapat Pemindahan</label>
+                                <label for="tidak_dapat">Tidak Diterima</label>
                             @endif
                         </div>
                         <div id="keterangan-field" class="hidden">
