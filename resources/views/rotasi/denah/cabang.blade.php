@@ -11,17 +11,22 @@
     <main>
         <section class="bg-[#293676] text-[#474747] p-8 flex flex-col md:grid md:grid-cols-3 gap-8">
             <aside class="col-span-3 md:col-span-1 sm:h-full flex flex-col">
-                <div class="flex items-center justify-center flex-grow h-[50vh] md:max-h-[50%] rounded-lg">
+                <div class="flex items-center justify-center h-64 rounded-lg">
                     <img src="{{ $cabang->thumbnail_url && $cabang->thumbnail_url != 'NULL' ? $cabang->thumbnail_url : '/images/default_tower.jpg' }}"
                         alt="foto cabang" class="w-full h-full object-cover rounded-lg">
                 </div>
                 <h1 id="nama" class="text-white p-2 font-semibold text-lg">
                     {{ $cabang->nama }}
                 </h1>
+                <div class="px-2 flex gap-2">
+                    @foreach ($cabang->kelases as $kelas)
+                        <p class="text-xs bg-gray-300 px-2 py-1 rounded-md">{{ $kelas->kelas->nama_kelas }}</p>
+                    @endforeach
+                </div>
                 <p class="text-white p-2">
                     {{ $cabang->alamat }}
                 </p>
-                @can ('admin')
+                @can('admin')
                     <a href="/rotasi/denah/input/{{ $cabang->id }}"
                         class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white w-full text-center p-2 rounded-lg font-semibold mb-2">Update
                         Cabang</a>
@@ -30,7 +35,7 @@
                         Cabang</a>
                 @endcan
             </aside>
-            <aside class="flex-grow col-span-3 md:col-span-2 md:h-screen grid md:grid-cols-2 md:grid-rows-2 gap-4">
+            <aside class="flex-grow col-span-3 md:col-span-2 grid md:grid-cols-2 md:grid-rows-1 gap-4">
                 <div class="col-span-2 md:col-span-1 flex items-center justify-center bg-white rounded-lg p-4">
                     <div id="stats-bar" class="w-full h-full"></div>
                 </div>
@@ -40,22 +45,55 @@
                 <div class="col-span-2 grid grid-cols-2 gap-2 bg-white rounded-lg p-4">
                     <div
                         class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col items-center justify-center p-2">
-                        <h2 class="font-bold text-xl">Jumlah Personel</h2>
-                        <p class="font-medium">ATC {{ $cabang->jumlah_personel }} Orang</p>
-                        <p class="font-medium">ACO {{ $cabang->jumlah_personel_aco }} Orang</p>
+                        <h2 class="font-bold text-xl">Jumlah Optimal</h2>
+                        <p class="font-medium">ATC {{ $cabang->formasi }} Orang</p>
+                        <p class="font-medium">ACO {{ $cabang->formasi_aco }} Orang</p>
+                        <p class="font-medium">AIS {{ $cabang->formasi_ais }} Orang</p>
+                        <p class="font-medium">ATFM {{ $cabang->formasi_atfm }} Orang</p>
+                        <p class="font-medium">TAPOR {{ $cabang->formasi_tapor }} Orang</p>
+                        <p class="font-medium">ATS System {{ $cabang->formasi_ats_system }} Orang</p>
                     </div>
                     <div
                         class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col items-center justify-center p-2">
-                        <h2 class="font-bold text-xl">Formasi</h2>
-                        <p class="font-medium">ATC {{ $cabang->formasi }} Orang</p>
-                        <p class="font-medium">ACO {{ $cabang->formasi_aco }} Orang</p>
+                        <h2 class="font-bold text-xl">Jumlah FRMS</h2>
+                        <p class="font-medium">ATC {{ $cabang->frms }} Orang</p>
+                        <p class="font-medium">ACO {{ $cabang->frms_aco }} Orang</p>
+                        <p class="font-medium">AIS {{ $cabang->frms_ais }} Orang</p>
+                        <p class="font-medium">ATFM {{ $cabang->frms_atfm }} Orang</p>
+                        <p class="font-medium">TAPOR {{ $cabang->frms_tapor }} Orang</p>
+                        <p class="font-medium">ATS System {{ $cabang->frms_ats_system }} Orang</p>
                     </div>
-                    <div class="border-4 rounded-lg col-span-2 flex flex-col items-center justify-center p-2">
+                    <div
+                        class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col items-center justify-center p-2">
+                        <h2 class="font-bold text-xl">Jumlah Eksisting</h2>
+                        <p class="font-medium">ATC {{ $cabang->jumlah_personel }} Orang</p>
+                        <p class="font-medium">ACO {{ $cabang->jumlah_personel_aco }} Orang</p>
+                        <p class="font-medium">AIS {{ $cabang->jumlah_personel_ais }} Orang</p>
+                        <p class="font-medium">ATFM {{ $cabang->jumlah_personel_atfm }} Orang</p>
+                        <p class="font-medium">TAPOR {{ $cabang->jumlah_personel_tapor }} Orang</p>
+                        <p class="font-medium">ATS System {{ $cabang->jumlah_personel_ats_system }} Orang</p>
+                    </div>
+                    <div
+                        class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col items-center justify-center p-2">
                         <h2 class="font-bold text-xl">Prediksi personel</h2>
                         <p class="font-medium">
                             ATC {{ $cabang->jumlah_personel + count($cabang->in) - count($cabang->out) }} Orang</p>
                         <p class="font-medium">
                             ACO {{ $cabang->jumlah_personel_aco + count($cabang->inACO) - count($cabang->outACO) }}
+                            Orang</p>
+                        <p class="font-medium">
+                            AIS {{ $cabang->jumlah_personel_ais + count($cabang->inAIS) - count($cabang->outAIS) }}
+                            Orang</p>
+                        <p class="font-medium">
+                            ATFM {{ $cabang->jumlah_personel_atfm + count($cabang->inATFM) - count($cabang->outATFM) }}
+                            Orang</p>
+                        <p class="font-medium">
+                            TAPOR
+                            {{ $cabang->jumlah_personel_tapor + count($cabang->inTAPOR) - count($cabang->outTAPOR) }}
+                            Orang</p>
+                        <p class="font-medium">
+                            ATS System
+                            {{ $cabang->jumlah_personel_ats_system + count($cabang->inATSSystem) - count($cabang->outATSSystem) }}
                             Orang</p>
                     </div>
                 </div>

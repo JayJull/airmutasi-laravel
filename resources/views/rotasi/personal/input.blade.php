@@ -104,6 +104,15 @@
                                 (ACS)</option>
                             <option value="ACO" {{ old('posisi_sekarang') == 'ACO' ? 'selected' : '' }}>ACO
                             </option>
+                            <option value="AIS" {{ old('posisi_sekarang') == 'AIS' ? 'selected' : '' }}>AIS
+                            </option>
+                            <option value="ATFM" {{ old('posisi_sekarang') == 'ATFM' ? 'selected' : '' }}>ATFM
+                            </option>
+                            <option value="TAPOR" {{ old('posisi_sekarang') == 'TAPOR' ? 'selected' : '' }}>TAPOR
+                            </option>
+                            <option value="ATSSystem" {{ old('posisi_sekarang') == 'ATSSystem' ? 'selected' : '' }}>ATS
+                                System
+                            </option>
                             <option value="STAFF" {{ old('posisi_sekarang') == 'STAFF' ? 'selected' : '' }}>STAFF
                             </option>
                         </select>
@@ -121,6 +130,15 @@
                             <option value="ATC (ACS)" {{ old('posisi_tujuan') == 'ATC (ACS)' ? 'selected' : '' }}>ATC
                                 (ACS)</option>
                             <option value="ACO" {{ old('posisi_tujuan') == 'ACO' ? 'selected' : '' }}>ACO</option>
+                            <option value="AIS" {{ old('posisi_tujuan') == 'AIS' ? 'selected' : '' }}>AIS
+                            </option>
+                            <option value="ATFM" {{ old('posisi_tujuan') == 'ATFM' ? 'selected' : '' }}>ATFM
+                            </option>
+                            <option value="TAPOR" {{ old('posisi_tujuan') == 'TAPOR' ? 'selected' : '' }}>TAPOR
+                            </option>
+                            <option value="ATSSystem" {{ old('posisi_tujuan') == 'ATSSystem' ? 'selected' : '' }}>ATS
+                                System
+                            </option>
                             <option value="STAFF" {{ old('posisi_tujuan') == 'STAFF' ? 'selected' : '' }}>STAFF
                             </option>
                         </select>

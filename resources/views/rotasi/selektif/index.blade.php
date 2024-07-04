@@ -103,11 +103,11 @@
                 <div class="sticky top-0 w-full">
                     <div class="text-[#293676] flex gap-2 py-2 justify-evenly bg-[#ced0ff]">
                         <a class="{{ !$tab || $tab === 'diajukan' ? 'font-semibold' : '' }}"
-                            href="/rotasi/selektif?tab=diajukan{{ $query }}">Diajukan</a>
+                            href="/rotasi/selektif?tab=diajukan{{ $query }}">Pengajuan</a>
                         <a class="{{ $tab === 'dapat' ? 'font-semibold' : '' }}"
-                            href="/rotasi/selektif?tab=dapat{{ $query }}">Dapat</a>
+                            href="/rotasi/selektif?tab=dapat{{ $query }}">Diterima</a>
                         <a class="{{ $tab === 'tidak_dapat' ? 'font-semibold' : '' }}"
-                            href="/rotasi/selektif?tab=tidak_dapat{{ $query }}">Tidak Dapat</a>
+                            href="/rotasi/selektif?tab=tidak_dapat{{ $query }}">Tidak Diterima</a>
                         <button popovertarget="filter" class="relative">
                             @if ($query != '')
                                 <span class="absolute -right-1 -top-0 rounded-full w-2 h-2 bg-red-500"></span>
@@ -167,7 +167,7 @@
                             @if ($tab === 'dapat')
                                 <h2 class="font-semibold">Status Pemindahan</h2>
                                 <input type="checkbox" name="status" id="diterima" value="diterima">
-                                <label for="diterima">Diterima</label><br />
+                                <label for="diterima">Disetujui</label><br />
                             @elseif ($tab === 'tidak_dapat')
                                 <h2 class="font-semibold">Keterangan Penolakan</h2>
                                 <p>{{ $pengajuan->keteranganPenolakan ? $pengajuan->keteranganPenolakan->catatan : '-' }}

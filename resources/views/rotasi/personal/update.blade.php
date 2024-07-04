@@ -114,6 +114,23 @@
                                 {{ old('posisi_sekarang') == 'ACO' || (!old('posisi_sekarang') && $pengajuan->posisi_sekarang == 'ACO') ? 'selected' : '' }}>
                                 ACO
                             </option>
+                            <option value="AIS"
+                                {{ old('posisi_sekarang') == 'AIS' || (!old('posisi_sekarang') && $pengajuan->posisi_sekarang == 'AIS') ? 'selected' : '' }}>
+                                AIS
+                            </option>
+                            <option value="ATFM"
+                                {{ old('posisi_sekarang') == 'ATFM' || (!old('posisi_sekarang') && $pengajuan->posisi_sekarang == 'ATFM') ? 'selected' : '' }}>
+                                ATFM
+                            </option>
+                            <option value="TAPOR"
+                                {{ old('posisi_sekarang') == 'TAPOR' || (!old('posisi_sekarang') && $pengajuan->posisi_sekarang == 'TAPOR') ? 'selected' : '' }}>
+                                TAPOR
+                            </option>
+                            <option value="ATSSystem"
+                                {{ old('posisi_sekarang') == 'ATSSystem' || (!old('posisi_sekarang') && $pengajuan->posisi_sekarang == 'ATSSystem') ? 'selected' : '' }}>
+                                ATS
+                                System
+                            </option>
                             <option value="STAFF"
                                 {{ old('posisi_sekarang') == 'STAFF' || (!old('posisi_sekarang') && $pengajuan->posisi_sekarang == 'STAFF') ? 'selected' : '' }}>
                                 STAFF
@@ -141,6 +158,23 @@
                             <option value="ACO"
                                 {{ old('posisi_tujuan') == 'ACO' || (!old('posisi_tujuan') && $pengajuan->posisi_tujuan == 'ACO') ? 'selected' : '' }}>
                                 ACO
+                            </option>
+                            <option value="AIS"
+                                {{ old('posisi_tujuan') == 'AIS' || (!old('posisi_tujuan') && $pengajuan->posisi_tujuan == 'AIS') ? 'selected' : '' }}>
+                                AIS
+                            </option>
+                            <option value="ATFM"
+                                {{ old('posisi_tujuan') == 'ATFM' || (!old('posisi_tujuan') && $pengajuan->posisi_tujuan == 'ATFM') ? 'selected' : '' }}>
+                                ATFM
+                            </option>
+                            <option value="TAPOR"
+                                {{ old('posisi_tujuan') == 'TAPOR' || (!old('posisi_tujuan') && $pengajuan->posisi_tujuan == 'TAPOR') ? 'selected' : '' }}>
+                                TAPOR
+                            </option>
+                            <option value="ATSSystem"
+                                {{ old('posisi_tujuan') == 'ATSSystem' || (!old('posisi_tujuan') && $pengajuan->posisi_tujuan == 'ATSSystem') ? 'selected' : '' }}>
+                                ATS
+                                System
                             </option>
                             <option value="STAFF"
                                 {{ old('posisi_tujuan') == 'STAFF' || (!old('posisi_tujuan') && $pengajuan->posisi_tujuan == 'STAFF') ? 'selected' : '' }}>
@@ -206,7 +240,8 @@
                     <textarea name="keterangan" id="keterangan" class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                         rows="3" placeholder="Ketik Disini ...">{{ old('keterangan') ? old('keterangan') : $pengajuan->keterangan }}</textarea>
                 </div>
-                <button type="submit" class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white py-2 rounded-lg font-semibold">
+                <button type="submit"
+                    class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white py-2 rounded-lg font-semibold">
                     Kirim
                 </button>
             </form>

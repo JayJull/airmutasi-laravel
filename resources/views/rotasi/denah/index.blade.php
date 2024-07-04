@@ -28,7 +28,7 @@
                 </div>
                 <div id="anak-cabang" class="flex flex-col gap-2">
                     @if (count($cabangs) === 0)
-                        <p class="text-center text-white my-auto">Tidak ada data</p>
+                        <p class="text-center my-auto">Tidak ada data</p>
                     @endif
                     @foreach ($cabangs as $cabang)
                         @include('rotasi.components.cabang-item', ['cabang' => $cabang])
@@ -65,7 +65,7 @@
     <script>
         // set data to aside cabang's summary
         function setCabang(cabang) {
-            document.getElementById('thumbnail').src = cabang.thumbnail_url !== 'NULL' ? cabang.thumbnail_url :
+            document.getElementById('thumbnail').src = cabang.thumbnail_url && cabang.thumbnail_url !== 'NULL' ? cabang.thumbnail_url :
                 "/images/default_tower.jpg";
             document.getElementById('thumbnail-placeholder').classList.add('hidden');
             document.getElementById('thumbnail').classList.remove('hidden');

@@ -97,12 +97,28 @@ class SelektifAdminController extends Controller
 
             if ($pengajuan->posisi_sekarang == "ACO") {
                 $pengajuan->lokasiAwal->jumlah_personel_aco -= 1;
+            } else if ($pengajuan->posisi_sekarang == "AIS") {
+                $pengajuan->lokasiAwal->jumlah_personel_ais -= 1;
+            } else if ($pengajuan->posisi_sekarang == "ATFM") {
+                $pengajuan->lokasiAwal->jumlah_personel_atfm -= 1;
+            } else if ($pengajuan->posisi_sekarang == "TAPOR") {
+                $pengajuan->lokasiAwal->jumlah_personel_tapor -= 1;
+            } else if ($pengajuan->posisi_sekarang == "ATSSystem") {
+                $pengajuan->lokasiAwal->jumlah_personel_ats_system -= 1;
             } else {
                 $pengajuan->lokasiAwal->jumlah_personel -= 1;
             }
 
             if ($pengajuan->posisi_tujuan == "ACO") {
                 $pengajuan->lokasiTujuan->jumlah_personel_aco += 1;
+            } else if ($pengajuan->posisi_tujuan == "AIS") {
+                $pengajuan->lokasiTujuan->jumlah_personel_ais -= 1;
+            } else if ($pengajuan->posisi_tujuan == "ATFM") {
+                $pengajuan->lokasiTujuan->jumlah_personel_atfm -= 1;
+            } else if ($pengajuan->posisi_tujuan == "TAPOR") {
+                $pengajuan->lokasiTujuan->jumlah_personel_tapor -= 1;
+            } else if ($pengajuan->posisi_tujuan == "ATSSystem") {
+                $pengajuan->lokasiTujuan->jumlah_personel_ats_system -= 1;
             } else {
                 $pengajuan->lokasiTujuan->jumlah_personel += 1;
             }

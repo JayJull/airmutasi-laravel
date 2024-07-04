@@ -20,8 +20,8 @@
             <textarea name="alamat" id="alamat" cols="30" rows="10" placeholder="Alamat ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md">{{ old('alamat') }}</textarea>
             <label for="thumbnail" class="font-semibold">Foto Tower</label>
-            <button class="bg-blue-300 px-2 py-1 rounded-md font-medium text-white" type="button"
-                popovertarget="thumbnail-popover">Pilih file</button>
+            <button class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-2 py-1 rounded-md font-medium"
+                type="button" popovertarget="thumbnail-popover">Pilih file</button>
             <img id="thumbnail-preview" src="" alt="default" class="hidden">
             <div id="thumbnail-popover" class="border-2 rounded-lg p-4 w-1/2 max-h-[90vh]" popover>
                 <div class="flex flex-col items-center gap-2">
@@ -39,6 +39,24 @@
                     </label>
                 </div>
             </div>
+
+            <label class="font-semibold">Kelas</label>
+            <div id="kelas" class="w-full my-1">
+                @if (old('kelas'))
+                    @foreach (old('kelas') as $index => $kelas)
+                        @include('rotasi.components.kelas-item', [
+                            'index' => $index,
+                            'db_id' => $kelas,
+                        ])
+                    @endforeach
+                @else
+                    @include('rotasi.components.kelas-item', ['index' => 1])
+                @endif
+            </div>
+            <button
+                class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white py-2 rounded-lg font-semibold w-full mt-1"
+                type="button" id="kelas_tambah">Tambah +</button>
+
             <label for="jumlah_personel" class="font-semibold">Jumlah Personel ATC Terkini</label>
             <input type="number" name="jumlah_personel" id="jumlah_personel" placeholder="Jumlah Personel ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
@@ -49,13 +67,78 @@
             <label for="frms" class="font-semibold">FRMS ATC</label>
             <input type="number" name="frms" id="frms" placeholder="FRMS ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md" value="{{ old('frms') }}">
+
             <label for="jumlah_personel_aco" class="font-semibold">Jumlah Personel ACO Terkini</label>
-            <input type="number" name="jumlah_personel_aco" id="jumlah_personel_aco" placeholder="Jumlah Personel ACO ..."
+            <input type="number" name="jumlah_personel_aco" id="jumlah_personel_aco"
+                placeholder="Jumlah Personel ACO ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                 value="{{ old('jumlah_personel_aco') }}">
             <label for="formasi_aco" class="font-semibold">Formasi ACO</label>
             <input type="number" name="formasi_aco" id="formasi_aco" placeholder="Formasi ACO ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md" value="{{ old('formasi_aco') }}">
+                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                value="{{ old('formasi_aco') }}">
+            <label for="frms_aco" class="font-semibold">FRMS ACO</label>
+            <input type="number" name="frms_aco" id="frms_aco" placeholder="FRMS ACO ..."
+                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                value="{{ old('frms_aco') }}">
+
+            <label for="jumlah_personel_ais" class="font-semibold">Jumlah Personel AIS Terkini</label>
+            <input type="number" name="jumlah_personel_ais" id="jumlah_personel_ais"
+                placeholder="Jumlah Personel AIS ..."
+                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                value="{{ old('jumlah_personel_ais') }}">
+            <label for="formasi_ais" class="font-semibold">Formasi AIS</label>
+            <input type="number" name="formasi_ais" id="formasi_ais" placeholder="Formasi AIS ..."
+                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                value="{{ old('formasi_ais') }}">
+            <label for="frms_ais" class="font-semibold">FRMS AIS</label>
+            <input type="number" name="frms_ais" id="frms_ais" placeholder="FRMS AIS ..."
+                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                value="{{ old('frms_ais') }}">
+
+            <label for="jumlah_personel_atfm" class="font-semibold">Jumlah Personel ATFM Terkini</label>
+            <input type="number" name="jumlah_personel_atfm" id="jumlah_personel_atfm"
+                placeholder="Jumlah Personel ATFM ..."
+                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                value="{{ old('jumlah_personel_atfm') }}">
+            <label for="formasi_atfm" class="font-semibold">Formasi ATFM</label>
+            <input type="number" name="formasi_atfm" id="formasi_atfm" placeholder="Formasi ATFM ..."
+                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                value="{{ old('formasi_atfm') }}">
+            <label for="frms_atfm" class="font-semibold">FRMS ATFM</label>
+            <input type="number" name="frms_atfm" id="frms_atfm" placeholder="FRMS ATFM ..."
+                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                value="{{ old('frms_atfm') }}">
+
+            <label for="jumlah_personel_tapor" class="font-semibold">Jumlah Personel TAPOR Terkini</label>
+            <input type="number" name="jumlah_personel_tapor" id="jumlah_personel_tapor"
+                placeholder="Jumlah Personel TAPOR ..."
+                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                value="{{ old('jumlah_personel_tapor') }}">
+            <label for="formasi_tapor" class="font-semibold">Formasi TAPOR</label>
+            <input type="number" name="formasi_tapor" id="formasi_tapor" placeholder="Formasi TAPOR ..."
+                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                value="{{ old('formasi_tapor') }}">
+            <label for="frms_tapor" class="font-semibold">FRMS TAPOR</label>
+            <input type="number" name="frms_tapor" id="frms_tapor" placeholder="FRMS TAPOR ..."
+                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                value="{{ old('frms_tapor') }}">
+
+            <label for="jumlah_personel_ats_system" class="font-semibold">Jumlah Personel ATS System Terkini</label>
+            <input type="number" name="jumlah_personel_ats_system" id="jumlah_personel_ats_system"
+                placeholder="Jumlah Personel ATS System ..."
+                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                value="{{ old('jumlah_personel_ats_system') }}">
+            <label for="formasi_ats_system" class="font-semibold">Formasi ATS System</label>
+            <input type="number" name="formasi_ats_system" id="formasi_ats_system"
+                placeholder="Formasi ATS System ..."
+                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                value="{{ old('formasi_ats_system') }}">
+            <label for="frms_ats_system" class="font-semibold">FRMS ATS System</label>
+            <input type="number" name="frms_ats_system" id="frms_ats_system" placeholder="FRMS ATS System ..."
+                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                value="{{ old('frms_ats_system') }}">
+
             <label class="select-none">
                 <input type="checkbox" name="induk" id="induk" {{ old('induk') ? 'checked' : '' }}>
                 Cabang Induk
@@ -77,12 +160,41 @@
                         placeholder="Longitude" step=".00000001">
                 </div>
             </div>
-            <button type="submit" class="bg-[#383A83] text-white py-2 rounded-lg font-semibold">Simpan</button>
+            <button type="submit" class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white py-2 rounded-lg font-semibold">Simpan</button>
         </form>
     </main>
     @include('components.footer')
     <script src="/script/nav.js"></script>
     <script src="/script/map.js"></script>
+    <script>
+        // (re)bind delete button event for item by id
+        function bindDeleteBtn(id) {
+            document.querySelector(`#${id} > button`).addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        }
+    </script>
+    <script>
+        // counter for kompetensi id
+        var kelasCount = 1;
+
+        // bind delete button event for initial kompetensi item
+        document.querySelectorAll(".kelas-item").forEach(kelas => {
+            bindDeleteBtn(kelas.id);
+        });
+
+        // add kelas item
+        document.querySelector("#kelas_tambah").addEventListener('click', function() {
+            const kelasContainer = document.getElementById('kelas');
+            kelasContainer.innerHTML += `@include('rotasi.components.kelas-item', [
+                'index' => '${kelasCount + 1}',
+            ])`;
+            document.querySelectorAll(".kelas-item").forEach(kelas => {
+                bindDeleteBtn(kelas.id);
+            });
+            kelasCount++;
+        });
+    </script>
     <script>
         // set preview when thumbnail file value is changed
         document.getElementById("thumbnail").addEventListener("change", function() {

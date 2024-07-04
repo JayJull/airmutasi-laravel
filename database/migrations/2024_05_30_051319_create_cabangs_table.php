@@ -16,11 +16,31 @@ return new class extends Migration
             $table->string('nama');
             $table->text("alamat");
             $table->string('thumbnail_url')->nullable();
+
             $table->integer("jumlah_personel");
             $table->integer("formasi");
             $table->integer("frms");
+            
             $table->integer("jumlah_personel_aco")->default(0);
             $table->integer("formasi_aco")->default(0);
+            $table->integer("frms_aco")->default(0);
+            
+            $table->integer("jumlah_personel_ais")->default(0);
+            $table->integer("formasi_ais")->default(0);
+            $table->integer("frms_ais")->default(0);
+            
+            $table->integer("jumlah_personel_atfm")->default(0);
+            $table->integer("formasi_atfm")->default(0);
+            $table->integer("frms_atfm")->default(0);
+            
+            $table->integer("jumlah_personel_tapor")->default(0);
+            $table->integer("formasi_tapor")->default(0);
+            $table->integer("frms_tapor")->default(0);
+            
+            $table->integer("jumlah_personel_ats_system")->default(0);
+            $table->integer("formasi_ats_system")->default(0);
+            $table->integer("frms_ats_system")->default(0);
+            
             $table->timestamps();
         });
     }

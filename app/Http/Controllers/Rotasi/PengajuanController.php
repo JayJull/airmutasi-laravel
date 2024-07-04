@@ -32,7 +32,7 @@ class PengajuanController extends Controller
 
     public function input(Request $request)
     {
-        $posisi = ['ATC (TWR)', 'ATC (APS)', 'ATC (ACS)', 'ACO', 'STAFF'];
+        $posisi = ['ATC (TWR)', 'ATC (APS)', 'ATC (ACS)', 'ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem', 'STAFF'];
         $request->validate([
             'lokasi_awal_id' => 'required',
             'lokasi_tujuan_id' => 'required',
@@ -107,7 +107,7 @@ class PengajuanController extends Controller
 
     public function update(Request $request, $id)
     {
-        $posisi = ['ATC (TWR)', 'ATC (APS)', 'ATC (ACS)', 'ACO', 'STAFF'];
+        $posisi = ['ATC (TWR)', 'ATC (APS)', 'ATC (ACS)', 'ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem',  'STAFF'];
         $request->validate([
             'lokasi_awal_id' => 'required',
             'lokasi_tujuan_id' => 'required',
