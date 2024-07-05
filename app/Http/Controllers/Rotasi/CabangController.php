@@ -39,6 +39,29 @@ class CabangController extends Controller
         $cabang = Cabang::select('id', 'nama', 'alamat', 'thumbnail_url')->where('id', $id)->first();
         return response()->json($cabang);
     }
+    public function cabangInKelas($kelas)
+    {
+        $cabangs = Cabang::whereHas('kelases', function ($query) use ($kelas) {
+            $query->where('kelas_id', $kelas);
+        })->get();
+        return response()->json($cabangs);
+    }
+    public function cabangInSameKelas($id)
+    {
+        $cabang = Cabang::with('kelases')->find($id);
+        if ($cabang && $cabang->kelases) {
+            $cabangs = Cabang::whereHas('kelases', function ($query) use ($cabang) {
+                $query->whereIn('kelas_id', $cabang->kelases->pluck('kelas_id'));
+            })->get();
+            return response()->json($cabangs);
+        }
+        return response()->json([]);
+    }
+    public function cabangAll()
+    {
+        $cabangs = Cabang::all();
+        return response()->json($cabangs);
+    }
     public function listCabangInduk()
     {
         $cabang = Cabang::has("coord")->get()->map(function ($cabang) {

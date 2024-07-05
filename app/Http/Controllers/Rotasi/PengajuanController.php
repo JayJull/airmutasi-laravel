@@ -34,8 +34,8 @@ class PengajuanController extends Controller
     {
         $posisi = ['ATC (TWR)', 'ATC (APS)', 'ATC (ACS)', 'ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem', 'STAFF'];
         $request->validate([
-            'lokasi_awal_id' => 'required',
-            'lokasi_tujuan_id' => 'required',
+            'lokasi_awal_id' => 'required|numeric|exists:cabangs,id',
+            'lokasi_tujuan_id' => 'required|numeric|exists:cabangs,id',
             'nama_lengkap' => 'required',
             'nik' => 'required|numeric',
             'masa_kerja' => 'required',
@@ -45,7 +45,6 @@ class PengajuanController extends Controller
             'kompetensi' => 'required|array',
             'kompetensi.*.nama' => 'required',
             'tujuan_rotasi' => 'required',
-            'keterangan' => 'required',
         ]);
 
         $pengajuan = $request->only([
@@ -60,6 +59,17 @@ class PengajuanController extends Controller
             'tujuan_rotasi',
             'keterangan',
         ]);
+        if (!$request->has('abnormal')) {
+            $request->validate([
+                'keterangan' => 'required',
+            ]);
+            $cabangAwal = Cabang::with('kelases')->find($request->lokasi_awal_id);
+            $cabangTujuan = Cabang::with('kelases')->find($request->lokasi_tujuan_id);
+            $intersect = $cabangAwal->kelases->intersect($cabangTujuan->kelases);
+            if ($intersect->isEmpty()) {
+                return redirect()->back()->with('invalid', 'Cabang asal dan tujuan tidak memiliki kelas yang sama')->withInput();
+            }
+        }
         $pengajuan['sk_mutasi_url'] = $request->sk_mutasi_url;
         $pengajuan['surat_persetujuan_url'] = $request->surat_persetujuan_url;
         DB::beginTransaction();
