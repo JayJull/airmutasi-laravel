@@ -60,15 +60,16 @@ class PengajuanController extends Controller
             'keterangan',
         ]);
         if (!$request->has('abnormal')) {
-            $request->validate([
-                'keterangan' => 'required',
-            ]);
             $cabangAwal = Cabang::with('kelases')->find($request->lokasi_awal_id);
             $cabangTujuan = Cabang::with('kelases')->find($request->lokasi_tujuan_id);
             $intersect = $cabangAwal->kelases->intersect($cabangTujuan->kelases);
             if ($intersect->isEmpty()) {
                 return redirect()->back()->with('invalid', 'Cabang asal dan tujuan tidak memiliki kelas yang sama')->withInput();
             }
+        }else{
+            $request->validate([
+                'keterangan' => 'required',
+            ]);
         }
         $pengajuan['sk_mutasi_url'] = $request->sk_mutasi_url;
         $pengajuan['surat_persetujuan_url'] = $request->surat_persetujuan_url;
