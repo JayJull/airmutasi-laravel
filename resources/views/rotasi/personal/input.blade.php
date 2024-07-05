@@ -219,10 +219,30 @@
     </script>
     <script>
         const abnormalCheckbox = document.getElementById('abnormal');
+        const lokasiAwal = document.getElementById('lokasi_awal')
+
+        lokasiAwal.addEventListener('change', function() {
+            const lokasiAwalID = this.value;
+            if (!abnormalCheckbox.checked) {
+                const cabangTujuan = fetch('/api/rotasi/cabang-same-kelas/' + lokasiAwalID)
+                    .then(response => response.json())
+                    .then(data => {
+                        const lokasiTujuan = document.getElementById('lokasi_tujuan');
+                        lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
+                        data.forEach(cabang => {
+                            const option = document.createElement('option');
+                            option.id = 'lokasi-tujuan-' + cabang.id;
+                            option.value = cabang.id;
+                            option.innerText = cabang.nama;
+                            lokasiTujuan.appendChild(option);
+                        });
+                    });
+            }
+        });
         abnormalCheckbox.addEventListener('change', function() {
-            const lokasiAwal = document.getElementById('lokasi_awal').value;
+            const lokasiAwalID = lokasiAwal.value;
             if (!this.checked) {
-                const cabangTujuan = fetch('/api/rotasi/cabang-same-kelas/' + lokasiAwal)
+                const cabangTujuan = fetch('/api/rotasi/cabang-same-kelas/' + lokasiAwalID)
                     .then(response => response.json())
                     .then(data => {
                         const lokasiTujuan = document.getElementById('lokasi_tujuan');
