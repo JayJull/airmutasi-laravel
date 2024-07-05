@@ -197,10 +197,10 @@
 
         // add kelas item
         document.querySelector("#kelas_tambah").addEventListener('click', function() {
-            const kelasContainer = document.getElementById('kelas');
-            kelasContainer.innerHTML += `@include('rotasi.components.kelas-item', [
+            const kelasContainer = document.querySelector('#kelas');
+            kelasContainer.insertAdjacentHTML("beforeend", `@include('rotasi.components.kelas-item', [
                 'index' => '${kelasCount + 1}',
-            ])`;
+            ])`);
             document.querySelectorAll(".kelas-item").forEach(kelas => {
                 bindDeleteBtn(kelas.id);
             });

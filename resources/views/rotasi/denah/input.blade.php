@@ -69,8 +69,7 @@
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md" value="{{ old('frms') }}">
 
             <label for="jumlah_personel_aco" class="font-semibold">Jumlah Eksisting ACO</label>
-            <input type="number" name="jumlah_personel_aco" id="jumlah_personel_aco"
-                placeholder="Jumlah Eksisting ..."
+            <input type="number" name="jumlah_personel_aco" id="jumlah_personel_aco" placeholder="Jumlah Eksisting ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                 value="{{ old('jumlah_personel_aco') }}">
             <label for="formasi_aco" class="font-semibold">Jumlah Optimal ACO</label>
@@ -114,8 +113,7 @@
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                 value="{{ old('jumlah_personel_ats_system') }}">
             <label for="formasi_ats_system" class="font-semibold">Jumlah Optimal ATS System</label>
-            <input type="number" name="formasi_ats_system" id="formasi_ats_system"
-                placeholder="Jumlah Optimal ..."
+            <input type="number" name="formasi_ats_system" id="formasi_ats_system" placeholder="Jumlah Optimal ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                 value="{{ old('formasi_ats_system') }}">
 
@@ -140,7 +138,8 @@
                         placeholder="Longitude" step=".00000001">
                 </div>
             </div>
-            <button type="submit" class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white py-2 rounded-lg font-semibold">Simpan</button>
+            <button type="submit"
+                class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white py-2 rounded-lg font-semibold">Simpan</button>
         </form>
     </main>
     @include('components.footer')
@@ -165,10 +164,10 @@
 
         // add kelas item
         document.querySelector("#kelas_tambah").addEventListener('click', function() {
-            const kelasContainer = document.getElementById('kelas');
-            kelasContainer.innerHTML += `@include('rotasi.components.kelas-item', [
+            const kelasContainer = document.querySelector('#kelas');
+            kelasContainer.insertAdjacentHTML("beforeend", `@include('rotasi.components.kelas-item', [
                 'index' => '${kelasCount + 1}',
-            ])`;
+            ])`);
             document.querySelectorAll(".kelas-item").forEach(kelas => {
                 bindDeleteBtn(kelas.id);
             });

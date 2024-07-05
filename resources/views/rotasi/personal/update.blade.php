@@ -267,11 +267,11 @@
             initFilePopover(kompetensi.id);
         });
         document.querySelector("#kompetensi_tambah").addEventListener('click', function() {
-            const kompetensiContainer = document.getElementById('kompetensi');
-            kompetensiContainer.innerHTML += `@include('rotasi.components.kompetensi-item', [
+            const kompetensiContainer = document.querySelector('#kompetensi');
+            kompetensiContainer.insertAdjacentHTML("beforeend", `@include('rotasi.components.kompetensi-item', [
                 'index' => '${kompetensiCount + 1}',
                 'id' => 'kompetensi_${kompetensiCount + 1}',
-            ])`;
+            ])`);
             document.querySelectorAll(".kompetensi-item").forEach(kompetensi => {
                 kompetensiBindDeleteBtn(kompetensi.id);
                 initFilePopover(kompetensi.id);
