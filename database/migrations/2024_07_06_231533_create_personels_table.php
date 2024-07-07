@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('masa_kerja');
             $table->string('level_jabatan');
             $table->string('kontak');
+            $table->boolean('pensiun');
 
             $table->foreignId('cabang_id')->constrained()->onDelete('cascade');
             $table->string('posisi');

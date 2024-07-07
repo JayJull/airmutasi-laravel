@@ -18,6 +18,7 @@ class Personel extends Model
         'kontak',
         'cabang_id',
         'posisi',
+        'pensiun'
     ];
 
     public function kompetensis()

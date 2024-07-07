@@ -64,8 +64,7 @@ class PersonelController extends Controller
             'posisi' => 'required',
             'kompetensi' => 'required|array',
         ]);
-        DB::beginTransaction();
-        $personel = Personel::create($request->only([
+        $dataPersonel = $request->only([
             'nik',
             'name',
             'jabatan',
@@ -74,7 +73,11 @@ class PersonelController extends Controller
             'kontak',
             'cabang_id',
             'posisi',
-        ]));
+            'pensiun'
+        ]);
+        $dataPersonel["pensiun"] = $request->pensiun === 'on';
+        DB::beginTransaction();
+        $personel = Personel::create($dataPersonel);
         $personel->kompetensis()->createMany(array_map(function ($kompetensi) {
             return ['kompetensi' => $kompetensi];
         }, $request->kompetensi));

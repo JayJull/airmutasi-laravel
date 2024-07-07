@@ -103,6 +103,8 @@
                         class="w-full px-2 py-1 mt-1 border-2 border-slate-400 rounded-md"
                         placeholder="Ketik Disini ..." value="{{ old('kontak') }}" />
                 </div>
+                <label class="font-semibold self-end" for="pensiun"><input type="checkbox" name="pensiun" id="pensiun">
+                    Persiapan pensiun?</label>
                 <div class="w-full">
                     <label class="font-semibold" for="kompetensi">Kompetensi</label><br />
                     <div id="kompetensi">
