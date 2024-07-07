@@ -26,14 +26,14 @@
             <a href="/akun">Akun</a>
             <a href="/logout">Logout</a>
         @else
-            <button popovertarget="login-popover">Login</button>
+            <a href="/login">Login</a>
         @endauth
     </nav>
     <div class="hidden md:block absolute h-full right-0 z-40 w-40">
         <img src="/images/backgrounds/headerAccent.svg" alt="header accent" class="h-full object-cover object-left">
     </div>
 </header>
-
+{{-- 
 <div popover id="login-popover" class="w-1/3 bg-white p-4 rounded-lg border">
     <form action="/login" method="post" class="flex flex-col gap-2">
         @csrf
@@ -41,10 +41,11 @@
         <hr>
         <input type="email" name="email" placeholder="Email" class="px-4 py-2 border rounded-md">
         <input type="password" name="password" placeholder="Password" class="px-4 py-2 border rounded-md">
-        <button type="submit" class="font-semibold bg-[#FFB72D] hover:opacity-100 opacity-80 duration-200 px-4 py-2 rounded-md">Login</button>
+        <button type="submit"
+            class="font-semibold bg-[#FFB72D] hover:opacity-100 opacity-80 duration-200 px-4 py-2 rounded-md">Login</button>
         <a href="/forget-password" class="text-blue-500 underline text-sm">Lupa password?</a>
     </form>
-</div>
+</div> --}}
 
 <script>
     const rotasiNav = document.getElementById('rotasi-nav');
