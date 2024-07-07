@@ -79,7 +79,7 @@ class SelektifAdminController extends Controller
                 $personel->jabatan = $pengajuan->jabatan;
                 $personel->masa_kerja = $pengajuan->masa_kerja;
                 $personel->level_jabatan = '';
-                $personel->kontak = $pengajuan->kontak;
+                $personel->kontak = '';
                 $personel->cabang_id = $pengajuan->lokasi_tujuan_id;
                 $personel->posisi = $pengajuan->posisi_tujuan;
                 $personel->pensiun = 0;
