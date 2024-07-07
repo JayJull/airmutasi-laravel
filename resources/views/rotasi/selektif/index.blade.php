@@ -6,7 +6,7 @@
     <title>Air Mutasi | Rotasi</title>
 </head>
 
-<body class="bg-[#CED0FF] font-poppins">
+<body class="bg-[#CED0FF] font-geruduk tracking-wider text-lg">
     @include('components.header', ['static' => true])
     @include('components.modal-component')
     @if (count($pengajuans) > 0)
@@ -124,7 +124,7 @@
                 @else
                     @foreach ($pengajuans as $currPengajuan)
                         <a href="/rotasi/selektif?id={{ $currPengajuan->id }}&tab={{ $tab }}{{ $query }}"
-                            class="pengajuan-item border-2 border-[#293676] {{ $currPengajuan->id === $pengajuan->id ? 'pengajuan-active bg-[#293676] text-white' : 'bg-white text-[#293676]' }} px-8 py-3 rounded-lg grid grid-cols-1 sm:grid-cols-2 items-center justify-between gap-2">
+                            class="pengajuan-item border-2 border-black {{ $currPengajuan->id === $pengajuan->id ? 'pengajuan-active bg-black text-white' : 'bg-white text-[#293676]' }} px-8 py-3 rounded-lg grid grid-cols-1 sm:grid-cols-2 items-center justify-between gap-2">
                             <aside class="flex flex-col items-center sm:items-start">
                                 <h3 class="font-semibold text-lg">{{ $currPengajuan->nama_lengkap }}</h3>
                                 <p>{{ $currPengajuan->nik }}</p>

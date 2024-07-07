@@ -6,7 +6,7 @@
     <title>Air Mutasi | Rotasi</title>
 </head>
 
-<body class="bg-[#CED0FF] font-poppins">
+<body class="font-geruduk tracking-wider text-lg">
     @include('components.header')
     @include('components.modal-component')
     <main>
@@ -23,8 +23,10 @@
             <aside
                 class="col-span-2 sm:col-span-1 text-[#474747] pb-2 pe-2 flex flex-col gap-2 max-h-[70vh] overflow-y-auto">
                 <div class="sticky top-0 bg-[#ced0ff]">
-                    <input id="search" class="w-full rounded-lg px-2 py-1 border-2 border-[#656B8E]" type="search"
-                        placeholder="Search ..." />
+                    <div>
+                        <input id="search" class="w-full rounded-lg px-2 py-1 border-2 border-[#656B8E]"
+                            type="search" placeholder="Search ..." />
+                    </div>
                 </div>
                 <div id="anak-cabang" class="flex flex-col gap-2">
                     @if (count($cabangs) === 0)
@@ -35,19 +37,19 @@
                     @endforeach
                 </div>
             </aside>
-            <aside class="col-span-2 sm:col-span-1 text-[#474747] flex flex-col gap-2 sm:max-h-[70vh]">
+            <aside class="col-span-2 sm:col-span-1 flex flex-col gap-2 sm:max-h-[70vh]">
                 @can('admin')
                     <a href="/rotasi/denah/input"
                         class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white w-full text-center p-2 rounded-lg font-semibold">Tambah
                         Cabang</a>
                 @endcan
-                <div class="p-2 bg-[#293676] flex-grow flex flex-col gap-2 rounded-lg overflow-y-auto w-full">
-                    <div class="flex items-center justify-center bg-white h-64 rounded-lg">
+                <div class="p-2 flex-grow flex flex-col gap-2 rounded-lg overflow-y-auto w-full">
+                    <div class="flex items-center justify-center bg-white h-64 rounded-lg border-8 border-black">
                         <img id="thumbnail-placeholder" src="/images/icons/Full Image.svg" alt="image" />
                         <img id="thumbnail" class="hidden w-full h-full object-cover" />
                     </div>
-                    <h1 id="nama" class="text-white px-2 font-semibold text-lg hidden"></h1>
-                    <p id="alamat" class="text-white p-2 text-center">
+                    <h1 id="nama" class="px-2 font-semibold text-lg hidden"></h1>
+                    <p id="alamat" class="p-2 text-center">
                         Pilih Cabang
                     </p>
                     <a id="detail"
@@ -65,7 +67,8 @@
     <script>
         // set data to aside cabang's summary
         function setCabang(cabang) {
-            document.getElementById('thumbnail').src = cabang.thumbnail_url && cabang.thumbnail_url !== 'NULL' ? cabang.thumbnail_url :
+            document.getElementById('thumbnail').src = cabang.thumbnail_url && cabang.thumbnail_url !== 'NULL' ? cabang
+                .thumbnail_url :
                 "/images/default_tower.jpg";
             document.getElementById('thumbnail-placeholder').classList.add('hidden');
             document.getElementById('thumbnail').classList.remove('hidden');
@@ -90,13 +93,9 @@
             document.querySelectorAll('.cabang-item').forEach(cabangItem => {
                 cabangItem.addEventListener('click', () => {
                     if (activated) {
-                        activated.classList.remove('bg-[#293676]');
-                        activated.classList.add('bg-white');
-                        activated.classList.remove('text-white');
+                        activated.classList.remove('bg-[#FFB72D]');
                     }
-                    cabangItem.classList.add('bg-[#293676]');
-                    cabangItem.classList.remove('bg-white');
-                    cabangItem.classList.add('text-white');
+                    cabangItem.classList.add('bg-[#FFB72D]');
                     activated = cabangItem;
                     fetch(`/api/rotasi/cabang-summary/${cabangItem.value}`)
                         .then(response => response.json())
@@ -136,9 +135,7 @@
                     }).addTo(map).on('click', () => {
                         setCabang(element);
                         const selected = document.querySelector('.cabang-item');
-                        selected.classList.add('bg-[#293676]');
-                        selected.classList.remove('bg-white');
-                        selected.classList.add('text-white');
+                        selected.classList.add('bg-[#FFB72D]');
                     });
                 });
             });

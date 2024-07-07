@@ -6,16 +6,16 @@
     <title>Air Mutasi | Rotasi</title>
 </head>
 
-<body class="bg-[#CED0FF] font-poppins">
+<body class="font-geruduk tracking-wider text-lg">
     @include('components.header', ['static' => true])
     <main>
-        <section class="bg-[#293676] text-[#474747] p-8 flex flex-col md:grid md:grid-cols-3 gap-8">
+        <section class="bg-[#FFEFB2] p-8 flex flex-col md:grid md:grid-cols-3 gap-8">
             <aside class="col-span-3 md:col-span-1 sm:h-full flex flex-col">
                 <div class="flex items-center justify-center h-64 rounded-lg">
                     <img src="{{ $cabang->thumbnail_url && $cabang->thumbnail_url != 'NULL' ? $cabang->thumbnail_url : '/images/default_tower.jpg' }}"
                         alt="foto cabang" class="w-full h-full object-cover rounded-lg">
                 </div>
-                <h1 id="nama" class="text-white p-2 font-semibold text-lg">
+                <h1 id="nama" class="p-2 font-semibold text-lg">
                     {{ $cabang->nama }}
                 </h1>
                 <div class="px-2 flex gap-2">
@@ -23,7 +23,7 @@
                         <p class="text-xs bg-gray-300 px-2 py-1 rounded-md">{{ $kelas->kelas->nama_kelas }}</p>
                     @endforeach
                 </div>
-                <p class="text-white p-2">
+                <p class="p-2">
                     {{ $cabang->alamat }}
                 </p>
                 <a class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white w-full text-center p-2 rounded-lg font-semibold mb-2"

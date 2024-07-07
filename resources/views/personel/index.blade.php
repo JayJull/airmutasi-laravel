@@ -6,7 +6,7 @@
     <title>Air Mutasi</title>
 </head>
 
-<body class="bg-[#373737] font-poppins">
+<body class="bg-[#373737] font-geruduk tracking-wider text-lg">
     @include('components/header', ['static' => true])
     @include('components.modal-component')
     <main class="min-h-screen">
@@ -20,7 +20,7 @@
             </form>
         </div>
         <section>
-            <div class="bg-[#293676] text-white p-8">
+            <div class="bg-[#FFB72D] p-8">
                 <h1 class="text-center font-bold text-xl">DATA PERSONIL OPERASI <br>
                     AIRNAV INDONESIA</h1>
                 <h2 class="font-semibold text-lg mt-8">{{ $cabang->nama }}</h2>
@@ -78,10 +78,10 @@
                             class="font-medium px-4 py-2 {{ $loop->index % 2 === 0 ? 'bg-slate-200' : '' }} grid grid-cols-4 md:grid-cols-12 items-center gap-2">
                             <div class="personels-action">
                                 <button
-                                    class="flex items-center gap-1 bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-2 py-1 rounded-md">Aksi<img
+                                    class="flex items-center gap-1 bg-[#FFB72D] hover:opacity-100 opacity-80 duration-200 px-2 py-1 rounded-md">Aksi<img
                                         src="/images/icons/moreArrow.svg" class="duration-300"></button>
                                 <div
-                                    class="max-h-0 duration-300 absolute flex flex-col gap-1 bg-white mt-4 text-gray-800 text-base font-light overflow-hidden">
+                                    class="max-h-0 duration-300 absolute flex flex-col gap-1 bg-white mt-4 text-gray-800 text-base font-light overflow-hidden z-50">
                                     <div class="border-2 flex flex-col gap-1 px-2 py-1">
                                         <a href="/personel/pensiun/{{ $personel->id }}">
                                             {{ $personel->pensiun ? 'Batalkan pensiun' : 'Pensiun' }}
@@ -91,20 +91,37 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="col-span-4 md:col-span-1 text-wrap break-all">{{ $personel->nik }}</p>
-                            <p class="col-span-2 break-all">{{ $personel->name }}</p>
-                            <p class="col-span-2 md:col-span-1 break-all">{{ $personel->jabatan }}</p>
-                            <p class="col-span-2 md:col-span-1 text-wrap break-all">{{ $personel->level_jabatan }}</p>
-                            <p class="col-span-2 md:col-span-1 break-all">{{ $personel->masa_kerja }} Tahun</p>
-                            <p class="col-span-2">{{ $personel->kontak }}</p>
-                            <div class="flex flex-wrap gap-1 justify-center col-span-4 md:col-span-2">
+                            <p class="col-span-4 md:col-span-1 text-wrap break-all">
+                                <span class="block md:hidden">NIK: </span>
+                                {{ $personel->nik }}
+                            </p>
+                            <p class="col-span-2 break-all">
+                                <span class="block md:hidden">Nama: </span>
+                                {{ $personel->name }}
+                            </p>
+                            <p class="col-span-2 md:col-span-1 break-all">
+                                <span class="block md:hidden">Jabatan: </span>{{ $personel->jabatan }}
+                            </p>
+                            <p class="col-span-2 md:col-span-1 text-wrap break-all">
+                                <span class="block md:hidden">Level Jabatan: </span>{{ $personel->level_jabatan }}
+                            </p>
+                            <p class="col-span-2 md:col-span-1 break-all"><span class="block md:hidden">Masa Kerja:
+                                </span>{{ $personel->masa_kerja }} Tahun</p>
+                            <p class="col-span-2"><span class="block md:hidden">Kontak: </span>{{ $personel->kontak }}
+                            </p>
+                            <div class="flex flex-wrap gap-1 md:justify-center col-span-4 md:col-span-2">
+                                <span class="block md:hidden">Kompetensi: </span>
                                 @foreach ($personel->kompetensis as $kompetensi)
                                     <p class="text-xs bg-gray-300 px-2 py-1 rounded-md">{{ $kompetensi->kompetensi }}
                                     </p>
                                 @endforeach
                             </div>
                             @if ($personel->pensiun)
-                                <p class="bg-yellow-500 text-gray-800 text-center rounded-md p-2 text-xs">Persiapan</p>
+                                <div>
+                                    <span class="block md:hidden">Pensiun: </span>
+                                    <p class="bg-yellow-500 text-gray-800 text-center rounded-md p-2 text-xs">Persiapan
+                                    </p>
+                                </div>
                             @endif
                         </div>
                     @endforeach

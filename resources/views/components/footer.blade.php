@@ -1,4 +1,4 @@
-<footer class="bg-[#293676] text-white flex flex-col md:flex-row items-center md:items-start justify-between gap-8 p-8">
+<footer class="bg-[#FFB72D] flex flex-col md:flex-row items-center md:items-start justify-between gap-8 p-8 text-lg">
     <aside class="md:max-w-[33%] flex-grow flex flex-col gap-2">
         <h2 class="font-bold text-center">KONTAK</h2>
         <p class="text-center md:text-left">

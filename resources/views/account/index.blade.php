@@ -6,7 +6,7 @@
     <title>Air Mutasi</title>
 </head>
 
-<body class="bg-[#373737] font-poppins">
+<body class="bg-[#373737] font-geruduk tracking-wider text-lg">
     @include('components/header', ['static' => true])
     @include('components.modal-component')
     <main class="min-h-screen flex justify-center items-center">
