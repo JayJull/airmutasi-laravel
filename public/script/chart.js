@@ -65,7 +65,7 @@ function generateBarChart(title, series) {
             colors: ["transparent"],
         },
         xaxis: {
-            categories: ["FRMS ATC", "Current ATC", "Formasi ATC"],
+            categories: ["Minimal FRMS", "Eksisting", "Maksimal FRMS"],
         },
         yaxis: {
             title: {
@@ -85,13 +85,13 @@ function generateBarChart(title, series) {
     };
 }
 
-function generatePieChart(title, series) {
+function generatePieChart(title, series, labels = []) {
     return {
         series,
         chart: {
             type: "pie",
         },
-        labels: ["FRMS", "Current", "Formasi"],
+        labels: labels,
         title: {
             text: title,
             align: "left",

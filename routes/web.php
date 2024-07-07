@@ -54,6 +54,10 @@ Route::group(['prefix' => 'personel', 'middleware' => [
         Route::get('/', [PersonelController::class, 'inputView']);
         Route::post('/', [PersonelController::class, 'input']);
     });
+
+    Route::middleware("is.admin")->get('/delete/{id}', [PersonelController::class, 'delete']);
+    Route::middleware("is.admin")->get('/pensiun/{id}', [PersonelController::class, 'togglePensiun']);
+    Route::middleware("is.admin")->post('/export', [PersonelController::class, 'importCsv']);
 });
 
 Route::group(['prefix' => 'rotasi', 'middleware' => [

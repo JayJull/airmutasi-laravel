@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-span-2 grid grid-cols-2 gap-2 bg-white rounded-lg p-4">
                     <div class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col justify-center p-2">
-                        <h2 class="font-bold text-xl text-center">Jumlah Optimal</h2>
+                        <h2 class="font-bold text-xl text-center">Jumlah Maksimal FRMS</h2>
                         <hr class="border-[1px] my-1">
                         <p class="font-medium ms-4">ATC {{ $cabang->formasi }} Orang</p>
                         <p class="font-medium ms-4">ACO {{ $cabang->formasi_aco }} Orang</p>
@@ -57,7 +57,7 @@
                     </div>
                     <div
                         class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col items-center justify-center p-2">
-                        <h2 class="font-bold text-xl">Jumlah FRMS</h2>
+                        <h2 class="font-bold text-xl">Jumlah Minimal FRMS</h2>
                         <p class="font-medium">ATC {{ $cabang->frms }} Orang</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col justify-center p-2">
@@ -71,7 +71,7 @@
                         <p class="font-medium ms-4">ATS System {{ $cabang->jumlah_personel_ats_system }} Orang</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col justify-center p-2">
-                        <h2 class="font-bold text-xl text-center">Prediksi personel</h2>
+                        <h2 class="font-bold text-xl text-center">Prediksi Personel {{ date('Y') + 1 }}</h2>
                         <hr class="border-[1px] my-1">
                         <p class="font-medium ms-4">
                             ATC {{ $cabang->jumlah_personel + count($cabang->in) - count($cabang->out) }} Orang</p>
@@ -128,25 +128,75 @@
     <script>
         // get statistics data
         const series = [{
-            name: "Jumlah Personel",
+            name: "ATC",
             data: [
                 {{ $cabang->frms }},
                 {{ $cabang->jumlah_personel }},
                 {{ $cabang->formasi }}
             ],
-        }, ];
+        }, {
+            name: "ACO",
+            data: [
+                0,
+                {{ $cabang->jumlah_personel_aco }},
+                {{ $cabang->formasi_aco }}
+            ],
+        }, {
+            name: "AIS",
+            data: [
+                0,
+                {{ $cabang->jumlah_personel_ais }},
+                {{ $cabang->formasi_ais }}
+            ],
+        }, {
+            name: "ATFM",
+            data: [
+                0,
+                {{ $cabang->jumlah_personel_atfm }},
+                {{ $cabang->formasi_atfm }}
+            ],
+        }, {
+            name: "TAPOR",
+            data: [
+                0,
+                {{ $cabang->jumlah_personel_tapor }},
+                {{ $cabang->formasi_tapor }}
+            ],
+        }, {
+            name: "ATS System",
+            data: [
+                0,
+                {{ $cabang->jumlah_personel_ats_system }},
+                {{ $cabang->formasi_ats_system }}
+            ],
+        }];
+        const eksistingDistribution = [
+            {{ $cabang->jumlah_personel }},
+            {{ $cabang->jumlah_personel_aco }},
+            {{ $cabang->jumlah_personel_ais }},
+            {{ $cabang->jumlah_personel_atfm }},
+            {{ $cabang->jumlah_personel_tapor }},
+            {{ $cabang->jumlah_personel_ats_system }}
+        ];
 
         // create bar chart
         var chartBar = new ApexCharts(
             document.querySelector("#stats-bar"),
-            generateBarChart("Grafik Personel ATC", series)
+            generateBarChart("Grafik Personel", series)
         );
         chartBar.render();
 
         // create pie chart
         var chartPie = new ApexCharts(
             document.querySelector("#stats-pie"),
-            generatePieChart("Distribusi Personel ATC", series[0].data)
+            generatePieChart("Distribusi Personel Eksisting", eksistingDistribution, [
+                "ATC",
+                "ACO",
+                "AIS",
+                "ATFM",
+                "TAPOR",
+                "ATS System"
+            ])
         );
         chartPie.render();
     </script>

@@ -51,6 +51,35 @@ class PersonelController extends Controller
         ]);
     }
 
+    public function importCsv(Request $request)
+    {
+        $request->validate([
+            'sheet' => 'required|mimes:csv,txt',
+            'cabang_id' => 'required',
+            'posisi' => 'required',
+        ]);
+        $file = $request->file('sheet');
+        $path = $file->getRealPath();
+        $data = array_map('str_getcsv', file($path));
+        $header = array_shift($data);
+        $dataPersonels = [];
+        foreach ($data as $row) {
+            $dataPersonel = array_combine($header, $row);
+            $dataPersonel['cabang_id'] = $request->cabang_id;
+            $dataPersonel['posisi'] = $request->posisi;
+            $dataPersonels[] = $dataPersonel;
+        }
+        DB::beginTransaction();
+        foreach ($dataPersonels as $dataPersonel) {
+            $personel = Personel::create($dataPersonel);
+            $personel->kompetensis()->createMany(array_map(function ($kompetensi) {
+                return ['kompetensi' => $kompetensi];
+            }, explode(',', $dataPersonel['kompetensi'])));
+        }
+        DB::commit();
+        return redirect()->route('personel.index', ['id' => $request->cabang_id])->with('success', 'Personel berhasil diimport');
+    }
+
     public function input(Request $request)
     {
         $request->validate([
@@ -83,5 +112,22 @@ class PersonelController extends Controller
         }, $request->kompetensi));
         DB::commit();
         return redirect()->route('personel.index', ['id' => $request->cabang_id])->with('success', 'Personel berhasil ditambahkan');
+    }
+
+    public function delete($id) {
+        $personel = Personel::find($id);
+        if (!$personel) abort(404);
+        $cabang_id = $personel->cabang_id;
+        $personel->delete();
+        return redirect()->route('personel.index', ['id' => $cabang_id])->with('success', 'Personel berhasil dihapus');
+    }
+
+    public function togglePensiun($id) {
+        $personel = Personel::find($id);
+        if (!$personel) abort(404);
+        $personel->update([
+            'pensiun' => !$personel->pensiun
+        ]);
+        return redirect()->route('personel.index', ['id' => $personel->cabang_id])->with('success', 'Status pensiun personel berhasil diubah');
     }
 }

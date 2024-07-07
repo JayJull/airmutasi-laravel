@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Cabang;
 use App\Models\Pengajuan;
+use App\Models\Personel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -70,6 +71,28 @@ class SelektifAdminController extends Controller
         }
         if ($request->status == 'dapat') {
             DB::beginTransaction();
+            $personel = Personel::where('nik', $pengajuan->nik)->first();
+            if (!$personel) {
+                $personel = new Personel();
+                $personel->nik = $pengajuan->nik;
+                $personel->name = $pengajuan->nama_lengkap;
+                $personel->jabatan = $pengajuan->jabatan;
+                $personel->masa_kerja = $pengajuan->masa_kerja;
+                $personel->level_jabatan = '';
+                $personel->kontak = $pengajuan->kontak;
+                $personel->cabang_id = $pengajuan->lokasi_tujuan_id;
+                $personel->posisi = $pengajuan->posisi_tujuan;
+                $personel->pensiun = 0;
+                $personel->save();
+            } else {
+                if ($personel->name != $pengajuan->nama_lengkap) {
+                    return redirect()->back()->with('invalid', 'Nama lengkap tidak sesuai');
+                }
+                $personel->cabang_id = $pengajuan->lokasi_tujuan_id;
+                $personel->posisi = $pengajuan->posisi_tujuan;
+                $personel->save();
+            }
+
             $pengajuan->status = 'dapat';
 
             if ($pengajuan->posisi_sekarang == "ACO") {
