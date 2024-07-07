@@ -1,5 +1,5 @@
 <header
-    class="bg-white font-bold flex flex-col md:flex-row items-center justify-between px-8 py-4 gap-4 {{ !empty($static) && $static ? 'sticky' : 'fixed' }} top-0 left-0 z-50 w-full shadow-black drop-shadow-lg font-geruduk tracking-wider text-lg tracking-widest font-lg">
+    class="bg-white font-bold flex flex-col md:flex-row items-center justify-between px-8 py-4 gap-4 {{ !empty($static) && $static ? 'sticky' : 'fixed' }} top-0 left-0 z-50 w-full shadow-black drop-shadow-lg font-geruduk text-lg tracking-widest font-lg">
     <a href="/"><img src="/images/logo.svg" alt="logo" /></a>
     <button class="md:hidden">☰</button>
     <nav
