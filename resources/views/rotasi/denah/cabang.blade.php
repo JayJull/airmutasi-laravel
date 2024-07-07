@@ -139,14 +139,14 @@
         // create bar chart
         var chartBar = new ApexCharts(
             document.querySelector("#stats-bar"),
-            generateBarChart("Grafik Personel", series)
+            generateBarChart("Grafik Personel ATC", series)
         );
         chartBar.render();
 
         // create pie chart
         var chartPie = new ApexCharts(
             document.querySelector("#stats-pie"),
-            generatePieChart("Distribusi Personel", series[0].data)
+            generatePieChart("Distribusi Personel ATC", series[0].data)
         );
         chartPie.render();
     </script>

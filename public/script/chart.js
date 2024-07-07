@@ -65,7 +65,7 @@ function generateBarChart(title, series) {
             colors: ["transparent"],
         },
         xaxis: {
-            categories: ["FRMS", "Current", "Formasi"],
+            categories: ["FRMS ATC", "Current ATC", "Formasi ATC"],
         },
         yaxis: {
             title: {
