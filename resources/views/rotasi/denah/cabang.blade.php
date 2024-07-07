@@ -74,23 +74,23 @@
                         <h2 class="font-bold text-xl text-center">Prediksi Personel {{ date('Y') + 1 }}</h2>
                         <hr class="border-[1px] my-1">
                         <p class="font-medium ms-4">
-                            ATC {{ $cabang->jumlah_personel + count($cabang->in) - count($cabang->out) }} Orang</p>
+                            ATC {{ $cabang->jumlah_personel - count($cabang->personelPensiunATC) }} Orang</p>
                         <p class="font-medium ms-4">
-                            ACO {{ $cabang->jumlah_personel_aco + count($cabang->inACO) - count($cabang->outACO) }}
+                            ACO {{ $cabang->jumlah_personel_aco - count($cabang->personelPensiunACO) }}
                             Orang</p>
                         <p class="font-medium ms-4">
-                            AIS {{ $cabang->jumlah_personel_ais + count($cabang->inAIS) - count($cabang->outAIS) }}
+                            AIS {{ $cabang->jumlah_personel_ais - count($cabang->personelPensiunAIS) }}
                             Orang</p>
                         <p class="font-medium ms-4">
-                            ATFM {{ $cabang->jumlah_personel_atfm + count($cabang->inATFM) - count($cabang->outATFM) }}
+                            ATFM {{ $cabang->jumlah_personel_atfm - count($cabang->personelPensiunATFM) }}
                             Orang</p>
                         <p class="font-medium ms-4">
                             TAPOR
-                            {{ $cabang->jumlah_personel_tapor + count($cabang->inTAPOR) - count($cabang->outTAPOR) }}
+                            {{ $cabang->jumlah_personel_tapor - count($cabang->personelPensiunTAPOR) }}
                             Orang</p>
                         <p class="font-medium ms-4">
                             ATS System
-                            {{ $cabang->jumlah_personel_ats_system + count($cabang->inATSSystem) - count($cabang->outATSSystem) }}
+                            {{ $cabang->jumlah_personel_ats_system - count($cabang->personelPensiunATSSystem) }}
                             Orang</p>
                     </div>
                 </div>

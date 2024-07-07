@@ -20,6 +20,7 @@ class CabangController extends Controller
         $cabang = Cabang::with([
             "inAll", "outAll", "in", "out", "inACO", "outACO", "inAIS",
             "outAIS", "inATFM", "outATFM", "inTAPOR", "outTAPOR", "inATSSystem", "outATSSystem",
+            "personelPensiunATC", 'personelPensiunACO', 'personelPensiunAIS', 'personelPensiunATFM', 'personelPensiunTAPOR', 'personelPensiunATSSystem',
             "kelases" => function ($query) {
                 $query->with('kelas');
             }

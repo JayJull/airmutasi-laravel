@@ -42,6 +42,36 @@ class Cabang extends Model
         return $this->hasMany(Personel::class);
     }
 
+    public function personelPensiunATC()
+    {
+        return $this->hasMany(Personel::class)->where('pensiun', '=', 1)->whereNotIn('posisi', ['ACO', 'ATFM', 'AIS', 'TAPOR', 'ATSSystem']);
+    }
+
+    public function personelPensiunACO()
+    {
+        return $this->hasMany(Personel::class)->where('pensiun', '=', 1)->where('posisi', '=', 'ACO');
+    }
+
+    public function personelPensiunAIS()
+    {
+        return $this->hasMany(Personel::class)->where('pensiun', '=', 1)->where('posisi', '=', 'AIS');
+    }
+
+    public function personelPensiunATFM()
+    {
+        return $this->hasMany(Personel::class)->where('pensiun', '=', 1)->where('posisi', '=', 'ATFM');
+    }
+
+    public function personelPensiunTAPOR()
+    {
+        return $this->hasMany(Personel::class)->where('pensiun', '=', 1)->where('posisi', '=', 'TAPOR');
+    }
+
+    public function personelPensiunATSSystem()
+    {
+        return $this->hasMany(Personel::class)->where('pensiun', '=', 1)->where('posisi', '=', 'ATSSystem');
+    }
+
     public function kelases()
     {
         return $this->hasMany(KelasCabang::class);
@@ -58,12 +88,12 @@ class Cabang extends Model
 
     public function in()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')->where('status', '=', 'dapat')->where('posisi_tujuan', '<>', 'ACO');
+        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')->where('status', '=', 'dapat')->whereNotIn('posisi_tujuan', ['ACO', 'ATFM', 'AIS', 'TAPOR', 'ATSSystem']);
     }
 
     public function out()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')->where('status', '=', 'dapat')->where('posisi_sekarang', '<>', 'ACO');
+        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')->where('status', '=', 'dapat')->whereNotIn('posisi_sekarang', ['ACO', 'ATFM', 'AIS', 'TAPOR', 'ATSSystem']);
     }
 
     public function inACO()
