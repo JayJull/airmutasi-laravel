@@ -64,12 +64,12 @@
                 class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white py-2 rounded-lg font-semibold w-full mt-1"
                 type="button" id="kelas_tambah">Tambah +</button>
 
-            <label for="jumlah_personel" class="font-semibold mt-1">Jumlah Personel ATC Terkini</label>
-            <input type="number" name="jumlah_personel" id="jumlah_personel" placeholder="Jumlah Personel ..."
+            <label for="jumlah_personel" class="font-semibold mt-1">Jumlah Eksisting ATC</label>
+            <input type="number" name="jumlah_personel" id="jumlah_personel" placeholder="Jumlah Eksisting ..."
                 class="resize-none w-full p-2 border-2 border-slate-400 rounded-md"
                 value="{{ old('jumlah_personel') === null ? $cabang->jumlah_personel : old('jumlah_personel') }}">
-            <label for="formasi" class="font-semibold mt-1">Formasi ATC</label>
-            <input type="number" name="formasi" id="formasi" placeholder="Formasi ..."
+            <label for="formasi" class="font-semibold mt-1">Jumlah Optimal ATC</label>
+            <input type="number" name="formasi" id="formasi" placeholder="Jumlah Optimal ..."
                 class="resize-none w-full p-2 border-2 border-slate-400 rounded-md"
                 value="{{ old('formasi') === null ? $cabang->formasi : old('formasi') }}">
             <label for="frms" class="font-semibold mt-1">FRMS ATC</label>
@@ -77,77 +77,57 @@
                 class="resize-none w-full p-2 border-2 border-slate-400 rounded-md"
                 value="{{ old('frms') === null ? $cabang->frms : old('frms') }}">
 
-            <label for="jumlah_personel_aco" class="font-semibold">Jumlah Personel ACO Terkini</label>
+            <label for="jumlah_personel_aco" class="font-semibold">Jumlah Eksisting ACO</label>
             <input type="number" name="jumlah_personel_aco" id="jumlah_personel_aco"
-                placeholder="Jumlah Personel ACO ..."
+                placeholder="Jumlah Eksisting ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                 value="{{ old('jumlah_personel_aco') === null ? $cabang->jumlah_personel_aco : old('jumlah_personel_aco') }}">
-            <label for="formasi_aco" class="font-semibold">Formasi ACO</label>
-            <input type="number" name="formasi_aco" id="formasi_aco" placeholder="Formasi ACO ..."
+            <label for="formasi_aco" class="font-semibold">Jumlah Optimal ACO</label>
+            <input type="number" name="formasi_aco" id="formasi_aco" placeholder="Jumlah Optimal ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                 value="{{ old('formasi_aco') === null ? $cabang->formasi_aco : old('formasi_aco') }}">
-            <label for="frms_aco" class="font-semibold">FRMS ACO</label>
-            <input type="number" name="frms_aco" id="frms_aco" placeholder="FRMS ACO ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                value="{{ old('frms_aco') === null ? $cabang->frms_aco : old('frms_aco') }}">
-
-            <label for="jumlah_personel_ais" class="font-semibold">Jumlah Personel AIS Terkini</label>
+          
+            <label for="jumlah_personel_ais" class="font-semibold">Jumlah Eksisting AIS</label>
             <input type="number" name="jumlah_personel_ais" id="jumlah_personel_ais"
-                placeholder="Jumlah Personel AIS ..."
+                placeholder="Jumlah Eksisting ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                 value="{{ old('jumlah_personel_ais') === null ? $cabang->jumlah_personel_ais : old('jumlah_personel_ais') }}">
-            <label for="formasi_ais" class="font-semibold">Formasi AIS</label>
-            <input type="number" name="formasi_ais" id="formasi_ais" placeholder="Formasi AIS ..."
+            <label for="formasi_ais" class="font-semibold">Jumlah Optimal AIS</label>
+            <input type="number" name="formasi_ais" id="formasi_ais" placeholder="Jumlah Optimal ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                 value="{{ old('formasi_ais') === null ? $cabang->formasi_ais : old('formasi_ais') }}">
-            <label for="frms_ais" class="font-semibold">FRMS AIS</label>
-            <input type="number" name="frms_ais" id="frms_ais" placeholder="FRMS AIS ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                value="{{ old('frms_ais') === null ? $cabang->frms_ais : old('frms_ais') }}">
-
-            <label for="jumlah_personel_atfm" class="font-semibold">Jumlah Personel ATFM Terkini</label>
+           
+            <label for="jumlah_personel_atfm" class="font-semibold">Jumlah Eksisting ATFM</label>
             <input type="number" name="jumlah_personel_atfm" id="jumlah_personel_atfm"
-                placeholder="Jumlah Personel ATFM ..."
+                placeholder="Jumlah Eksisting ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                 value="{{ old('jumlah_personel_atfm') === null ? $cabang->jumlah_personel_atfm : old('jumlah_personel_atfm') }}">
-            <label for="formasi_atfm" class="font-semibold">Formasi ATFM</label>
-            <input type="number" name="formasi_atfm" id="formasi_atfm" placeholder="Formasi ATFM ..."
+            <label for="formasi_atfm" class="font-semibold">Jumlah Optimal ATFM</label>
+            <input type="number" name="formasi_atfm" id="formasi_atfm" placeholder="Jumlah Optimal ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                 value="{{ old('formasi_atfm') === null ? $cabang->formasi_atfm : old('formasi_atfm') }}">
-            <label for="frms_atfm" class="font-semibold">FRMS ATFM</label>
-            <input type="number" name="frms_atfm" id="frms_atfm" placeholder="FRMS ATFM ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                value="{{ old('frms_atfm') === null ? $cabang->frms_atfm : old('frms_atfm') }}">
-
-            <label for="jumlah_personel_tapor" class="font-semibold">Jumlah Personel TAPOR Terkini</label>
+            
+            <label for="jumlah_personel_tapor" class="font-semibold">Jumlah Eksisting TAPOR</label>
             <input type="number" name="jumlah_personel_tapor" id="jumlah_personel_tapor"
-                placeholder="Jumlah Personel TAPOR ..."
+                placeholder="Jumlah Eksisting ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                 value="{{ old('jumlah_personel_tapor') === null ? $cabang->jumlah_personel_tapor : old('jumlah_personel_tapor') }}">
-            <label for="formasi_tapor" class="font-semibold">Formasi TAPOR</label>
-            <input type="number" name="formasi_tapor" id="formasi_tapor" placeholder="Formasi TAPOR ..."
+            <label for="formasi_tapor" class="font-semibold">Jumlah Optimal TAPOR</label>
+            <input type="number" name="formasi_tapor" id="formasi_tapor" placeholder="Jumlah Optimal ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                 value="{{ old('formasi_tapor') === null ? $cabang->formasi_tapor : old('formasi_tapor') }}">
-            <label for="frms_tapor" class="font-semibold">FRMS TAPOR</label>
-            <input type="number" name="frms_tapor" id="frms_tapor" placeholder="FRMS TAPOR ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                value="{{ old('frms_tapor') === null ? $cabang->frms_tapor : old('frms_tapor') }}">
-
-            <label for="jumlah_personel_ats_system" class="font-semibold">Jumlah Personel ATS System Terkini</label>
+            
+            <label for="jumlah_personel_ats_system" class="font-semibold">Jumlah Eksisting ATS System</label>
             <input type="number" name="jumlah_personel_ats_system" id="jumlah_personel_ats_system"
-                placeholder="Jumlah Personel ATS System ..."
+                placeholder="Jumlah Eksisting ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                 value="{{ old('jumlah_personel_ats_system') === null ? $cabang->jumlah_personel_ats_system : old('jumlah_personel_ats_system') }}">
-            <label for="formasi_ats_system" class="font-semibold">Formasi ATS System</label>
+            <label for="formasi_ats_system" class="font-semibold">Jumlah Optimal ATS System</label>
             <input type="number" name="formasi_ats_system" id="formasi_ats_system"
-                placeholder="Formasi ATS System ..."
+                placeholder="Jumlah Optimal ..."
                 class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
                 value="{{ old('formasi_ats_system') === null ? $cabang->formasi_ats_system : old('formasi_ats_system') }}">
-            <label for="frms_ats_system" class="font-semibold">FRMS ATS System</label>
-            <input type="number" name="frms_ats_system" id="frms_ats_system" placeholder="FRMS ATS System ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                value="{{ old('frms_ats_system') === null ? $cabang->frms_ats_system : old('frms_ats_system') }}">
-
+            
             <label class="select-none">
                 <input type="checkbox" name="induk" id="induk"
                     {{ old('induk') !== null || $cabang->coord !== null ? 'checked' : '' }}>
