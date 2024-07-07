@@ -37,6 +37,11 @@ class Cabang extends Model
         return $this->hasOne(CabangCoord::class);
     }
 
+    public function personels()
+    {
+        return $this->hasMany(Personel::class);
+    }
+
     public function kelases()
     {
         return $this->hasMany(KelasCabang::class);

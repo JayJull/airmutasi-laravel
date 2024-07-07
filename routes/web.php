@@ -4,7 +4,7 @@ use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\PersonelController;
 // use App\Http\Controllers\Rotasi\HomeController as RotasiHomeController;
 use App\Http\Controllers\Rotasi\CabangController as RotasiCabangController;
 use App\Http\Controllers\Rotasi\SelektifAdminController as RotasiSelektifAdminController;
@@ -42,6 +42,18 @@ Route::group(['prefix' => 'akun', 'middleware' => [
     });
     Route::get('/edit', [AccountController::class, 'updateView']);
     Route::post('/edit', [AccountController::class, 'update']);
+});
+
+Route::group(['prefix' => 'personel', 'middleware' => [
+    'auth:web'
+]], function () {
+    Route::get('/cabang/{id}', [PersonelController::class, 'index'])->name('personel.index');
+    Route::group(['prefix' => 'add', 'middleware' => [
+        'is.admin'
+    ]], function () {
+        Route::get('/', [PersonelController::class, 'inputView']);
+        Route::post('/', [PersonelController::class, 'input']);
+    });
 });
 
 Route::group(['prefix' => 'rotasi', 'middleware' => [

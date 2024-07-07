@@ -26,9 +26,11 @@
                 <p class="text-white p-2">
                     {{ $cabang->alamat }}
                 </p>
+                <a class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white w-full text-center p-2 rounded-lg font-semibold mb-2"
+                    href="/personel/cabang/{{ $cabang->id }}">Personel</a>
                 @can('admin')
                     <a href="/rotasi/denah/input/{{ $cabang->id }}"
-                        class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white w-full text-center p-2 rounded-lg font-semibold mb-2">Update
+                        class="bg-yellow-300 hover:bg-yellow-400 duration-200 text-gray-800 w-full text-center p-2 rounded-lg font-semibold mb-2">Update
                         Cabang</a>
                     <a href="/rotasi/denah/input/{{ $cabang->id }}/delete"
                         class="bg-red-500 hover:bg-red-700 duration-200 text-white w-full text-center p-2 rounded-lg font-semibold">Hapus
@@ -43,8 +45,7 @@
                     <div id="stats-pie" class="w-full h-full"></div>
                 </div>
                 <div class="col-span-2 grid grid-cols-2 gap-2 bg-white rounded-lg p-4">
-                    <div
-                        class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col justify-center p-2">
+                    <div class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col justify-center p-2">
                         <h2 class="font-bold text-xl text-center">Jumlah Optimal</h2>
                         <hr class="border-[1px] my-1">
                         <p class="font-medium ms-4">ATC {{ $cabang->formasi }} Orang</p>
@@ -59,8 +60,7 @@
                         <h2 class="font-bold text-xl">Jumlah FRMS</h2>
                         <p class="font-medium">ATC {{ $cabang->frms }} Orang</p>
                     </div>
-                    <div
-                        class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col justify-center p-2">
+                    <div class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col justify-center p-2">
                         <h2 class="font-bold text-xl text-center">Jumlah Eksisting</h2>
                         <hr class="border-[1px] my-1">
                         <p class="font-medium ms-4">ATC {{ $cabang->jumlah_personel }} Orang</p>
@@ -70,8 +70,7 @@
                         <p class="font-medium ms-4">TAPOR {{ $cabang->jumlah_personel_tapor }} Orang</p>
                         <p class="font-medium ms-4">ATS System {{ $cabang->jumlah_personel_ats_system }} Orang</p>
                     </div>
-                    <div
-                        class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col justify-center p-2">
+                    <div class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col justify-center p-2">
                         <h2 class="font-bold text-xl text-center">Prediksi personel</h2>
                         <hr class="border-[1px] my-1">
                         <p class="font-medium ms-4">
