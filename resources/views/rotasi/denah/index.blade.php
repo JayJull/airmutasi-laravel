@@ -94,8 +94,10 @@
                 cabangItem.addEventListener('click', () => {
                     if (activated) {
                         activated.classList.remove('bg-[#FFB72D]');
+                        activated.classList.add('bg-white');
                     }
                     cabangItem.classList.add('bg-[#FFB72D]');
+                    cabangItem.classList.remove('bg-white');
                     activated = cabangItem;
                     fetch(`/api/rotasi/cabang-summary/${cabangItem.value}`)
                         .then(response => response.json())
@@ -136,6 +138,7 @@
                         setCabang(element);
                         const selected = document.querySelector('.cabang-item');
                         selected.classList.add('bg-[#FFB72D]');
+                        selected.classList.remove('bg-white');
                     });
                 });
             });
