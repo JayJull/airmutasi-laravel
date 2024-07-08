@@ -46,11 +46,12 @@
                         </select>
                     </aside>
                 </div>
-                <label class="self-end">
-                    <input type="checkbox" name="abnormal" id="abnormal"
-                        {{ old('abnormal') || !old() ? 'checked' : '' }}>
-                    Mutasi abnormal?
-                </label>
+                @can('admin')
+                    <label class="self-end">
+                        <input type="checkbox" name="abnormal" id="abnormal" {{ old('abnormal') ? 'checked' : '' }}>
+                        Mutasi abnormal?
+                    </label>
+                @endcan
                 <hr class="border-1 border-slate-400 w-full my-4" />
                 <div class="grid md:grid-cols-2 gap-4">
                     <aside class="w-full">
@@ -220,6 +221,22 @@
     <script>
         const abnormalCheckbox = document.getElementById('abnormal');
         const lokasiAwal = document.getElementById('lokasi_awal')
+
+        @if (!old('abnormal'))
+            fetch('/api/rotasi/cabang-same-kelas/' + lokasiAwal.value)
+                .then(response => response.json())
+                .then(data => {
+                    const lokasiTujuan = document.getElementById('lokasi_tujuan');
+                    lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
+                    data.forEach(cabang => {
+                        const option = document.createElement('option');
+                        option.id = 'lokasi-tujuan-' + cabang.id;
+                        option.value = cabang.id;
+                        option.innerText = cabang.nama;
+                        lokasiTujuan.appendChild(option);
+                    });
+                });
+        @endif
 
         lokasiAwal.addEventListener('change', function() {
             const lokasiAwalID = this.value;
