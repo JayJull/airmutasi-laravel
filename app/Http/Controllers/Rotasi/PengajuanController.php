@@ -60,13 +60,17 @@ class PengajuanController extends Controller
             'keterangan',
         ]);
         if (!$request->has('abnormal')) {
-            $cabangAwal = Cabang::with('kelases')->find($request->lokasi_awal_id);
-            $cabangTujuan = Cabang::with('kelases')->find($request->lokasi_tujuan_id);
-            $intersect = $cabangAwal->kelases->intersect($cabangTujuan->kelases);
+            $kelasCabangAwal = Cabang::with(['kelases' => function ($query) {
+                $query->select(['cabang_id', 'kelas_id']);
+            }])->find($request->lokasi_awal_id);
+            $kelasCabangTujuan = Cabang::with(['kelases' => function ($query) {
+                $query->select(['cabang_id', 'kelas_id']);
+            }])->find($request->lokasi_tujuan_id);
+            $intersect = $kelasCabangAwal->kelases->intersect($kelasCabangTujuan->kelases);
             if ($intersect->isEmpty()) {
                 return redirect()->back()->with('invalid', 'Cabang asal dan tujuan tidak memiliki kelas yang sama')->withInput();
             }
-        }else{
+        } else {
             $request->validate([
                 'keterangan' => 'required',
             ]);

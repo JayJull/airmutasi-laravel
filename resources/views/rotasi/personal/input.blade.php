@@ -37,12 +37,6 @@
                         <select class="w-full px-2 py-1 mt-1 bg-white border-2 border-slate-400 rounded-md"
                             name="lokasi_tujuan_id" id="lokasi_tujuan">
                             <option value>--- Pilih Lokasi Tujuan ---</option>
-                            @foreach ($cabangs as $cabang)
-                                <option id="lokasi-tujuan-{{ $cabang->id }}" value="{{ $cabang->id }}"
-                                    {{ old('lokasi_tujuan_id') == $cabang->id ? 'selected' : '' }}>
-                                    {{ $cabang->nama }}
-                                </option>
-                            @endforeach
                         </select>
                     </aside>
                 </div>
@@ -233,6 +227,7 @@
                         option.id = 'lokasi-tujuan-' + cabang.id;
                         option.value = cabang.id;
                         option.innerText = cabang.nama;
+                        option.selected = cabang.id == {{ old('lokasi_tujuan_id') ?? -1 }};
                         lokasiTujuan.appendChild(option);
                     });
                 });
@@ -256,38 +251,40 @@
                     });
             }
         });
-        abnormalCheckbox.addEventListener('change', function() {
-            const lokasiAwalID = lokasiAwal.value;
-            if (!this.checked) {
-                const cabangTujuan = fetch('/api/rotasi/cabang-same-kelas/' + lokasiAwalID)
-                    .then(response => response.json())
-                    .then(data => {
-                        const lokasiTujuan = document.getElementById('lokasi_tujuan');
-                        lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
-                        data.forEach(cabang => {
-                            const option = document.createElement('option');
-                            option.id = 'lokasi-tujuan-' + cabang.id;
-                            option.value = cabang.id;
-                            option.innerText = cabang.nama;
-                            lokasiTujuan.appendChild(option);
+        @can('admin')
+            abnormalCheckbox.addEventListener('change', function() {
+                const lokasiAwalID = lokasiAwal.value;
+                if (!this.checked) {
+                    const cabangTujuan = fetch('/api/rotasi/cabang-same-kelas/' + lokasiAwalID)
+                        .then(response => response.json())
+                        .then(data => {
+                            const lokasiTujuan = document.getElementById('lokasi_tujuan');
+                            lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
+                            data.forEach(cabang => {
+                                const option = document.createElement('option');
+                                option.id = 'lokasi-tujuan-' + cabang.id;
+                                option.value = cabang.id;
+                                option.innerText = cabang.nama;
+                                lokasiTujuan.appendChild(option);
+                            });
                         });
-                    });
-            } else {
-                const cabangTujuan = fetch('/api/rotasi/cabang')
-                    .then(response => response.json())
-                    .then(data => {
-                        const lokasiTujuan = document.getElementById('lokasi_tujuan');
-                        lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
-                        data.forEach(cabang => {
-                            const option = document.createElement('option');
-                            option.id = 'lokasi-tujuan-' + cabang.id;
-                            option.value = cabang.id;
-                            option.innerText = cabang.nama;
-                            lokasiTujuan.appendChild(option);
+                } else {
+                    const cabangTujuan = fetch('/api/rotasi/cabang')
+                        .then(response => response.json())
+                        .then(data => {
+                            const lokasiTujuan = document.getElementById('lokasi_tujuan');
+                            lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
+                            data.forEach(cabang => {
+                                const option = document.createElement('option');
+                                option.id = 'lokasi-tujuan-' + cabang.id;
+                                option.value = cabang.id;
+                                option.innerText = cabang.nama;
+                                lokasiTujuan.appendChild(option);
+                            });
                         });
-                    });
-            }
-        });
+                }
+            });
+        @endcan
     </script>
     <script>
         // counter for kompetensi id
