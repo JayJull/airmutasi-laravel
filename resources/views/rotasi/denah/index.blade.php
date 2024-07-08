@@ -11,11 +11,21 @@
     @include('components.modal-component')
     <main>
         {{-- Map start --}}
-        <section class="h-[50vh] md:h-screen w-full">
-            <div id="map" class="w-full h-full z-40">
-                <div class="w-full h-full flex items-center justify-center" id="loading">
-                    <img src="/images/icons/ripples.svg" alt="loading" class="w-20 h-20 z-40 p-2 bg-white rounded-full">
+        <section class="flex flex-col items-center">
+            <div class="w-full h-[50vh] md:h-screen flex">
+                <div id="map" class="w-full h-full z-40">
+                    <div class="w-full h-full flex items-center justify-center" id="loading">
+                        <img src="/images/icons/ripples.svg" alt="loading"
+                            class="w-20 h-20 z-40 p-2 bg-white rounded-full">
+                    </div>
                 </div>
+                <div id="banner-img" class="w-0 h-full overflow-hidden">
+                    <img class="w-full object-cover"  src="/images/backgrounds/banner.png" alt="banner">
+                </div>
+            </div>
+            <div>
+                <button id="map-show-btn" class="p-2 border-2 border-yellow-500 bg-yellow-500 rounded-full"></button>
+                <button id="banner-show-btn" class="p-2 border-2 border-yellow-500 rounded-full"></button>
             </div>
         </section>
         {{-- Map end --}}
@@ -64,6 +74,35 @@
     <script src="/script/nav.js"></script>
     <script src="/script/map.js"></script>
     <script src="/script/debounce.js"></script>
+    <script>
+        var currentPage = 0;
+        const mapContainer = document.getElementById('map');
+        const bannerContainer = document.querySelector('#banner-img');
+        const mapShowBtn = document.getElementById('map-show-btn');
+        const bannerShowBtn = document.getElementById('banner-show-btn');
+        mapShowBtn.addEventListener('click', () => {
+            if (currentPage !== 0) {
+                mapContainer.classList.remove('w-0');
+                mapContainer.classList.add('w-full');
+                bannerContainer.classList.remove('w-full');
+                bannerContainer.classList.add('w-0');
+                currentPage = 0;
+                mapShowBtn.classList.add('bg-yellow-500');
+                bannerShowBtn.classList.remove('bg-yellow-500');
+            }
+        });
+        bannerShowBtn.addEventListener('click', () => {
+            if (currentPage !== 1) {
+                mapContainer.classList.add('w-0');
+                mapContainer.classList.remove('w-full');
+                bannerContainer.classList.add('w-full');
+                bannerContainer.classList.remove('w-0');
+                currentPage = 1;
+                mapShowBtn.classList.remove('bg-yellow-500');
+                bannerShowBtn.classList.add('bg-yellow-500');
+            }
+        });
+    </script>
     <script>
         // set data to aside cabang's summary
         function setCabang(cabang) {
