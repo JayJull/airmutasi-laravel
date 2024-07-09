@@ -104,7 +104,7 @@ class PengajuanController extends Controller
         $pengajuan->kompetensis()->createMany($kompetensi);
         DB::commit();
 
-        return redirect()->route("rotasi.denah")->with('success', 'Data berhasil disimpan');
+        return redirect()->back()->with('success', 'Data berhasil disimpan');
     }
 
     public function updateView($id)
@@ -192,6 +192,6 @@ class PengajuanController extends Controller
         $pengajuan->kompetensis()->createMany($kompetensi);
         DB::commit();
 
-        return redirect()->route("rotasi.denah")->with('success', 'Data berhasil disimpan');
+        return redirect()->back()->with('success', 'Data berhasil disimpan');
     }
 }

@@ -18,11 +18,13 @@
                 <h1 id="nama" class="p-2 font-semibold text-lg">
                     {{ $cabang->nama }}
                 </h1>
-                <div class="px-2 flex gap-2">
-                    @foreach ($cabang->kelases as $kelas)
-                        <p class="text-xs bg-gray-300 px-2 py-1 rounded-md">{{ $kelas->kelas->nama_kelas }}</p>
-                    @endforeach
-                </div>
+                @can('admin')
+                    <div class="px-2 flex gap-2">
+                        @foreach ($cabang->kelases as $kelas)
+                            <p class="text-xs bg-gray-300 px-2 py-1 rounded-md">{{ $kelas->kelas->nama_kelas }}</p>
+                        @endforeach
+                    </div>
+                @endcan
                 <p class="p-2">
                     {{ $cabang->alamat }}
                 </p>
@@ -38,11 +40,39 @@
                 @endcan
             </aside>
             <aside class="flex-grow col-span-3 md:col-span-2 grid md:grid-cols-2 md:grid-rows-1 gap-4">
-                <div class="col-span-2 md:col-span-1 flex items-center justify-center bg-white rounded-lg p-4">
+                <div
+                    class="col-span-2 md:col-span-1 flex items-center justify-center bg-white rounded-lg p-4 min-h-[50vh]">
                     <div id="stats-bar" class="w-full h-full"></div>
                 </div>
-                <div class="col-span-2 md:col-span-1 flex items-center justify-center bg-white rounded-lg p-4">
-                    <div id="stats-pie" class="w-full h-full"></div>
+                <div
+                    class="col-span-2 md:col-span-1 flex flex-col gap-4 items-center justify-center bg-white rounded-lg p-4">
+                    @php
+                        $skalaPersonelATC =
+                            (($cabang->jumlah_personel - $cabang->frms) / ($cabang->formasi - $cabang->frms)) * 10;
+                    @endphp
+                    <h2 class="font-bold">Skala Personel ATC</h2>
+                    <div class="w-full flex justify-center items-center gap-1">
+                        <div class="{{ $skalaPersonelATC <= 2 ? 'w-14 h-14' : 'w-10 h-10' }} aspect-square bg-red-500">
+                            <img src="/images/icons/worst.svg" alt="worst">
+                        </div>
+                        <div
+                            class="{{ $skalaPersonelATC > 2 && $skalaPersonelATC <= 4 ? 'w-14 h-14' : 'w-10 h-10' }} aspect-square bg-orange-500">
+                            <img src="/images/icons/bad.svg" alt="bad">
+                        </div>
+                        <div
+                            class="{{ $skalaPersonelATC > 4 && $skalaPersonelATC <= 6 ? 'w-14 h-14' : 'w-10 h-10' }} aspect-square bg-yellow-400">
+                            <img src="/images/icons/netral.svg" alt="netral">
+                        </div>
+                        <div
+                            class="{{ $skalaPersonelATC > 6 && $skalaPersonelATC <= 8 ? 'w-14 h-14' : 'w-10 h-10' }} aspect-square bg-lime-500">
+                            <img src="/images/icons/good.svg" alt="good">
+                        </div>
+                        <div
+                            class="{{ $skalaPersonelATC > 8 ? 'w-14 h-14' : 'w-10 h-10' }} aspect-square bg-green-500">
+                            <img src="/images/icons/best.svg" alt="best">
+                        </div>
+                    </div>
+                    {{ $skalaPersonelATC }}/10
                 </div>
                 <div class="col-span-2 grid grid-cols-2 gap-2 bg-white rounded-lg p-4">
                     <div class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col justify-center p-2">

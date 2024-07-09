@@ -48,11 +48,13 @@ function generateBarChart(title, series) {
         title: {
             text: title,
             align: "left",
+            style: {
+                fontFamily: "geruduk",
+            }
         },
         plotOptions: {
             bar: {
                 horizontal: false,
-                columnWidth: "55%",
                 endingShape: "rounded",
             },
         },
@@ -65,7 +67,7 @@ function generateBarChart(title, series) {
             colors: ["transparent"],
         },
         xaxis: {
-            categories: ["Minimal FRMS", "Eksisting", "Maksimal FRMS"],
+            categories: ["Minimal", "Eksisting", "Maksimal"],
         },
         yaxis: {
             title: {
