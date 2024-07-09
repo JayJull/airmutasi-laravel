@@ -54,23 +54,42 @@
                     @endphp
                     <h2 class="font-bold">Skala Personel ATC</h2>
                     <div class="w-full flex justify-center items-center gap-1">
-                        <div class="{{ $skalaPersonelATC <= 2 ? 'w-14 h-14' : 'w-10 h-10' }} aspect-square bg-red-500">
+                        <div class="{{ $skalaPersonelATC == 1 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#ff0000]">
                             <img src="/images/icons/worst.svg" alt="worst">
                         </div>
                         <div
-                            class="{{ $skalaPersonelATC > 2 && $skalaPersonelATC <= 4 ? 'w-14 h-14' : 'w-10 h-10' }} aspect-square bg-orange-500">
+                            class="{{ $skalaPersonelATC == 2 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#ff3300]">
+                            <img src="/images/icons/worst.svg" alt="worst">
+                        </div>
+                        <div
+                            class="{{ $skalaPersonelATC == 3 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#ff6600]">
                             <img src="/images/icons/bad.svg" alt="bad">
                         </div>
                         <div
-                            class="{{ $skalaPersonelATC > 4 && $skalaPersonelATC <= 6 ? 'w-14 h-14' : 'w-10 h-10' }} aspect-square bg-yellow-400">
+                            class="{{ $skalaPersonelATC == 4 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#ff9900]">
+                            <img src="/images/icons/bad.svg" alt="bad">
+                        </div>
+                        <div
+                            class="{{ $skalaPersonelATC == 5 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#ffcc00]">
+                            <img src="/images/icons/netral.svg" alt="netral">
+                        </div>
+                        <div class="{{ $skalaPersonelATC == 6 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#ccff00]">
                             <img src="/images/icons/netral.svg" alt="netral">
                         </div>
                         <div
-                            class="{{ $skalaPersonelATC > 6 && $skalaPersonelATC <= 8 ? 'w-14 h-14' : 'w-10 h-10' }} aspect-square bg-lime-500">
+                            class="{{ $skalaPersonelATC == 7 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#99ff00]">
                             <img src="/images/icons/good.svg" alt="good">
                         </div>
                         <div
-                            class="{{ $skalaPersonelATC > 8 ? 'w-14 h-14' : 'w-10 h-10' }} aspect-square bg-green-500">
+                            class="{{ $skalaPersonelATC == 8 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#66ff00]">
+                            <img src="/images/icons/good.svg" alt="good">
+                        </div>
+                        <div
+                            class="{{ $skalaPersonelATC == 9 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#33ff00]">
+                            <img src="/images/icons/best.svg" alt="best">
+                        </div>
+                        <div
+                            class="{{ $skalaPersonelATC == 10 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#00ff00]">
                             <img src="/images/icons/best.svg" alt="best">
                         </div>
                     </div>
