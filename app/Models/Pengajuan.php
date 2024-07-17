@@ -22,6 +22,7 @@ class Pengajuan extends Model
         'keterangan',
         'sk_mutasi_url',
         'surat_persetujuan_url',
+        'secondary_pengajuan_id',
         'status'
     ];
 
@@ -44,5 +45,13 @@ class Pengajuan extends Model
     public function rekomendasi()
     {
         return $this->hasOne(Catatan::class)->where('tipe', 'rekomendasi');
+    }
+    public function secondary()
+    {
+        return $this->belongsTo(Pengajuan::class, "secondary_pengajuan_id");
+    }
+    public function primary()
+    {
+        return $this->hasOne(Pengajuan::class, "secondary_pengajuan_id");
     }
 }

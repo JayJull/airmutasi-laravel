@@ -15,7 +15,7 @@
                 enctype="multipart/form-data">
                 <h1 class="font-semibold text-xl">Tambah Data Personel</h1>
                 @csrf
-                <div class="grid md:grid-cols-9 gap-4">
+                <div class="grid md:grid-cols-9 gap-4 items-start">
                     <aside class="w-full md:col-span-4">
                         <label class="font-semibold" for="lokasi_awal_id">Lokasi Awal</label><br />
                         <select class="w-full px-2 py-1 mt-1 bg-white border-2 border-slate-400 rounded-md"
@@ -29,7 +29,7 @@
                             @endforeach
                         </select>
                     </aside>
-                    <div class="flex justify-center items-end">
+                    <div class="self-center flex justify-center items-end">
                         <img src="/images/icons/switch_blue.svg" alt="switch">
                     </div>
                     <aside class="w-full md:col-span-4">
@@ -38,52 +38,12 @@
                             name="lokasi_tujuan_id" id="lokasi_tujuan">
                             <option value>--- Pilih Lokasi Tujuan ---</option>
                         </select>
-                    </aside>
-                </div>
-                @can('admin')
-                    <label class="self-end">
-                        <input type="checkbox" name="abnormal" id="abnormal" {{ old('abnormal') ? 'checked' : '' }}>
-                        Mutasi abnormal?
-                    </label>
-                @endcan
-                <hr class="border-1 border-slate-400 w-full my-4" />
-                <div class="grid md:grid-cols-2 gap-4">
-                    <aside class="w-full">
-                        <label class="font-semibold" for="nama_lengkap">Nama Lengkap</label><br />
-                        <input type="text" name="nama_lengkap" id="nama_lengkap"
-                            class="w-full px-2 py-1 mt-1 border-2 border-slate-400 rounded-md"
-                            placeholder="Ketik Disini ..." value="{{ old('nama_lengkap') }}" />
-                    </aside>
-                    <aside class="w-full">
-                        <label class="font-semibold" for="nik">NIK</label><br />
-                        <input type="text" name="nik" id="nik"
-                            class="w-full px-2 py-1 mt-1 border-2 border-slate-400 rounded-md"
-                            placeholder="Ketik Disini ..." value="{{ old('nik') }}" />
-                    </aside>
-                </div>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <aside class="w-full">
-                        <label class="font-semibold" for="masa_kerja">Masa Kerja</label><br />
-                        <div class="grid grid-cols-4 mt-1 gap-2 items-center">
-                            <input type="number" name="masa_kerja" id="masa_kerja"
-                                class="col-span-3 px-2 py-1 border-2 border-slate-400 rounded-md"
-                                placeholder="Ketik Disini ..." value="{{ old('masa_kerja') }}" />
-                            <button type="button" id="sk_mutasi_file_button"
-                                class="col-span-1 bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-2 py-1 rounded-md font-medium"
-                                popovertarget="sk_mutasi_popover">{{ old('sk_mutasi_url') ? '✅️ Ubah' : 'Berkas' }}</button>
-                            @include('rotasi.components.file-popover', [
-                                'id' => 'sk_mutasi',
-                                'url' => 'sk_mutasi_url',
-                                'file' => 'sk_mutasi_file',
-                                'file_url' => old('sk_mutasi_url'),
-                            ])
-                        </div>
-                    </aside>
-                    <aside class="w-full">
-                        <label class="font-semibold" for="jabatan">Jabatan</label><br />
-                        <input type="text" name="jabatan" id="jabatan"
-                            class="w-full px-2 py-1 mt-1 border-2 border-slate-400 rounded-md"
-                            placeholder="Ketik Disini ..." value="{{ old('jabatan') }}" />
+                        <select
+                            class="{{ !old('use_tujuan_alt') ? 'hidden' : '' }} w-full px-2 py-1 mt-1 bg-white border-2 border-slate-400 rounded-md"
+                            name="lokasi_tujuan_alt_id" id="lokasi_tujuan_alt"
+                            {{ !old('use_tujuan_alt') ? 'disabled' : '' }}>
+                            <option value>--- Pilih Lokasi Tujuan Alternatif ---</option>
+                        </select>
                     </aside>
                 </div>
                 <div class="grid md:grid-cols-2 gap-4">
@@ -142,6 +102,90 @@
                             <option value="STAFF" {{ old('posisi_tujuan') == 'STAFF' ? 'selected' : '' }}>STAFF
                             </option>
                         </select>
+                        <select name="posisi_tujuan_alt" id="posisi_tujuan_alt"
+                            class="{{ !old('use_tujuan_alt') ? 'hidden' : '' }} w-full px-2 py-1 mt-1 bg-white border-2 border-slate-400 rounded-md"
+                            {{ !old('use_tujuan_alt') ? 'disabled' : '' }}>
+                            <option value disabled {{ !old('posisi_tujuan_alt') ? 'selected' : '' }}>--- Pilih Posisi
+                                Alternatif
+                                ---
+                            </option>
+                            <option value="ATC (TWR)" {{ old('posisi_tujuan_alt') == 'ATC (TWR)' ? 'selected' : '' }}>
+                                ATC
+                                (TWR)</option>
+                            <option value="ATC (APS)" {{ old('posisi_tujuan_alt') == 'ATC (APS)' ? 'selected' : '' }}>
+                                ATC
+                                (APS)</option>
+                            <option value="ATC (ACS)" {{ old('posisi_tujuan_alt') == 'ATC (ACS)' ? 'selected' : '' }}>
+                                ATC
+                                (ACS)</option>
+                            <option value="ACO" {{ old('posisi_tujuan_alt') == 'ACO' ? 'selected' : '' }}>ACO
+                            </option>
+                            <option value="AIS" {{ old('posisi_tujuan_alt') == 'AIS' ? 'selected' : '' }}>AIS
+                            </option>
+                            <option value="ATFM" {{ old('posisi_tujuan_alt') == 'ATFM' ? 'selected' : '' }}>ATFM
+                            </option>
+                            <option value="TAPOR" {{ old('posisi_tujuan_alt') == 'TAPOR' ? 'selected' : '' }}>TAPOR
+                            </option>
+                            <option value="ATSSystem" {{ old('posisi_tujuan_alt') == 'ATSSystem' ? 'selected' : '' }}>
+                                ATS
+                                System
+                            </option>
+                            <option value="STAFF" {{ old('posisi_tujuan_alt') == 'STAFF' ? 'selected' : '' }}>STAFF
+                            </option>
+                        </select>
+                    </aside>
+                </div>
+                <div class="self-end flex items-center gap-4">
+                    <label class="flex items-center gap-1">
+                        <input type="checkbox" name="use_tujuan_alt" id="use_tujuan_alt"
+                            {{ old('use_tujuan_alt') ? 'checked' : '' }}>
+                        Tujuan alternatif?
+                    </label>
+                    @can('admin')
+                        <label class="flex items-center gap-1">
+                            <input type="checkbox" name="abnormal" id="abnormal" {{ old('abnormal') ? 'checked' : '' }}>
+                            Mutasi abnormal?
+                        </label>
+                    @endcan
+                </div>
+                <hr class="border-1 border-slate-400 w-full my-4" />
+                <div class="grid md:grid-cols-2 gap-4">
+                    <aside class="w-full">
+                        <label class="font-semibold" for="nama_lengkap">Nama Lengkap</label><br />
+                        <input type="text" name="nama_lengkap" id="nama_lengkap"
+                            class="w-full px-2 py-1 mt-1 border-2 border-slate-400 rounded-md"
+                            placeholder="Ketik Disini ..." value="{{ old('nama_lengkap') }}" />
+                    </aside>
+                    <aside class="w-full">
+                        <label class="font-semibold" for="nik">NIK</label><br />
+                        <input type="text" name="nik" id="nik"
+                            class="w-full px-2 py-1 mt-1 border-2 border-slate-400 rounded-md"
+                            placeholder="Ketik Disini ..." value="{{ old('nik') }}" />
+                    </aside>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <aside class="w-full">
+                        <label class="font-semibold" for="masa_kerja">Masa Kerja</label><br />
+                        <div class="grid grid-cols-4 mt-1 gap-2 items-center">
+                            <input type="number" name="masa_kerja" id="masa_kerja"
+                                class="col-span-3 px-2 py-1 border-2 border-slate-400 rounded-md"
+                                placeholder="Ketik Disini ..." value="{{ old('masa_kerja') }}" />
+                            <button type="button" id="sk_mutasi_file_button"
+                                class="col-span-1 bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-2 py-1 rounded-md font-medium"
+                                popovertarget="sk_mutasi_popover">{{ old('sk_mutasi_url') ? '✅️ Ubah' : 'Berkas' }}</button>
+                            @include('rotasi.components.file-popover', [
+                                'id' => 'sk_mutasi',
+                                'url' => 'sk_mutasi_url',
+                                'file' => 'sk_mutasi_file',
+                                'file_url' => old('sk_mutasi_url'),
+                            ])
+                        </div>
+                    </aside>
+                    <aside class="w-full">
+                        <label class="font-semibold" for="jabatan">Jabatan</label><br />
+                        <input type="text" name="jabatan" id="jabatan"
+                            class="w-full px-2 py-1 mt-1 border-2 border-slate-400 rounded-md"
+                            placeholder="Ketik Disini ..." value="{{ old('jabatan') }}" />
                     </aside>
                 </div>
                 <hr class="border-1 border-slate-400 w-full my-4" />
@@ -213,6 +257,23 @@
         }
     </script>
     <script>
+        document.querySelector("#use_tujuan_alt").addEventListener("change", (e) => {
+            const tujuanAlt = document.querySelector("#lokasi_tujuan_alt");
+            const posisiAlt = document.querySelector("#posisi_tujuan_alt");
+            if (e.target.checked) {
+                tujuanAlt.classList.remove("hidden");
+                tujuanAlt.disabled = false;
+                posisiAlt.classList.remove("hidden");
+                posisiAlt.disabled = false;
+            } else {
+                tujuanAlt.classList.add("hidden");
+                tujuanAlt.disabled = true;
+                posisiAlt.classList.add("hidden");
+                posisiAlt.disabled = true;
+            }
+        });
+    </script>
+    <script>
         const abnormalCheckbox = document.getElementById('abnormal');
         const lokasiAwal = document.getElementById('lokasi_awal')
 
@@ -221,7 +282,9 @@
                 .then(response => response.json())
                 .then(data => {
                     const lokasiTujuan = document.getElementById('lokasi_tujuan');
+                    const lokasiTujuanAlt = document.getElementById('lokasi_tujuan_alt');
                     lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
+                    lokasiTujuanAlt.innerHTML = '<option value>--- Pilih Lokasi Tujuan Alternatif ---</option>';
                     data.forEach(cabang => {
                         const option = document.createElement('option');
                         option.id = 'lokasi-tujuan-' + cabang.id;
@@ -229,6 +292,13 @@
                         option.innerText = cabang.nama;
                         option.selected = cabang.id == {{ old('lokasi_tujuan_id') ?? -1 }};
                         lokasiTujuan.appendChild(option);
+
+                        const optionAlt = document.createElement('option');
+                        optionAlt.id = 'lokasi-tujuan-alt-' + cabang.id;
+                        optionAlt.value = cabang.id;
+                        optionAlt.innerText = cabang.nama;
+                        optionAlt.selected = cabang.id == {{ old('lokasi_tujuan_alt_id') ?? -1 }};
+                        lokasiTujuanAlt.appendChild(optionAlt);
                     });
                 });
         @endif
@@ -240,13 +310,24 @@
                     .then(response => response.json())
                     .then(data => {
                         const lokasiTujuan = document.getElementById('lokasi_tujuan');
+                        const lokasiTujuanAlt = document.getElementById('lokasi_tujuan_alt');
                         lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
+                        lokasiTujuanAlt.innerHTML =
+                            '<option value>--- Pilih Lokasi Tujuan Alternatif ---</option>';
                         data.forEach(cabang => {
                             const option = document.createElement('option');
                             option.id = 'lokasi-tujuan-' + cabang.id;
                             option.value = cabang.id;
                             option.innerText = cabang.nama;
+                            option.selected = cabang.id == {{ old('lokasi_tujuan_id') ?? -1 }};
                             lokasiTujuan.appendChild(option);
+
+                            const optionAlt = document.createElement('option');
+                            optionAlt.id = 'lokasi-tujuan-alt-' + cabang.id;
+                            optionAlt.value = cabang.id;
+                            optionAlt.innerText = cabang.nama;
+                            optionAlt.selected = cabang.id == {{ old('lokasi_tujuan_alt_id') ?? -1 }};
+                            lokasiTujuanAlt.appendChild(optionAlt);
                         });
                     });
             }
@@ -259,13 +340,25 @@
                         .then(response => response.json())
                         .then(data => {
                             const lokasiTujuan = document.getElementById('lokasi_tujuan');
+                            const lokasiTujuanAlt = document.getElementById('lokasi_tujuan_alt');
                             lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
+                            lokasiTujuanAlt.innerHTML =
+                                '<option value>--- Pilih Lokasi Tujuan Alternatif ---</option>';
                             data.forEach(cabang => {
                                 const option = document.createElement('option');
                                 option.id = 'lokasi-tujuan-' + cabang.id;
                                 option.value = cabang.id;
                                 option.innerText = cabang.nama;
+                                option.selected = cabang.id == {{ old('lokasi_tujuan_id') ?? -1 }};
                                 lokasiTujuan.appendChild(option);
+
+                                const optionAlt = document.createElement('option');
+                                optionAlt.id = 'lokasi-tujuan-alt-' + cabang.id;
+                                optionAlt.value = cabang.id;
+                                optionAlt.innerText = cabang.nama;
+                                optionAlt.selected = cabang.id ==
+                                    {{ old('lokasi_tujuan_alt_id') ?? -1 }};
+                                lokasiTujuanAlt.appendChild(optionAlt);
                             });
                         });
                 } else {
@@ -273,13 +366,25 @@
                         .then(response => response.json())
                         .then(data => {
                             const lokasiTujuan = document.getElementById('lokasi_tujuan');
+                            const lokasiTujuanAlt = document.getElementById('lokasi_tujuan_alt');
                             lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
+                            lokasiTujuanAlt.innerHTML =
+                                '<option value>--- Pilih Lokasi Tujuan Alternatif ---</option>';
                             data.forEach(cabang => {
                                 const option = document.createElement('option');
                                 option.id = 'lokasi-tujuan-' + cabang.id;
                                 option.value = cabang.id;
                                 option.innerText = cabang.nama;
+                                option.selected = cabang.id == {{ old('lokasi_tujuan_id') ?? -1 }};
                                 lokasiTujuan.appendChild(option);
+
+                                const optionAlt = document.createElement('option');
+                                optionAlt.id = 'lokasi-tujuan-alt-' + cabang.id;
+                                optionAlt.value = cabang.id;
+                                optionAlt.innerText = cabang.nama;
+                                optionAlt.selected = cabang.id ==
+                                    {{ old('lokasi_tujuan_alt_id') ?? -1 }};
+                                lokasiTujuanAlt.appendChild(optionAlt);
                             });
                         });
                 }

@@ -75,10 +75,44 @@ class PengajuanController extends Controller
                 'keterangan' => 'required',
             ]);
         }
+        if ($request->has('use_tujuan_alt')) {
+            $request->validate([
+                "lokasi_tujuan_alt_id" => "required",
+                "posisi_tujuan_alt" => ['required', Rule::in($posisi)],
+            ]);
+        }
         $pengajuan['sk_mutasi_url'] = $request->sk_mutasi_url;
         $pengajuan['surat_persetujuan_url'] = $request->surat_persetujuan_url;
         DB::beginTransaction();
         $pengajuan['status'] = 'diajukan';
+        $kompetensi = array_map(function ($kom) {
+            if (!(str_contains($kom["url"], "http://") || str_contains($kom["url"], "https://")) && $kom["url"] !== null) {
+                $kom["url"] = "http://" . $kom["url"];
+            }
+            $kom["file_url"] = $kom["url"];
+            return ['nama' => $kom["nama"], 'file_url' => $kom["file_url"]];
+        }, $request->kompetensi);
+        if ($request->has('use_tujuan_alt')) {
+            $pengajuanAlt = Pengajuan::create([
+                'lokasi_awal_id' => $pengajuan['lokasi_awal_id'],
+                'lokasi_tujuan_id' => $request['lokasi_tujuan_alt_id'],
+                'nama_lengkap' => $pengajuan['nama_lengkap'],
+                'nik' => $pengajuan['nik'],
+                'masa_kerja' => $pengajuan['masa_kerja'],
+                'jabatan' => $pengajuan['jabatan'],
+                'posisi_sekarang' => $pengajuan['posisi_sekarang'],
+                'posisi_tujuan' => $request['posisi_tujuan_alt'],
+                'tujuan_rotasi' => $pengajuan['tujuan_rotasi'],
+                'keterangan' => $pengajuan['keterangan'],
+                'sk_mutasi_url' => $pengajuan['sk_mutasi_url'],
+                'surat_persetujuan_url' => $pengajuan['surat_persetujuan_url'],
+                'status' => $pengajuan['status'],
+            ]);
+            $pengajuanAlt->kompetensis()->createMany($kompetensi);
+            $pengajuan["secondary_pengajuan_id"] = $pengajuanAlt->id;
+        } else {
+            $pengajuan["secondary_pengajuan_id"] = null;
+        }
         $pengajuan = Pengajuan::create([
             'lokasi_awal_id' => $pengajuan['lokasi_awal_id'],
             'lokasi_tujuan_id' => $pengajuan['lokasi_tujuan_id'],
@@ -93,14 +127,8 @@ class PengajuanController extends Controller
             'sk_mutasi_url' => $pengajuan['sk_mutasi_url'],
             'surat_persetujuan_url' => $pengajuan['surat_persetujuan_url'],
             'status' => $pengajuan['status'],
+            'secondary_pengajuan_id' => $pengajuan["secondary_pengajuan_id"],
         ]);
-        $kompetensi = array_map(function ($kom) {
-            if (!(str_contains($kom["url"], "http://") || str_contains($kom["url"], "https://")) && $kom["url"] !== null) {
-                $kom["url"] = "http://" . $kom["url"];
-            }
-            $kom["file_url"] = $kom["url"];
-            return ['nama' => $kom["nama"], 'file_url' => $kom["file_url"]];
-        }, $request->kompetensi);
         $pengajuan->kompetensis()->createMany($kompetensi);
         DB::commit();
 
