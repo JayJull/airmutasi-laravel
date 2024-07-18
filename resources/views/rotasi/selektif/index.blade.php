@@ -102,11 +102,11 @@
             <aside class="flex flex-col gap-2 pe-2 pb-2 h-[50vh] md:h-full overflow-y-auto">
                 <div class="sticky top-0 w-full">
                     <div class="text-[#293676] flex gap-2 py-2 justify-evenly bg-[#ced0ff]">
-                        <a class="{{ !$tab || $tab === 'diajukan' ? 'font-semibold' : '' }}"
+                        <a class="{{ !$tab || $tab === 'diajukan' ? 'font-semibold underline' : '' }}"
                             href="/rotasi/selektif?tab=diajukan{{ $query }}">Pengajuan</a>
-                        <a class="{{ $tab === 'dapat' ? 'font-semibold' : '' }}"
+                        <a class="{{ $tab === 'dapat' ? 'font-semibold underline' : '' }}"
                             href="/rotasi/selektif?tab=dapat{{ $query }}">Diterima</a>
-                        <a class="{{ $tab === 'tidak_dapat' ? 'font-semibold' : '' }}"
+                        <a class="{{ $tab === 'tidak_dapat' ? 'font-semibold underline' : '' }}"
                             href="/rotasi/selektif?tab=tidak_dapat{{ $query }}">Tidak Diterima</a>
                         <button popovertarget="filter" class="relative">
                             @if ($query != '')

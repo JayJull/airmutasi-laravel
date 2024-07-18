@@ -54,46 +54,39 @@
                     @endphp
                     <h2 class="font-bold">Skala Personel ATC</h2>
                     <div class="w-full flex justify-center items-center gap-1">
-                        <div class="{{ $skalaPersonelATC == 1 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#ff0000]">
+                        <div class="{{ $skalaPersonelATC <= 1 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#ff0000]">
                             <img src="/images/icons/worst.svg" alt="worst">
                         </div>
-                        <div
-                            class="{{ $skalaPersonelATC == 2 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#ff3300]">
+                        <div class="{{ $skalaPersonelATC == 2 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#ff3300]">
                             <img src="/images/icons/worst.svg" alt="worst">
                         </div>
-                        <div
-                            class="{{ $skalaPersonelATC == 3 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#ff6600]">
+                        <div class="{{ $skalaPersonelATC == 3 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#ff6600]">
                             <img src="/images/icons/bad.svg" alt="bad">
                         </div>
-                        <div
-                            class="{{ $skalaPersonelATC == 4 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#ff9900]">
+                        <div class="{{ $skalaPersonelATC == 4 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#ff9900]">
                             <img src="/images/icons/bad.svg" alt="bad">
                         </div>
-                        <div
-                            class="{{ $skalaPersonelATC == 5 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#ffcc00]">
+                        <div class="{{ $skalaPersonelATC == 5 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#ffcc00]">
                             <img src="/images/icons/netral.svg" alt="netral">
                         </div>
                         <div class="{{ $skalaPersonelATC == 6 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#ccff00]">
                             <img src="/images/icons/netral.svg" alt="netral">
                         </div>
-                        <div
-                            class="{{ $skalaPersonelATC == 7 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#99ff00]">
+                        <div class="{{ $skalaPersonelATC == 7 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#99ff00]">
                             <img src="/images/icons/good.svg" alt="good">
                         </div>
-                        <div
-                            class="{{ $skalaPersonelATC == 8 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#66ff00]">
+                        <div class="{{ $skalaPersonelATC == 8 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#66ff00]">
                             <img src="/images/icons/good.svg" alt="good">
                         </div>
-                        <div
-                            class="{{ $skalaPersonelATC == 9 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#33ff00]">
+                        <div class="{{ $skalaPersonelATC == 9 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#33ff00]">
                             <img src="/images/icons/best.svg" alt="best">
                         </div>
                         <div
-                            class="{{ $skalaPersonelATC == 10 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#00ff00]">
+                            class="{{ $skalaPersonelATC >= 10 ? 'w-12 h-12' : 'w-8 h-8' }} aspect-square bg-[#00ff00]">
                             <img src="/images/icons/best.svg" alt="best">
                         </div>
                     </div>
-                    {{ $skalaPersonelATC }}/10
+                    {{ $skalaPersonelATC < 0 ? 0 : ($skalaPersonelATC > 10 ? 10 : $skalaPersonelATC) }}/10
                 </div>
                 <div class="col-span-2 grid grid-cols-2 gap-2 bg-white rounded-lg p-4">
                     <div class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col justify-center p-2">

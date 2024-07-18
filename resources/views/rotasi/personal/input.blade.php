@@ -102,37 +102,6 @@
                             <option value="STAFF" {{ old('posisi_tujuan') == 'STAFF' ? 'selected' : '' }}>STAFF
                             </option>
                         </select>
-                        <select name="posisi_tujuan_alt" id="posisi_tujuan_alt"
-                            class="{{ !old('use_tujuan_alt') ? 'hidden' : '' }} w-full px-2 py-1 mt-1 bg-white border-2 border-slate-400 rounded-md"
-                            {{ !old('use_tujuan_alt') ? 'disabled' : '' }}>
-                            <option value disabled {{ !old('posisi_tujuan_alt') ? 'selected' : '' }}>--- Pilih Posisi
-                                Alternatif
-                                ---
-                            </option>
-                            <option value="ATC (TWR)" {{ old('posisi_tujuan_alt') == 'ATC (TWR)' ? 'selected' : '' }}>
-                                ATC
-                                (TWR)</option>
-                            <option value="ATC (APS)" {{ old('posisi_tujuan_alt') == 'ATC (APS)' ? 'selected' : '' }}>
-                                ATC
-                                (APS)</option>
-                            <option value="ATC (ACS)" {{ old('posisi_tujuan_alt') == 'ATC (ACS)' ? 'selected' : '' }}>
-                                ATC
-                                (ACS)</option>
-                            <option value="ACO" {{ old('posisi_tujuan_alt') == 'ACO' ? 'selected' : '' }}>ACO
-                            </option>
-                            <option value="AIS" {{ old('posisi_tujuan_alt') == 'AIS' ? 'selected' : '' }}>AIS
-                            </option>
-                            <option value="ATFM" {{ old('posisi_tujuan_alt') == 'ATFM' ? 'selected' : '' }}>ATFM
-                            </option>
-                            <option value="TAPOR" {{ old('posisi_tujuan_alt') == 'TAPOR' ? 'selected' : '' }}>TAPOR
-                            </option>
-                            <option value="ATSSystem" {{ old('posisi_tujuan_alt') == 'ATSSystem' ? 'selected' : '' }}>
-                                ATS
-                                System
-                            </option>
-                            <option value="STAFF" {{ old('posisi_tujuan_alt') == 'STAFF' ? 'selected' : '' }}>STAFF
-                            </option>
-                        </select>
                     </aside>
                 </div>
                 <div class="self-end flex items-center gap-4">
@@ -263,13 +232,9 @@
             if (e.target.checked) {
                 tujuanAlt.classList.remove("hidden");
                 tujuanAlt.disabled = false;
-                posisiAlt.classList.remove("hidden");
-                posisiAlt.disabled = false;
             } else {
                 tujuanAlt.classList.add("hidden");
                 tujuanAlt.disabled = true;
-                posisiAlt.classList.add("hidden");
-                posisiAlt.disabled = true;
             }
         });
     </script>

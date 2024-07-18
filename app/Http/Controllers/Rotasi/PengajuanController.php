@@ -78,7 +78,6 @@ class PengajuanController extends Controller
         if ($request->has('use_tujuan_alt')) {
             $request->validate([
                 "lokasi_tujuan_alt_id" => "required",
-                "posisi_tujuan_alt" => ['required', Rule::in($posisi)],
             ]);
         }
         $pengajuan['sk_mutasi_url'] = $request->sk_mutasi_url;
@@ -101,7 +100,7 @@ class PengajuanController extends Controller
                 'masa_kerja' => $pengajuan['masa_kerja'],
                 'jabatan' => $pengajuan['jabatan'],
                 'posisi_sekarang' => $pengajuan['posisi_sekarang'],
-                'posisi_tujuan' => $request['posisi_tujuan_alt'],
+                'posisi_tujuan' => $pengajuan['posisi_tujuan'],
                 'tujuan_rotasi' => $pengajuan['tujuan_rotasi'],
                 'keterangan' => $pengajuan['keterangan'],
                 'sk_mutasi_url' => $pengajuan['sk_mutasi_url'],
