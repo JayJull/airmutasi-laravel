@@ -173,6 +173,7 @@
         // bind delete button event for initial kompetensi item
         document.querySelectorAll(".kelas-item").forEach(kelas => {
             bindDeleteBtn(kelas.id);
+            kelasCount++;
         });
 
         // add kelas item

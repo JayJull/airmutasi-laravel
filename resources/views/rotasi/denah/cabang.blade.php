@@ -19,7 +19,7 @@
                     {{ $cabang->nama }}
                 </h1>
                 @can('admin')
-                    <div class="px-2 flex gap-2">
+                    <div class="px-2 flex flex-wrap gap-2">
                         @foreach ($cabang->kelases as $kelas)
                             <p class="text-xs bg-gray-300 px-2 py-1 rounded-md">{{ $kelas->kelas->nama_kelas }}</p>
                         @endforeach
