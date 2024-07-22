@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('surat_persetujuan_url')->nullable();
             $table->text('keterangan');
             $table->enum('status', ['diajukan', 'dapat', 'tidak_dapat', 'diterima']);
-            $table->foreignId('secondary_pengajuan_id')->nullable()->constrained('pengajuans')->onDelete("cascade");
+            $table->foreignId('secondary_pengajuan_id')->nullable()->constrained('pengajuans')->cascadeOnDelete();
             $table->timestamps();
         });
     }

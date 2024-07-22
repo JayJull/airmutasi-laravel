@@ -47,8 +47,9 @@
                 <div
                     class="col-span-2 md:col-span-1 flex flex-col gap-4 items-center justify-center bg-white rounded-lg p-4">
                     @php
+                        $range = $cabang->formasi - $cabang->frms;
                         $skalaPersonelATC = number_format(
-                            (($cabang->jumlah_personel - $cabang->frms) / ($cabang->formasi - $cabang->frms)) * 10,
+                            (($cabang->jumlah_personel - $cabang->frms) / ($range > 0 ? $range : 1)) * 10,
                             0,
                         );
                     @endphp
