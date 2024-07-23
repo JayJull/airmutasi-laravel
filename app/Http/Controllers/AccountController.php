@@ -26,7 +26,7 @@ class AccountController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'nik' => 'required',
             'masa_kerja' => 'required',
             'jabatan' => 'required',
@@ -59,15 +59,15 @@ class AccountController extends Controller
 
     public function update(Request $request)
     {
+        DB::beginTransaction();
+        $akun = User::find(Auth::user()->id);
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email,' . $akun->id,
             'nik' => 'required',
             'masa_kerja' => 'required',
             'jabatan' => 'required',
         ]);
-        DB::beginTransaction();
-        $akun = User::find(Auth::user()->id);
         $akun->name = $request->name;
         $akun->email = $request->email;
         $akun->save();
