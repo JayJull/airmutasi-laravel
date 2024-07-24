@@ -27,6 +27,13 @@ class PengajuanController extends Controller
     public function inputView()
     {
         $cabangs = Cabang::all();
+        if (auth()->user()->role->name !== 'admin') {
+            if (!auth()->user()->profile->cabang_id) {
+                return redirect()->back();
+            }
+            $cabangs = Cabang::where('id', auth()->user()->profile->cabang_id)->get();
+            return view('rotasi.personal.input', ['cabangs' => $cabangs]);
+        }
         return view('rotasi.personal.input', ['cabangs' => $cabangs]);
     }
 
@@ -46,6 +53,15 @@ class PengajuanController extends Controller
             'kompetensi.*.nama' => 'required',
             'tujuan_rotasi' => 'required',
         ]);
+
+        if (auth()->user()->role->name !== 'admin') {
+            if (!auth()->user()->profile->cabang_id) {
+                return redirect()->back()->with('invalid', 'Anda tidak memiliki cabang')->withInput();
+            }
+            if ($request->lokasi_awal_id !== auth()->user()->profile->cabang_id) {
+                return redirect()->back()->with('invalid', 'Cabang asal tidak sesuai')->withInput();
+            }
+        }
 
         $pengajuan = $request->only([
             'lokasi_awal_id',

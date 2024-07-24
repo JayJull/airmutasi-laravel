@@ -42,6 +42,7 @@ Route::group(['prefix' => 'akun', 'middleware' => [
     });
     Route::get('/edit', [AccountController::class, 'updateView']);
     Route::post('/edit', [AccountController::class, 'update']);
+    Route::middleware(['is.admin'])->post('/assign', [AccountController::class, 'assign']);
 });
 
 Route::group(['prefix' => 'personel', 'middleware' => [

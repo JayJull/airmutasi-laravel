@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cabang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Profile;
@@ -14,12 +15,18 @@ class AccountController extends Controller
     public function index()
     {
         $akun = auth()->user();
+        if ($akun->role->name == 'admin') {
+            $akuns = Profile::with(['user'])->get();
+            $cabangs = Cabang::all();
+            return view('account.index', ['akun' => $akun, 'akuns' => $akuns, 'cabangs' => $cabangs]);
+        }
         return view('account.index', ['akun' => $akun]);
     }
 
     public function inputView()
     {
-        return view('account.input');
+        $cabangs = Cabang::all();
+        return view('account.input', ['cabangs' => $cabangs]);
     }
 
     public function input(Request $request)
@@ -30,7 +37,8 @@ class AccountController extends Controller
             'nik' => 'required',
             'masa_kerja' => 'required',
             'jabatan' => 'required',
-            'password' => 'required|min:8'
+            'password' => 'required|min:8',
+            'cabang_id' => 'required|exists:cabangs,id'
         ]);
         DB::beginTransaction();
         $akun = new User();
@@ -46,6 +54,7 @@ class AccountController extends Controller
         $akun->profile->nik = $request->nik;
         $akun->profile->masa_kerja = $request->masa_kerja;
         $akun->profile->jabatan = $request->jabatan;
+        $akun->profile->cabang_id = $request->cabang_id;
         $akun->profile->save();
         DB::commit();
         return redirect()->route('akun')->with('success', 'Akun berhasil ditambahkan');
@@ -88,5 +97,17 @@ class AccountController extends Controller
         $akun->profile->save();
         DB::commit();
         return redirect()->route('akun')->with('success', 'Akun berhasil diubah');
+    }
+
+    public function assign(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:profiles,id',
+            'cabang_id' => 'required|exists:cabangs,id'
+        ]);
+        $profile = Profile::find($request->user_id);
+        $profile->cabang_id = $request->cabang_id;
+        $profile->save();
+        return redirect()->route('akun')->with('success', 'Cabang berhasil diassign');
     }
 }

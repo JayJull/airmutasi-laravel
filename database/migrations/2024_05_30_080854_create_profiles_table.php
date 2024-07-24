@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("nik");
             $table->integer("masa_kerja");
             $table->string("jabatan");
+            $table->foreignId("cabang_id")->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

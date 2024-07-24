@@ -17,15 +17,43 @@
             @endif
             <div class="bg-blue-100 p-2 rounded-md flex flex-col items-center gap-2">
                 @if ($akun->profile != null)
+                    @if ($akun->profile->cabang_id != null)
+                        <p class="text-center">Cabang: {{ $akun->profile->cabang->nama }}</p>
+                    @endif
                     <p class="text-center">NIK: {{ $akun->profile->nik }}</p>
                     <p class="text-center">Masa Kerja: {{ $akun->profile->masa_kerja }} Tahun</p>
                 @endif
                 <p class="text-center">Email: {{ $akun->email }}</p>
             </div>
-            <a href="/akun/edit" class="bg-yellow-300 hover:bg-yellow-400 duration-200 text-gray-800 px-4 py-2 rounded-lg font-semibold text-center">Edit</a>
+            <a href="/akun/edit"
+                class="bg-yellow-300 hover:bg-yellow-400 duration-200 text-gray-800 px-4 py-2 rounded-lg font-semibold text-center">Edit</a>
             @if ($akun->role->name == 'admin')
-                <a href="/akun/add" class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold text-center">Buat
+                <a href="/akun/add"
+                    class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold text-center">Buat
                     akun personel baru</a>
+                <button popovertarget="cabang-assign" class="underline text-blue-500">Daftarkan cabang ke akun</button>
+                <div id="cabang-assign" popover class="p-2 rounded-md w-1/2 border-2">
+                    <form action="/akun/assign" method="POST" class="flex flex-col gap-2">
+                        @csrf
+                        <h1 class="text-center font-semibold text-xl">Daftarkan cabang ke akun</h1>
+                        <select name="user_id" id="user_id"
+                            class="w-full px-2 py-1 mt-1 bg-white border-2 border-slate-400 rounded-md text-center">
+                            <option value disabled selected>--- Pilih Akun ---</option>
+                            @foreach ($akuns as $currAkun)
+                                <option value="{{ $currAkun->id }}">{{ $currAkun->user->name }}</option>
+                            @endforeach
+                        </select>
+                        <select name="cabang_id" id="cabang_id"
+                            class="w-full px-2 py-1 mt-1 bg-white border-2 border-slate-400 rounded-md text-center">
+                            <option value disabled selected>--- Pilih Cabang ---</option>
+                            @foreach ($cabangs as $currCabang)
+                                <option value="{{ $currCabang->id }}">{{ $currCabang->nama }}</option>
+                            @endforeach
+                        </select>
+                        <button
+                            class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold text-center">Daftarkan</button>
+                    </form>
+                </div>
             @endif
         </section>
     </main>

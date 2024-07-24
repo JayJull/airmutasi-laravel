@@ -22,8 +22,7 @@
                 value="{{ old('email') }}">
             <label for="password" class="font-semibold">Password <span class="text-red-500">*</span></label>
             <input type="password" name="password" id="password"
-                class="w-full p-2 mt-1 border-2 border-slate-400 rounded-md mb-2"
-                placeholder="Minimal 8 karakter">
+                class="w-full p-2 mt-1 border-2 border-slate-400 rounded-md mb-2" placeholder="Minimal 8 karakter">
 
             <label for="nik" class="font-semibold">NIK <span class="text-red-500">*</span></label>
             <input type="text" name="nik" id="nik"
@@ -37,6 +36,14 @@
             <input type="jabatan" name="jabatan" id="jabatan"
                 class="w-full p-2 mt-1 border-2 border-slate-400 rounded-md mb-2" placeholder="Jabatan"
                 value="{{ old('jabatan') }}">
+            <label for="cabang_id" class="font-semibold">Cabang <span class="text-red-500">*</span></label>
+            <select name="cabang_id" id="cabang_id"
+                class="w-full px-2 py-1 mt-1 bg-white border-2 border-slate-400 rounded-md">
+                <option value disabled selected>--- Pilih Cabang ---</option>
+                @foreach ($cabangs as $currCabang)
+                    <option value="{{ $currCabang->id }}">{{ $currCabang->nama }}</option>
+                @endforeach
+            </select>
 
             <button type="submit" class="bg-[#383A83] text-white py-2 rounded-lg font-semibold">Simpan</button>
         </form>
