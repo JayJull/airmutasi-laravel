@@ -260,6 +260,10 @@ class PengajuanController extends Controller
             $path = storage_path('app/public/' . explode("storage", $pengajuan->sk_mutasi_url)[1]);
             $oMerger->addPDF($path, 'all');
         }
+        if ($pengajuan->surat_persetujuan_url) {
+            $path = storage_path('app/public/' . explode("storage", $pengajuan->surat_persetujuan_url)[1]);
+            $oMerger->addPDF($path, 'all');
+        }
         foreach ($pengajuan->kompetensis as $kompetensi) {
             if ($kompetensi->file_url) {
                 $path = storage_path('app/public/' . explode("storage", $kompetensi->file_url)[1]);
