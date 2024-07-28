@@ -199,6 +199,9 @@
                         <button type="button"
                             class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-6 py-2 font-semibold rounded-lg"
                             popovertarget="detail-pengajuan">Detail</button>
+                        <a href="/download/pengajuan/{{ $pengajuan->id }}" target="_blank"
+                            class="text-center bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-6 py-2 font-semibold rounded-lg">Unduh
+                            Dokumen</a>
                     </div>
                     <button
                         class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-6 py-2 font-semibold rounded-lg"

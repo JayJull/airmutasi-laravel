@@ -10,6 +10,9 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+use Webklex\PDFMerger\Facades\PDFMergerFacade;
+
 class PengajuanController extends Controller
 {
     public function pengajuanById($id)
@@ -236,5 +239,38 @@ class PengajuanController extends Controller
         DB::commit();
 
         return redirect()->back()->with('success', 'Data berhasil disimpan');
+    }
+
+    public function document($id)
+    {
+        $pengajuan = Pengajuan::with(['lokasiAwal', 'lokasiTujuan', 'kompetensis'])->find($id);
+
+        if (!$pengajuan) {
+            abort(404);
+        }
+
+        $oMerger = PDFMergerFacade::init();
+        $pdf = Pdf::loadView('documenttpl.pengajuan', ['pengajuan' => $pengajuan]);
+
+        $pdf->setPaper('a4', 'portrait');
+        $pdfPath = storage_path('tmp/pengajuan-' . $pengajuan->id . '.pdf');
+        $pdf->save($pdfPath);
+        $oMerger->addPDF($pdfPath, 'all');
+        if ($pengajuan->sk_mutasi_url) {
+            $path = storage_path('app/public/' . explode("storage", $pengajuan->sk_mutasi_url)[1]);
+            $oMerger->addPDF($path, 'all');
+        }
+        foreach ($pengajuan->kompetensis as $kompetensi) {
+            if ($kompetensi->file_url) {
+                $path = storage_path('app/public/' . explode("storage", $kompetensi->file_url)[1]);
+                $oMerger->addPDF($path, 'all');
+            }
+        }
+
+        $oMerger->merge();
+
+        return $oMerger->stream();
+
+        // return view('documenttpl.pengajuan', ['pengajuan' => $pengajuan]);
     }
 }

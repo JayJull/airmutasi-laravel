@@ -9,6 +9,7 @@ use App\Http\Controllers\PersonelController;
 use App\Http\Controllers\Rotasi\CabangController as RotasiCabangController;
 use App\Http\Controllers\Rotasi\SelektifAdminController as RotasiSelektifAdminController;
 use App\Http\Controllers\Rotasi\PengajuanController as RotasiPersonalController;
+use App\Http\Controllers\Rotasi\PengajuanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,10 @@ Route::get('/', function () {
 Route::middleware("guest")->get("/login", [AuthController::class, 'loginView'])->name('login');
 Route::middleware("guest")->post("/login", [AuthController::class, 'login']);
 Route::middleware("auth:web")->get("/logout", [AuthController::class, 'logout'])->name('logout');
+
+Route::group(['prefix' => 'download', 'middleware' => ["auth:web"]], function () {
+    Route::middleware('is.admin')->get('/pengajuan/{id}', [PengajuanController::class, 'document']);
+});
 
 Route::group(['prefix' => 'akun', 'middleware' => [
     'auth:web'
