@@ -44,32 +44,44 @@ class Cabang extends Model
 
     public function personelPensiunATC()
     {
-        return $this->hasMany(Personel::class)->where('pensiun', '=', 1)->whereNotIn('posisi', ['ACO', 'ATFM', 'AIS', 'TAPOR', 'ATSSystem']);
+        return $this->hasMany(Personel::class)
+            ->where('pensiun', '=', 1)
+            ->whereNotIn('posisi', ['ACO', 'ATFM', 'AIS', 'TAPOR', 'ATSSystem']);
     }
 
     public function personelPensiunACO()
     {
-        return $this->hasMany(Personel::class)->where('pensiun', '=', 1)->where('posisi', '=', 'ACO');
+        return $this->hasMany(Personel::class)
+            ->where('pensiun', '=', 1)
+            ->where('posisi', '=', 'ACO');
     }
 
     public function personelPensiunAIS()
     {
-        return $this->hasMany(Personel::class)->where('pensiun', '=', 1)->where('posisi', '=', 'AIS');
+        return $this->hasMany(Personel::class)
+            ->where('pensiun', '=', 1)
+            ->where('posisi', '=', 'AIS');
     }
 
     public function personelPensiunATFM()
     {
-        return $this->hasMany(Personel::class)->where('pensiun', '=', 1)->where('posisi', '=', 'ATFM');
+        return $this->hasMany(Personel::class)
+            ->where('pensiun', '=', 1)
+            ->where('posisi', '=', 'ATFM');
     }
 
     public function personelPensiunTAPOR()
     {
-        return $this->hasMany(Personel::class)->where('pensiun', '=', 1)->where('posisi', '=', 'TAPOR');
+        return $this->hasMany(Personel::class)
+            ->where('pensiun', '=', 1)
+            ->where('posisi', '=', 'TAPOR');
     }
 
     public function personelPensiunATSSystem()
     {
-        return $this->hasMany(Personel::class)->where('pensiun', '=', 1)->where('posisi', '=', 'ATSSystem');
+        return $this->hasMany(Personel::class)
+            ->where('pensiun', '=', 1)
+            ->where('posisi', '=', 'ATSSystem');
     }
 
     public function kelases()
@@ -79,70 +91,111 @@ class Cabang extends Model
 
     public function inAll()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')->where('status', '=', 'dapat');
+        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
+            ->whereIn('status', ['dapat', 'diterima'])
+            ->where('updated_at', '>=', now()->subYears(1));
     }
     public function outAll()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')->where('status', '=', 'dapat');
+        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
+            ->whereIn('status', ['dapat', 'diterima'])
+            ->where('updated_at', '>=', now()->subYears(1))
+        ;
     }
 
     public function in()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')->where('status', '=', 'dapat')->whereNotIn('posisi_tujuan', ['ACO', 'ATFM', 'AIS', 'TAPOR', 'ATSSystem']);
+        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
+            ->whereIn('status', ['dapat', 'diterima'])
+            ->where('updated_at', '>=', now()->subYears(1))
+            ->whereNotIn('posisi_tujuan', ['ACO', 'ATFM', 'AIS', 'TAPOR', 'ATSSystem']);
     }
 
     public function out()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')->where('status', '=', 'dapat')->whereNotIn('posisi_sekarang', ['ACO', 'ATFM', 'AIS', 'TAPOR', 'ATSSystem']);
+        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
+            ->whereIn('status', ['dapat', 'diterima'])
+            ->where('updated_at', '>=', now()->subYears(1))
+            ->whereNotIn('posisi_sekarang', ['ACO', 'ATFM', 'AIS', 'TAPOR', 'ATSSystem']);
     }
 
     public function inACO()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')->where('status', '=', 'dapat')->where('posisi_tujuan', '=', 'ACO');
+        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
+            ->whereIn('status', ['dapat', 'diterima'])
+            ->where('updated_at', '>=', now()->subYears(1))
+            ->where('posisi_tujuan', '=', 'ACO');
     }
 
     public function outACO()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')->where('status', '=', 'dapat')->where('posisi_sekarang', '=', 'ACO');
+        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
+            ->whereIn('status', ['dapat', 'diterima'])
+            ->where('updated_at', '>=', now()->subYears(1))
+            ->where('posisi_sekarang', '=', 'ACO');
     }
 
     public function inAIS()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')->where('status', '=', 'dapat')->where('posisi_tujuan', '=', 'AIS');
+        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
+            ->whereIn('status', ['dapat', 'diterima'])
+            ->where('updated_at', '>=', now()->subYears(1))
+            ->where('posisi_tujuan', '=', 'AIS');
     }
 
     public function outAIS()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')->where('status', '=', 'dapat')->where('posisi_sekarang', '=', 'AIS');
+        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
+            ->whereIn('status', ['dapat', 'diterima'])
+            ->where('updated_at', '>=', now()->subYears(1))
+            ->where('posisi_sekarang', '=', 'AIS');
     }
 
     public function inATFM()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')->where('status', '=', 'dapat')->where('posisi_tujuan', '=', 'ATFM');
+        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
+            ->whereIn('status', ['dapat', 'diterima'])
+            ->where('updated_at', '>=', now()->subYears(1))
+            ->where('posisi_tujuan', '=', 'ATFM');
     }
 
     public function outATFM()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')->where('status', '=', 'dapat')->where('posisi_sekarang', '=', 'ATFM');
+        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
+            ->whereIn('status', ['dapat', 'diterima'])
+            ->where('updated_at', '>=', now()->subYears(1))
+            ->where('posisi_sekarang', '=', 'ATFM');
     }
 
     public function inTAPOR()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')->where('status', '=', 'dapat')->where('posisi_tujuan', '=', 'TAPOR');
+        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
+            ->whereIn('status', ['dapat', 'diterima'])
+            ->where('updated_at', '>=', now()->subYears(1))
+            ->where('posisi_tujuan', '=', 'TAPOR');
     }
 
     public function outTAPOR()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')->where('status', '=', 'dapat')->where('posisi_sekarang', '=', 'TAPOR');
+        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
+            ->whereIn('status', ['dapat', 'diterima'])
+            ->where('updated_at', '>=', now()->subYears(1))
+            ->where('posisi_sekarang', '=', 'TAPOR');
     }
 
     public function inATSSystem()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')->where('status', '=', 'dapat')->where('posisi_tujuan', '=', 'ATSSystem');
+        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
+            ->whereIn('status', ['dapat', 'diterima'])
+            ->where('updated_at', '>=', now()->subYears(1))
+            ->where('posisi_tujuan', '=', 'ATSSystem');
     }
 
     public function outATSSystem()
     {
-        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')->where('status', '=', 'dapat')->where('posisi_sekarang', '=', 'ATSSystem');
+        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
+            ->whereIn('status', ['dapat', 'diterima'])
+            ->where('updated_at', '>=', now()->subYears(1))
+            ->where('posisi_sekarang', '=', 'ATSSystem');
     }
 }

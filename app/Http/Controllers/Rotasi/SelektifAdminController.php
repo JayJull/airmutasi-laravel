@@ -102,7 +102,30 @@ class SelektifAdminController extends Controller
                 $pengajuan->secondary->save();
             }
             $pengajuan->status = 'dapat';
-
+            $pengajuan->save();
+            DB::commit();
+            return redirect()->back()->with('success', 'Data berhasil diupdate');
+        } else if ($request->status == 'tidak') {
+            $request->validate([
+                'keterangan' => 'required',
+                'rekomendasi' => 'required'
+            ]);
+            DB::beginTransaction();
+            $pengajuan->status = 'tidak_dapat';
+            $pengajuan->keteranganPenolakan()->create([
+                'tipe' => 'keterangan_penolakan',
+                'catatan' => $request->keterangan
+            ]);
+            $pengajuan->rekomendasi()->create([
+                'tipe' => 'rekomendasi',
+                'catatan' => $request->rekomendasi
+            ]);
+            $pengajuan->save();
+            DB::commit();
+            return redirect()->back()->with('success', 'Data berhasil diupdate');
+        } else if ($request->status == 'diterima') {
+            DB::beginTransaction();
+            $pengajuan->status = 'diterima';
             if ($pengajuan->posisi_sekarang == "ACO") {
                 $pengajuan->lokasiAwal->jumlah_personel_aco -= 1;
             } else if ($pengajuan->posisi_sekarang == "AIS") {
@@ -132,30 +155,6 @@ class SelektifAdminController extends Controller
             }
             $pengajuan->lokasiAwal->save();
             $pengajuan->lokasiTujuan->save();
-            $pengajuan->save();
-            DB::commit();
-            return redirect()->back()->with('success', 'Data berhasil diupdate');
-        } else if ($request->status == 'tidak') {
-            $request->validate([
-                'keterangan' => 'required',
-                'rekomendasi' => 'required'
-            ]);
-            DB::beginTransaction();
-            $pengajuan->status = 'tidak_dapat';
-            $pengajuan->keteranganPenolakan()->create([
-                'tipe' => 'keterangan_penolakan',
-                'catatan' => $request->keterangan
-            ]);
-            $pengajuan->rekomendasi()->create([
-                'tipe' => 'rekomendasi',
-                'catatan' => $request->rekomendasi
-            ]);
-            $pengajuan->save();
-            DB::commit();
-            return redirect()->back()->with('success', 'Data berhasil diupdate');
-        } else if ($request->status == 'diterima') {
-            DB::beginTransaction();
-            $pengajuan->status = 'diterima';
             $pengajuan->save();
             DB::commit();
             return redirect()->back()->with('success', 'Data berhasil diupdate');

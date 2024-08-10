@@ -274,7 +274,5 @@ class PengajuanController extends Controller
         $oMerger->merge();
 
         return $oMerger->stream();
-
-        // return view('documenttpl.pengajuan', ['pengajuan' => $pengajuan]);
     }
 }
