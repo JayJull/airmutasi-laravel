@@ -12,15 +12,41 @@ class CabangController extends Controller
 {
     public function index()
     {
-        $cabangs = Cabang::all();
+        $cabangs = Cabang::with([
+            "inDapat",
+            "outDapat",
+            "inDiterima",
+            "outDiterima",
+            "inTidakDapat",
+            "outTidakDapat",
+            "inAll",
+            "outAll",
+        ])->get();
         return view('rotasi.denah.index', ['cabangs' => $cabangs]);
     }
     public function cabang(Request $request, $id)
     {
         $cabang = Cabang::with([
-            "inAll", "outAll", "in", "out", "inACO", "outACO", "inAIS",
-            "outAIS", "inATFM", "outATFM", "inTAPOR", "outTAPOR", "inATSSystem", "outATSSystem",
-            "personelPensiunATC", 'personelPensiunACO', 'personelPensiunAIS', 'personelPensiunATFM', 'personelPensiunTAPOR', 'personelPensiunATSSystem',
+            "inAll",
+            "outAll",
+            "in",
+            "out",
+            "inACO",
+            "outACO",
+            "inAIS",
+            "outAIS",
+            "inATFM",
+            "outATFM",
+            "inTAPOR",
+            "outTAPOR",
+            "inATSSystem",
+            "outATSSystem",
+            "personelPensiunATC",
+            'personelPensiunACO',
+            'personelPensiunAIS',
+            'personelPensiunATFM',
+            'personelPensiunTAPOR',
+            'personelPensiunATSSystem',
             "kelases" => function ($query) {
                 $query->with('kelas');
             }

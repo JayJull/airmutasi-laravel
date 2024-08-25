@@ -89,6 +89,45 @@ class Cabang extends Model
         return $this->hasMany(KelasCabang::class);
     }
 
+    public function inDapat()
+    {
+        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
+            ->where('status', '=', 'dapat')
+            ->where('updated_at', '>=', now()->subYears(1));
+    }
+    public function outDapat()
+    {
+        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
+            ->where('status', '=', 'dapat')
+            ->where('updated_at', '>=', now()->subYears(1));
+    }
+
+    public function inTidakDapat()
+    {
+        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
+            ->where('status', '=', 'tidak')
+            ->where('updated_at', '>=', now()->subYears(1));
+    }
+    public function outTidakDapat()
+    {
+        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
+            ->where('status', '=', 'tidak')
+            ->where('updated_at', '>=', now()->subYears(1));
+    }
+
+    public function inDiterima()
+    {
+        return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
+            ->where('status', '=', 'diterima')
+            ->where('updated_at', '>=', now()->subYears(1));
+    }
+    public function outDiterima()
+    {
+        return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
+            ->where('status', '=', 'diterima')
+            ->where('updated_at', '>=', now()->subYears(1));
+    }
+
     public function inAll()
     {
         return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
