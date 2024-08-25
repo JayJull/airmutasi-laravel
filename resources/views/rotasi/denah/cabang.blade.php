@@ -25,9 +25,8 @@
                         @endforeach
                     </div>
                 @endcan
-                <p class="p-2">
-                    {{ $cabang->alamat }}
-                </p>
+                <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;"
+                    class="p-2 break-all w-full font-sans">{{ $cabang->alamat }}</pre>
                 @can('admin')
                     <a class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white w-full text-center p-2 rounded-lg font-semibold mb-2"
                         href="/personel/cabang/{{ $cabang->id }}">Personel</a>
