@@ -125,16 +125,7 @@ function generateRadarChart(title, series) {
             categories: ["ATC", "ACO", "AIS", "ATFM", "TAPOR", "ATS System"],
         },
         yaxis: {
-            tickAmount: 5,
-            labels: {
-                formatter: function (val, i) {
-                    if (i % 2 === 0) {
-                        return val;
-                    } else {
-                        return "";
-                    }
-                },
-            },
+            tickAmount: 3,
         },
     };
 }
