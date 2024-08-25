@@ -6,7 +6,7 @@
     <title>Air Mutasi | Rotasi</title>
 </head>
 
-<body class="bg-[#373737] font-geruduk tracking-wider text-lg">
+<body class="bg-[#373737] font-sans tracking-wider text-lg">
     @include('components.header')
     <main class="h-[70vh] sm:h-screen">
         <section class="h-full w-full p-4">

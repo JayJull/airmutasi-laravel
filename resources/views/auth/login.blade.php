@@ -6,7 +6,7 @@
     <title>Air Mutasi | Login</title>
 </head>
 
-<body class="font-geruduk tracking-wider text-lg">
+<body class="font-sans tracking-wider text-lg">
     @include('components.header', ['static' => true])
     @include('components.modal-component')
     <main class="h-screen flex justify-end">

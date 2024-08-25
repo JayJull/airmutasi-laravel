@@ -6,7 +6,7 @@
     <title>Air Mutasi | Profil</title>
 </head>
 
-<body class="bg-[#373737] font-geruduk tracking-wider text-lg">
+<body class="bg-[#373737] font-sans tracking-wider text-lg">
     @include('components/header', ['static' => true])
     @include('components.modal-component')
     <main class="min-h-screen">
