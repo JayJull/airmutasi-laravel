@@ -50,7 +50,7 @@ function generateBarChart(title, series) {
             align: "left",
             style: {
                 fontFamily: "geruduk",
-            }
+            },
         },
         plotOptions: {
             bar: {
@@ -108,5 +108,21 @@ function generatePieChart(title, series, labels = []) {
                 },
             },
         ],
+    };
+}
+
+function generateRadarChart(title, series) {
+    return {
+        series,
+        chart: {
+            height: 350,
+            type: "radar",
+        },
+        title: {
+            text: title,
+        },
+        xaxis: {
+            categories: ["ATC", "ACO", "AIS", "ATFM", "TAPOR", "ATS System"],
+        },
     };
 }

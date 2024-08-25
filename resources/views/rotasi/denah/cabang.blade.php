@@ -42,7 +42,8 @@
             <aside class="flex-grow col-span-3 md:col-span-2 grid md:grid-cols-2 md:grid-rows-1 gap-4">
                 <div
                     class="col-span-2 md:col-span-1 flex items-center justify-center bg-white rounded-lg p-4 min-h-[50vh]">
-                    <div id="stats-bar" class="w-full h-full"></div>
+                    {{-- <div id="stats-bar" class="w-full h-full"></div> --}}
+                    <div id="stats-radar" class="w-full h-full"></div>
                 </div>
                 <div
                     class="col-span-2 md:col-span-1 flex flex-col gap-4 items-center justify-center bg-white rounded-lg p-4">
@@ -171,79 +172,40 @@
     <script src="/script/nav.js"></script>
     <script src="/script/chart.js"></script>
     <script>
-        // get statistics data
-        const series = [{
-            name: "ATC",
+        var options = generateRadarChart("Distribusi Personel", [{
+            name: 'Minimal',
             data: [
                 {{ $cabang->frms }},
+                {{ $cabang->frms_aco }},
+                {{ $cabang->frms_ais }},
+                {{ $cabang->frms_atfm }},
+                {{ $cabang->frms_tapor }},
+                {{ $cabang->frms_ats_system }},
+            ],
+        }, {
+            name: 'Eksisting',
+            data: [
                 {{ $cabang->jumlah_personel }},
-                {{ $cabang->formasi }}
-            ],
-        }, {
-            name: "ACO",
-            data: [
-                0,
                 {{ $cabang->jumlah_personel_aco }},
-                {{ $cabang->formasi_aco }}
-            ],
-        }, {
-            name: "AIS",
-            data: [
-                0,
                 {{ $cabang->jumlah_personel_ais }},
-                {{ $cabang->formasi_ais }}
-            ],
-        }, {
-            name: "ATFM",
-            data: [
-                0,
                 {{ $cabang->jumlah_personel_atfm }},
-                {{ $cabang->formasi_atfm }}
-            ],
-        }, {
-            name: "TAPOR",
-            data: [
-                0,
                 {{ $cabang->jumlah_personel_tapor }},
-                {{ $cabang->formasi_tapor }}
+                {{ $cabang->jumlah_personel_ats_system }},
             ],
         }, {
-            name: "ATS System",
+            name: 'Maksimal',
             data: [
-                0,
-                {{ $cabang->jumlah_personel_ats_system }},
-                {{ $cabang->formasi_ats_system }}
+                {{ $cabang->formasi }},
+                {{ $cabang->formasi_aco }},
+                {{ $cabang->formasi_ais }},
+                {{ $cabang->formasi_atfm }},
+                {{ $cabang->formasi_tapor }},
+                {{ $cabang->formasi_ats_system }},
             ],
-        }];
-        const eksistingDistribution = [
-            {{ $cabang->jumlah_personel }},
-            {{ $cabang->jumlah_personel_aco }},
-            {{ $cabang->jumlah_personel_ais }},
-            {{ $cabang->jumlah_personel_atfm }},
-            {{ $cabang->jumlah_personel_tapor }},
-            {{ $cabang->jumlah_personel_ats_system }}
-        ];
+        }]);
 
-        // create bar chart
-        var chartBar = new ApexCharts(
-            document.querySelector("#stats-bar"),
-            generateBarChart("Grafik Personel", series)
-        );
-        chartBar.render();
-
-        // create pie chart
-        var chartPie = new ApexCharts(
-            document.querySelector("#stats-pie"),
-            generatePieChart("Distribusi Personel Eksisting", eksistingDistribution, [
-                "ATC",
-                "ACO",
-                "AIS",
-                "ATFM",
-                "TAPOR",
-                "ATS System"
-            ])
-        );
-        chartPie.render();
+        var chart = new ApexCharts(document.querySelector("#stats-radar"), options);
+        chart.render();
     </script>
 </body>
 
