@@ -85,7 +85,7 @@
                     @endif
                     @foreach ($cabangs as $cabang)
                         <a class="border-2 border-yellow-500 rounded-md px-4 py-2 flex flex-col sm:flex-row items-center justify-between"
-                            href="/rotasi/selektif?lokasi_awal={{ $cabang->nama }}&lokasi_tujuan={{ $cabang->nama }}">
+                            href="/rotasi/selektif?lokasi={{ $cabang->nama }}">
                             <span class="sm:max-w-[40%] font-semibold">
                                 {{ $cabang->nama }}
                             </span>

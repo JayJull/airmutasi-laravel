@@ -35,6 +35,12 @@ class SelektifAdminController extends Controller
                 return $pengajuan->nik === $request->nik;
             });
         }
+        if ($request->lokasi) {
+            $query .= "&lokasi=" . $request->lokasi;
+            $pengajuans = $pengajuans->filter(function ($pengajuan) use ($request) {
+                return $pengajuan->lokasiAwal->nama === $request->lokasi || $pengajuan->lokasiTujuan->nama === $request->lokasi;
+            });
+        }
         if ($request->lokasi_awal) {
             $query .= "&lokasi_awal=" . $request->lokasi_awal;
             $pengajuans = $pengajuans->filter(function ($pengajuan) use ($request) {
