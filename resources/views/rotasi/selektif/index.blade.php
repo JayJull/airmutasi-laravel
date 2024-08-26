@@ -99,7 +99,7 @@
     </div>
     <main>
         <section class="flex flex-col-reverse md:grid md:grid-cols-2 md:items-start m-4 gap-4 md:min-h-screen">
-            <aside class="flex flex-col gap-2 pe-2 pb-2 h-[50vh] md:h-full overflow-y-auto">
+            <aside class="flex flex-col gap-2 pe-2 pb-2 h-[50vh] md:h-full md:max-h-screen overflow-y-auto">
                 <div class="sticky top-0 w-full">
                     <div class="text-[#293676] flex gap-2 py-2 justify-evenly bg-[#ced0ff]">
                         <a class="{{ !$tab || $tab === 'diajukan' ? 'font-semibold underline' : '' }}"
