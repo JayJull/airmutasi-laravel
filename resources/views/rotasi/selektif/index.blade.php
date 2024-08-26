@@ -98,7 +98,7 @@
         </form>
     </div>
     <main>
-        <section class="flex flex-col-reverse md:grid md:grid-cols-2 md:items-start m-4 gap-4 md:h-screen">
+        <section class="flex flex-col-reverse md:grid md:grid-cols-2 md:items-start m-4 gap-4 md:min-h-screen">
             <aside class="flex flex-col gap-2 pe-2 pb-2 h-[50vh] md:h-full overflow-y-auto">
                 <div class="sticky top-0 w-full">
                     <div class="text-[#293676] flex gap-2 py-2 justify-evenly bg-[#ced0ff]">
@@ -140,8 +140,7 @@
                 @endif
             </aside>
             @if (count($pengajuans) > 0)
-                <form method="POST" action="/rotasi/selektif/{{ $pengajuan->id }}"
-                    class="flex flex-col gap-2 md:max-h-full overflow-y-auto">
+                <form method="POST" action="/rotasi/selektif/{{ $pengajuan->id }}" class="flex flex-col gap-2">
                     <div
                         class="flex flex-col flex-grow gap-4 bg-white text-[#474747] border-2 border-[#293676] rounded-lg p-4 overflow-y-auto">
                         @csrf
@@ -153,6 +152,16 @@
                             </aside>
                         </div>
                         <hr class="w-full border-2 border-[#B6B6B6]" />
+                        <div class="flex gap-2">
+                            <a href="/rotasi/personal/{{ $pengajuan->id }}"
+                                class="flex-grow bg-yellow-300 hover:bg-yellow-400 duration-200 text-gray-800  px-6 py-2 font-semibold rounded-lg text-center">Ubah</a>
+                            <button type="button"
+                                class="flex-grow bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-6 py-2 font-semibold rounded-lg"
+                                popovertarget="detail-pengajuan">Detail</button>
+                            <a href="/download/pengajuan/{{ $pengajuan->id }}" target="_blank"
+                                class="flex-grow text-center bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-6 py-2 font-semibold rounded-lg">Unduh
+                                Dokumen</a>
+                        </div>
                         <div>
                             <label class="font-semibold" for="nama">Nama</label>
                             <input class="w-full border-2 border-[#B6B6B6] px-2 py-1 mt-1 bg-[#C6C6C6]" type="text"
@@ -194,20 +203,12 @@
                             <textarea name="rekomendasi" id="rekomendasi" placeholder="Ketik Disini ..."
                                 class="w-full border-2 border-[#B6B6B6] px-2 py-1 mt-1 resize-none" rows="5"></textarea>
                         </div>
-                        <a href="/rotasi/personal/{{ $pengajuan->id }}"
-                            class="bg-yellow-300 hover:bg-yellow-400 duration-200 text-gray-800  px-6 py-2 font-semibold rounded-lg text-center">Ubah</a>
-                        <button type="button"
+                        <button
                             class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-6 py-2 font-semibold rounded-lg"
-                            popovertarget="detail-pengajuan">Detail</button>
-                        <a href="/download/pengajuan/{{ $pengajuan->id }}" target="_blank"
-                            class="text-center bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-6 py-2 font-semibold rounded-lg">Unduh
-                            Dokumen</a>
+                            type="submit">
+                            Submit
+                        </button>
                     </div>
-                    <button
-                        class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-6 py-2 font-semibold rounded-lg"
-                        type="submit">
-                        Submit
-                    </button>
                 </form>
             @else
                 <div class="h-full bg-white flex items-center justify-center border-2 border-[#293676] rounded-lg">
