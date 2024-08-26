@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\FileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Rotasi\CabangController as RotasiCabangController;
-use App\Http\Controllers\Rotasi\PengajuanController as RotasiPengajuanController;
+use App\Http\Controllers\API\FileController;
+use App\Http\Controllers\API\Rotasi\CabangController as RotasiCabangController;
+use App\Http\Controllers\API\Rotasi\PengajuanController as RotasiPengajuanController;
 
 /*
 |--------------------------------------------------------------------------

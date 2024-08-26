@@ -15,18 +15,6 @@ use Webklex\PDFMerger\Facades\PDFMergerFacade;
 
 class PengajuanController extends Controller
 {
-    public function pengajuanById($id)
-    {
-        $pengajuan = Pengajuan::find($id);
-        if (!$pengajuan) {
-            return response()->json(['message' => 'Data not found'], 404);
-        }
-        $pengajuan->tanggal_pengajuan = Carbon::parse($pengajuan->created_at)->format('d-m-Y');
-        $pengajuan->lokasi_awal = $pengajuan->lokasiAwal;
-        $pengajuan->lokasi_tujuan = $pengajuan->lokasiTujuan;
-        return response()->json($pengajuan);
-    }
-
     public function inputView()
     {
         $cabangs = Cabang::all();
