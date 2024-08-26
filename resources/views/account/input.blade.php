@@ -6,11 +6,12 @@
     <title>Air Mutasi | Profil</title>
 </head>
 
-<body class="bg-[#373737] font-sans tracking-wider text-lg">
+<body class="bg-[#CED0FF] font-sans tracking-wider text-lg">
     @include('components/header', ['static' => true])
     @include('components.modal-component')
     <main class="min-h-screen">
         <form action="/akun/add" method="post" class="rounded-lg flex flex-col gap-1 bg-white mx-8 my-2 p-4">
+            <h1 class="font-semibold text-2xl text-center">Create User</h1>
             @csrf
             <label for="name" class="font-semibold">Nama <span class="text-red-500">*</span></label>
             <input type="text" name="name" id="name"
