@@ -84,7 +84,7 @@ Route::group(['prefix' => 'rotasi', 'middleware' => [
         });
 
         Route::get('/', [RotasiCabangController::class, 'index'])->name('rotasi.denah');
-        Route::get("/{id}", [RotasiCabangController::class, 'cabang']);
+        Route::get("/{id}", [RotasiCabangController::class, 'detail']);
     });
     Route::group(['prefix' => 'personal'], function () {
         Route::get('/', [RotasiPersonalController::class, 'inputView']);

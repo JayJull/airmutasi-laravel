@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class PengajuanController extends Controller
 {
-    public function pengajuanById($id)
+    public function byId($id)
     {
         $pengajuan = Pengajuan::find($id);
         if (!$pengajuan) {

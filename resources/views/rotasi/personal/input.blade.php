@@ -328,6 +328,30 @@
                         lokasiTujuanAlt.appendChild(optionAlt);
                     });
                 });
+        @else
+            fetch('/api/rotasi/cabang')
+                .then(response => response.json())
+                .then(data => {
+                    const lokasiTujuan = document.getElementById('lokasi_tujuan');
+                    const lokasiTujuanAlt = document.getElementById('lokasi_tujuan_alt');
+                    lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
+                    lokasiTujuanAlt.innerHTML = '<option value>--- Pilih Lokasi Tujuan Alternatif ---</option>';
+                    data.forEach(cabang => {
+                        const option = document.createElement('option');
+                        option.id = 'lokasi-tujuan-' + cabang.id;
+                        option.value = cabang.id;
+                        option.innerText = cabang.nama;
+                        option.selected = cabang.id == {{ old('lokasi_tujuan_id') ?? -1 }};
+                        lokasiTujuan.appendChild(option);
+
+                        const optionAlt = document.createElement('option');
+                        optionAlt.id = 'lokasi-tujuan-alt-' + cabang.id;
+                        optionAlt.value = cabang.id;
+                        optionAlt.innerText = cabang.nama;
+                        optionAlt.selected = cabang.id == {{ old('lokasi_tujuan_alt_id') ?? -1 }};
+                        lokasiTujuanAlt.appendChild(optionAlt);
+                    });
+                });
         @endif
 
         lokasiAwal.addEventListener('change', function() {

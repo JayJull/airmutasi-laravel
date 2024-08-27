@@ -24,7 +24,7 @@ class CabangController extends Controller
         ])->get();
         return view('rotasi.denah.index', ['cabangs' => $cabangs]);
     }
-    public function cabang(Request $request, $id)
+    public function detail(Request $request, $id)
     {
         $cabang = Cabang::with([
             "inAll",

@@ -8,26 +8,26 @@ use App\Models\Cabang;
 
 class CabangController extends Controller
 {
-    public function cabangSearch(Request $request)
+    public function search(Request $request)
     {
         $search = $request->search;
 
         $cabangs = Cabang::whereRaw('UPPER(nama) LIKE ?', ['%' . strtoupper($search) . '%'])->get();
         return response()->json($cabangs);
     }
-    public function cabangSummary($id)
+    public function summary($id)
     {
         $cabang = Cabang::select('id', 'nama', 'alamat', 'thumbnail_url')->where('id', $id)->first();
         return response()->json($cabang);
     }
-    public function cabangInKelas($kelas)
+    public function inKelas($kelas)
     {
         $cabangs = Cabang::whereHas('kelases', function ($query) use ($kelas) {
             $query->where('kelas_id', $kelas);
         })->get();
         return response()->json($cabangs);
     }
-    public function cabangInSameKelas($id)
+    public function inSameKelas($id)
     {
         $cabang = Cabang::with('kelases')->find($id);
         if ($cabang && $cabang->kelases) {
@@ -38,12 +38,12 @@ class CabangController extends Controller
         }
         return response()->json([]);
     }
-    public function cabangAll()
+    public function all()
     {
         $cabangs = Cabang::all();
         return response()->json($cabangs);
     }
-    public function listCabangInduk()
+    public function listInduk()
     {
         $cabang = Cabang::has("coord")->get()->map(function ($cabang) {
             return [

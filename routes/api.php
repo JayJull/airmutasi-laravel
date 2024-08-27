@@ -23,16 +23,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'rotasi'], function () {
-    Route::get('/cabang-induk', [RotasiCabangController::class, 'listCabangInduk']);
-    Route::get('/cabang', [RotasiCabangController::class, 'cabangAll']);
-    Route::get('/cabang-summary/{id}', [RotasiCabangController::class, 'cabangSummary']);
-    Route::get('/cabang-search', [RotasiCabangController::class, 'cabangSearch']);
-    Route::get('/cabang-kelas/{kelas}', [RotasiCabangController::class, 'cabangInKelas']);
-    Route::get('/cabang-same-kelas/{id}', [RotasiCabangController::class, 'cabangInSameKelas']);
+    Route::get('/cabang-induk', [RotasiCabangController::class, 'listInduk']);
+    Route::get('/cabang', [RotasiCabangController::class, 'all']);
+    Route::get('/cabang-summary/{id}', [RotasiCabangController::class, 'summary']);
+    Route::get('/cabang-search', [RotasiCabangController::class, 'search']);
+    Route::get('/cabang-kelas/{kelas}', [RotasiCabangController::class, 'inKelas']);
+    Route::get('/cabang-same-kelas/{id}', [RotasiCabangController::class, 'inSameKelas']);
 });
 
 Route::group(['prefix' => 'pengajuan'], function () {
-    Route::get('/{id}', [RotasiPengajuanController::class, 'pengajuanById']);
+    Route::get('/{id}', [RotasiPengajuanController::class, 'byId']);
 });
 
 Route::post('/upload-doc', [FileController::class, 'uploadDoc']);

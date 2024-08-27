@@ -73,6 +73,7 @@ class AccountController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $akun->id,
+            'password' => 'nullable|min:8',
             'nik' => 'required',
             'masa_kerja' => 'required',
             'jabatan' => 'required',
@@ -89,9 +90,6 @@ class AccountController extends Controller
         $akun->profile->masa_kerja = $request->masa_kerja;
         $akun->profile->jabatan = $request->jabatan;
         if ($request->password) {
-            $request->validate([
-                'password' => 'required|min:8'
-            ]);
             $akun->password = bcrypt($request->password);
         }
         $akun->profile->save();

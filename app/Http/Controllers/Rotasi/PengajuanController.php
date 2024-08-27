@@ -15,22 +15,23 @@ use Webklex\PDFMerger\Facades\PDFMergerFacade;
 
 class PengajuanController extends Controller
 {
+    private $posisi = ['ATC (TWR)', 'ATC (APS)', 'ATC (ACS)', 'ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem', 'STAFF'];
+
     public function inputView()
     {
-        $cabangs = Cabang::all();
         if (auth()->user()->role->name !== 'admin') {
             if (!auth()->user()->profile->cabang_id) {
                 return redirect()->back();
             }
-            $cabangs = Cabang::where('id', auth()->user()->profile->cabang_id)->get();
-            return view('rotasi.personal.input', ['cabangs' => $cabangs]);
+            $usersCabangs = Cabang::where('id', auth()->user()->profile->cabang_id)->get();
+            return view('rotasi.personal.input', ['cabangs' => $usersCabangs]);
         }
+        $cabangs = Cabang::all();
         return view('rotasi.personal.input', ['cabangs' => $cabangs]);
     }
 
     public function input(Request $request)
     {
-        $posisi = ['ATC (TWR)', 'ATC (APS)', 'ATC (ACS)', 'ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem', 'STAFF'];
         $request->validate([
             'lokasi_awal_id' => 'required|numeric|exists:cabangs,id',
             'lokasi_tujuan_id' => 'required|numeric|exists:cabangs,id',
@@ -38,11 +39,15 @@ class PengajuanController extends Controller
             'nik' => 'required|numeric',
             'masa_kerja' => 'required',
             'jabatan' => 'required',
-            'posisi_sekarang' => ['required', Rule::in($posisi)],
-            'posisi_tujuan' => ['required', Rule::in($posisi)],
+            'posisi_sekarang' => ['required', Rule::in($this->posisi)],
+            'posisi_tujuan' => ['required', Rule::in($this->posisi)],
             'kompetensi' => 'required|array',
             'kompetensi.*.nama' => 'required',
             'tujuan_rotasi' => 'required',
+            'keterangan' => Rule::requiredIf(function () use ($request) {
+                return $request->has('abnormal');
+            }),
+            'lokasi_tujuan_alt_id' => 'required_if:use_tujuan_alt,1|numeric|exists:cabangs,id',
         ]);
 
         if (auth()->user()->role->name !== 'admin') {
@@ -66,7 +71,12 @@ class PengajuanController extends Controller
             'tujuan_rotasi',
             'keterangan',
         ]);
+        if ($pengajuan['keterangan'] === null) {
+            $pengajuan['keterangan'] = '';
+        }
         if (!$request->has('abnormal')) {
+            // bisa di ringkas
+            
             $kelasCabangAwal = Cabang::with(['kelases' => function ($query) {
                 $query->select(['cabang_id', 'kelas_id']);
             }])->find($request->lokasi_awal_id);
@@ -77,15 +87,7 @@ class PengajuanController extends Controller
             if ($intersect->isEmpty()) {
                 return redirect()->back()->with('invalid', 'Cabang asal dan tujuan tidak memiliki kelas yang sama')->withInput();
             }
-        } else {
-            $request->validate([
-                'keterangan' => 'required',
-            ]);
-        }
-        if ($request->has('use_tujuan_alt')) {
-            $request->validate([
-                "lokasi_tujuan_alt_id" => "required",
-            ]);
+            // sampai sini
         }
         $pengajuan['sk_mutasi_url'] = $request->sk_mutasi_url;
         $pengajuan['surat_persetujuan_url'] = $request->surat_persetujuan_url;
@@ -156,7 +158,6 @@ class PengajuanController extends Controller
 
     public function update(Request $request, $id)
     {
-        $posisi = ['ATC (TWR)', 'ATC (APS)', 'ATC (ACS)', 'ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem',  'STAFF'];
         $request->validate([
             'lokasi_awal_id' => 'required',
             'lokasi_tujuan_id' => 'required',
@@ -164,8 +165,8 @@ class PengajuanController extends Controller
             'nik' => 'required|numeric',
             'masa_kerja' => 'required',
             'jabatan' => 'required',
-            'posisi_sekarang' => ['required', Rule::in($posisi)],
-            'posisi_tujuan' => ['required', Rule::in($posisi)],
+            'posisi_sekarang' => ['required', Rule::in($this->posisi)],
+            'posisi_tujuan' => ['required', Rule::in($this->posisi)],
             'kompetensi' => 'required|array',
             'kompetensi.*.nama' => 'required',
             'tujuan_rotasi' => 'required',
