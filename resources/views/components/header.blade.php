@@ -10,9 +10,9 @@
             <div
                 class="max-h-0 duration-300 absolute flex flex-col gap-1 bg-white mt-4 text-gray-800 text-base font-light overflow-hidden">
                 <div class="flex flex-col gap-1 px-2 py-1 bg-[#FFB72D]">
-                    <a href="/rotasi/denah">Denah Rotasi</a>
+                    <a href="/rotasi/cabang">Denah Rotasi</a>
                     <hr>
-                    <a href="/rotasi/personal">Input Personal (IP)</a>
+                    <a href="/rotasi/pengajuan">Input Personal (IP)</a>
                     @can('admin')
                         <hr>
                         <a href="/rotasi/selektif">Selektif Admin</a>

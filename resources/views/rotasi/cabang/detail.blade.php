@@ -30,10 +30,10 @@
                 @can('admin')
                     <a class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white w-full text-center p-2 rounded-lg font-semibold mb-2"
                         href="/personel/cabang/{{ $cabang->id }}">Personel</a>
-                    <a href="/rotasi/denah/input/{{ $cabang->id }}"
+                    <a href="/rotasi/cabang/input/{{ $cabang->id }}"
                         class="bg-yellow-300 hover:bg-yellow-400 duration-200 text-gray-800 w-full text-center p-2 rounded-lg font-semibold mb-2">Update
                         Cabang</a>
-                    <a href="/rotasi/denah/input/{{ $cabang->id }}/delete"
+                    <a href="/rotasi/cabang/input/{{ $cabang->id }}/delete"
                         class="bg-red-500 hover:bg-red-700 duration-200 text-white w-full text-center p-2 rounded-lg font-semibold">Hapus
                         Cabang</a>
                 @endcan
@@ -145,9 +145,9 @@
             <div class="bg-white rounded-lg border-2 border-[#293676]">
                 <div class="flex gap-4 p-4 border-b-2 border-[#293676] text-[#293676]">
                     <a class="{{ $tab != 'out' ? 'font-semibold' : '' }}"
-                        href="/rotasi/denah/{{ $cabang->id }}?tab=in">PERSONEL IN</a>
+                        href="/rotasi/cabang/{{ $cabang->id }}?tab=in">PERSONEL IN</a>
                     <a class="{{ $tab == 'out' ? 'font-semibold' : '' }}"
-                        href="/rotasi/denah/{{ $cabang->id }}?tab=out">PERSONEL OUT</a>
+                        href="/rotasi/cabang/{{ $cabang->id }}?tab=out">PERSONEL OUT</a>
                 </div>
                 <div>
                     @if (($tab != 'out' && $cabang->inAll->isEmpty()) || ($tab == 'out' && $cabang->outAll->isEmpty()))

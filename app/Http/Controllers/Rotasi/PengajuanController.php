@@ -24,10 +24,10 @@ class PengajuanController extends Controller
                 return redirect()->back();
             }
             $usersCabangs = Cabang::where('id', auth()->user()->profile->cabang_id)->get();
-            return view('rotasi.personal.input', ['cabangs' => $usersCabangs]);
+            return view('rotasi.pengajuan.input', ['cabangs' => $usersCabangs]);
         }
         $cabangs = Cabang::all();
-        return view('rotasi.personal.input', ['cabangs' => $cabangs]);
+        return view('rotasi.pengajuan.input', ['cabangs' => $cabangs]);
     }
 
     public function input(Request $request)
@@ -153,7 +153,7 @@ class PengajuanController extends Controller
         $pengajuan->tanggal_pengajuan = Carbon::parse($pengajuan->created_at)->format('d-m-Y');
         $pengajuan->lokasi_awal = $pengajuan->lokasiAwal;
         $pengajuan->lokasi_tujuan = $pengajuan->lokasiTujuan;
-        return view('rotasi.personal.update', ['pengajuan' => $pengajuan, 'cabangs' => $cabangs]);
+        return view('rotasi.pengajuan.update', ['pengajuan' => $pengajuan, 'cabangs' => $cabangs]);
     }
 
     public function update(Request $request, $id)

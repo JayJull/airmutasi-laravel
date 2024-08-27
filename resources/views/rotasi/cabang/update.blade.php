@@ -10,7 +10,7 @@
     @include('components.header', ['static' => true])
     @include('components.modal-component')
     <main class="min-h-[90vh] flex justify-center items-center p-4">
-        <form action="/rotasi/denah/input/{{ $cabang->id }}" method="post"
+        <form action="/rotasi/cabang/input/{{ $cabang->id }}" method="post"
             class="w-2/3 flex flex-col gap-2 bg-white p-4 rounded-lg" enctype="multipart/form-data">
             @csrf
             <label for="nama" class="font-semibold mt-1">Nama Cabang</label>
@@ -157,7 +157,7 @@
     @include('components.footer')
     <script src="/script/nav.js"></script>
     <script src="/script/map.js"></script>
-    {{-- same as rotasi/denah/input.blade --}}
+    {{-- same as rotasi/cabang/input.blade --}}
     <script>
         // (re)bind delete button event for item by id
         function bindDeleteBtn(id) {

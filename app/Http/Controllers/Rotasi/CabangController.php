@@ -22,7 +22,7 @@ class CabangController extends Controller
             "inAll",
             "outAll",
         ])->get();
-        return view('rotasi.denah.index', ['cabangs' => $cabangs]);
+        return view('rotasi.cabang.index', ['cabangs' => $cabangs]);
     }
     public function detail(Request $request, $id)
     {
@@ -51,13 +51,13 @@ class CabangController extends Controller
                 $query->with('kelas');
             }
         ])->find($id);
-        return view('rotasi.denah.cabang', ['cabang' => $cabang, 'tab' => $request->tab]);
+        return view('rotasi.cabang.detail', ['cabang' => $cabang, 'tab' => $request->tab]);
     }
 
     public function inputView()
     {
         $kelases = Kelas::all();
-        return view('rotasi.denah.input', ['kelases' => $kelases]);
+        return view('rotasi.cabang.input', ['kelases' => $kelases]);
     }
     public function input(Request $request)
     {
@@ -138,7 +138,7 @@ class CabangController extends Controller
             ]);
         }
         DB::commit();
-        return redirect()->route("rotasi.denah")->with('success', 'Cabang berhasil ditambahkan');
+        return redirect()->route("rotasi.cabang")->with('success', 'Cabang berhasil ditambahkan');
     }
 
     public function updateView($id)
@@ -148,7 +148,7 @@ class CabangController extends Controller
         if (!$cabang) {
             return redirect()->back()->with('invalid', 'Cabang tidak ditemukan');
         }
-        return view('rotasi.denah.update', ['cabang' => $cabang, 'kelases' => $kelases]);
+        return view('rotasi.cabang.update', ['cabang' => $cabang, 'kelases' => $kelases]);
     }
     public function update(Request $request, $id)
     {
@@ -229,7 +229,7 @@ class CabangController extends Controller
             ]);
         }
         DB::commit();
-        return redirect()->route("rotasi.denah")->with('success', 'Cabang berhasil diupdate');
+        return redirect()->route("rotasi.cabang")->with('success', 'Cabang berhasil diupdate');
     }
 
     public function delete($id)
@@ -239,6 +239,6 @@ class CabangController extends Controller
             return redirect()->back()->with('invalid', 'Cabang tidak ditemukan');
         }
         $cabang->delete();
-        return redirect()->route("rotasi.denah")->with('success', 'Cabang berhasil dihapus');
+        return redirect()->route("rotasi.cabang")->with('success', 'Cabang berhasil dihapus');
     }
 }

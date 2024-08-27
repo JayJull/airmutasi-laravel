@@ -15,8 +15,8 @@
     <aside class="md:max-w-[33%] flex-grow md:flex-grow-0 flex flex-col items-center md:items-start gap-2">
         <h2 class="font-bold text-center md:text-right">LAYANAN</h2>
         <ul class="md:ms-4 flex flex-col items-center md:items-start md:[&_li]:list-disc">
-            <li><a href="/rotasi/denah">Denah Rotasi</a></li>
-            <li><a href="/rotasi/personal">Input Personal (IP)</a></li>
+            <li><a href="/rotasi/cabang">Denah Rotasi</a></li>
+            <li><a href="/rotasi/pengajuan">Input Personal (IP)</a></li>
             <li><a href="/akun">Akun</a></li>
         </ul>
     </aside>

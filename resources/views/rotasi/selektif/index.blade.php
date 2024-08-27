@@ -153,7 +153,7 @@
                         </div>
                         <hr class="w-full border-2 border-[#B6B6B6]" />
                         <div class="flex gap-2">
-                            <a href="/rotasi/personal/{{ $pengajuan->id }}"
+                            <a href="/rotasi/pengajuan/{{ $pengajuan->id }}"
                                 class="flex-grow bg-yellow-300 hover:bg-yellow-400 duration-200 text-gray-800  px-6 py-2 font-semibold rounded-lg text-center">Ubah</a>
                             <button type="button"
                                 class="flex-grow bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-6 py-2 font-semibold rounded-lg"

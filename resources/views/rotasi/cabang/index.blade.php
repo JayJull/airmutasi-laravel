@@ -57,7 +57,7 @@
             </aside>
             <aside class="col-span-2 sm:col-span-1 flex flex-col gap-2 sm:max-h-[70vh]">
                 @can('admin')
-                    <a href="/rotasi/denah/input"
+                    <a href="/rotasi/cabang/input"
                         class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white w-full text-center p-2 rounded-lg font-semibold">Tambah
                         Cabang</a>
                 @endcan
@@ -216,7 +216,7 @@
             document.getElementById('alamat').classList.remove('text-center');
             document.getElementById('alamat').innerText = cabang.alamat;
             document.getElementById('detail').classList.remove('hidden');
-            document.getElementById('detail').href = `/rotasi/denah/${cabang.id}`;
+            document.getElementById('detail').href = `/rotasi/cabang/${cabang.id}`;
             document.getElementById('nama').classList.remove('hidden');
             document.getElementById('nama').innerText = cabang.nama;
             if (cabang.longitude || cabang.latitude) {

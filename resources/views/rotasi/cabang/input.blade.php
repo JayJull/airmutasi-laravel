@@ -10,7 +10,7 @@
     @include('components.header', ['static' => true])
     @include('components.modal-component')
     <main class="min-h-[90vh] flex justify-center items-center p-4">
-        <form action="/rotasi/denah/input" method="post"
+        <form action="/rotasi/cabang/input" method="post"
             class="w-full rounded-md bg-white md:w-2/3 p-8 flex flex-col gap-4" enctype="multipart/form-data">
             <h1 class="font-semibold text-2xl text-center">Tambah Data Cabang</h1>
             @csrf

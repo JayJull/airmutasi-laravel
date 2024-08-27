@@ -8,8 +8,7 @@ use App\Http\Controllers\PersonelController;
 // use App\Http\Controllers\Rotasi\HomeController as RotasiHomeController;
 use App\Http\Controllers\Rotasi\CabangController as RotasiCabangController;
 use App\Http\Controllers\Rotasi\SelektifAdminController as RotasiSelektifAdminController;
-use App\Http\Controllers\Rotasi\PengajuanController as RotasiPersonalController;
-use App\Http\Controllers\Rotasi\PengajuanController;
+use App\Http\Controllers\Rotasi\PengajuanController as RotasiPengajuanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +31,7 @@ Route::middleware("guest")->post("/login", [AuthController::class, 'login']);
 Route::middleware("auth:web")->get("/logout", [AuthController::class, 'logout'])->name('logout');
 
 Route::group(['prefix' => 'download', 'middleware' => ["auth:web"]], function () {
-    Route::middleware('is.admin')->get('/pengajuan/{id}', [PengajuanController::class, 'document']);
+    Route::middleware('is.admin')->get('/pengajuan/{id}', [RotasiPengajuanController::class, 'document']);
 });
 
 Route::group(['prefix' => 'akun', 'middleware' => [
@@ -53,7 +52,7 @@ Route::group(['prefix' => 'akun', 'middleware' => [
 Route::group(['prefix' => 'personel', 'middleware' => [
     'auth:web'
 ]], function () {
-    Route::get('/cabang/{id}', [PersonelController::class, 'index'])->name('personel.index');
+    Route::get('/cabang/{id}', [PersonelController::class, 'index'])->name('pengajuan.index');
     Route::group(['prefix' => 'add', 'middleware' => [
         'is.admin'
     ]], function () {
@@ -70,7 +69,7 @@ Route::group(['prefix' => 'rotasi', 'middleware' => [
     'auth:web'
 ]], function () {
     // Route::get('/', [RotasiHomeController::class, 'index'])->name('rotasi');
-    Route::group(['prefix' => 'denah'], function () {
+    Route::group(['prefix' => 'cabang'], function () {
         Route::group(['prefix' => 'input', 'middleware' => [
             'is.admin'
         ]], function () {
@@ -83,14 +82,14 @@ Route::group(['prefix' => 'rotasi', 'middleware' => [
             Route::get('/{id}/delete', [RotasiCabangController::class, 'delete']);
         });
 
-        Route::get('/', [RotasiCabangController::class, 'index'])->name('rotasi.denah');
+        Route::get('/', [RotasiCabangController::class, 'index'])->name('rotasi.cabang');
         Route::get("/{id}", [RotasiCabangController::class, 'detail']);
     });
-    Route::group(['prefix' => 'personal'], function () {
-        Route::get('/', [RotasiPersonalController::class, 'inputView']);
-        Route::post('/', [RotasiPersonalController::class, 'input']);
-        Route::middleware("is.admin")->get('/{id}', [RotasiPersonalController::class, 'updateView']);
-        Route::middleware("is.admin")->post('/{id}', [RotasiPersonalController::class, 'update']);
+    Route::group(['prefix' => 'pengajuan'], function () {
+        Route::get('/', [RotasiPengajuanController::class, 'inputView']);
+        Route::post('/', [RotasiPengajuanController::class, 'input']);
+        Route::middleware("is.admin")->get('/{id}', [RotasiPengajuanController::class, 'updateView']);
+        Route::middleware("is.admin")->post('/{id}', [RotasiPengajuanController::class, 'update']);
     });
     Route::group(['prefix' => 'selektif', 'middleware' => [
         'is.admin'

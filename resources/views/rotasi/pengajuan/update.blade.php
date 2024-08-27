@@ -11,7 +11,7 @@
     @include('components.modal-component')
     <main>
         <section class="flex flex-col items-center my-4 px-2">
-            <form method="POST" action="/rotasi/personal/{{ $pengajuan->id }}"
+            <form method="POST" action="/rotasi/pengajuan/{{ $pengajuan->id }}"
                 class="w-full md:w-2/3 p-8 flex flex-col gap-4" enctype="multipart/form-data">
                 <h1 class="font-semibold text-xl">Ubah Data Personel</h1>
                 @csrf
@@ -250,7 +250,7 @@
     @include('components.footer')
     <script src="/script/nav.js"></script>
     <script src="/script/filePopover.js"></script>
-    {{-- same as rotasi/personal/input.blade --}}
+    {{-- same as rotasi/pengajuan/input.blade --}}
     <script>
         function kompetensiBindDeleteBtn(id) {
             document.querySelector(`#${id} > button`).addEventListener('click', function() {
