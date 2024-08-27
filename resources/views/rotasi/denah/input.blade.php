@@ -10,141 +10,264 @@
     @include('components.header', ['static' => true])
     @include('components.modal-component')
     <main class="min-h-[90vh] flex justify-center items-center p-4">
-        <form action="/rotasi/denah/input" method="post" class="w-2/3 flex flex-col gap-1 bg-white p-4 rounded-lg"
-            enctype="multipart/form-data">
+        <form action="/rotasi/denah/input" method="post"
+            class="w-full rounded-md bg-white md:w-2/3 p-8 flex flex-col gap-4" enctype="multipart/form-data">
+            <h1 class="font-semibold text-2xl text-center">Tambah Data Cabang</h1>
             @csrf
-            <label for="nama" class="font-semibold">Nama Cabang</label>
-            <input type="text" name="nama" id="nama" placeholder="Nama Cabang ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md" value="{{ old('nama') }}">
-            <label for="alamat" class="font-semibold">Alamat Cabang</label>
-            <textarea name="alamat" id="alamat" cols="30" rows="10" placeholder="Alamat ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md">{{ old('alamat') }}</textarea>
-            <label for="thumbnail" class="font-semibold">Foto Tower</label>
-            <button class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-2 py-1 rounded-md font-medium"
-                type="button" popovertarget="thumbnail-popover">Pilih file</button>
-            <img id="thumbnail-preview" src="" alt="default" class="hidden">
-            <div id="thumbnail-popover" class="border-2 rounded-lg p-4 w-1/2 max-h-[90vh]" popover>
-                <div class="flex flex-col items-center gap-2">
-                    <div class="flex w-full">
-                        <input type="text" name="thumbnail_url" id="thumbnail_url"
-                            class="resize-none flex-grow p-2 border-2 border-slate-400 rounded-s-md"
-                            placeholder="URL Foto" value="{{ old('thumbnail_url') }}">
-                        <button id="thumbnail_url_set" type="button"
-                            class="bg-[#383A83] text-white p-2 rounded-e-lg font-semibold">Set</button>
+            <section id="section-1" class="sections flex flex-col gap-1 bg-slate-200 p-2 rounded-md">
+                <label for="nama" class="font-semibold">Nama Cabang</label>
+                <input type="text" name="nama" id="nama" placeholder="Nama Cabang ..."
+                    class="w-full p-2 border-2 border-slate-400 rounded-md" value="{{ old('nama') }}">
+                <label for="alamat" class="font-semibold">Alamat Cabang</label>
+                <textarea name="alamat" id="alamat" cols="30" rows="5" placeholder="Alamat ..."
+                    class="resize-none w-full p-2 border-2 border-slate-400 rounded-md">{{ old('alamat') }}</textarea>
+                <label for="thumbnail" class="font-semibold">Foto Tower</label>
+                <button class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-2 py-1 rounded-md font-medium"
+                    type="button" popovertarget="thumbnail-popover">Pilih file</button>
+                <img id="thumbnail-preview" src="" alt="default" class="hidden">
+                <div id="thumbnail-popover" class="border-2 rounded-lg p-4 w-1/2 max-h-[90vh]" popover>
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="flex w-full">
+                            <input type="text" name="thumbnail_url" id="thumbnail_url"
+                                class="resize-none flex-grow p-2 border-2 border-slate-400 rounded-s-md"
+                                placeholder="URL Foto" value="{{ old('thumbnail_url') }}">
+                            <button id="thumbnail_url_set" type="button"
+                                class="bg-[#383A83] text-white p-2 rounded-e-lg font-semibold">Set</button>
+                        </div>
+                        atau
+                        <label class="bg-blue-300 px-2 py-1 rounded-md font-medium text-white hover:cursor-pointer">
+                            Upload Foto (max 2MB)
+                            <input type="file" name="thumbnail" id="thumbnail" class="h-0 w-0"
+                                accept=".jpg,.jpeg,.png">
+                        </label>
                     </div>
-                    atau
-                    <label class="bg-blue-300 px-2 py-1 rounded-md font-medium text-white hover:cursor-pointer">
-                        Upload Foto (max 2MB)
-                        <input type="file" name="thumbnail" id="thumbnail" class="h-0 w-0" accept=".jpg,.jpeg,.png">
-                    </label>
                 </div>
-            </div>
-
-            <label class="font-semibold">Kelas</label>
-            <div id="kelas" class="w-full my-1">
-                @if (old('kelas'))
-                    @foreach (old('kelas') as $index => $kelas)
-                        @include('rotasi.components.kelas-item', [
-                            'index' => $index,
-                            'db_id' => $kelas,
-                        ])
-                    @endforeach
-                @else
-                    @include('rotasi.components.kelas-item', ['index' => 1])
-                @endif
-            </div>
-            <button
-                class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white py-2 rounded-lg font-semibold w-full mt-1"
-                type="button" id="kelas_tambah">Tambah +</button>
-
-            <label for="jumlah_personel" class="font-semibold">Jumlah Eksisting ATC</label>
-            <input type="number" name="jumlah_personel" id="jumlah_personel" placeholder="Jumlah Eksisting ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                value="{{ old('jumlah_personel') }}">
-            <label for="formasi" class="font-semibold">Jumlah Optimal ATC</label>
-            <input type="number" name="formasi" id="formasi" placeholder="Jumlah Optimal ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md" value="{{ old('formasi') }}">
-            <label for="frms" class="font-semibold">FRMS ATC</label>
-            <input type="number" name="frms" id="frms" placeholder="FRMS ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md" value="{{ old('frms') }}">
-
-            <label for="jumlah_personel_aco" class="font-semibold">Jumlah Eksisting ACO</label>
-            <input type="number" name="jumlah_personel_aco" id="jumlah_personel_aco" placeholder="Jumlah Eksisting ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                value="{{ old('jumlah_personel_aco') }}">
-            <label for="formasi_aco" class="font-semibold">Jumlah Optimal ACO</label>
-            <input type="number" name="formasi_aco" id="formasi_aco" placeholder="Jumlah Optimal ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                value="{{ old('formasi_aco') }}">
-
-            <label for="jumlah_personel_ais" class="font-semibold">Jumlah Eksisting AIS</label>
-            <input type="number" name="jumlah_personel_ais" id="jumlah_personel_ais"
-                placeholder="Jumlah Eksisting ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                value="{{ old('jumlah_personel_ais') }}">
-            <label for="formasi_ais" class="font-semibold">Jumlah Optimal AIS</label>
-            <input type="number" name="formasi_ais" id="formasi_ais" placeholder="Jumlah Optimal ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                value="{{ old('formasi_ais') }}">
-
-            <label for="jumlah_personel_atfm" class="font-semibold">Jumlah Eksisting ATFM</label>
-            <input type="number" name="jumlah_personel_atfm" id="jumlah_personel_atfm"
-                placeholder="Jumlah Eksisting ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                value="{{ old('jumlah_personel_atfm') }}">
-            <label for="formasi_atfm" class="font-semibold">Jumlah Optimal ATFM</label>
-            <input type="number" name="formasi_atfm" id="formasi_atfm" placeholder="Jumlah Optimal ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                value="{{ old('formasi_atfm') }}">
-
-            <label for="jumlah_personel_tapor" class="font-semibold">Jumlah Eksisting TAPOR</label>
-            <input type="number" name="jumlah_personel_tapor" id="jumlah_personel_tapor"
-                placeholder="Jumlah Eksisting ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                value="{{ old('jumlah_personel_tapor') }}">
-            <label for="formasi_tapor" class="font-semibold">Jumlah Optimal TAPOR</label>
-            <input type="number" name="formasi_tapor" id="formasi_tapor" placeholder="Jumlah Optimal ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                value="{{ old('formasi_tapor') }}">
-
-            <label for="jumlah_personel_ats_system" class="font-semibold">Jumlah Eksisting ATS System</label>
-            <input type="number" name="jumlah_personel_ats_system" id="jumlah_personel_ats_system"
-                placeholder="Jumlah Eksisting ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                value="{{ old('jumlah_personel_ats_system') }}">
-            <label for="formasi_ats_system" class="font-semibold">Jumlah Optimal ATS System</label>
-            <input type="number" name="formasi_ats_system" id="formasi_ats_system" placeholder="Jumlah Optimal ..."
-                class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                value="{{ old('formasi_ats_system') }}">
-
-            <label class="select-none">
-                <input type="checkbox" name="induk" id="induk" {{ old('induk') ? 'checked' : '' }}>
-                Cabang Induk
-            </label>
-            <div id="map" class="h-0 z-10">
-                <div class="w-full h-full flex items-center justify-center" id="loading">
-                    <img src="/images/icons/ripples.svg" alt="loading"
-                        class="w-20 h-20 z-40 p-2 bg-white rounded-full">
+                <div class="mt-3 flex justify-end gap-4 w-full">
+                    <button type="button"
+                        class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                        onclick="changeSection(2)">
+                        Selanjutnya
+                    </button>
                 </div>
-            </div>
-            <div class="hidden" id="latlng">
-                <label for="latitude" class="font-semibold">Coordinate</label>
-                <div class="flex gap-2">
-                    <input type="text" name="latitude" id="latitude" value="{{ old('latitude') }}"
-                        class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                        placeholder="Latitude" step=".00000001">
-                    <input type="text" name="longitude" id="longitude"
-                        value="{{ old('longitude') }}"class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
-                        placeholder="Longitude" step=".00000001">
+            </section>
+            <section id="section-2" class="sections hidden flex-col gap-1 bg-slate-200 p-2 rounded-md">
+                <label class="font-semibold">Kelas</label>
+                <div id="kelas" class="w-full my-1">
+                    @if (old('kelas'))
+                        @foreach (old('kelas') as $index => $kelas)
+                            @include('rotasi.components.kelas-item', [
+                                'index' => $index,
+                                'db_id' => $kelas,
+                            ])
+                        @endforeach
+                    @else
+                        @include('rotasi.components.kelas-item', ['index' => 1])
+                    @endif
                 </div>
-            </div>
-            <button type="submit"
-                class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white py-2 rounded-lg font-semibold">Simpan</button>
+                <button
+                    class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white py-2 rounded-lg font-semibold w-full mt-1"
+                    type="button" id="kelas_tambah">Tambah +</button>
+                <div class="mt-3 flex justify-end gap-4 w-full">
+                    <button type="button"
+                        class="bg-gray-300 hover:bg-gray-400 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                        onclick="changeSection(1)">
+                        Kembali
+                    </button>
+                    <button type="button"
+                        class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                        onclick="changeSection(3)">
+                        Selanjutnya
+                    </button>
+                </div>
+            </section>
+            <section id="section-3" class="sections hidden flex-col gap-1 bg-slate-200 p-2 rounded-md">
+                <label for="jumlah_personel" class="font-semibold">Jumlah Eksisting ATC</label>
+                <input type="number" name="jumlah_personel" id="jumlah_personel" placeholder="Jumlah Eksisting ..."
+                    class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                    value="{{ old('jumlah_personel') }}">
+                <label for="formasi" class="font-semibold">Jumlah Optimal ATC</label>
+                <input type="number" name="formasi" id="formasi" placeholder="Jumlah Optimal ..."
+                    class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                    value="{{ old('formasi') }}">
+                <label for="frms" class="font-semibold">FRMS ATC</label>
+                <input type="number" name="frms" id="frms" placeholder="FRMS ..."
+                    class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                    value="{{ old('frms') }}">
+                <div class="mt-3 flex justify-end gap-4 w-full">
+                    <button type="button"
+                        class="bg-gray-300 hover:bg-gray-400 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                        onclick="changeSection(2)">
+                        Kembali
+                    </button>
+                    <button type="button"
+                        class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                        onclick="changeSection(4)">
+                        Selanjutnya
+                    </button>
+                </div>
+            </section>
+            <section id="section-4" class="sections hidden flex-col gap-1 bg-slate-200 p-2 rounded-md">
+                <label for="jumlah_personel_aco" class="font-semibold">Jumlah Eksisting ACO</label>
+                <input type="number" name="jumlah_personel_aco" id="jumlah_personel_aco"
+                    placeholder="Jumlah Eksisting ..."
+                    class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                    value="{{ old('jumlah_personel_aco') }}">
+                <label for="formasi_aco" class="font-semibold">Jumlah Optimal ACO</label>
+                <input type="number" name="formasi_aco" id="formasi_aco" placeholder="Jumlah Optimal ..."
+                    class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                    value="{{ old('formasi_aco') }}">
+                <div class="mt-3 flex justify-end gap-4 w-full">
+                    <button type="button"
+                        class="bg-gray-300 hover:bg-gray-400 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                        onclick="changeSection(3)">
+                        Kembali
+                    </button>
+                    <button type="button"
+                        class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                        onclick="changeSection(5)">
+                        Selanjutnya
+                    </button>
+                </div>
+            </section>
+            <section id="section-5" class="sections hidden flex-col gap-1 bg-slate-200 p-2 rounded-md">
+                <label for="jumlah_personel_ais" class="font-semibold">Jumlah Eksisting AIS</label>
+                <input type="number" name="jumlah_personel_ais" id="jumlah_personel_ais"
+                    placeholder="Jumlah Eksisting ..."
+                    class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                    value="{{ old('jumlah_personel_ais') }}">
+                <label for="formasi_ais" class="font-semibold">Jumlah Optimal AIS</label>
+                <input type="number" name="formasi_ais" id="formasi_ais" placeholder="Jumlah Optimal ..."
+                    class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                    value="{{ old('formasi_ais') }}">
+                <div class="mt-3 flex justify-end gap-4 w-full">
+                    <button type="button"
+                        class="bg-gray-300 hover:bg-gray-400 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                        onclick="changeSection(4)">
+                        Kembali
+                    </button>
+                    <button type="button"
+                        class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                        onclick="changeSection(6)">
+                        Selanjutnya
+                    </button>
+                </div>
+            </section>
+            <section id="section-6" class="sections hidden flex-col gap-1 bg-slate-200 p-2 rounded-md">
+                <label for="jumlah_personel_atfm" class="font-semibold">Jumlah Eksisting ATFM</label>
+                <input type="number" name="jumlah_personel_atfm" id="jumlah_personel_atfm"
+                    placeholder="Jumlah Eksisting ..."
+                    class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                    value="{{ old('jumlah_personel_atfm') }}">
+                <label for="formasi_atfm" class="font-semibold">Jumlah Optimal ATFM</label>
+                <input type="number" name="formasi_atfm" id="formasi_atfm" placeholder="Jumlah Optimal ..."
+                    class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                    value="{{ old('formasi_atfm') }}">
+                <div class="mt-3 flex justify-end gap-4 w-full">
+                    <button type="button"
+                        class="bg-gray-300 hover:bg-gray-400 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                        onclick="changeSection(5)">
+                        Kembali
+                    </button>
+                    <button type="button"
+                        class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                        onclick="changeSection(7)">
+                        Selanjutnya
+                    </button>
+                </div>
+            </section>
+            <section id="section-7" class="sections hidden flex-col gap-1 bg-slate-200 p-2 rounded-md">
+                <label for="jumlah_personel_tapor" class="font-semibold">Jumlah Eksisting TAPOR</label>
+                <input type="number" name="jumlah_personel_tapor" id="jumlah_personel_tapor"
+                    placeholder="Jumlah Eksisting ..."
+                    class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                    value="{{ old('jumlah_personel_tapor') }}">
+                <label for="formasi_tapor" class="font-semibold">Jumlah Optimal TAPOR</label>
+                <input type="number" name="formasi_tapor" id="formasi_tapor" placeholder="Jumlah Optimal ..."
+                    class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                    value="{{ old('formasi_tapor') }}">
+                <div class="mt-3 flex justify-end gap-4 w-full">
+                    <button type="button"
+                        class="bg-gray-300 hover:bg-gray-400 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                        onclick="changeSection(6)">
+                        Kembali
+                    </button>
+                    <button type="button"
+                        class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                        onclick="changeSection(8)">
+                        Selanjutnya
+                    </button>
+                </div>
+            </section>
+            <section id="section-8" class="sections hidden flex-col gap-1 bg-slate-200 p-2 rounded-md">
+                <label for="jumlah_personel_ats_system" class="font-semibold">Jumlah Eksisting ATS System</label>
+                <input type="number" name="jumlah_personel_ats_system" id="jumlah_personel_ats_system"
+                    placeholder="Jumlah Eksisting ..."
+                    class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                    value="{{ old('jumlah_personel_ats_system') }}">
+                <label for="formasi_ats_system" class="font-semibold">Jumlah Optimal ATS System</label>
+                <input type="number" name="formasi_ats_system" id="formasi_ats_system"
+                    placeholder="Jumlah Optimal ..."
+                    class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                    value="{{ old('formasi_ats_system') }}">
+                <div class="mt-3 flex justify-end gap-4 w-full">
+                    <button type="button"
+                        class="bg-gray-300 hover:bg-gray-400 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                        onclick="changeSection(7)">
+                        Kembali
+                    </button>
+                    <button type="button"
+                        class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                        onclick="changeSection(9)">
+                        Selanjutnya
+                    </button>
+                </div>
+            </section>
+            <section id="section-9" class="sections hidden flex-col items-center gap-1 bg-slate-200 p-2 rounded-md">
+                <label class="select-none">
+                    <input type="checkbox" name="induk" id="induk" {{ old('induk') ? 'checked' : '' }}>
+                    Cabang Induk ?
+                </label>
+                <div id="map" class="h-0 z-10 w-full">
+                    <div class="w-full h-full flex items-center justify-center" id="loading">
+                        <img src="/images/icons/ripples.svg" alt="loading"
+                            class="w-20 h-20 z-40 p-2 bg-white rounded-full">
+                    </div>
+                </div>
+                <div class="hidden w-full" id="latlng">
+                    <label for="latitude" class="font-semibold">Coordinate</label>
+                    <div class="flex gap-2">
+                        <input type="text" name="latitude" id="latitude" value="{{ old('latitude') }}"
+                            class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                            placeholder="Latitude" step=".00000001">
+                        <input type="text" name="longitude" id="longitude"
+                            value="{{ old('longitude') }}"class="resize-none w-full p-2 mt-1 border-2 border-slate-400 rounded-md"
+                            placeholder="Longitude" step=".00000001">
+                    </div>
+                </div>
+                <div class="mt-3 flex justify-end gap-4 w-full">
+                    <button type="button"
+                        class="bg-gray-300 hover:bg-gray-400 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                        onclick="changeSection(8)">
+                        Kembali
+                    </button>
+                    <button type="submit"
+                        class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold">
+                        Simpan
+                    </button>
+                </div>
+            </section>
         </form>
     </main>
     @include('components.footer')
     <script src="/script/nav.js"></script>
     <script src="/script/map.js"></script>
+    <script>
+        function changeSection(section) {
+            document.querySelectorAll('.sections').forEach(s => s.classList.add('hidden'));
+            document.querySelector(`#section-${section}`).classList.remove('hidden');
+            document.querySelector(`#section-${section}`).classList.add('flex');
+        }
+    </script>
     <script>
         // (re)bind delete button event for item by id
         function bindDeleteBtn(id) {
