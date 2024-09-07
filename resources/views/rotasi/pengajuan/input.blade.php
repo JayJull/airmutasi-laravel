@@ -6,16 +6,17 @@
     <title>Air Mutasi | Rotasi</title>
 </head>
 
-<body class="bg-[#CED0FF] font-sans tracking-wider text-lg relative">
+<body class="font-sans tracking-wider text-lg relative">
     @include('components.header', ['static' => true])
     @include('components.modal-component')
     <main>
         <section class="flex flex-col items-center my-4 px-2">
             <form method="POST" action="/rotasi/pengajuan"
-                class="w-full rounded-md bg-white md:w-2/3 p-8 flex flex-col gap-4" enctype="multipart/form-data">
+                class="w-full rounded-md bg-white shadow-lg md:w-2/3 p-8 flex flex-col gap-4"
+                enctype="multipart/form-data">
                 <h1 class="font-semibold text-2xl text-center">Tambah Data Pengajuan Mutasi</h1>
                 @csrf
-                <section id="section-1" class="sections flex flex-col gap-4 bg-slate-200 p-2 rounded-md">
+                <section id="section-1" class="sections flex flex-col gap-4 p-2 rounded-md">
                     <div class="grid md:grid-cols-9 gap-4 items-stretch">
                         <aside class="w-full md:col-span-4 flex flex-col justify-between">
                             <div>
@@ -39,35 +40,11 @@
                                         Posisi
                                         ---
                                     </option>
-                                    <option value="ATC (TWR)"
-                                        {{ old('posisi_sekarang') == 'ATC (TWR)' ? 'selected' : '' }}>
-                                        ATC
-                                        (TWR)</option>
-                                    <option value="ATC (APS)"
-                                        {{ old('posisi_sekarang') == 'ATC (APS)' ? 'selected' : '' }}>
-                                        ATC
-                                        (APS)</option>
-                                    <option value="ATC (ACS)"
-                                        {{ old('posisi_sekarang') == 'ATC (ACS)' ? 'selected' : '' }}>
-                                        ATC
-                                        (ACS)</option>
-                                    <option value="ACO" {{ old('posisi_sekarang') == 'ACO' ? 'selected' : '' }}>ACO
-                                    </option>
-                                    <option value="AIS" {{ old('posisi_sekarang') == 'AIS' ? 'selected' : '' }}>AIS
-                                    </option>
-                                    <option value="ATFM" {{ old('posisi_sekarang') == 'ATFM' ? 'selected' : '' }}>
-                                        ATFM
-                                    </option>
-                                    <option value="TAPOR" {{ old('posisi_sekarang') == 'TAPOR' ? 'selected' : '' }}>
-                                        TAPOR
-                                    </option>
-                                    <option value="ATSSystem"
-                                        {{ old('posisi_sekarang') == 'ATSSystem' ? 'selected' : '' }}>ATS
-                                        System
-                                    </option>
-                                    <option value="STAFF" {{ old('posisi_sekarang') == 'STAFF' ? 'selected' : '' }}>
-                                        STAFF
-                                    </option>
+                                    @foreach (['ATC (TWR)', 'ATC (APS)', 'ATC (ACS)', 'ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem', 'STAFF'] as $posisi)
+                                        <option value="{{ $posisi }}"
+                                            {{ old('posisi_sekarang') == $posisi ? 'selected' : '' }}>
+                                            {{ $posisi }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </aside>
@@ -96,35 +73,11 @@
                                         Posisi
                                         ---
                                     </option>
-                                    <option value="ATC (TWR)"
-                                        {{ old('posisi_tujuan') == 'ATC (TWR)' ? 'selected' : '' }}>
-                                        ATC
-                                        (TWR)</option>
-                                    <option value="ATC (APS)"
-                                        {{ old('posisi_tujuan') == 'ATC (APS)' ? 'selected' : '' }}>
-                                        ATC
-                                        (APS)</option>
-                                    <option value="ATC (ACS)"
-                                        {{ old('posisi_tujuan') == 'ATC (ACS)' ? 'selected' : '' }}>
-                                        ATC
-                                        (ACS)</option>
-                                    <option value="ACO" {{ old('posisi_tujuan') == 'ACO' ? 'selected' : '' }}>ACO
-                                    </option>
-                                    <option value="AIS" {{ old('posisi_tujuan') == 'AIS' ? 'selected' : '' }}>AIS
-                                    </option>
-                                    <option value="ATFM" {{ old('posisi_tujuan') == 'ATFM' ? 'selected' : '' }}>ATFM
-                                    </option>
-                                    <option value="TAPOR" {{ old('posisi_tujuan') == 'TAPOR' ? 'selected' : '' }}>
-                                        TAPOR
-                                    </option>
-                                    <option value="ATSSystem"
-                                        {{ old('posisi_tujuan') == 'ATSSystem' ? 'selected' : '' }}>
-                                        ATS
-                                        System
-                                    </option>
-                                    <option value="STAFF" {{ old('posisi_tujuan') == 'STAFF' ? 'selected' : '' }}>
-                                        STAFF
-                                    </option>
+                                    @foreach (['ATC (TWR)', 'ATC (APS)', 'ATC (ACS)', 'ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem', 'STAFF'] as $posisi)
+                                        <option value="{{ $posisi }}"
+                                            {{ old('posisi_tujuan') == $posisi ? 'selected' : '' }}>
+                                            {{ $posisi }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </aside>
@@ -145,13 +98,13 @@
                     </div>
                     <div class="flex justify-end gap-4 w-full">
                         <button type="button"
-                            class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                            class="bg-black opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
                             onclick="changeSection(2)">
                             Selanjutnya
                         </button>
                     </div>
                 </section>
-                <section id="section-2" class="sections hidden flex-col gap-4 bg-slate-200 p-2 rounded-md">
+                <section id="section-2" class="sections hidden flex-col gap-4 p-2 rounded-md">
                     <div class="grid md:grid-cols-2 gap-4">
                         <aside class="w-full">
                             <label class="font-semibold" for="nama_lengkap">Nama Lengkap</label><br />
@@ -174,7 +127,7 @@
                                     class="col-span-3 px-2 py-1 border-2 border-slate-400 rounded-md"
                                     placeholder="Ketik Disini ..." value="{{ old('masa_kerja') }}" />
                                 <button type="button" id="sk_mutasi_file_button"
-                                    class="col-span-1 bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-2 py-1 rounded-md font-medium"
+                                    class="col-span-1 bg-black  opacity-80 hover:opacity-100 duration-200 text-white px-2 py-1 rounded-md font-medium"
                                     popovertarget="sk_mutasi_popover">{{ old('sk_mutasi_url') ? '✅️ Ubah' : 'Berkas' }}</button>
                                 @include('rotasi.components.file-popover', [
                                     'id' => 'sk_mutasi',
@@ -193,18 +146,18 @@
                     </div>
                     <div class="flex justify-end gap-4 w-full">
                         <button type="button"
-                            class="bg-gray-300 hover:bg-gray-400 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                            class="bg-white border-2 border-black opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
                             onclick="changeSection(1)">
                             Kembali
                         </button>
                         <button type="button"
-                            class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                            class="bg-black opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
                             onclick="changeSection(3)">
                             Selanjutnya
                         </button>
                     </div>
                 </section>
-                <section id="section-3" class="sections hidden flex-col gap-4 bg-slate-200 p-2 rounded-md">
+                <section id="section-3" class="sections hidden flex-col gap-4 p-2 rounded-md">
                     <div class="grid md:grid-cols-2 auto-rows-auto gap-4">
                         <aside class="w-full">
                             <label class="font-semibold" for="kompetensi">Kompetensi</label><br />
@@ -226,7 +179,7 @@
                                 @endif
                             </div>
                             <button
-                                class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white py-2 rounded-lg font-semibold w-full mt-1"
+                                class="bg-black opacity-80 hover:opacity-100 duration-200 text-white py-2 rounded-lg font-semibold w-full mt-1"
                                 type="button" id="kompetensi_tambah">Tambah +</button>
                         </aside>
                         <aside class="flex flex-col justify-center gap-0">
@@ -240,7 +193,7 @@
                         <label class="font-semibold">Surat Persetujuan Pejabat Setempat</label>
                         <br>
                         <button type="button" id="surat_persetujuan_file_button"
-                            class="w-full bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-2 py-1 mt-1 rounded-md font-medium"
+                            class="w-full bg-black opacity-80 hover:opacity-100 duration-200 text-white px-2 py-1 mt-1 rounded-md font-medium"
                             popovertarget="surat_persetujuan_popover">{{ old('surat_persetujuan_url') ? '✅️ Ubah' : 'Berkas' }}</button>
                         @include('rotasi.components.file-popover', [
                             'id' => 'surat_persetujuan',
@@ -256,12 +209,12 @@
                     </div>
                     <div class="flex justify-end gap-4 w-full">
                         <button type="button"
-                            class="bg-gray-300 hover:bg-gray-400 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                            class="bg-white border-2 border-black opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
                             onclick="changeSection(2)">
                             Kembali
                         </button>
                         <button type="submit"
-                            class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold">
+                            class="bg-black opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold">
                             Kirim
                         </button>
                     </div>
