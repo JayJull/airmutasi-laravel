@@ -43,13 +43,13 @@
         </section>
         <div class="grid md:grid-cols-3 gap-4">
             <a href="/rotasi/cabang"
-                class="bg-black text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-xl 2xl:rounded-2xl"><img
+                class="bg-black text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-md 2xl:rounded-2xl"><img
                     src="/images/icons/rotasi.svg" alt="rotasi" />Rotasi</a>
             <a href="/"
-                class="bg-black text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-xl 2xl:rounded-2xl opacity-65">
+                class="bg-black text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-md 2xl:rounded-2xl opacity-65">
                 <img src="/images/icons/demosi.svg" alt="demosi" />Demosi</a>
             <a href="/"
-                class="bg-black text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-xl 2xl:rounded-2xl opacity-65">
+                class="bg-black text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-md 2xl:rounded-2xl opacity-65">
                 <img src="/images/icons/promosi.svg" alt="promosi" />Promosi</a>
         </div>
     </main>
