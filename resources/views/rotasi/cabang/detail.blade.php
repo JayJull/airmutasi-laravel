@@ -9,7 +9,7 @@
 <body class="font-sans tracking-wider text-lg">
     @include('components.header', ['static' => true])
     <main>
-        <section class="bg-[#FFEFB2] p-8 flex flex-col md:grid md:grid-cols-3 gap-8">
+        <section class="p-8 flex flex-col md:grid md:grid-cols-3 gap-8">
             <aside class="col-span-3 md:col-span-1 sm:h-full flex flex-col">
                 <div class="flex items-center justify-center h-64 rounded-lg">
                     <img src="{{ $cabang->thumbnail_url && $cabang->thumbnail_url != 'NULL' ? $cabang->thumbnail_url : '/images/default_tower.jpg' }}"
@@ -28,24 +28,22 @@
                 <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;"
                     class="p-2 break-all w-full font-sans">{{ $cabang->alamat }}</pre>
                 @can('admin')
-                    <a class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white w-full text-center p-2 rounded-lg font-semibold mb-2"
+                    <a class="mt-4 bg-black hover:bg-white text-white hover:text-black border-2 border-black duration-200 w-full text-center p-2 rounded-lg font-semibold mb-2"
                         href="/personel/cabang/{{ $cabang->id }}">Personel</a>
                     <a href="/rotasi/cabang/input/{{ $cabang->id }}"
-                        class="bg-yellow-300 hover:bg-yellow-400 duration-200 text-gray-800 w-full text-center p-2 rounded-lg font-semibold mb-2">Update
-                        Cabang</a>
+                        class="bg-black hover:bg-white text-white hover:text-black border-2 border-black duration-200 w-full text-center p-2 rounded-lg font-semibold mb-2">Update</a>
                     <a href="/rotasi/cabang/input/{{ $cabang->id }}/delete"
-                        class="bg-red-500 hover:bg-red-700 duration-200 text-white w-full text-center p-2 rounded-lg font-semibold">Hapus
+                        class="bg-white hover:bg-black text-black hover:text-white border-2 border-black duration-200 w-full text-center p-2 rounded-lg font-semibold">Hapus
                         Cabang</a>
                 @endcan
             </aside>
-            <aside class="flex-grow col-span-3 md:col-span-2 grid md:grid-cols-2 md:grid-rows-1 gap-4">
+            <aside class="flex-grow col-span-2 grid md:grid-cols-2 md:grid-rows-1 gap-4">
                 <div
-                    class="col-span-2 md:col-span-1 flex items-center justify-center bg-white rounded-lg p-4 min-h-[50vh]">
-                    {{-- <div id="stats-bar" class="w-full h-full"></div> --}}
-                    <div id="stats-radar" class="w-full h-full"></div>
+                    class="bg-black col-span-2 md:col-span-1 flex items-center justify-center rounded-lg p-4 min-h-[50vh]">
+                    <div id="stats-radar" class="w-full"></div>
                 </div>
                 <div
-                    class="col-span-2 md:col-span-1 flex flex-col gap-4 items-center justify-center bg-white rounded-lg p-4">
+                    class="bg-black text-white col-span-2 md:col-span-1 flex flex-col gap-4 items-center justify-center rounded-lg p-4">
                     @php
                         $range = $cabang->formasi - $cabang->frms;
                         $skalaPersonelATC = number_format(
@@ -89,8 +87,9 @@
                     </div>
                     {{ $skalaPersonelATC < 0 ? 0 : ($skalaPersonelATC > 10 ? 10 : $skalaPersonelATC) }}/10
                 </div>
-                <div class="col-span-2 grid grid-cols-2 gap-2 bg-white rounded-lg p-4">
-                    <div class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col justify-center p-2">
+                <div class="col-span-2 grid grid-cols-2 gap-4 bg-white rounded-lg">
+                    <div
+                        class="col-span-2 sm:col-span-1 border-4 border-black rounded-lg flex flex-col justify-center p-2">
                         <h2 class="font-bold text-xl text-center">Jumlah Maksimal FRMS</h2>
                         <hr class="border-[1px] my-1">
                         <p class="font-medium ms-4">ATC {{ $cabang->formasi }} Orang</p>
@@ -101,11 +100,12 @@
                         <p class="font-medium ms-4">ATS System {{ $cabang->formasi_ats_system }} Orang</p>
                     </div>
                     <div
-                        class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col items-center justify-center p-2">
+                        class="col-span-2 sm:col-span-1 border-4 border-black rounded-lg flex flex-col items-center justify-center p-2">
                         <h2 class="font-bold text-xl">Jumlah Minimal FRMS</h2>
                         <p class="font-medium">ATC {{ $cabang->frms }} Orang</p>
                     </div>
-                    <div class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col justify-center p-2">
+                    <div
+                        class="col-span-2 sm:col-span-1 border-4 border-black rounded-lg flex flex-col justify-center p-2">
                         <h2 class="font-bold text-xl text-center">Jumlah Eksisting</h2>
                         <hr class="border-[1px] my-1">
                         <p class="font-medium ms-4">ATC {{ $cabang->jumlah_personel }} Orang</p>
@@ -115,7 +115,8 @@
                         <p class="font-medium ms-4">TAPOR {{ $cabang->jumlah_personel_tapor }} Orang</p>
                         <p class="font-medium ms-4">ATS System {{ $cabang->jumlah_personel_ats_system }} Orang</p>
                     </div>
-                    <div class="col-span-2 sm:col-span-1 border-4 rounded-lg flex flex-col justify-center p-2">
+                    <div
+                        class="col-span-2 sm:col-span-1 border-4 border-black rounded-lg flex flex-col justify-center p-2">
                         <h2 class="font-bold text-xl text-center">Prediksi Personel {{ date('Y') + 1 }}</h2>
                         <hr class="border-[1px] my-1">
                         <p class="font-medium ms-4">
@@ -142,11 +143,11 @@
             </aside>
         </section>
         <section class="p-8">
-            <div class="bg-white rounded-lg border-2 border-[#293676]">
-                <div class="flex gap-4 p-4 border-b-2 border-[#293676] text-[#293676]">
-                    <a class="{{ $tab != 'out' ? 'font-semibold' : '' }}"
+            <div class="bg-white rounded-md border-2 border-black">
+                <div class="flex gap-4 p-4 border-b-2 border-black text-black">
+                    <a class="{{ $tab != 'out' ? 'font-semibold underline' : '' }}"
                         href="/rotasi/cabang/{{ $cabang->id }}?tab=in">PERSONEL IN</a>
-                    <a class="{{ $tab == 'out' ? 'font-semibold' : '' }}"
+                    <a class="{{ $tab == 'out' ? 'font-semibold underline' : '' }}"
                         href="/rotasi/cabang/{{ $cabang->id }}?tab=out">PERSONEL OUT</a>
                 </div>
                 <div>
@@ -156,9 +157,8 @@
                     @foreach ($tab == 'out' ? $cabang->outAll : $cabang->inAll as $pengajuan)
                         <div
                             class="font-medium px-4 py-2 {{ $loop->index % 2 === 0 ? 'bg-slate-200' : '' }} grid grid-cols-12 items-center gap-2">
-                            <img class="h-14" src="/images/icons/User_fill.svg" alt="user" />
-                            <h2 class="col-span-4">{{ $pengajuan->nama_lengkap }}</h2>
-                            <p class="col-span-5">{{ $pengajuan->nik }}</p>
+                            <p class="col-span-3">{{ $pengajuan->nik }}</p>
+                            <h2 class="col-span-6">{{ $pengajuan->nama_lengkap }}</h2>
                             <p>{{ $pengajuan->posisi_tujuan }}</p>
                         </div>
                     @endforeach

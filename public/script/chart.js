@@ -97,6 +97,9 @@ function generatePieChart(title, series, labels = []) {
         title: {
             text: title,
             align: "left",
+            style: {
+                fontFamily: "geruduk",
+            },
         },
         responsive: [
             {
@@ -120,6 +123,10 @@ function generateRadarChart(title, series) {
         },
         title: {
             text: title,
+            style: {
+                color: "#fff",
+                fontWeight: "bold",
+            }
         },
         xaxis: {
             categories: ["ATC", "ACO", "AIS", "ATFM", "TAPOR", "ATS System"],
