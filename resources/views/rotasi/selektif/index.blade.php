@@ -129,7 +129,7 @@
                                 <h3 class="font-semibold text-lg">{{ $currPengajuan->nama_lengkap }}</h3>
                                 <p>{{ $currPengajuan->nik }}</p>
                             </aside>
-                            <aside class="flex items-center gap-4">
+                            <aside class="flex items-center gap-4 flex-wrap">
                                 <h4 class="font-semibold text-center">{{ $currPengajuan->lokasiAwal->nama }}</h4>
                                 <img src="/images/icons/{{ $currPengajuan->id === $pengajuan->id ? 'switch_white' : 'switch_blue' }}.svg"
                                     alt="switch" />
