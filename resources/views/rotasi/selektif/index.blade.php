@@ -6,11 +6,11 @@
     <title>Air Mutasi | Rotasi</title>
 </head>
 
-<body class="bg-[#CED0FF] font-sans tracking-wider text-lg">
+<body class="font-sans tracking-wider text-lg">
     @include('components.header', ['static' => true])
     @include('components.modal-component')
     @if (count($pengajuans) > 0)
-        <div id="detail-pengajuan" class="border-2 rounded-lg p-4 w-5/6 sm:w-2/3 md:w-1/2 max-h-[90vh]" popover>
+        <div id="detail-pengajuan" class="border-2 rounded-md p-4 w-5/6 sm:w-2/3 md:w-1/2 max-h-[90vh]" popover>
             <div class="bg-white flex flex-col items-center">
                 <h1 class="font-bold text-xl">Detail</h1>
                 <p class="my-1 text-center">
@@ -42,7 +42,7 @@
                 <div class="flex gap-2">
                     @foreach ($pengajuan->kompetensis as $kompetensi)
                         @if ($kompetensi->file_url && $kompetensi->file_url !== 'null')
-                            <a class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-2 py-1 font-semibold rounded-lg"
+                            <a class="bg-black duration-200 text-white px-2 py-1 font-semibold rounded-lg"
                                 href="{{ $kompetensi->file_url }}">{{ $kompetensi->nama }}</a>
                         @else
                             <p class="text-white bg-gray-400 px-2 py-1 font-semibold rounded-lg">
@@ -54,11 +54,11 @@
                 <p class="font-semibold mt-2">Berkas Lain</p>
                 <div class="flex gap-2">
                     @if ($pengajuan->sk_mutasi_url)
-                        <a class="flex-grow text-center bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-2 py-1 mt-1 font-semibold rounded-lg"
+                        <a class="flex-grow text-center bg-black duration-200 text-white px-2 py-1 mt-1 font-semibold rounded-lg"
                             href="{{ $pengajuan->file_url }}">SK Mutasi</a>
                     @endif
                     @if ($pengajuan->surat_persetujuan_url)
-                        <a class="flex-grow text-center bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-2 py-1 mt-1 font-semibold rounded-lg"
+                        <a class="flex-grow text-center bg-black duration-200 text-white px-2 py-1 mt-1 font-semibold rounded-lg"
                             href="{{ $pengajuan->surat_persetujuan_url }}">Surat Persetujuan</a>
                     @endif
                 </div>
@@ -93,7 +93,7 @@
 
             <button id="filter-reset" type="button" class="underline self-end">Reset</button>
 
-            <button class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-2 py-1 font-semibold rounded-lg"
+            <button class="bg-black opacity-80 hover:opacity-100 duration-200 text-white px-2 py-1 font-semibold rounded-lg"
                 type="submit">Filter</button>
         </form>
     </div>
@@ -101,7 +101,7 @@
         <section class="flex flex-col-reverse md:grid md:grid-cols-2 md:items-start m-4 gap-4 md:min-h-screen">
             <aside class="flex flex-col gap-2 pe-2 pb-2 h-[50vh] md:h-full md:max-h-screen overflow-y-auto">
                 <div class="sticky top-0 w-full">
-                    <div class="text-[#293676] flex gap-2 py-2 justify-evenly bg-[#ced0ff]">
+                    <div class="text-black flex gap-2 py-8 justify-evenly items-center">
                         <a class="{{ !$tab || $tab === 'diajukan' ? 'font-semibold underline' : '' }}"
                             href="/rotasi/selektif?tab=diajukan{{ $query }}">Pengajuan</a>
                         <a class="{{ $tab === 'dapat' ? 'font-semibold underline' : '' }}"
@@ -115,7 +115,7 @@
                             <img src="/images/icons/filter.svg" alt="filter">
                         </button>
                     </div>
-                    <hr class="bg-[#293676] p-[1px] w-full">
+                    <hr class="w-full border-2 border-black" />
                 </div>
                 @if (count($pengajuans) === 0)
                     <div class="h-full flex items-center justify-center">
@@ -124,7 +124,7 @@
                 @else
                     @foreach ($pengajuans as $currPengajuan)
                         <a href="/rotasi/selektif?id={{ $currPengajuan->id }}&tab={{ $tab }}{{ $query }}"
-                            class="pengajuan-item border-2 border-black {{ $currPengajuan->id === $pengajuan->id ? 'pengajuan-active bg-black text-white' : 'bg-white text-[#293676]' }} px-8 py-3 rounded-lg grid grid-cols-1 sm:grid-cols-2 items-center justify-between gap-2">
+                            class="pengajuan-item {{ $currPengajuan->id === $pengajuan->id ? 'pengajuan-active bg-black text-white' : 'bg-white text-black' }} px-8 py-3 rounded-lg grid grid-cols-1 sm:grid-cols-2 items-center justify-between gap-2">
                             <aside class="flex flex-col items-center sm:items-start">
                                 <h3 class="font-semibold text-lg">{{ $currPengajuan->nama_lengkap }}</h3>
                                 <p>{{ $currPengajuan->nik }}</p>
@@ -141,27 +141,25 @@
             </aside>
             @if (count($pengajuans) > 0)
                 <form method="POST" action="/rotasi/selektif/{{ $pengajuan->id }}" class="flex flex-col gap-2">
-                    <div
-                        class="flex flex-col flex-grow gap-4 bg-white text-[#474747] border-2 border-[#293676] rounded-lg p-4 overflow-y-auto">
+                    <div class="flex flex-col flex-grow gap-4 bg-white rounded-lg p-4 overflow-y-auto">
                         @csrf
                         <div class="flex flex-col gap-2 sm:flex-row items-center justify-between">
-                            <h1 class="font-bold text-2xl">Deskripsi</h1>
-                            <aside class="flex flex-col items-center sm:items-end font-semibold">
+                            <aside class="flex flex-col items-center sm:items-start font-semibold">
                                 <p>Tanggal Pengajuan</p>
                                 <p id="tanggal-pengajuan">{{ $pengajuan->tanggal_pengajuan }}</p>
                             </aside>
+                            <aside class="flex gap-2">
+                                <a href="/rotasi/pengajuan/{{ $pengajuan->id }}"
+                                    class="flex-grow bg-white border-2 border-black opacity-80 hover:opacity-100 duration-200 text-gray-800 flex items-center px-6 py-2 font-semibold rounded-lg text-center">Ubah</a>
+                                <button type="button"
+                                    class="flex-grow bg-black opacity-80 hover:opacity-100 duration-200 text-white px-6 py-2 font-semibold rounded-lg"
+                                    popovertarget="detail-pengajuan">Detail</button>
+                            </aside>
                         </div>
-                        <hr class="w-full border-2 border-[#B6B6B6]" />
-                        <div class="flex gap-2">
-                            <a href="/rotasi/pengajuan/{{ $pengajuan->id }}"
-                                class="flex-grow bg-yellow-300 hover:bg-yellow-400 duration-200 text-gray-800  px-6 py-2 font-semibold rounded-lg text-center">Ubah</a>
-                            <button type="button"
-                                class="flex-grow bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-6 py-2 font-semibold rounded-lg"
-                                popovertarget="detail-pengajuan">Detail</button>
-                            <a href="/download/pengajuan/{{ $pengajuan->id }}" target="_blank"
-                                class="flex-grow text-center bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-6 py-2 font-semibold rounded-lg">Unduh
-                                Dokumen</a>
-                        </div>
+                        <a href="/download/pengajuan/{{ $pengajuan->id }}" target="_blank"
+                            class="flex-grow text-center bg-black opacity-80 hover:opacity-100 duration-200 text-white px-6 py-2 font-semibold rounded-lg">Unduh
+                            Dokumen</a>
+                        <hr class="w-full border-2 border-black" />
                         <div>
                             <label class="font-semibold" for="nama">Nama</label>
                             <input class="w-full border-2 border-[#B6B6B6] px-2 py-1 mt-1 bg-[#C6C6C6]" type="text"
@@ -204,14 +202,14 @@
                                 class="w-full border-2 border-[#B6B6B6] px-2 py-1 mt-1 resize-none" rows="5"></textarea>
                         </div>
                         <button
-                            class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-6 py-2 font-semibold rounded-lg"
+                            class="bg-black opacity-80 hover:opacity-100 duration-200 text-white px-6 py-2 font-semibold rounded-lg"
                             type="submit">
                             Submit
                         </button>
                     </div>
                 </form>
             @else
-                <div class="h-full bg-white flex items-center justify-center border-2 border-[#293676] rounded-lg">
+                <div class="h-full bg-white flex items-center justify-center border-2 border-black rounded-md">
                     <h1 class="font-bold text-2xl text-center">Tidak Ada Pengajuan</h1>
                 </div>
             @endif
