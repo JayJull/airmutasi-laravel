@@ -6,40 +6,56 @@
     <title>Air Mutasi | Profil</title>
 </head>
 
-<body class="bg-[#CED0FF] font-sans tracking-wider text-lg">
+<body class="font-sans tracking-wider text-lg">
     @include('components/header', ['static' => true])
     @include('components.modal-component')
-    <main class="min-h-screen">
-        <form action="/akun/edit" method="post" class="rounded-lg flex flex-col gap-1 bg-white mx-8 my-2 p-4">
-            <h1 class="font-semibold text-2xl text-center">Edit Profile</h1>
+    <main class="px-8 py-16">
+        <form action="/akun/edit" method="POST" class="flex justify-center gap-16">
             @csrf
-            <label for="name" class="font-semibold">Nama <span class="text-red-500">*</span></label>
-            <input type="text" name="name" id="name"
-                class="w-full p-2 mt-1 border-2 border-slate-400 rounded-md mb-2" placeholder="Nama"
-                value="{{ old('name') === null ? $akun->name : old('name') }}">
-            <label for="email" class="font-semibold">Email <span class="text-red-500">*</span></label>
-            <input type="email" name="email" id="email"
-                class="w-full p-2 mt-1 border-2 border-slate-400 rounded-md mb-2" placeholder="Email"
-                value="{{ old('email') === null ? $akun->email : old('email') }}">
-            <label for="password" class="font-semibold">Password</label>
-            <input type="password" name="password" id="password"
-                class="w-full p-2 mt-1 border-2 border-slate-400 rounded-md mb-2"
-                placeholder="Isi ulang untuk mengganti, Minimal 8 karakter">
+            <aside class="w-2/5">
+                <img class="h-full object-cover rounded-md" src="/images/backgrounds/LOGIN.png" alt="illustration">
+            </aside>
+            <aside class="w-3/5 flex flex-col gap-4">
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                    <aside>
+                        <h1 class="font-semibold text-2xl">Tambah Akun</h1>
+                    </aside>
+                    <aside class="flex items-center gap-4">
+                        <a href="/akun"
+                            class="px-4 py-2 bg-white border-2 border-black opacity-80 hover:opacity-100 duration-300 rounded-md">Cancel</a>
+                        <button type="submit"
+                            class="px-4 py-2 bg-black border-2 border-black text-white opacity-80 hover:opacity-100 duration-300 rounded-md">Save</button>
+                    </aside>
+                </div>
+                <hr>
+                <div class="flex flex-col gap-2">
+                    <label for="name" class="font-semibold">Nama <span class="text-red-500">*</span></label>
+                    <input type="text" name="name" id="name"
+                        class="w-full p-2 mt-1 border-2 border-slate-400 rounded-md mb-2" placeholder="Nama"
+                        value="{{ old('name') === null ? $akun->name : old('name') }}">
+                    <label for="nik" class="font-semibold">NIK <span class="text-red-500">*</span></label>
+                    <input type="text" name="nik" id="nik"
+                        class="w-full p-2 mt-1 border-2 border-slate-400 rounded-md mb-2" placeholder="NIK"
+                        value="{{ old('nik') === null ? ($akun->profile === null ? '' : $akun->profile->nik) : old('nik') }}">
+                    <label for="email" class="font-semibold">Email <span class="text-red-500">*</span></label>
+                    <input type="email" name="email" id="email"
+                        class="w-full p-2 mt-1 border-2 border-slate-400 rounded-md mb-2" placeholder="Email"
+                        value="{{ old('email') === null ? $akun->email : old('email') }}">
+                    <label for="password" class="font-semibold">Password <span class="text-red-500">*</span></label>
+                    <input type="password" name="password" id="password"
+                        class="w-full p-2 mt-1 border-2 border-slate-400 rounded-md mb-2"
+                        placeholder="Minimal 8 karakter">
+                    <label for="masa_kerja" class="font-semibold">Masa Kerja <span class="text-red-500">*</span></label>
+                    <input type="number" name="masa_kerja" id="masa_kerja"
+                        class="w-full p-2 mt-1 border-2 border-slate-400 rounded-md mb-2" placeholder="Masa Kerja"
+                        value="{{ old('masa_kerja') === null ? ($akun->profile === null ? '' : $akun->profile->masa_kerja) : old('masa_kerja') }}">
 
-            <label for="nik" class="font-semibold">NIK <span class="text-red-500">*</span></label>
-            <input type="text" name="nik" id="nik"
-                class="w-full p-2 mt-1 border-2 border-slate-400 rounded-md mb-2" placeholder="NIK"
-                value="{{ old('nik') === null ? ($akun->profile === null ? '' : $akun->profile->nik) : old('nik') }}">
-            <label for="masa_kerja" class="font-semibold">Masa Kerja <span class="text-red-500">*</span></label>
-            <input type="number" name="masa_kerja" id="masa_kerja"
-                class="w-full p-2 mt-1 border-2 border-slate-400 rounded-md mb-2" placeholder="Masa Kerja"
-                value="{{ old('masa_kerja') === null ? ($akun->profile === null ? '' : $akun->profile->masa_kerja) : old('masa_kerja') }}">
-            <label for="jabatan" class="font-semibold">Jabatan <span class="text-red-500">*</span></label>
-            <input type="jabatan" name="jabatan" id="jabatan"
-                class="w-full p-2 mt-1 border-2 border-slate-400 rounded-md mb-2" placeholder="Jabatan"
-                value="{{ old('jabatan') === null ? ($akun->profile === null ? '' : $akun->profile->jabatan) : old('jabatan') }}">
-
-            <button type="submit" class="bg-[#383A83] text-white py-2 rounded-lg font-semibold">Simpan</button>
+                    <label for="jabatan" class="font-semibold">Jabatan <span class="text-red-500">*</span></label>
+                    <input type="jabatan" name="jabatan" id="jabatan"
+                        class="w-full p-2 mt-1 border-2 border-slate-400 rounded-md mb-2" placeholder="Jabatan"
+                        value="{{ old('jabatan') === null ? ($akun->profile === null ? '' : $akun->profile->jabatan) : old('jabatan') }}">
+                </div>
+            </aside>
         </form>
     </main>
     @include('components.footer')
