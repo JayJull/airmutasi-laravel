@@ -1,9 +1,9 @@
 <header
-    class="bg-white flex flex-col md:flex-row items-center justify-between px-8 py-4 gap-4 {{ !empty($static) && $static ? 'sticky' : 'fixed' }} top-0 left-0 z-50 w-full font-sans text-lg tracking-widest font-lg">
+    class="bg-white flex flex-col xl:flex-row items-center justify-between px-8 py-4 gap-4 {{ !empty($static) && $static ? 'sticky' : 'fixed' }} top-0 left-0 z-50 w-full font-sans text-lg tracking-widest font-lg">
     <a href="/"><img src="/images/logo.svg" alt="logo" /></a>
-    <button class="md:hidden">☰</button>
+    <button class="xl:hidden">☰</button>
     <nav
-        class="md:min-w-1/4 hidden md:flex flex-col sm:flex-row items-center justify-around gap-2 sm:gap-4 md:gap-16 z-[60]">
+        class="xl:min-w-1/4 hidden xl:flex flex-col sm:flex-row items-center justify-around gap-2 sm:gap-4 xl:gap-16 z-[60]">
         <div id="rotasi-nav">
             <button class="flex items-center gap-1">Rotasi <img src="/images/icons/moreArrow.svg"
                     class="duration-300"></button>
@@ -23,15 +23,15 @@
         <a class="text-gray-500" href="#">Demosi</a>
         <a class="text-gray-500" href="#">Promosi</a>
     </nav>
-    <div>
+    <div id="account" class="hidden xl:flex flex-col sm:flex-row gap-2">
         @auth
             <a href="/akun"
-                class="text-sm hover:bg-black hover:text-white duration-300 text-black border-2 border-black px-8 py-1 rounded-full">Akun</a>
+                class="text-center text-sm hover:bg-black hover:text-white duration-300 text-black border-2 border-black px-8 py-1 rounded-full">Akun</a>
             <a href="/logout"
-                class="text-sm hover:bg-white hover:text-black duration-300 bg-black text-white border-2 border-black px-8 py-1 rounded-full">Logout</a>
+                class="text-center text-sm hover:bg-white hover:text-black duration-300 bg-black text-white border-2 border-black px-8 py-1 rounded-full">Logout</a>
         @else
             <a href="/login"
-                class="text-sm hover:bg-black hover:text-white duration-300 text-black border-2 border-black px-8 py-1 rounded-full">Login</a>
+                class="text-center text-sm hover:bg-black hover:text-white duration-300 text-black border-2 border-black px-8 py-1 rounded-full">Login</a>
         @endauth
     </div>
 </header>
