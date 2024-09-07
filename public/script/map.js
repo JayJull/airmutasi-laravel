@@ -11,17 +11,39 @@ function InitMap() {
     }).setView([-2, 117.0577694], 5);
     const mapIndonesiaURL = "/geo/indonesia-prov.geojson";
 
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.innerHTML = `
+            <defs>
+                <pattern id="imagePattern" patternUnits="userSpaceOnUse" width="130" height="86.5">
+                    <image href="/images/backgrounds/square-texture.jpg" x="0" y="0" width="130" height="86.5" />
+                </pattern>
+            </defs>
+        `;
+    svg.classList.add("h-0");
+    document.body.appendChild(svg);
+
     fetch(mapIndonesiaURL)
         .then((response) => response.json())
         .then((data) => {
             L.geoJson(data, {
-                style: {
-                    color: "#CACACA",
-                    weight: 1.5,
-                    fillColor: "#293676",
-                    fillOpacity: 1,
-                },
+                style: function () {
+                    return {
+                        fillColor: 'url(#imagePattern)',  // Fill with the pattern
+                        weight: 2,
+                        opacity: 1,
+                        color: '#000',
+                        fillOpacity: 0.8
+                    };
+                }
             }).addTo(newMap);
+            // var bounds = geoJsonLayer.getBounds();
+
+            // // Add an image overlay over the bounds
+            // var imageUrl = "/images/backgrounds/square-texture.jpg"; // Replace with your image
+            // var imageOverlay = L.imageOverlay(imageUrl, bounds).addTo(newMap);
+
+            // // Bring the GeoJSON outline to the front
+            // geoJsonLayer.bringToFront();
             document.getElementById("loading") &&
                 document.getElementById("loading").classList.add("hidden");
         });
