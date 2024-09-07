@@ -36,14 +36,6 @@ function InitMap() {
                     };
                 }
             }).addTo(newMap);
-            // var bounds = geoJsonLayer.getBounds();
-
-            // // Add an image overlay over the bounds
-            // var imageUrl = "/images/backgrounds/square-texture.jpg"; // Replace with your image
-            // var imageOverlay = L.imageOverlay(imageUrl, bounds).addTo(newMap);
-
-            // // Bring the GeoJSON outline to the front
-            // geoJsonLayer.bringToFront();
             document.getElementById("loading") &&
                 document.getElementById("loading").classList.add("hidden");
         });
