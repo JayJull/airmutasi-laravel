@@ -124,7 +124,7 @@
                 @else
                     @foreach ($pengajuans as $currPengajuan)
                         <a href="/rotasi/selektif?id={{ $currPengajuan->id }}&tab={{ $tab }}{{ $query }}"
-                            class="pengajuan-item {{ $currPengajuan->id === $pengajuan->id ? 'pengajuan-active bg-blue-500 text-white' : 'bg-white text-black' }} px-8 py-3 rounded-lg grid grid-cols-1 sm:grid-cols-2 items-center justify-between gap-2">
+                            class="pengajuan-item {{ $currPengajuan->id === $pengajuan->id ? 'pengajuan-active bg-blue-500 text-white' : 'bg-white text-black border border-blue-500' }} px-8 py-3 rounded-lg grid grid-cols-1 sm:grid-cols-2 items-center justify-between gap-2">
                             <aside class="flex flex-col items-center sm:items-start">
                                 <h3 class="font-semibold text-lg">{{ $currPengajuan->nama_lengkap }}</h3>
                                 <p>{{ $currPengajuan->nik }}</p>
