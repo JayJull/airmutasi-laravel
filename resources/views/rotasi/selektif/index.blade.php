@@ -100,7 +100,7 @@
     <main>
         <section class="flex flex-col-reverse md:grid md:grid-cols-2 md:items-start m-4 gap-4 md:min-h-screen">
             <aside class="flex flex-col gap-2 pe-2 pb-2 h-[50vh] md:h-full md:max-h-screen overflow-y-auto">
-                <div class="sticky top-0 w-full">
+                <div class="sticky top-0 w-full bg-white">
                     <div class="text-black flex gap-2 py-8 justify-evenly items-center">
                         <a class="{{ !$tab || $tab === 'diajukan' ? 'font-semibold underline' : '' }}"
                             href="/rotasi/selektif?tab=diajukan{{ $query }}">Pengajuan</a>
@@ -129,7 +129,7 @@
                                 <h3 class="font-semibold text-lg">{{ $currPengajuan->nama_lengkap }}</h3>
                                 <p>{{ $currPengajuan->nik }}</p>
                             </aside>
-                            <aside class="flex items-center gap-4 flex-wrap">
+                            <aside class="flex justify-center items-center gap-4 flex-wrap flex-row md:flex-col xl:flex-row">
                                 <h4 class="font-semibold text-center">{{ $currPengajuan->lokasiAwal->nama }}</h4>
                                 <img src="/images/icons/{{ $currPengajuan->id === $pengajuan->id ? 'switch_white' : 'switch_blue' }}.svg"
                                     alt="switch" />
