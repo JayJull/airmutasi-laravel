@@ -22,9 +22,9 @@
                     </aside>
                     <aside class="flex items-center gap-4">
                         <a href="/akun"
-                            class="px-4 py-2 bg-white border-2 border-black opacity-80 hover:opacity-100 duration-300 rounded-md">Cancel</a>
+                            class="px-4 py-2 bg-white border-2 border-blue-500 opacity-80 hover:opacity-100 duration-300 rounded-md">Cancel</a>
                         <button type="submit"
-                            class="px-4 py-2 bg-black border-2 border-black text-white opacity-80 hover:opacity-100 duration-300 rounded-md">Save</button>
+                            class="px-4 py-2 bg-blue-500 border-2 border-blue-500 text-white opacity-80 hover:opacity-100 duration-300 rounded-md">Save</button>
                     </aside>
                 </div>
                 <hr>

@@ -12,33 +12,26 @@
     <main>
         {{-- Map start --}}
         <section class="flex flex-col items-center">
-            <div class="w-full h-[50vh] md:h-screen flex">
+            <div class="w-full h-[50vh] md:h-[75vh] flex">
                 <div id="map" class="w-full h-full z-40">
                     <div class="w-full h-full flex items-center justify-center" id="loading">
                         <img src="/images/icons/ripples.svg" alt="loading"
                             class="w-20 h-20 z-40 p-2 bg-white rounded-full">
                     </div>
                 </div>
-                <div id="banner-img" class="w-0 h-full overflow-hidden">
-                    <img class="w-full object-cover" src="/images/backgrounds/banner.png" alt="banner">
-                </div>
-            </div>
-            <div>
-                <button id="map-show-btn" class="p-2 border-2 border-black bg-black rounded-full"></button>
-                <button id="banner-show-btn" class="p-2 border-2 border-black rounded-full"></button>
             </div>
         </section>
         {{-- Map end --}}
         @can('admin')
             <div class="flex justify-center p-4 text-sm font-semibold">
-                <div id="tab-cabang" class="flex gap-2 border-2 border-black rounded-md p-2">
-                    <button id="list" class="rounded-md bg-black text-white px-2 py-1">List Cabang</button>
+                <div id="tab-cabang" class="flex gap-2 border-2 border-blue-500 rounded-md p-2">
+                    <button id="list" class="rounded-md bg-blue-500 text-white px-2 py-1">List Cabang</button>
                     <button id="summary" class="rounded-md px-2 py-1">Summary Cabang</button>
                 </div>
             </div>
         @endcan
         <section id="cabang-list" class="p-4 w-full flex flex-col-reverse sm:grid sm:grid-cols-2 gap-2">
-            <aside class="col-span-2 sm:col-span-1 bg-black rounded-md pt-2 flex flex-col gap-2 max-h-[70vh]">
+            <aside class="col-span-2 sm:col-span-1 bg-blue-500 rounded-md pt-2 flex flex-col gap-2 max-h-[70vh]">
                 <h1 class="font-bold text-xl text-white mx-2 text-center">Daftar Kantor Cabang</h1>
                 <div class="sticky top-0 bg-[#ced0ff] rounded-md mx-2">
                     <div>
@@ -63,11 +56,11 @@
             <aside class="col-span-2 sm:col-span-1 flex flex-col gap-2 sm:max-h-[70vh]">
                 @can('admin')
                     <a href="/rotasi/cabang/input"
-                        class="bg-black text-white opacity-80 hover:opacity-100 duration-300 w-full text-center p-2 rounded-lg font-semibold">Tambah
+                        class="bg-blue-500 text-white opacity-80 hover:opacity-100 duration-300 w-full text-center p-2 rounded-lg font-semibold">Tambah
                         Cabang</a>
                 @endcan
                 <div class="py-2 flex-grow flex flex-col gap-2 rounded-lg overflow-y-auto w-full">
-                    <div class="flex items-center justify-center bg-white h-64 rounded-lg border-8 border-black">
+                    <div class="flex items-center justify-center bg-white h-64 rounded-lg border-8 border-blue-500">
                         <img id="thumbnail-placeholder" src="/images/icons/Full Image.svg" alt="image" />
                         <img id="thumbnail" class="hidden w-full h-full object-cover" />
                     </div>
@@ -76,7 +69,7 @@
                         Pilih Cabang
                     </p>
                     <a id="detail"
-                        class="self-end bg-black text-white opacity-80 hover:opacity-100 duration-300 px-4 py-2 rounded-lg text-center font-semibold hidden">
+                        class="self-end bg-blue-500 text-white opacity-80 hover:opacity-100 duration-300 px-4 py-2 rounded-lg text-center font-semibold hidden">
                         Lihat Detail
                     </a>
                 </div>
@@ -89,7 +82,7 @@
                         <p class="text-center my-auto">Tidak ada data</p>
                     @endif
                     @foreach ($cabangs as $cabang)
-                        <a class="border-2 border-black rounded-md px-4 py-2 flex flex-col sm:flex-row items-center justify-between"
+                        <a class="border-2 border-blue-500 rounded-md px-4 py-2 flex flex-col sm:flex-row items-center justify-between"
                             href="/rotasi/selektif?lokasi_awal={{ $cabang->nama }}">
                             <span class="sm:max-w-[40%] font-semibold">
                                 {{ $cabang->nama }}
@@ -165,9 +158,9 @@
                 document.getElementById('cabang-list').classList.add('flex');
                 document.getElementById('cabang-list').classList.add('sm:grid');
                 document.getElementById('cabang-summary').classList.add('hidden');
-                document.querySelector('#tab-cabang #list').classList.add('bg-black');
+                document.querySelector('#tab-cabang #list').classList.add('bg-blue-500');
                 document.querySelector('#tab-cabang #list').classList.add('text-white');
-                document.querySelector('#tab-cabang #summary').classList.remove('bg-black');
+                document.querySelector('#tab-cabang #summary').classList.remove('bg-blue-500');
                 document.querySelector('#tab-cabang #summary').classList.remove('text-white');
             }
 
@@ -176,9 +169,9 @@
                 document.getElementById('cabang-list').classList.remove('flex');
                 document.getElementById('cabang-list').classList.remove('sm:grid');
                 document.getElementById('cabang-summary').classList.remove('hidden');
-                document.querySelector('#tab-cabang #list').classList.remove('bg-black');
+                document.querySelector('#tab-cabang #list').classList.remove('bg-blue-500');
                 document.querySelector('#tab-cabang #list').classList.remove('text-white');
-                document.querySelector('#tab-cabang #summary').classList.add('bg-black');
+                document.querySelector('#tab-cabang #summary').classList.add('bg-blue-500');
                 document.querySelector('#tab-cabang #summary').classList.add('text-white');
             }
             document.querySelector('#tab-cabang #list').addEventListener('click', openListCabang);
@@ -198,8 +191,8 @@
                 bannerContainer.classList.remove('w-full');
                 bannerContainer.classList.add('w-0');
                 currentPage = 0;
-                mapShowBtn.classList.add('bg-black');
-                bannerShowBtn.classList.remove('bg-black');
+                mapShowBtn.classList.add('bg-blue-500');
+                bannerShowBtn.classList.remove('bg-blue-500');
             }
         });
         bannerShowBtn.addEventListener('click', () => {
@@ -209,8 +202,8 @@
                 bannerContainer.classList.add('w-full');
                 bannerContainer.classList.remove('w-0');
                 currentPage = 1;
-                mapShowBtn.classList.remove('bg-black');
-                bannerShowBtn.classList.add('bg-black');
+                mapShowBtn.classList.remove('bg-blue-500');
+                bannerShowBtn.classList.add('bg-blue-500');
             }
         });
     </script>

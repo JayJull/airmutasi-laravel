@@ -9,6 +9,8 @@ use App\Http\Controllers\PersonelController;
 use App\Http\Controllers\Rotasi\CabangController as RotasiCabangController;
 use App\Http\Controllers\Rotasi\SelektifAdminController as RotasiSelektifAdminController;
 use App\Http\Controllers\Rotasi\PengajuanController as RotasiPengajuanController;
+use App\Models\Cabang;
+use App\Models\Personel;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +25,9 @@ use App\Http\Controllers\Rotasi\PengajuanController as RotasiPengajuanController
 
 
 Route::get('/', function () {
-    return view('welcome');
+    $personelCount = Personel::count();
+    $cabangCount = Cabang::count();
+    return view('welcome', ["personel" => $personelCount, "cabang" => $cabangCount]);
 })->name('landing');
 
 Route::middleware("guest")->get("/login", [AuthController::class, 'loginView'])->name('login');

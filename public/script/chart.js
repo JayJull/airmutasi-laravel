@@ -126,13 +126,28 @@ function generateRadarChart(title, series) {
             style: {
                 color: "#fff",
                 fontWeight: "bold",
-            }
+            },
         },
         xaxis: {
             categories: ["ATC", "ACO", "AIS", "ATFM", "TAPOR", "ATS System"],
+            labels: {
+                style: {
+                    colors: ["#fff", "#fff", "#fff", "#fff", "#fff", "#fff"],
+                },
+            },
         },
         yaxis: {
             tickAmount: 3,
+            labels: {
+                style: {
+                    colors: ["#ff0", "#ff0", "#ff0", "#ff0", "#ff0", "#ff0"],
+                },
+            },
         },
+        legend: {
+            labels: {
+                colors: "#fff"
+            }
+        }
     };
 }

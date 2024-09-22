@@ -1,5 +1,5 @@
 <footer
-    class="bg-black text-white flex flex-col xl:flex-row items-center xl:items-start justify-between gap-8 p-8 text-lg">
+    class="bg-blue-500 text-white flex flex-col xl:flex-row items-center xl:items-start justify-between gap-8 p-8 text-lg">
     <aside class="xl:max-w-[33%] flex-grow flex flex-col gap-2">
         <h1 class="font-black text-6xl sm:text-8xl">MUTANT</h1>
     </aside>
