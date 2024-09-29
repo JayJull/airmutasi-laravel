@@ -28,7 +28,7 @@
                 <button type="submit"
                     class="w-full font-semibold bg-[#003285] text-white hover:opacity-100 opacity-80 duration-200 px-4 py-2 rounded-full mt-10">Log
                     in</button>
-                <a href="/forget-password" class="text-blue-[#003285] underline text-sm mt-2">Forgot your password?</a>
+                <a href="/forget-password" class="text-[#003285] underline text-sm mt-2">Forgot your password?</a>
             </div>
         </form>
         <div class="px-4 py-2 hidden sm:block">

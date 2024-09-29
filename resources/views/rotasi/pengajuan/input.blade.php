@@ -98,7 +98,7 @@
                     </div>
                     <div class="flex justify-end gap-4 w-full">
                         <button type="button"
-                            class="bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                            class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
                             onclick="changeSection(2)">
                             Selanjutnya
                         </button>
@@ -127,7 +127,7 @@
                                     class="col-span-3 px-2 py-1 border-2 border-slate-400 rounded-md"
                                     placeholder="Ketik Disini ..." value="{{ old('masa_kerja') }}" />
                                 <button type="button" id="sk_mutasi_file_button"
-                                    class="col-span-1 bg-blue-[#003285]  opacity-80 hover:opacity-100 duration-200 text-white px-2 py-1 rounded-md font-medium"
+                                    class="col-span-1 bg-[#003285]  opacity-80 hover:opacity-100 duration-200 text-white px-2 py-1 rounded-md font-medium"
                                     popovertarget="sk_mutasi_popover">{{ old('sk_mutasi_url') ? '✅️ Ubah' : 'Berkas' }}</button>
                                 @include('rotasi.components.file-popover', [
                                     'id' => 'sk_mutasi',
@@ -146,12 +146,12 @@
                     </div>
                     <div class="flex justify-end gap-4 w-full">
                         <button type="button"
-                            class="bg-white border-2 border-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                            class="bg-white border-2 border-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
                             onclick="changeSection(1)">
                             Kembali
                         </button>
                         <button type="button"
-                            class="bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                            class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
                             onclick="changeSection(3)">
                             Selanjutnya
                         </button>
@@ -179,7 +179,7 @@
                                 @endif
                             </div>
                             <button
-                                class="bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white py-2 rounded-lg font-semibold w-full mt-1"
+                                class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white py-2 rounded-lg font-semibold w-full mt-1"
                                 type="button" id="kompetensi_tambah">Tambah +</button>
                         </aside>
                         <aside class="flex flex-col justify-center gap-0">
@@ -193,7 +193,7 @@
                         <label class="font-semibold">Surat Persetujuan Pejabat Setempat</label>
                         <br>
                         <button type="button" id="surat_persetujuan_file_button"
-                            class="w-full bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-2 py-1 mt-1 rounded-md font-medium"
+                            class="w-full bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-2 py-1 mt-1 rounded-md font-medium"
                             popovertarget="surat_persetujuan_popover">{{ old('surat_persetujuan_url') ? '✅️ Ubah' : 'Berkas' }}</button>
                         @include('rotasi.components.file-popover', [
                             'id' => 'surat_persetujuan',
@@ -209,12 +209,12 @@
                     </div>
                     <div class="flex justify-end gap-4 w-full">
                         <button type="button"
-                            class="bg-white border-2 border-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                            class="bg-white border-2 border-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
                             onclick="changeSection(2)">
                             Kembali
                         </button>
                         <button type="submit"
-                            class="bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold">
+                            class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold">
                             Kirim
                         </button>
                     </div>

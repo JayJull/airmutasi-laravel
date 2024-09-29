@@ -26,12 +26,12 @@
     <div id="account" class="hidden xl:flex flex-col sm:flex-row gap-2">
         @auth
             <a href="/akun"
-                class="text-center text-sm hover:bg-blue-[#003285] hover:text-white duration-300 text-black border-2 border-blue-[#003285] px-8 py-1 rounded-full">Akun</a>
+                class="text-center text-sm hover:bg-[#003285] hover:text-white duration-300 text-black border-2 border-[#003285] px-8 py-1 rounded-full">Akun</a>
             <a href="/logout"
-                class="text-center text-sm hover:bg-white hover:text-black duration-300 bg-blue-[#003285] text-white border-2 border-blue-[#003285] px-8 py-1 rounded-full">Logout</a>
+                class="text-center text-sm hover:bg-white hover:text-black duration-300 bg-[#003285] text-white border-2 border-[#003285] px-8 py-1 rounded-full">Logout</a>
         @else
             <a href="/login"
-                class="text-center text-sm hover:bg-blue-[#003285] hover:text-white duration-300 text-black border-2 border-blue-[#003285] px-8 py-1 rounded-full">Login</a>
+                class="text-center text-sm hover:bg-[#003285] hover:text-white duration-300 text-black border-2 border-[#003285] px-8 py-1 rounded-full">Login</a>
         @endauth
     </div>
 </header>

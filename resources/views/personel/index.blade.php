@@ -71,7 +71,7 @@
                             <h1 class="col-span-4 md:col-span-2">Kompetensi</h1>
                             <h1>Pensiun</h1>
                         </div>
-                        <hr class="border-[1px] border-blue-[#003285] w-full">
+                        <hr class="border-[1px] border-[#003285] w-full">
                     @endif
                     @foreach ($cabang->personels as $personel)
                         <div

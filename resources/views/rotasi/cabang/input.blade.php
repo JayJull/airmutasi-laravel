@@ -23,7 +23,7 @@
                     class="resize-none w-full p-2 border-2 border-slate-400 rounded-md">{{ old('alamat') }}</textarea>
                 <label for="thumbnail_file_button" class="font-semibold">Foto Tower</label>
                 <button id="thumbnail_file_button"
-                    class="bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-2 py-1 rounded-md font-medium"
+                    class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-2 py-1 rounded-md font-medium"
                     type="button" popovertarget="thumbnail_popover">Pilih file</button>
                 <img id="thumbnail-preview" src="" alt="default" class="hidden">
                 @include('rotasi.components.file-popover', [
@@ -35,7 +35,7 @@
                 ])
                 <div class="mt-3 flex justify-end gap-4 w-full">
                     <button type="button"
-                        class="bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                        class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
                         onclick="changeSection(2)">
                         Selanjutnya
                     </button>
@@ -56,16 +56,16 @@
                     @endif
                 </div>
                 <button
-                    class="bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white py-2 rounded-lg font-semibold w-full mt-1"
+                    class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white py-2 rounded-lg font-semibold w-full mt-1"
                     type="button" id="kelas_tambah">Tambah +</button>
                 <div class="mt-3 flex justify-end gap-4 w-full">
                     <button type="button"
-                        class="bg-white border-2 border-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                        class="bg-white border-2 border-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
                         onclick="changeSection(1)">
                         Kembali
                     </button>
                     <button type="button"
-                        class="bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                        class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
                         onclick="changeSection(3)">
                         Selanjutnya
                     </button>
@@ -86,12 +86,12 @@
                     value="{{ old('frms') }}">
                 <div class="mt-3 flex justify-end gap-4 w-full">
                     <button type="button"
-                        class="bg-white border-2 border-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                        class="bg-white border-2 border-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
                         onclick="changeSection(2)">
                         Kembali
                     </button>
                     <button type="button"
-                        class="bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                        class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
                         onclick="changeSection(4)">
                         Selanjutnya
                     </button>
@@ -109,12 +109,12 @@
                     value="{{ old('formasi_aco') }}">
                 <div class="mt-3 flex justify-end gap-4 w-full">
                     <button type="button"
-                        class="bg-white border-2 border-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                        class="bg-white border-2 border-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
                         onclick="changeSection(3)">
                         Kembali
                     </button>
                     <button type="button"
-                        class="bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                        class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
                         onclick="changeSection(5)">
                         Selanjutnya
                     </button>
@@ -132,12 +132,12 @@
                     value="{{ old('formasi_ais') }}">
                 <div class="mt-3 flex justify-end gap-4 w-full">
                     <button type="button"
-                        class="bg-white border-2 border-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                        class="bg-white border-2 border-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
                         onclick="changeSection(4)">
                         Kembali
                     </button>
                     <button type="button"
-                        class="bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                        class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
                         onclick="changeSection(6)">
                         Selanjutnya
                     </button>
@@ -155,12 +155,12 @@
                     value="{{ old('formasi_atfm') }}">
                 <div class="mt-3 flex justify-end gap-4 w-full">
                     <button type="button"
-                        class="bg-white border-2 border-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                        class="bg-white border-2 border-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
                         onclick="changeSection(5)">
                         Kembali
                     </button>
                     <button type="button"
-                        class="bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                        class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
                         onclick="changeSection(7)">
                         Selanjutnya
                     </button>
@@ -178,12 +178,12 @@
                     value="{{ old('formasi_tapor') }}">
                 <div class="mt-3 flex justify-end gap-4 w-full">
                     <button type="button"
-                        class="bg-white border-2 border-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                        class="bg-white border-2 border-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
                         onclick="changeSection(6)">
                         Kembali
                     </button>
                     <button type="button"
-                        class="bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                        class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
                         onclick="changeSection(8)">
                         Selanjutnya
                     </button>
@@ -202,12 +202,12 @@
                     value="{{ old('formasi_ats_system') }}">
                 <div class="mt-3 flex justify-end gap-4 w-full">
                     <button type="button"
-                        class="bg-white border-2 border-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                        class="bg-white border-2 border-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
                         onclick="changeSection(7)">
                         Kembali
                     </button>
                     <button type="button"
-                        class="bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                        class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
                         onclick="changeSection(9)">
                         Selanjutnya
                     </button>
@@ -237,12 +237,12 @@
                 </div>
                 <div class="mt-3 flex justify-end gap-4 w-full">
                     <button type="button"
-                        class="bg-white border-2 border-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
+                        class="bg-white border-2 border-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-950 px-4 py-2 rounded-lg font-semibold"
                         onclick="changeSection(8)">
                         Kembali
                     </button>
                     <button type="submit"
-                        class="bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold">
+                        class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold">
                         Simpan
                     </button>
                 </div>
