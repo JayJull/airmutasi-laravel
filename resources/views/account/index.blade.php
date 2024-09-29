@@ -24,10 +24,10 @@
                     </aside>
                     <aside class="flex items-center gap-4">
                         <a href="/akun/edit"
-                            class="px-4 py-2 bg-blue-500 text-white opacity-80 hover:opacity-100 duration-300 rounded-md">Edit</a>
+                            class="px-4 py-2 bg-blue-[#003285] text-white opacity-80 hover:opacity-100 duration-300 rounded-md">Edit</a>
                         @can('admin')
                             <button
-                                class="px-4 py-2 bg-blue-500 text-white opacity-80 hover:opacity-100 duration-300 rounded-md"
+                                class="px-4 py-2 bg-blue-[#003285] text-white opacity-80 hover:opacity-100 duration-300 rounded-md"
                                 popovertarget="admin-action">☰</button>
                         @endcan
                     </aside>
@@ -55,10 +55,10 @@
             <section popover="auto" id="admin-action" class="rounded-md p-4 shadow-lg">
                 <div class="flex flex-col gap-2">
                     <a href="/akun/add"
-                        class="px-4 py-2 bg-blue-500 text-white opacity-80 hover:opacity-100 rounded-md duration-300">Buat
+                        class="px-4 py-2 bg-blue-[#003285] text-white opacity-80 hover:opacity-100 rounded-md duration-300">Buat
                         akun personel baru</a>
                     <button popovertarget="cabang-assign"
-                        class="px-4 py-2 bg-blue-500 text-white opacity-80 hover:opacity-100 rounded-md duration-300">Daftarkan
+                        class="px-4 py-2 bg-blue-[#003285] text-white opacity-80 hover:opacity-100 rounded-md duration-300">Daftarkan
                         cabang ke
                         akun</button>
                     <div id="cabang-assign" popover class="p-2 rounded-md w-1/2 border-2">

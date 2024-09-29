@@ -42,7 +42,7 @@
                 <div class="flex gap-2">
                     @foreach ($pengajuan->kompetensis as $kompetensi)
                         @if ($kompetensi->file_url && $kompetensi->file_url !== 'null')
-                            <a class="bg-blue-500 duration-200 text-white px-2 py-1 font-semibold rounded-lg"
+                            <a class="bg-blue-[#003285] duration-200 text-white px-2 py-1 font-semibold rounded-lg"
                                 href="{{ $kompetensi->file_url }}">{{ $kompetensi->nama }}</a>
                         @else
                             <p class="text-white bg-gray-400 px-2 py-1 font-semibold rounded-lg">
@@ -54,11 +54,11 @@
                 <p class="font-semibold mt-2">Berkas Lain</p>
                 <div class="flex gap-2">
                     @if ($pengajuan->sk_mutasi_url)
-                        <a class="flex-grow text-center bg-blue-500 duration-200 text-white px-2 py-1 mt-1 font-semibold rounded-lg"
+                        <a class="flex-grow text-center bg-blue-[#003285] duration-200 text-white px-2 py-1 mt-1 font-semibold rounded-lg"
                             href="{{ $pengajuan->file_url }}">SK Mutasi</a>
                     @endif
                     @if ($pengajuan->surat_persetujuan_url)
-                        <a class="flex-grow text-center bg-blue-500 duration-200 text-white px-2 py-1 mt-1 font-semibold rounded-lg"
+                        <a class="flex-grow text-center bg-blue-[#003285] duration-200 text-white px-2 py-1 mt-1 font-semibold rounded-lg"
                             href="{{ $pengajuan->surat_persetujuan_url }}">Surat Persetujuan</a>
                     @endif
                 </div>
@@ -93,7 +93,7 @@
 
             <button id="filter-reset" type="button" class="underline self-end">Reset</button>
 
-            <button class="bg-blue-500 opacity-80 hover:opacity-100 duration-200 text-white px-2 py-1 font-semibold rounded-lg"
+            <button class="bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-2 py-1 font-semibold rounded-lg"
                 type="submit">Filter</button>
         </form>
     </div>
@@ -115,7 +115,7 @@
                             <img src="/images/icons/filter.svg" alt="filter">
                         </button>
                     </div>
-                    <hr class="w-full border-2 border-blue-500" />
+                    <hr class="w-full border-2 border-blue-[#003285]" />
                 </div>
                 @if (count($pengajuans) === 0)
                     <div class="h-full flex items-center justify-center">
@@ -124,7 +124,7 @@
                 @else
                     @foreach ($pengajuans as $currPengajuan)
                         <a href="/rotasi/selektif?id={{ $currPengajuan->id }}&tab={{ $tab }}{{ $query }}"
-                            class="pengajuan-item {{ $currPengajuan->id === $pengajuan->id ? 'pengajuan-active bg-blue-500 text-white' : 'bg-white text-black border border-blue-500' }} px-8 py-3 rounded-lg grid grid-cols-1 sm:grid-cols-2 items-center justify-between gap-2">
+                            class="pengajuan-item {{ $currPengajuan->id === $pengajuan->id ? 'pengajuan-active bg-blue-[#003285] text-white' : 'bg-white text-black border border-blue-[#003285]' }} px-8 py-3 rounded-lg grid grid-cols-1 sm:grid-cols-2 items-center justify-between gap-2">
                             <aside class="flex flex-col items-center sm:items-start">
                                 <h3 class="font-semibold text-lg">{{ $currPengajuan->nama_lengkap }}</h3>
                                 <p>{{ $currPengajuan->nik }}</p>
@@ -150,16 +150,16 @@
                             </aside>
                             <aside class="flex gap-2">
                                 <a href="/rotasi/pengajuan/{{ $pengajuan->id }}"
-                                    class="flex-grow bg-white border-2 border-blue-500 opacity-80 hover:opacity-100 duration-200 text-gray-800 flex items-center px-6 py-2 font-semibold rounded-lg text-center">Ubah</a>
+                                    class="flex-grow bg-white border-2 border-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-gray-800 flex items-center px-6 py-2 font-semibold rounded-lg text-center">Ubah</a>
                                 <button type="button"
-                                    class="flex-grow bg-blue-500 opacity-80 hover:opacity-100 duration-200 text-white px-6 py-2 font-semibold rounded-lg"
+                                    class="flex-grow bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-6 py-2 font-semibold rounded-lg"
                                     popovertarget="detail-pengajuan">Detail</button>
                             </aside>
                         </div>
                         <a href="/download/pengajuan/{{ $pengajuan->id }}" target="_blank"
-                            class="flex-grow text-center bg-blue-500 opacity-80 hover:opacity-100 duration-200 text-white px-6 py-2 font-semibold rounded-lg">Unduh
+                            class="flex-grow text-center bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-6 py-2 font-semibold rounded-lg">Unduh
                             Dokumen</a>
-                        <hr class="w-full border-2 border-blue-500" />
+                        <hr class="w-full border-2 border-blue-[#003285]" />
                         <div>
                             <label class="font-semibold" for="nama">Nama</label>
                             <input class="w-full border-2 border-[#B6B6B6] px-2 py-1 mt-1 bg-[#C6C6C6]" type="text"
@@ -202,14 +202,14 @@
                                 class="w-full border-2 border-[#B6B6B6] px-2 py-1 mt-1 resize-none" rows="5"></textarea>
                         </div>
                         <button
-                            class="bg-blue-500 opacity-80 hover:opacity-100 duration-200 text-white px-6 py-2 font-semibold rounded-lg"
+                            class="bg-blue-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-6 py-2 font-semibold rounded-lg"
                             type="submit">
                             Submit
                         </button>
                     </div>
                 </form>
             @else
-                <div class="h-full bg-white flex items-center justify-center border-2 border-blue-500 rounded-md">
+                <div class="h-full bg-white flex items-center justify-center border-2 border-blue-[#003285] rounded-md">
                     <h1 class="font-bold text-2xl text-center">Tidak Ada Pengajuan</h1>
                 </div>
             @endif

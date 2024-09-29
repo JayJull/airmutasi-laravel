@@ -11,7 +11,7 @@
     <main class="flex flex-col gap-4 p-8">
         <section class="flex flex-col-reverse md:flex-row items-stretch gap-4">
             <aside class="md:w-3/5">
-                <p class="text-6xl 2xl:text-8xl font-black text-blue-500">
+                <p class="text-6xl 2xl:text-8xl font-black text-blue-[#003285]">
                     Sistem Mutasi AirNav
                 </p>
                 <p class="font-medium text-lg mt-4 md:text-left text-justify">
@@ -22,11 +22,11 @@
                     setiap proses rotasi, demosi, dan promosi dilakukan dengan cara yang adil dan efisien.
                 </p>
                 <div class="grid md:grid-cols-2 gap-4 mt-4">
-                    <div class="bg-blue-500 text-white p-4 rounded-md">
+                    <div class="bg-blue-[#003285] text-white p-4 rounded-md">
                         <p class="font-semibold text-2xl text-center">{{ $cabang }}+</p>
                         <p class="opacity-60 text-center">Branch Offices</p>
                     </div>
-                    <div class="bg-blue-500 text-white p-4 rounded-md">
+                    <div class="bg-blue-[#003285] text-white p-4 rounded-md">
                         <p class="font-semibold text-2xl text-center">{{ $personel }}+</p>
                         <p class="opacity-60 text-center">Employees</p>
                     </div>
@@ -38,13 +38,13 @@
         </section>
         <div class="grid md:grid-cols-3 gap-4">
             <a href="/rotasi/cabang"
-                class="bg-blue-500 text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-md 2xl:rounded-2xl"><img
+                class="bg-blue-[#003285] text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-md 2xl:rounded-2xl"><img
                     src="/images/icons/rotasi.svg" alt="rotasi" />Rotasi</a>
             <a href="/"
-                class="bg-blue-500 text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-md 2xl:rounded-2xl opacity-65">
+                class="bg-blue-[#003285] text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-md 2xl:rounded-2xl opacity-65">
                 <img src="/images/icons/demosi.svg" alt="demosi" />Demosi</a>
             <a href="/"
-                class="bg-blue-500 text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-md 2xl:rounded-2xl opacity-65">
+                class="bg-blue-[#003285] text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-md 2xl:rounded-2xl opacity-65">
                 <img src="/images/icons/promosi.svg" alt="promosi" />Promosi</a>
         </div>
     </main>

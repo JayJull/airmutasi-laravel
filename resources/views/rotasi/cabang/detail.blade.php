@@ -28,22 +28,22 @@
                 <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;"
                     class="p-2 break-all w-full font-sans">{{ $cabang->alamat }}</pre>
                 @can('admin')
-                    <a class="mt-4 bg-blue-500 hover:bg-white text-white hover:text-black border-2 border-blue-500 duration-200 w-full text-center p-2 rounded-lg font-semibold mb-2"
+                    <a class="mt-4 bg-blue-[#003285] hover:bg-white text-white hover:text-black border-2 border-blue-[#003285] duration-200 w-full text-center p-2 rounded-lg font-semibold mb-2"
                         href="/personel/cabang/{{ $cabang->id }}">Personel</a>
                     <a href="/rotasi/cabang/input/{{ $cabang->id }}"
-                        class="bg-blue-500 hover:bg-white text-white hover:text-black border-2 border-blue-500 duration-200 w-full text-center p-2 rounded-lg font-semibold mb-2">Update</a>
+                        class="bg-blue-[#003285] hover:bg-white text-white hover:text-black border-2 border-blue-[#003285] duration-200 w-full text-center p-2 rounded-lg font-semibold mb-2">Update</a>
                     <a href="/rotasi/cabang/input/{{ $cabang->id }}/delete"
-                        class="bg-white hover:bg-blue-500 text-black hover:text-white border-2 border-blue-500 duration-200 w-full text-center p-2 rounded-lg font-semibold">Hapus
+                        class="bg-white hover:bg-blue-[#003285] text-black hover:text-white border-2 border-blue-[#003285] duration-200 w-full text-center p-2 rounded-lg font-semibold">Hapus
                         Cabang</a>
                 @endcan
             </aside>
             <aside class="flex-grow col-span-2 grid md:grid-cols-2 md:grid-rows-1 gap-4">
                 <div
-                    class="bg-blue-500 col-span-2 md:col-span-1 flex items-center justify-center rounded-lg p-4 min-h-[50vh]">
+                    class="bg-blue-[#003285] col-span-2 md:col-span-1 flex items-center justify-center rounded-lg p-4 min-h-[50vh]">
                     <div id="stats-radar" class="w-full"></div>
                 </div>
                 <div
-                    class="bg-blue-500 text-white col-span-2 md:col-span-1 flex flex-col gap-4 items-center justify-center rounded-lg p-4">
+                    class="bg-blue-[#003285] text-white col-span-2 md:col-span-1 flex flex-col gap-4 items-center justify-center rounded-lg p-4">
                     @php
                         $range = $cabang->formasi - $cabang->frms;
                         $skalaPersonelATC = number_format(
@@ -89,7 +89,7 @@
                 </div>
                 <div class="col-span-2 grid grid-cols-2 gap-4 bg-white rounded-lg">
                     <div
-                        class="col-span-2 sm:col-span-1 border-4 border-blue-500 rounded-lg flex flex-col justify-center p-2">
+                        class="col-span-2 sm:col-span-1 border-4 border-blue-[#003285] rounded-lg flex flex-col justify-center p-2">
                         <h2 class="font-bold text-xl text-center">Jumlah Maksimal FRMS</h2>
                         <hr class="border-[1px] my-1">
                         <p class="font-medium ms-4">ATC {{ $cabang->formasi }} Orang</p>
@@ -100,12 +100,12 @@
                         <p class="font-medium ms-4">ATS System {{ $cabang->formasi_ats_system }} Orang</p>
                     </div>
                     <div
-                        class="col-span-2 sm:col-span-1 border-4 border-blue-500 rounded-lg flex flex-col items-center justify-center p-2">
+                        class="col-span-2 sm:col-span-1 border-4 border-blue-[#003285] rounded-lg flex flex-col items-center justify-center p-2">
                         <h2 class="font-bold text-xl">Jumlah Minimal FRMS</h2>
                         <p class="font-medium">ATC {{ $cabang->frms }} Orang</p>
                     </div>
                     <div
-                        class="col-span-2 sm:col-span-1 border-4 border-blue-500 rounded-lg flex flex-col justify-center p-2">
+                        class="col-span-2 sm:col-span-1 border-4 border-blue-[#003285] rounded-lg flex flex-col justify-center p-2">
                         <h2 class="font-bold text-xl text-center">Jumlah Eksisting</h2>
                         <hr class="border-[1px] my-1">
                         <p class="font-medium ms-4">ATC {{ $cabang->jumlah_personel }} Orang</p>
@@ -116,7 +116,7 @@
                         <p class="font-medium ms-4">ATS System {{ $cabang->jumlah_personel_ats_system }} Orang</p>
                     </div>
                     <div
-                        class="col-span-2 sm:col-span-1 border-4 border-blue-500 rounded-lg flex flex-col justify-center p-2">
+                        class="col-span-2 sm:col-span-1 border-4 border-blue-[#003285] rounded-lg flex flex-col justify-center p-2">
                         <h2 class="font-bold text-xl text-center">Prediksi Personel {{ date('Y') + 1 }}</h2>
                         <hr class="border-[1px] my-1">
                         <p class="font-medium ms-4">
@@ -143,8 +143,8 @@
             </aside>
         </section>
         <section class="p-8">
-            <div class="bg-white rounded-md border-2 border-blue-500">
-                <div class="flex gap-4 p-4 border-b-2 border-blue-500 text-black">
+            <div class="bg-white rounded-md border-2 border-blue-[#003285]">
+                <div class="flex gap-4 p-4 border-b-2 border-blue-[#003285] text-black">
                     <a class="{{ $tab != 'out' ? 'font-semibold underline' : '' }}"
                         href="/rotasi/cabang/{{ $cabang->id }}?tab=in">PERSONEL IN</a>
                     <a class="{{ $tab == 'out' ? 'font-semibold underline' : '' }}"
