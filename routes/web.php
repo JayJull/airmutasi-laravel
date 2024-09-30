@@ -26,8 +26,8 @@ use App\Models\Personel;
 
 Route::get('/', function () {
     $personelCount = Personel::count();
-    $cabangCount = Cabang::count();
-    return view('welcome', ["personel" => $personelCount, "cabang" => $cabangCount]);
+    $cabangs = Cabang::select('thumbnail_url')->get();
+    return view('welcome', ["personel" => $personelCount, "cabangs" => $cabangs]);
 })->name('landing');
 
 Route::middleware("guest")->get("/login", [AuthController::class, 'loginView'])->name('login');

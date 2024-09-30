@@ -18,7 +18,7 @@
                 <h1 id="nama" class="p-2 font-semibold text-lg">
                     {{ $cabang->nama }}
                 </h1>
-                @can('admin')
+                @can('cabangOwner', $cabang->id)
                     <div class="px-2 flex flex-wrap gap-2">
                         @foreach ($cabang->kelases as $kelas)
                             <p class="text-xs bg-gray-300 px-2 py-1 rounded-md">{{ $kelas->kelas->nama_kelas }}</p>
@@ -27,7 +27,7 @@
                 @endcan
                 <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;"
                     class="p-2 break-all w-full font-sans">{{ $cabang->alamat }}</pre>
-                @can('admin')
+                @can('cabangOwner', $cabang->id)
                     <a class="mt-4 bg-[#003285] hover:bg-white text-white hover:text-black border-2 border-[#003285] duration-200 w-full text-center p-2 rounded-lg font-semibold mb-2"
                         href="/personel/cabang/{{ $cabang->id }}">Personel</a>
                     <a href="/rotasi/cabang/input/{{ $cabang->id }}"
