@@ -33,10 +33,10 @@
                 </div>
             </aside>
             <aside class="md:w-2/5 aspect-video flex" id="carousel">
-                @foreach ($cabangs as $cabang)
-                    <img class="{{ $loop->index != 0 ? 'w-0' : '' }} object-cover rounded-md duration-300"
-                        src="{{ $cabang->thumbnail_url }}" alt="thumbnail-{{ $loop->index }}">
-                @endforeach
+                @for ($i = 0; $i < $cabangs->count() > 10 ? 10 : $cabangs->count(); $i++)
+                    <img class="{{ $i != 0 ? 'w-0' : '' }} object-cover rounded-md duration-300"
+                        src="{{ $cabangs[$i]->thumbnail_url }}" alt="thumbnail-{{ $i }}">
+                @endfor
             </aside>
         </section>
         <div class="grid md:grid-cols-3 gap-4">
