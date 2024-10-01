@@ -33,7 +33,7 @@
                 </div>
             </aside>
             <aside class="md:w-2/5 aspect-video flex" id="carousel">
-                @for ($i = 0; $i < $cabangs->count() > 10 ? 10 : $cabangs->count(); $i++)
+                @for ($i = 0; $i < ($cabangs->count() > 10 ? 10 : $cabangs->count()); $i++)
                     <img class="{{ $i != 0 ? 'w-0' : '' }} object-cover rounded-md duration-300"
                         src="{{ $cabangs[$i]->thumbnail_url }}" alt="thumbnail-{{ $i }}">
                 @endfor
