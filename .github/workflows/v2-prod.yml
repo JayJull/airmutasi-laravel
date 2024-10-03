@@ -17,5 +17,5 @@ jobs:
           port: 22
           script: |
             cd repositories/action-test
-            git pull origin
+            git pull origin v2-prod
             npm run build
