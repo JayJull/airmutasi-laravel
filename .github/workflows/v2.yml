@@ -1,0 +1,11 @@
+name: CD
+run-name: Running deployment 🚀
+on:
+  push:
+    branches: v2-prod
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello world"
