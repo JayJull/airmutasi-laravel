@@ -12,7 +12,7 @@
         <section class="flex flex-col-reverse md:flex-row items-stretch gap-4">
             <aside class="md:w-3/5 flex flex-col justify-between">
                 <p class="text-6xl 2xl:text-8xl font-black text-[#003285]">
-                    Sistem Mutasi AirNav Yapping Skibidi
+                    Sistem Mutasi AirNav Yapping Skibidi Rizz
                 </p>
                 <p class="font-medium text-lg mt-4 md:text-left text-justify">
                     Mutant adalah sebuah platform berbasis web yang dirancang untuk mengelola berbagai proses terkait
