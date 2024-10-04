@@ -31,7 +31,7 @@
                     <a class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white w-full text-center p-2 rounded-lg font-semibold mb-2"
                         href="/personel/cabang/{{ $cabang->id }}">Personel</a>
                     <a href="/rotasi/denah/input/{{ $cabang->id }}"
-                        class="bg-yellow-300 hover:bg-yellow-400 duration-200 text-gray-800 w-full text-center p-2 rounded-lg font-semibold mb-2">Update
+                        class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white w-full text-center p-2 rounded-lg font-semibold mb-2">Update
                         Cabang</a>
                     <a href="/rotasi/denah/input/{{ $cabang->id }}/delete"
                         class="bg-red-500 hover:bg-red-700 duration-200 text-white w-full text-center p-2 rounded-lg font-semibold">Hapus

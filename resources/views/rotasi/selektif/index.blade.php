@@ -195,7 +195,7 @@
                                 class="w-full border-2 border-[#B6B6B6] px-2 py-1 mt-1 resize-none" rows="5"></textarea>
                         </div>
                         <a href="/rotasi/personal/{{ $pengajuan->id }}"
-                            class="bg-yellow-300 hover:bg-yellow-400 duration-200 text-gray-800  px-6 py-2 font-semibold rounded-lg text-center">Ubah</a>
+                            class="bg-[#003285] hover:bg-[#003285] duration-200 text-gray-800  px-6 py-2 font-semibold rounded-lg text-center">Ubah</a>
                         <button type="button"
                             class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-6 py-2 font-semibold rounded-lg"
                             popovertarget="detail-pengajuan">Detail</button>

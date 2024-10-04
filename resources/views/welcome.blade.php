@@ -32,13 +32,13 @@
             </div>
             <div class="grid md:grid-cols-3 gap-4">
                 <a href="/rotasi/denah"
-                    class="bg-[#FFB72D] font-semibold text-lg 2xl:text-xl flex justify-center items-center gap-3 p-4 rounded-xl 2xl:rounded-2xl">Rotasi
+                    class="bg-[#003285] font-semibold text-lg 2xl:text-xl flex justify-center items-center gap-3 p-4 rounded-xl 2xl:rounded-2xl">Rotasi
                     <img src="/images/icons/rotasi.svg" alt="rotasi" /></a>
                 <a href="/"
-                    class="bg-[#FFB72D] font-semibold text-lg 2xl:text-xl flex justify-center items-center gap-3 p-4 rounded-xl 2xl:rounded-2xl opacity-65">Demosi
+                    class="bg-[#003285] font-semibold text-lg 2xl:text-xl flex justify-center items-center gap-3 p-4 rounded-xl 2xl:rounded-2xl opacity-65">Demosi
                     <img src="/images/icons/demosi.svg" alt="demosi" /></a>
                 <a href="/"
-                    class="bg-[#FFB72D] font-semibold text-lg 2xl:text-xl flex justify-center items-center gap-3 p-4 rounded-xl 2xl:rounded-2xl opacity-65">Promosi
+                    class="bg-[#003285] font-semibold text-lg 2xl:text-xl flex justify-center items-center gap-3 p-4 rounded-xl 2xl:rounded-2xl opacity-65">Promosi
                     <img src="/images/icons/promosi.svg" alt="promosi" /></a>
             </div>
         </section>

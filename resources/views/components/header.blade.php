@@ -9,7 +9,7 @@
                     class="duration-300"></button>
             <div
                 class="max-h-0 duration-300 absolute flex flex-col gap-1 bg-white mt-4 text-gray-800 text-base font-light overflow-hidden">
-                <div class="flex flex-col gap-1 px-2 py-1 bg-[#FFB72D]">
+                <div class="flex flex-col gap-1 px-2 py-1 bg-[#003285]">
                     <a href="/rotasi/denah">Denah Rotasi</a>
                     <hr>
                     <a href="/rotasi/personal">Input Personal (IP)</a>
@@ -42,7 +42,7 @@
         <input type="email" name="email" placeholder="Email" class="px-4 py-2 border rounded-md">
         <input type="password" name="password" placeholder="Password" class="px-4 py-2 border rounded-md">
         <button type="submit"
-            class="font-semibold bg-[#FFB72D] hover:opacity-100 opacity-80 duration-200 px-4 py-2 rounded-md">Login</button>
+            class="font-semibold bg-[#003285] hover:opacity-100 opacity-80 duration-200 px-4 py-2 rounded-md">Login</button>
         <a href="/forget-password" class="text-blue-500 underline text-sm">Lupa password?</a>
     </form>
 </div> --}}

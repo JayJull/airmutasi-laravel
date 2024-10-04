@@ -18,7 +18,7 @@
             <input type="email" name="email" placeholder="Email" class="px-4 py-2 border rounded-md">
             <input type="password" name="password" placeholder="Password" class="px-4 py-2 border rounded-md">
             <button type="submit"
-                class="font-semibold bg-[#FFB72D] hover:opacity-100 opacity-80 duration-200 px-4 py-2 rounded-md">Login</button>
+                class="font-semibold bg-[#003285] hover:opacity-100 opacity-80 duration-200 px-4 py-2 rounded-md">Login</button>
             <a href="/forget-password" class="text-blue-500 underline text-sm">Lupa password?</a>
         </form>
     </main>

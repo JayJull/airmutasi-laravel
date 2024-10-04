@@ -24,15 +24,15 @@
                 </div>
             </div>
             <div>
-                <button id="map-show-btn" class="p-2 border-2 border-yellow-500 bg-yellow-500 rounded-full"></button>
-                <button id="banner-show-btn" class="p-2 border-2 border-yellow-500 rounded-full"></button>
+                <button id="map-show-btn" class="p-2 border-2 border-[#003285] bg-[#003285] rounded-full"></button>
+                <button id="banner-show-btn" class="p-2 border-2 border-[#003285] rounded-full"></button>
             </div>
         </section>
         {{-- Map end --}}
         @can('admin')
             <div class="flex justify-center p-4 text-sm font-semibold">
-                <div id="tab-cabang" class="flex gap-2 border-2 border-yellow-500 rounded-md p-2">
-                    <button id="list" class="rounded-lg bg-yellow-500 px-2 py-1">List Cabang</button>
+                <div id="tab-cabang" class="flex gap-2 border-2 border-[#003285] rounded-md p-2">
+                    <button id="list" class="rounded-lg bg-[#003285] px-2 py-1">List Cabang</button>
                     <button id="summary" class="rounded-lg px-2 py-1">Summary Cabang</button>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                         <p class="text-center my-auto">Tidak ada data</p>
                     @endif
                     @foreach ($cabangs as $cabang)
-                        <a class="border-2 border-yellow-500 rounded-md px-4 py-2 flex flex-col sm:flex-row items-center justify-between"
+                        <a class="border-2 border-[#003285] rounded-md px-4 py-2 flex flex-col sm:flex-row items-center justify-between"
                             href="/rotasi/selektif?lokasi={{ $cabang->nama }}">
                             <span class="sm:max-w-[40%] font-semibold">
                                 {{ $cabang->nama }}
@@ -160,8 +160,8 @@
                 document.getElementById('cabang-list').classList.add('flex');
                 document.getElementById('cabang-list').classList.add('sm:grid');
                 document.getElementById('cabang-summary').classList.add('hidden');
-                document.querySelector('#tab-cabang #list').classList.add('bg-yellow-500');
-                document.querySelector('#tab-cabang #summary').classList.remove('bg-yellow-500');
+                document.querySelector('#tab-cabang #list').classList.add('bg-[#003285]');
+                document.querySelector('#tab-cabang #summary').classList.remove('bg-[#003285]');
             }
 
             function openSummaryCabang() {
@@ -169,8 +169,8 @@
                 document.getElementById('cabang-list').classList.remove('flex');
                 document.getElementById('cabang-list').classList.remove('sm:grid');
                 document.getElementById('cabang-summary').classList.remove('hidden');
-                document.querySelector('#tab-cabang #list').classList.remove('bg-yellow-500');
-                document.querySelector('#tab-cabang #summary').classList.add('bg-yellow-500');
+                document.querySelector('#tab-cabang #list').classList.remove('bg-[#003285]');
+                document.querySelector('#tab-cabang #summary').classList.add('bg-[#003285]');
             }
             document.querySelector('#tab-cabang #list').addEventListener('click', openListCabang);
             document.querySelector('#tab-cabang #summary').addEventListener('click', openSummaryCabang);
@@ -189,8 +189,8 @@
                 bannerContainer.classList.remove('w-full');
                 bannerContainer.classList.add('w-0');
                 currentPage = 0;
-                mapShowBtn.classList.add('bg-yellow-500');
-                bannerShowBtn.classList.remove('bg-yellow-500');
+                mapShowBtn.classList.add('bg-[#003285]');
+                bannerShowBtn.classList.remove('bg-[#003285]');
             }
         });
         bannerShowBtn.addEventListener('click', () => {
@@ -200,8 +200,8 @@
                 bannerContainer.classList.add('w-full');
                 bannerContainer.classList.remove('w-0');
                 currentPage = 1;
-                mapShowBtn.classList.remove('bg-yellow-500');
-                bannerShowBtn.classList.add('bg-yellow-500');
+                mapShowBtn.classList.remove('bg-[#003285]');
+                bannerShowBtn.classList.add('bg-[#003285]');
             }
         });
     </script>
@@ -234,10 +234,10 @@
             document.querySelectorAll('.cabang-item').forEach(cabangItem => {
                 cabangItem.addEventListener('click', () => {
                     if (activated) {
-                        activated.classList.remove('bg-[#FFB72D]');
+                        activated.classList.remove('bg-[#003285]');
                         activated.classList.add('bg-white');
                     }
-                    cabangItem.classList.add('bg-[#FFB72D]');
+                    cabangItem.classList.add('bg-[#003285]');
                     cabangItem.classList.remove('bg-white');
                     activated = cabangItem;
                     fetch(`/api/rotasi/cabang-summary/${cabangItem.value}`)
@@ -278,7 +278,7 @@
                     }).addTo(map).on('click', () => {
                         setCabang(element);
                         const selected = document.querySelector('.cabang-item');
-                        selected.classList.add('bg-[#FFB72D]');
+                        selected.classList.add('bg-[#003285]');
                         selected.classList.remove('bg-white');
                     });
                 });

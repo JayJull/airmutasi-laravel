@@ -20,7 +20,7 @@
             </form>
         </div>
         <section>
-            <div class="bg-[#FFB72D] p-8">
+            <div class="bg-[#003285] p-8">
                 <h1 class="text-center font-bold text-xl">DATA PERSONIL OPERASI <br>
                     AIRNAV INDONESIA</h1>
                 <h2 class="font-semibold text-lg mt-8">{{ $cabang->nama }}</h2>
@@ -78,7 +78,7 @@
                             class="font-medium px-4 py-2 {{ $loop->index % 2 === 0 ? 'bg-slate-200' : '' }} grid grid-cols-4 md:grid-cols-12 items-center gap-2">
                             <div class="personels-action">
                                 <button
-                                    class="flex items-center gap-1 bg-[#FFB72D] hover:opacity-100 opacity-80 duration-200 px-2 py-1 rounded-md">Aksi<img
+                                    class="flex items-center gap-1 bg-[#003285] hover:opacity-100 opacity-80 duration-200 px-2 py-1 rounded-md">Aksi<img
                                         src="/images/icons/moreArrow.svg" class="duration-300"></button>
                                 <div
                                     class="max-h-0 duration-300 absolute flex flex-col gap-1 bg-white mt-4 text-gray-800 text-base font-light overflow-hidden z-50">
@@ -119,7 +119,7 @@
                             @if ($personel->pensiun)
                                 <div>
                                     <span class="block md:hidden">Pensiun: </span>
-                                    <p class="bg-yellow-500 text-gray-800 text-center rounded-md p-2 text-xs">Persiapan
+                                    <p class="bg-[#003285] text-gray-800 text-center rounded-md p-2 text-xs">Persiapan
                                     </p>
                                 </div>
                             @endif
