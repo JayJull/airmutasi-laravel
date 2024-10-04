@@ -1,0 +1,21 @@
+name: CD
+run-name: Running deployment 🚀
+on:
+  push:
+    branches: [v1]
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.MUTANT_HOST }}
+          username: ${{ secrets.MUTANT_USERNAME }}
+          key: ${{ secrets.MUTANT_SECRET }}
+          port: ${{ secrets.MUTANT_PORT }}
+          script: |
+            cd repositories/airmutasi-laravel-v1
+            git pull origin v1
+            npm run build
