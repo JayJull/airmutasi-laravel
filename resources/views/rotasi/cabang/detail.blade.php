@@ -6,7 +6,7 @@
     <title>Air Mutasi | Rotasi</title>
 </head>
 
-<body class="font-sans tracking-wider text-lg">
+<body class="font-sans tracking-wider">
     @include('components.header', ['static' => true])
     <main>
         <section class="p-8 flex flex-col md:grid md:grid-cols-3 gap-8">

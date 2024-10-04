@@ -1,7 +1,7 @@
 <footer
-    class="bg-gradient-to-b from-gray-50 to-[#003285] text-slate-950 flex flex-col xl:flex-row items-center xl:items-start justify-between gap-8 p-8 text-lg">
-    <aside class="xl:max-w-[33%] flex-grow flex flex-col gap-2">
-        <h1 class="font-black text-6xl sm:text-8xl">MUTANT</h1>
+    class="bg-gradient-to-b xl:text-sm from-[#B4D4FF] to-[#003285] text-slate-950 flex flex-col xl:flex-row items-center xl:items-start justify-between gap-8 p-8 text-lg">
+    <aside class="xl:max-w-[33%] flex-grow self-stretch flex flex-col items-center justify-center gap-2">
+        <h1 class="font-black text-6xl sm:text-8xl xl:text-6xl">MUTANT</h1>
     </aside>
     <aside class="xl:max-w-[33%] flex-grow xl:flex-grow-0 flex flex-col items-center xl:items-start gap-4">
         <h2 class="font-bold text-center xl:text-right">Services</h2>

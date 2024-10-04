@@ -6,13 +6,13 @@
     <title>Air Mutasi | Profil</title>
 </head>
 
-<body class="font-sans tracking-wider text-lg">
+<body class="font-sans tracking-wider">
     @include('components/header', ['static' => true])
     @include('components.modal-component')
     <main class="px-8 py-16">
         <section class="flex justify-center gap-16">
             <aside class="w-2/5">
-                <img class="h-full object-cover rounded-md" src="/images/backgrounds/LOGIN.png" alt="illustration">
+                <img class="h-full object-cover rounded-md" src="/images/thumbnail2.jpeg" alt="illustration">
             </aside>
             <aside class="w-3/5 flex flex-col gap-4">
                 <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2">

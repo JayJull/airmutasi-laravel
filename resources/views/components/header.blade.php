@@ -1,6 +1,6 @@
 <header
-    class="bg-white flex flex-col xl:flex-row items-center justify-between px-8 py-4 gap-4 {{ !empty($static) && $static ? 'sticky' : 'fixed' }} top-0 left-0 z-50 w-full font-sans text-lg tracking-widest font-lg">
-    <a href="/"><img src="/images/logo.svg" alt="logo" /></a>
+    class="bg-white flex flex-col xl:text-sm xl:flex-row items-center justify-between px-8 py-4 gap-4 {{ !empty($static) && $static ? 'sticky' : 'fixed' }} top-0 left-0 z-50 w-full font-sans text-lg tracking-widest font-lg">
+    <a href="/"><img class="xl:h-10" src="/images/logo.svg" alt="logo" /></a>
     <button class="xl:hidden">☰</button>
     <nav
         class="xl:min-w-1/4 hidden xl:flex flex-col sm:flex-row items-center justify-around gap-2 sm:gap-4 xl:gap-16 z-[60]">
@@ -9,7 +9,7 @@
                     class="duration-300"></button>
             <div
                 class="max-h-0 duration-300 absolute flex flex-col gap-1 bg-white mt-4 text-gray-800 text-base font-light overflow-hidden">
-                <div class="flex flex-col gap-1 px-2 py-1 bg-slate-100">
+                <div class="flex xl:text-sm flex-col gap-1 px-2 py-1 bg-slate-100">
                     <a href="/rotasi/cabang">Denah Rotasi</a>
                     <hr>
                     <a href="/rotasi/pengajuan">Input Personal (IP)</a>

@@ -6,7 +6,7 @@
     <title>Air Mutasi | Rotasi</title>
 </head>
 
-<body class="font-sans tracking-wider text-lg">
+<body class="font-sans tracking-wider">
     @include('components.header', ['static' => true])
     @include('components.modal-component')
     <main class="min-h-[90vh] flex justify-center items-center p-4">

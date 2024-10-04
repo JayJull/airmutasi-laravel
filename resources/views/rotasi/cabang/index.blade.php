@@ -6,7 +6,7 @@
     <title>Air Mutasi | Rotasi</title>
 </head>
 
-<body class="tracking-wider text-lg">
+<body class="tracking-wider">
     @include('components.header', ['static' => true])
     @include('components.modal-component')
     <main>
@@ -30,7 +30,7 @@
         </div>
         <section id="cabang-list" class="p-4 w-full flex flex-col-reverse sm:grid sm:grid-cols-2 gap-2">
             <aside class="col-span-2 sm:col-span-1 bg-[#003285] rounded-md pt-2 flex flex-col gap-2 max-h-[70vh]">
-                <h1 class="font-bold text-xl text-white mx-2 text-center">Daftar Kantor Cabang</h1>
+                <h1 class="font-bold text-lg text-white mx-2 text-center">Daftar Kantor Cabang</h1>
                 <div class="sticky top-0 bg-[#ced0ff] rounded-md mx-2">
                     <div>
                         <input id="search" class="w-full rounded-md px-2 py-1" type="search"
@@ -54,7 +54,7 @@
             <aside class="col-span-2 sm:col-span-1 flex flex-col gap-2 sm:max-h-[70vh]">
                 @can('admin')
                     <a href="/rotasi/cabang/input"
-                        class="bg-[#003285] text-white opacity-80 hover:opacity-100 duration-300 w-full text-center p-2 rounded-lg font-semibold">Tambah
+                        class="bg-[#003285] text-white opacity-80 hover:opacity-100 duration-300 w-full text-center text-lg p-2 rounded-lg font-semibold">Tambah
                         Cabang</a>
                 @endcan
                 <div class="py-2 flex-grow flex flex-col gap-2 rounded-lg overflow-y-auto w-full">

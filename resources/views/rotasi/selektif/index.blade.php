@@ -6,7 +6,7 @@
     <title>Air Mutasi | Rotasi</title>
 </head>
 
-<body class="font-sans tracking-wider text-lg">
+<body class="font-sans tracking-wider">
     @include('components.header', ['static' => true])
     @include('components.modal-component')
     @if (count($pengajuans) > 0)
@@ -101,7 +101,7 @@
         <section class="flex flex-col-reverse md:grid md:grid-cols-2 md:items-start m-4 gap-4 md:min-h-screen">
             <aside class="flex flex-col gap-2 pe-2 pb-2 h-[50vh] md:h-full md:max-h-screen overflow-y-auto">
                 <div class="sticky top-0 w-full bg-white">
-                    <div class="text-black flex gap-2 py-8 justify-evenly items-center">
+                    <div class="text-black flex gap-2 py-2 justify-evenly items-center">
                         <a class="{{ !$tab || $tab === 'diajukan' ? 'font-semibold underline' : '' }}"
                             href="/rotasi/selektif?tab=diajukan{{ $query }}">Pengajuan</a>
                         <a class="{{ $tab === 'dapat' ? 'font-semibold underline' : '' }}"
