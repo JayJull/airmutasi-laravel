@@ -168,35 +168,6 @@
         document.querySelector('#tab-cabang #summary').addEventListener('click', openSummaryCabang);
     </script>
     <script>
-        var currentPage = 0;
-        const mapContainer = document.getElementById('map');
-        const bannerContainer = document.querySelector('#banner-img');
-        const mapShowBtn = document.getElementById('map-show-btn');
-        const bannerShowBtn = document.getElementById('banner-show-btn');
-        mapShowBtn.addEventListener('click', () => {
-            if (currentPage !== 0) {
-                mapContainer.classList.remove('w-0');
-                mapContainer.classList.add('w-full');
-                bannerContainer.classList.remove('w-full');
-                bannerContainer.classList.add('w-0');
-                currentPage = 0;
-                mapShowBtn.classList.add('bg-[#003285]');
-                bannerShowBtn.classList.remove('bg-[#003285]');
-            }
-        });
-        bannerShowBtn.addEventListener('click', () => {
-            if (currentPage !== 1) {
-                mapContainer.classList.add('w-0');
-                mapContainer.classList.remove('w-full');
-                bannerContainer.classList.add('w-full');
-                bannerContainer.classList.remove('w-0');
-                currentPage = 1;
-                mapShowBtn.classList.remove('bg-[#003285]');
-                bannerShowBtn.classList.add('bg-[#003285]');
-            }
-        });
-    </script>
-    <script>
         // set data to aside cabang's summary
         function setCabang(cabang) {
             document.getElementById('thumbnail').src = cabang.thumbnail_url && cabang.thumbnail_url !== 'NULL' ? cabang
@@ -226,9 +197,11 @@
                 cabangItem.addEventListener('click', () => {
                     if (activated) {
                         activated.classList.remove('bg-[#003285]');
+                        activated.classList.remove('text-white');
                         activated.classList.add('bg-white');
                     }
                     cabangItem.classList.add('bg-[#003285]');
+                    cabangItem.classList.add('text-white');
                     cabangItem.classList.remove('bg-white');
                     activated = cabangItem;
                     fetch(`/api/rotasi/cabang-summary/${cabangItem.value}`)
