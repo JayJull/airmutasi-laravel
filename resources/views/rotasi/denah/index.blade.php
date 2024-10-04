@@ -12,20 +12,13 @@
     <main>
         {{-- Map start --}}
         <section class="flex flex-col items-center">
-            <div class="w-full h-[50vh] md:h-screen flex">
+            <div class="w-full h-[50vh] md:h-[88vh] flex">
                 <div id="map" class="w-full h-full z-40">
                     <div class="w-full h-full flex items-center justify-center" id="loading">
                         <img src="/images/icons/ripples.svg" alt="loading"
                             class="w-20 h-20 z-40 p-2 bg-white rounded-full">
                     </div>
                 </div>
-                <div id="banner-img" class="w-0 h-full overflow-hidden">
-                    <img class="w-full object-cover" src="/images/backgrounds/banner.png" alt="banner">
-                </div>
-            </div>
-            <div>
-                <button id="map-show-btn" class="p-2 border-2 border-[#003285] bg-[#003285] rounded-full"></button>
-                <button id="banner-show-btn" class="p-2 border-2 border-[#003285] rounded-full"></button>
             </div>
         </section>
         {{-- Map end --}}
