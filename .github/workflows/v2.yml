@@ -1,0 +1,21 @@
+name: CD
+run-name: Running deployment 🚀
+on:
+  push:
+    branches: [v2]
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SECRET_KEY }}
+          port: 22
+          script: |
+            cd repositories/action-test
+            git pull origin v2
+            npm run build
