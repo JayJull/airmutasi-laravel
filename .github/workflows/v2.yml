@@ -11,11 +11,11 @@ jobs:
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SECRET_KEY }}
-          port: 22
+          host: ${{ secrets.MUTANT_HOST }}
+          username: ${{ secrets.MUTANT_USERNAME }}
+          key: ${{ secrets.MUTANT_SECRET }}
+          port: ${{ secrets.MUTANT_PORT }}
           script: |
-            cd repositories/action-test
+            cd repositories/airmutasi-laravel
             git pull origin v2
             npm run build
