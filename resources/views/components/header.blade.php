@@ -8,7 +8,7 @@
             <button class="flex items-center gap-1">Rotasi <img src="/images/icons/moreArrow.svg"
                     class="duration-300"></button>
             <div
-                class="max-h-0 duration-300 absolute flex flex-col gap-1 bg-white mt-4 text-gray-800 text-base font-light overflow-hidden">
+                class="max-h-0 duration-300 absolute flex flex-col gap-1 mt-4 text-white text-base font-light overflow-hidden">
                 <div class="flex flex-col gap-1 px-2 py-1 bg-[#003285]">
                     <a href="/rotasi/denah">Denah Rotasi</a>
                     <hr>
@@ -24,9 +24,9 @@
         <a class="text-gray-500" href="#">Promosi</a>
         @auth
             <a href="/akun">Akun</a>
-            <a href="/logout">Logout</a>
+            <a href="/logout" class="text-white">Logout</a>
         @else
-            <a href="/login">Login</a>
+            <a href="/login" class="text-white">Login</a>
         @endauth
     </nav>
     <div class="hidden md:block absolute h-full right-0 z-40 w-40">

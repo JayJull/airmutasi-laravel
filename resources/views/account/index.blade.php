@@ -26,7 +26,7 @@
                 <p class="text-center">Email: {{ $akun->email }}</p>
             </div>
             <a href="/akun/edit"
-                class="bg-[#003285] hover:bg-[#003285] duration-200 text-gray-800 px-4 py-2 rounded-lg font-semibold text-center">Edit</a>
+                class="bg-[#003285] hover:bg-[#003285] text-white duration-200 px-4 py-2 rounded-lg font-semibold text-center">Edit</a>
             @if ($akun->role->name == 'admin')
                 <a href="/akun/add"
                     class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold text-center">Buat

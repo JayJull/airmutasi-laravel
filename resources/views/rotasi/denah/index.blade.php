@@ -29,14 +29,12 @@
             </div>
         </section>
         {{-- Map end --}}
-        @can('admin')
-            <div class="flex justify-center p-4 text-sm font-semibold">
-                <div id="tab-cabang" class="flex gap-2 border-2 border-[#003285] rounded-md p-2">
-                    <button id="list" class="rounded-lg bg-[#003285] px-2 py-1">List Cabang</button>
-                    <button id="summary" class="rounded-lg px-2 py-1">Summary Cabang</button>
-                </div>
+        <div class="flex justify-center p-4 text-sm font-semibold">
+            <div id="tab-cabang" class="flex gap-2 border-2 border-[#003285] rounded-md p-2">
+                <button id="list" class="rounded-lg bg-[#003285] text-white px-2 py-1">List Cabang</button>
+                <button id="summary" class="rounded-lg px-2 py-1">Summary Cabang</button>
             </div>
-        @endcan
+        </div>
         <section id="cabang-list" class="p-4 w-full flex flex-col-reverse sm:grid sm:grid-cols-2 gap-2">
             <aside
                 class="col-span-2 sm:col-span-1 text-[#474747] pb-2 pe-2 flex flex-col gap-2 max-h-[70vh] overflow-y-auto">
@@ -77,105 +75,105 @@
                 </div>
             </aside>
         </section>
-        @can('admin')
-            <section id="cabang-summary" class="hidden p-4">
-                <div id="anak-cabang" class="flex flex-col gap-4">
-                    @if (count($cabangs) === 0)
-                        <p class="text-center my-auto">Tidak ada data</p>
-                    @endif
-                    @foreach ($cabangs as $cabang)
-                        <a class="border-2 border-[#003285] rounded-md px-4 py-2 flex flex-col sm:flex-row items-center justify-between"
-                            href="/rotasi/selektif?lokasi={{ $cabang->nama }}">
-                            <span class="sm:max-w-[40%] font-semibold">
-                                {{ $cabang->nama }}
-                            </span>
-                            <span class="flex-grow flex justify-center sm:justify-end gap-2">
-                                <span class="flex flex-col items-center">
-                                    <span class="font-medium">Pengajuan</span>
-                                    <span class="flex gap-2">
-                                        <span class="flex items-center">
-                                            <img class="w-5" src="/images/icons/in.svg" alt="in">
-                                            {{ count($cabang->inAll) }}
-                                        </span>
-                                        <span class="flex items-center">
-                                            <img class="w-5" src="/images/icons/out.svg" alt="out">
-                                            {{ count($cabang->outAll) }}
-                                        </span>
+        <section id="cabang-summary" class="hidden p-4">
+            <div id="anak-cabang" class="flex flex-col gap-4">
+                @if (count($cabangs) === 0)
+                    <p class="text-center my-auto">Tidak ada data</p>
+                @endif
+                @foreach ($cabangs as $cabang)
+                    <a class="border-2 border-[#003285] rounded-md px-4 py-2 flex flex-col sm:flex-row items-center justify-between"
+                        @can('admin') href="/rotasi/selektif?lokasi={{ $cabang->nama }}" @endcan>
+                        <span class="sm:max-w-[40%] font-semibold">
+                            {{ $cabang->nama }}
+                        </span>
+                        <span class="flex-grow flex justify-center sm:justify-end gap-2">
+                            <span class="flex flex-col items-center">
+                                <span class="font-medium">Pengajuan</span>
+                                <span class="flex gap-2">
+                                    <span class="flex items-center">
+                                        <img class="w-5" src="/images/icons/in.svg" alt="in">
+                                        {{ count($cabang->inAll) }}
                                     </span>
-                                </span>
-                                <span class="flex flex-col items-center">
-                                    <span class="font-medium">Diterima</span>
-                                    <span class="flex gap-2">
-                                        <span class="flex items-center">
-                                            <img class="w-5" src="/images/icons/in.svg" alt="in">
-                                            {{ count($cabang->inDapat) }}
-                                        </span>
-                                        <span class="flex items-center">
-                                            <img class="w-5" src="/images/icons/out.svg" alt="out">
-                                            {{ count($cabang->outDapat) }}
-                                        </span>
-                                    </span>
-                                </span>
-                                <span class="flex flex-col items-center">
-                                    <span class="font-medium">Disetujui</span>
-                                    <span class="flex gap-2">
-                                        <span class="flex items-center">
-                                            <img class="w-5" src="/images/icons/in.svg" alt="in">
-                                            {{ count($cabang->inDiterima) }}
-                                        </span>
-                                        <span class="flex items-center">
-                                            <img class="w-5" src="/images/icons/out.svg" alt="out">
-                                            {{ count($cabang->outDiterima) }}
-                                        </span>
-                                    </span>
-                                </span>
-                                <span class="flex flex-col items-center">
-                                    <span class="font-medium">Ditolak</span>
-                                    <span class="flex gap-2">
-                                        <span class="flex items-center">
-                                            <img class="w-5" src="/images/icons/in.svg" alt="in">
-                                            {{ count($cabang->inTidakDapat) }}
-                                        </span>
-                                        <span class="flex items-center">
-                                            <img class="w-5" src="/images/icons/out.svg" alt="out">
-                                            {{ count($cabang->outTidakDapat) }}
-                                        </span>
+                                    <span class="flex items-center">
+                                        <img class="w-5" src="/images/icons/out.svg" alt="out">
+                                        {{ count($cabang->outAll) }}
                                     </span>
                                 </span>
                             </span>
-                        </a>
-                    @endforeach
-                </div>
-            </section>
-        @endcan
+                            <span class="flex flex-col items-center">
+                                <span class="font-medium">Diterima</span>
+                                <span class="flex gap-2">
+                                    <span class="flex items-center">
+                                        <img class="w-5" src="/images/icons/in.svg" alt="in">
+                                        {{ count($cabang->inDapat) }}
+                                    </span>
+                                    <span class="flex items-center">
+                                        <img class="w-5" src="/images/icons/out.svg" alt="out">
+                                        {{ count($cabang->outDapat) }}
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="flex flex-col items-center">
+                                <span class="font-medium">Disetujui</span>
+                                <span class="flex gap-2">
+                                    <span class="flex items-center">
+                                        <img class="w-5" src="/images/icons/in.svg" alt="in">
+                                        {{ count($cabang->inDiterima) }}
+                                    </span>
+                                    <span class="flex items-center">
+                                        <img class="w-5" src="/images/icons/out.svg" alt="out">
+                                        {{ count($cabang->outDiterima) }}
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="flex flex-col items-center">
+                                <span class="font-medium">Ditolak</span>
+                                <span class="flex gap-2">
+                                    <span class="flex items-center">
+                                        <img class="w-5" src="/images/icons/in.svg" alt="in">
+                                        {{ count($cabang->inTidakDapat) }}
+                                    </span>
+                                    <span class="flex items-center">
+                                        <img class="w-5" src="/images/icons/out.svg" alt="out">
+                                        {{ count($cabang->outTidakDapat) }}
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </a>
+                @endforeach
+            </div>
+        </section>
     </main>
     @include('components.footer')
     <script src="/script/nav.js"></script>
     <script src="/script/map.js"></script>
     <script src="/script/debounce.js"></script>
-    @can('admin')
-        <script>
-            function openListCabang() {
-                document.getElementById('cabang-list').classList.remove('hidden');
-                document.getElementById('cabang-list').classList.add('flex');
-                document.getElementById('cabang-list').classList.add('sm:grid');
-                document.getElementById('cabang-summary').classList.add('hidden');
-                document.querySelector('#tab-cabang #list').classList.add('bg-[#003285]');
-                document.querySelector('#tab-cabang #summary').classList.remove('bg-[#003285]');
-            }
+    <script>
+        function openListCabang() {
+            document.getElementById('cabang-list').classList.remove('hidden');
+            document.getElementById('cabang-list').classList.add('flex');
+            document.getElementById('cabang-list').classList.add('sm:grid');
+            document.getElementById('cabang-summary').classList.add('hidden');
+            document.querySelector('#tab-cabang #list').classList.add('bg-[#003285]');
+            document.querySelector('#tab-cabang #list').classList.add('text-white');
+            document.querySelector('#tab-cabang #summary').classList.remove('bg-[#003285]');
+            document.querySelector('#tab-cabang #summary').classList.remove('text-white');
+        }
 
-            function openSummaryCabang() {
-                document.getElementById('cabang-list').classList.add('hidden');
-                document.getElementById('cabang-list').classList.remove('flex');
-                document.getElementById('cabang-list').classList.remove('sm:grid');
-                document.getElementById('cabang-summary').classList.remove('hidden');
-                document.querySelector('#tab-cabang #list').classList.remove('bg-[#003285]');
-                document.querySelector('#tab-cabang #summary').classList.add('bg-[#003285]');
-            }
-            document.querySelector('#tab-cabang #list').addEventListener('click', openListCabang);
-            document.querySelector('#tab-cabang #summary').addEventListener('click', openSummaryCabang);
-        </script>
-    @endcan
+        function openSummaryCabang() {
+            document.getElementById('cabang-list').classList.add('hidden');
+            document.getElementById('cabang-list').classList.remove('flex');
+            document.getElementById('cabang-list').classList.remove('sm:grid');
+            document.getElementById('cabang-summary').classList.remove('hidden');
+            document.querySelector('#tab-cabang #list').classList.remove('bg-[#003285]');
+            document.querySelector('#tab-cabang #list').classList.remove('text-white');
+            document.querySelector('#tab-cabang #summary').classList.add('bg-[#003285]');
+            document.querySelector('#tab-cabang #summary').classList.add('text-white');
+        }
+        document.querySelector('#tab-cabang #list').addEventListener('click', openListCabang);
+        document.querySelector('#tab-cabang #summary').addEventListener('click', openSummaryCabang);
+    </script>
     <script>
         var currentPage = 0;
         const mapContainer = document.getElementById('map');

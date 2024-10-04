@@ -9,7 +9,7 @@
 <body class="font-sans tracking-wider text-lg">
     @include('components.header', ['static' => true])
     <main>
-        <section class="bg-[#FFEFB2] p-8 flex flex-col md:grid md:grid-cols-3 gap-8">
+        <section class="bg-[#1144ee11] p-8 flex flex-col md:grid md:grid-cols-3 gap-8">
             <aside class="col-span-3 md:col-span-1 sm:h-full flex flex-col">
                 <div class="flex items-center justify-center h-64 rounded-lg">
                     <img src="{{ $cabang->thumbnail_url && $cabang->thumbnail_url != 'NULL' ? $cabang->thumbnail_url : '/images/default_tower.jpg' }}"
@@ -18,7 +18,7 @@
                 <h1 id="nama" class="p-2 font-semibold text-lg">
                     {{ $cabang->nama }}
                 </h1>
-                @can('admin')
+                @can('cabangOwner', $cabang)
                     <div class="px-2 flex flex-wrap gap-2">
                         @foreach ($cabang->kelases as $kelas)
                             <p class="text-xs bg-gray-300 px-2 py-1 rounded-md">{{ $kelas->kelas->nama_kelas }}</p>
@@ -27,7 +27,7 @@
                 @endcan
                 <pre style="white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;"
                     class="p-2 break-all w-full font-sans">{{ $cabang->alamat }}</pre>
-                @can('admin')
+                @can('cabangOwner', $cabang)
                     <a class="bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white w-full text-center p-2 rounded-lg font-semibold mb-2"
                         href="/personel/cabang/{{ $cabang->id }}">Personel</a>
                     <a href="/rotasi/denah/input/{{ $cabang->id }}"

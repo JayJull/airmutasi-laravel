@@ -30,7 +30,7 @@
                     setiap proses rotasi, demosi, dan promosi dilakukan dengan cara yang adil dan efisien.
                 </p>
             </div>
-            <div class="grid md:grid-cols-3 gap-4">
+            <div class="grid md:grid-cols-3 gap-4 text-white">
                 <a href="/rotasi/denah"
                     class="bg-[#003285] font-semibold text-lg 2xl:text-xl flex justify-center items-center gap-3 p-4 rounded-xl 2xl:rounded-2xl">Rotasi
                     <img src="/images/icons/rotasi.svg" alt="rotasi" /></a>
