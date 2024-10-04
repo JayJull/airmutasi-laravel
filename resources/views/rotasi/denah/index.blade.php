@@ -243,6 +243,7 @@
                         setCabang(element);
                         const selected = document.querySelector('.cabang-item');
                         selected.classList.add('bg-[#003285]');
+                        selected.classList.add('text-white');
                         selected.classList.remove('bg-white');
                     });
                 });
