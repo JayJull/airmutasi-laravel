@@ -36,6 +36,7 @@
                 class="text-sm hover:bg-white hover:text-black duration-300 text-white border-2 px-8 py-1 rounded-full">Login</a>
         </div>
     </main>
+    <script src="/script/chatbot.js"></script>
 </body>
 
 </html>

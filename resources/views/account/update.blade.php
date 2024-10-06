@@ -60,6 +60,7 @@
     </main>
     @include('components.footer')
     <script src="/script/nav.js"></script>
+    <script src="/script/chatbot.js"></script>
 </body>
 
 </html>

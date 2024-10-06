@@ -247,6 +247,7 @@
             document.getElementById("rekomendasi-field").classList.remove("hidden");
         }
     </script>
+    <script src="/script/chatbot.js"></script>
 </body>
 
 </html>

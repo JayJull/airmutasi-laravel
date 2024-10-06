@@ -355,6 +355,7 @@
         document.getElementById("latitude").addEventListener("input", setMarkerFromCoord);
         document.getElementById("longitude").addEventListener("input", setMarkerFromCoord);
     </script>
+    <script src="/script/chatbot.js"></script>
 </body>
 
 </html>

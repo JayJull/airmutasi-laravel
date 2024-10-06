@@ -206,6 +206,7 @@
         var chart = new ApexCharts(document.querySelector("#stats-radar"), options);
         chart.render();
     </script>
+    <script src="/script/chatbot.js"></script>
 </body>
 
 </html>
