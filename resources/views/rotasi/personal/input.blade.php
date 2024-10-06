@@ -383,6 +383,7 @@
             kompetensiCount++;
         });
     </script>
+    <script src="/script/chatbot.js"></script>
 </body>
 
 </html>
