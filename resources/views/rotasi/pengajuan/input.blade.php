@@ -64,6 +64,12 @@
                                     {{ !old('use_tujuan_alt') ? 'disabled' : '' }}>
                                     <option value>--- Pilih Lokasi Tujuan Alternatif ---</option>
                                 </select>
+                                <select
+                                    class="{{ !old('use_tujuan_alt2') ? 'hidden' : '' }} w-full px-2 py-1 mt-1 bg-white border-2 border-slate-400 rounded-md"
+                                    name="lokasi_tujuan_alt2_id" id="lokasi_tujuan_alt2"
+                                    {{ !old('use_tujuan_alt2') ? 'disabled' : '' }}>
+                                    <option value>--- Pilih Lokasi Tujuan Alternatif 2 ---</option>
+                                </select>
                             </div>
                             <div>
                                 <label class="font-semibold" for="posisi_tujuan">Posisi Tujuan</label><br />
@@ -87,6 +93,12 @@
                             <input type="checkbox" name="use_tujuan_alt" id="use_tujuan_alt"
                                 {{ old('use_tujuan_alt') ? 'checked' : '' }}>
                             Tujuan alternatif?
+                        </label>
+                        <label id="use_tujuan_alt2_container"
+                            class="{{ !old('use_tujuan_alt') ? 'hidden' : 'flex' }} items-center gap-1">
+                            <input type="checkbox" name="use_tujuan_alt2" id="use_tujuan_alt2"
+                                {{ old('use_tujuan_alt2') ? 'checked' : '' }}>
+                            Tujuan alternatif 2?
                         </label>
                         @can('admin')
                             <label class="flex items-center gap-1">
@@ -243,7 +255,21 @@
     <script>
         document.querySelector("#use_tujuan_alt").addEventListener("change", (e) => {
             const tujuanAlt = document.querySelector("#lokasi_tujuan_alt");
-            const posisiAlt = document.querySelector("#posisi_tujuan_alt");
+            if (e.target.checked) {
+                tujuanAlt.classList.remove("hidden");
+                tujuanAlt.disabled = false;
+                document.querySelector("#use_tujuan_alt2_container").classList.remove('hidden');
+                document.querySelector("#use_tujuan_alt2_container").classList.add('flex');
+            } else {
+                tujuanAlt.classList.add("hidden");
+                tujuanAlt.disabled = true;
+                document.querySelector("#use_tujuan_alt2_container").classList.remove('flex');
+                document.querySelector("#use_tujuan_alt2_container").classList.add('hidden');
+            }
+        });
+
+        document.querySelector("#use_tujuan_alt2").addEventListener("change", (e) => {
+            const tujuanAlt = document.querySelector("#lokasi_tujuan_alt2");
             if (e.target.checked) {
                 tujuanAlt.classList.remove("hidden");
                 tujuanAlt.disabled = false;
@@ -263,8 +289,11 @@
                 .then(data => {
                     const lokasiTujuan = document.getElementById('lokasi_tujuan');
                     const lokasiTujuanAlt = document.getElementById('lokasi_tujuan_alt');
+                    const lokasiTujuanAlt2 = document.getElementById('lokasi_tujuan_alt2');
                     lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
                     lokasiTujuanAlt.innerHTML = '<option value>--- Pilih Lokasi Tujuan Alternatif ---</option>';
+                    lokasiTujuanAlt2.innerHTML =
+                        '<option value>--- Pilih Lokasi Tujuan Alternatif 2 ---</option>';
                     data.forEach(cabang => {
                         const option = document.createElement('option');
                         option.id = 'lokasi-tujuan-' + cabang.id;
@@ -279,6 +308,14 @@
                         optionAlt.innerText = cabang.nama;
                         optionAlt.selected = cabang.id == {{ old('lokasi_tujuan_alt_id') ?? -1 }};
                         lokasiTujuanAlt.appendChild(optionAlt);
+
+                        const optionAlt2 = document.createElement('option');
+                        optionAlt2.id = 'lokasi-tujuan-alt2-' + cabang.id;
+                        optionAlt2.value = cabang.id;
+                        optionAlt2.innerText = cabang.nama;
+                        optionAlt2.selected = cabang.id ==
+                            {{ old('lokasi_tujuan_alt2_id') ?? -1 }};
+                        lokasiTujuanAlt2.appendChild(optionAlt2);
                     });
                 });
         @else
@@ -287,8 +324,11 @@
                 .then(data => {
                     const lokasiTujuan = document.getElementById('lokasi_tujuan');
                     const lokasiTujuanAlt = document.getElementById('lokasi_tujuan_alt');
+                    const lokasiTujuanAlt2 = document.getElementById('lokasi_tujuan_alt2');
                     lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
                     lokasiTujuanAlt.innerHTML = '<option value>--- Pilih Lokasi Tujuan Alternatif ---</option>';
+                    lokasiTujuanAlt2.innerHTML =
+                        '<option value>--- Pilih Lokasi Tujuan Alternatif 2 ---</option>';
                     data.forEach(cabang => {
                         const option = document.createElement('option');
                         option.id = 'lokasi-tujuan-' + cabang.id;
@@ -303,6 +343,14 @@
                         optionAlt.innerText = cabang.nama;
                         optionAlt.selected = cabang.id == {{ old('lokasi_tujuan_alt_id') ?? -1 }};
                         lokasiTujuanAlt.appendChild(optionAlt);
+
+                        const optionAlt2 = document.createElement('option');
+                        optionAlt2.id = 'lokasi-tujuan-alt2-' + cabang.id;
+                        optionAlt2.value = cabang.id;
+                        optionAlt2.innerText = cabang.nama;
+                        optionAlt2.selected = cabang.id ==
+                            {{ old('lokasi_tujuan_alt2_id') ?? -1 }};
+                        lokasiTujuanAlt2.appendChild(optionAlt2);
                     });
                 });
         @endif
@@ -315,9 +363,12 @@
                     .then(data => {
                         const lokasiTujuan = document.getElementById('lokasi_tujuan');
                         const lokasiTujuanAlt = document.getElementById('lokasi_tujuan_alt');
+                        const lokasiTujuanAlt2 = document.getElementById('lokasi_tujuan_alt2');
                         lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
                         lokasiTujuanAlt.innerHTML =
                             '<option value>--- Pilih Lokasi Tujuan Alternatif ---</option>';
+                        lokasiTujuanAlt2.innerHTML =
+                            '<option value>--- Pilih Lokasi Tujuan Alternatif 2 ---</option>';
                         data.forEach(cabang => {
                             const option = document.createElement('option');
                             option.id = 'lokasi-tujuan-' + cabang.id;
@@ -332,6 +383,14 @@
                             optionAlt.innerText = cabang.nama;
                             optionAlt.selected = cabang.id == {{ old('lokasi_tujuan_alt_id') ?? -1 }};
                             lokasiTujuanAlt.appendChild(optionAlt);
+
+                            const optionAlt2 = document.createElement('option');
+                            optionAlt2.id = 'lokasi-tujuan-alt2-' + cabang.id;
+                            optionAlt2.value = cabang.id;
+                            optionAlt2.innerText = cabang.nama;
+                            optionAlt2.selected = cabang.id ==
+                                {{ old('lokasi_tujuan_alt2_id') ?? -1 }};
+                            lokasiTujuanAlt2.appendChild(optionAlt2);
                         });
                     });
             }
@@ -345,9 +404,12 @@
                         .then(data => {
                             const lokasiTujuan = document.getElementById('lokasi_tujuan');
                             const lokasiTujuanAlt = document.getElementById('lokasi_tujuan_alt');
+                            const lokasiTujuanAlt2 = document.getElementById('lokasi_tujuan_alt2');
                             lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
                             lokasiTujuanAlt.innerHTML =
                                 '<option value>--- Pilih Lokasi Tujuan Alternatif ---</option>';
+                            lokasiTujuanAlt2.innerHTML =
+                                '<option value>--- Pilih Lokasi Tujuan Alternatif 2 ---</option>';
                             data.forEach(cabang => {
                                 const option = document.createElement('option');
                                 option.id = 'lokasi-tujuan-' + cabang.id;
@@ -363,6 +425,14 @@
                                 optionAlt.selected = cabang.id ==
                                     {{ old('lokasi_tujuan_alt_id') ?? -1 }};
                                 lokasiTujuanAlt.appendChild(optionAlt);
+
+                                const optionAlt2 = document.createElement('option');
+                                optionAlt2.id = 'lokasi-tujuan-alt2-' + cabang.id;
+                                optionAlt2.value = cabang.id;
+                                optionAlt2.innerText = cabang.nama;
+                                optionAlt2.selected = cabang.id ==
+                                    {{ old('lokasi_tujuan_alt2_id') ?? -1 }};
+                                lokasiTujuanAlt2.appendChild(optionAlt2);
                             });
                         });
                 } else {
@@ -371,9 +441,12 @@
                         .then(data => {
                             const lokasiTujuan = document.getElementById('lokasi_tujuan');
                             const lokasiTujuanAlt = document.getElementById('lokasi_tujuan_alt');
+                            const lokasiTujuanAlt2 = document.getElementById('lokasi_tujuan_alt2');
                             lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
                             lokasiTujuanAlt.innerHTML =
                                 '<option value>--- Pilih Lokasi Tujuan Alternatif ---</option>';
+                            lokasiTujuanAlt2.innerHTML =
+                                '<option value>--- Pilih Lokasi Tujuan Alternatif 2 ---</option>';
                             data.forEach(cabang => {
                                 const option = document.createElement('option');
                                 option.id = 'lokasi-tujuan-' + cabang.id;
@@ -389,6 +462,14 @@
                                 optionAlt.selected = cabang.id ==
                                     {{ old('lokasi_tujuan_alt_id') ?? -1 }};
                                 lokasiTujuanAlt.appendChild(optionAlt);
+
+                                const optionAlt2 = document.createElement('option');
+                                optionAlt2.id = 'lokasi-tujuan-alt2-' + cabang.id;
+                                optionAlt2.value = cabang.id;
+                                optionAlt2.innerText = cabang.nama;
+                                optionAlt2.selected = cabang.id ==
+                                    {{ old('lokasi_tujuan_alt2_id') ?? -1 }};
+                                lokasiTujuanAlt2.appendChild(optionAlt2);
                             });
                         });
                 }

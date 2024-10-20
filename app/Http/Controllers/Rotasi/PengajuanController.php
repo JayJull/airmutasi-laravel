@@ -48,6 +48,7 @@ class PengajuanController extends Controller
                 return $request->has('abnormal');
             }),
             'lokasi_tujuan_alt_id' => 'required_if:use_tujuan_alt,1|numeric|exists:cabangs,id',
+            'lokasi_tujuan_alt2_id' => 'required_if:use_tujuan_alt,1|numeric|exists:cabangs,id',
         ]);
 
         if (auth()->user()->role->name !== 'admin') {
@@ -76,7 +77,7 @@ class PengajuanController extends Controller
         }
         if (!$request->has('abnormal')) {
             // bisa di ringkas
-            
+
             $kelasCabangAwal = Cabang::with(['kelases' => function ($query) {
                 $query->select(['cabang_id', 'kelas_id']);
             }])->find($request->lokasi_awal_id);
@@ -121,6 +122,27 @@ class PengajuanController extends Controller
         } else {
             $pengajuan["secondary_pengajuan_id"] = null;
         }
+        if ($request->has('use_tujuan_alt2')) {
+            $pengajuanAlt2 = Pengajuan::create([
+                'lokasi_awal_id' => $pengajuan['lokasi_awal_id'],
+                'lokasi_tujuan_id' => $request['lokasi_tujuan_alt2_id'],
+                'nama_lengkap' => $pengajuan['nama_lengkap'],
+                'nik' => $pengajuan['nik'],
+                'masa_kerja' => $pengajuan['masa_kerja'],
+                'jabatan' => $pengajuan['jabatan'],
+                'posisi_sekarang' => $pengajuan['posisi_sekarang'],
+                'posisi_tujuan' => $pengajuan['posisi_tujuan'],
+                'tujuan_rotasi' => $pengajuan['tujuan_rotasi'],
+                'keterangan' => $pengajuan['keterangan'],
+                'sk_mutasi_url' => $pengajuan['sk_mutasi_url'],
+                'surat_persetujuan_url' => $pengajuan['surat_persetujuan_url'],
+                'status' => $pengajuan['status'],
+            ]);
+            $pengajuanAlt2->kompetensis()->createMany($kompetensi);
+            $pengajuan["th3_pengajuan_id"] = $pengajuanAlt2->id;
+        } else {
+            $pengajuan["th3_pengajuan_id"] = null;
+        }
         $pengajuan = Pengajuan::create([
             'lokasi_awal_id' => $pengajuan['lokasi_awal_id'],
             'lokasi_tujuan_id' => $pengajuan['lokasi_tujuan_id'],
@@ -136,6 +158,7 @@ class PengajuanController extends Controller
             'surat_persetujuan_url' => $pengajuan['surat_persetujuan_url'],
             'status' => $pengajuan['status'],
             'secondary_pengajuan_id' => $pengajuan["secondary_pengajuan_id"],
+            'th3_pengajuan_id' => $pengajuan['th3_pengajuan_id']
         ]);
         $pengajuan->kompetensis()->createMany($kompetensi);
         DB::commit();

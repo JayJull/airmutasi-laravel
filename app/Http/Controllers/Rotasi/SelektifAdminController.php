@@ -97,9 +97,13 @@ class SelektifAdminController extends Controller
                 $pengajuan->primary->status = 'tidak_dapat';
                 $pengajuan->primary->save();
             }
-            if ($pengajuan->secondary) {
-                $pengajuan->secondary->status = 'tidak_dapat';
-                $pengajuan->secondary->save();
+            if ($pengajuan->primary->secondary) {
+                $pengajuan->primary->secondary->status = 'tidak_dapat';
+                $pengajuan->primary->secondary->save();
+            }
+            if ($pengajuan->primary->th3) {
+                $pengajuan->primary->th3->status = 'tidak_dapat';
+                $pengajuan->primary->th3->save();
             }
             $pengajuan->status = 'dapat';
             $pengajuan->save();

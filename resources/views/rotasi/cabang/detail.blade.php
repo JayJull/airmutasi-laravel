@@ -88,53 +88,68 @@
                     {{ $skalaPersonelATC < 0 ? 0 : ($skalaPersonelATC > 10 ? 10 : $skalaPersonelATC) }}/10
                 </div>
                 <div class="col-span-2 grid grid-cols-2 gap-4 bg-white rounded-lg">
-                    <div
-                        class="col-span-2 sm:col-span-1 border-4 border-[#003285] rounded-lg flex flex-col justify-center p-2">
-                        <h2 class="font-bold text-xl text-center">Jumlah Maksimal FRMS</h2>
+                    <div class="col-span-2 sm:col-span-1 border-4 border-[#003285] rounded-lg flex flex-col p-2">
+                        <h2 class="font-bold text-xl text-center">ATC</h2>
                         <hr class="border-[1px] my-1">
-                        <p class="font-medium ms-4">ATC {{ $cabang->formasi }} Orang</p>
-                        <p class="font-medium ms-4">ACO {{ $cabang->formasi_aco }} Orang</p>
-                        <p class="font-medium ms-4">AIS {{ $cabang->formasi_ais }} Orang</p>
-                        <p class="font-medium ms-4">ATFM {{ $cabang->formasi_atfm }} Orang</p>
-                        <p class="font-medium ms-4">TAPOR {{ $cabang->formasi_tapor }} Orang</p>
-                        <p class="font-medium ms-4">ATS System {{ $cabang->formasi_ats_system }} Orang</p>
+                        <p class="font-medium ms-4">Jumlah Eksisting {{ $cabang->jumlah_personel }} Orang</p>
+                        <p class="font-medium ms-4">Jumlah FRMS Maksimal {{ $cabang->formasi }} Orang</p>
+                        <p class="font-medium ms-4">Jumlah FRMS Minimal {{ $cabang->frms }} Orang</p>
                     </div>
-                    <div
-                        class="col-span-2 sm:col-span-1 border-4 border-[#003285] rounded-lg flex flex-col items-center justify-center p-2">
-                        <h2 class="font-bold text-xl">Jumlah Minimal FRMS</h2>
-                        <p class="font-medium">ATC {{ $cabang->frms }} Orang</p>
+                    <div class="col-span-2 sm:col-span-1 border-4 border-[#003285] rounded-lg p-2 grid">
+                        <h2 class="font-bold text-xl text-center col-span-12">Unit</h2>
+                        <hr class="border-[1px] my-1 col-span-12">
+                        <table class="col-span-12">
+                            <tr>
+                                <th class="text-start">Posisi</th>
+                                <th class="text-start">Eksisting</th>
+                                <th class="text-start">Formasi</th>
+                            </tr>
+                            <tr>
+                                <td>ACO</td>
+                                <td>{{ $cabang->jumlah_personel_aco }}</td>
+                                <td>{{ $cabang->formasi_aco }}</td>
+                            </tr>
+                            <tr>
+                                <td>AIS</td>
+                                <td>{{ $cabang->jumlah_personel_ais }}</td>
+                                <td>{{ $cabang->formasi_ais }}</td>
+                            </tr>
+                            <tr>
+                                <td>ATFM</td>
+                                <td>{{ $cabang->jumlah_personel_atfm }}</td>
+                                <td>{{ $cabang->formasi_atfm }}</td>
+                            </tr>
+                            <tr>
+                                <td>TAPOR</td>
+                                <td>{{ $cabang->jumlah_personel_tapor }}</td>
+                                <td>{{ $cabang->formasi_tapor }}</td>
+                            </tr>
+                            <tr>
+                                <td>ATS System</td>
+                                <td>{{ $cabang->jumlah_personel_ats_system }}</td>
+                                <td>{{ $cabang->formasi_ats_system }}</td>
+                            </tr>
+                        </table>
                     </div>
-                    <div
-                        class="col-span-2 sm:col-span-1 border-4 border-[#003285] rounded-lg flex flex-col justify-center p-2">
-                        <h2 class="font-bold text-xl text-center">Jumlah Eksisting</h2>
-                        <hr class="border-[1px] my-1">
-                        <p class="font-medium ms-4">ATC {{ $cabang->jumlah_personel }} Orang</p>
-                        <p class="font-medium ms-4">ACO {{ $cabang->jumlah_personel_aco }} Orang</p>
-                        <p class="font-medium ms-4">AIS {{ $cabang->jumlah_personel_ais }} Orang</p>
-                        <p class="font-medium ms-4">ATFM {{ $cabang->jumlah_personel_atfm }} Orang</p>
-                        <p class="font-medium ms-4">TAPOR {{ $cabang->jumlah_personel_tapor }} Orang</p>
-                        <p class="font-medium ms-4">ATS System {{ $cabang->jumlah_personel_ats_system }} Orang</p>
-                    </div>
-                    <div
-                        class="col-span-2 sm:col-span-1 border-4 border-[#003285] rounded-lg flex flex-col justify-center p-2">
+                    <div class="col-span-2 border-4 border-[#003285] rounded-lg flex flex-col justify-center p-2">
                         <h2 class="font-bold text-xl text-center">Prediksi Personel {{ date('Y') + 1 }}</h2>
                         <hr class="border-[1px] my-1">
-                        <p class="font-medium ms-4">
+                        <p class="font-medium ms-4 text-center">
                             ATC {{ $cabang->jumlah_personel - count($cabang->personelPensiunATC) }} Orang</p>
-                        <p class="font-medium ms-4">
+                        <p class="font-medium ms-4 text-center">
                             ACO {{ $cabang->jumlah_personel_aco - count($cabang->personelPensiunACO) }}
                             Orang</p>
-                        <p class="font-medium ms-4">
+                        <p class="font-medium ms-4 text-center">
                             AIS {{ $cabang->jumlah_personel_ais - count($cabang->personelPensiunAIS) }}
                             Orang</p>
-                        <p class="font-medium ms-4">
+                        <p class="font-medium ms-4 text-center">
                             ATFM {{ $cabang->jumlah_personel_atfm - count($cabang->personelPensiunATFM) }}
                             Orang</p>
-                        <p class="font-medium ms-4">
+                        <p class="font-medium ms-4 text-center">
                             TAPOR
                             {{ $cabang->jumlah_personel_tapor - count($cabang->personelPensiunTAPOR) }}
                             Orang</p>
-                        <p class="font-medium ms-4">
+                        <p class="font-medium ms-4 text-center">
                             ATS System
                             {{ $cabang->jumlah_personel_ats_system - count($cabang->personelPensiunATSSystem) }}
                             Orang</p>

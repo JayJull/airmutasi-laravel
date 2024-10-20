@@ -11,8 +11,8 @@
     @include('components.modal-component')
     <main>
         {{-- Map start --}}
-        <section class="flex flex-col items-center">
-            <div class="w-full h-[50vh] md:h-[75vh] flex">
+        <section class="px-8 flex flex-col items-center">
+            <div class="w-full h-[50vh] md:h-[75vh] border-4 rounded-md flex">
                 <div id="map" class="w-full h-full z-40">
                     <div class="w-full h-full flex items-center justify-center" id="loading">
                         <img src="/images/icons/ripples.svg" alt="loading"
@@ -62,7 +62,7 @@
                         <img id="thumbnail-placeholder" src="/images/icons/Full Image.svg" alt="image" />
                         <img id="thumbnail" class="hidden w-full h-full object-cover" />
                     </div>
-                    <h1 id="nama" class="px-2 font-semibold text-lg hidden"></h1>
+                    <h1 id="nama" class="px-2 font-semibold text-3xl hidden"></h1>
                     <p id="alamat" class="p-2 text-center">
                         Pilih Cabang
                     </p>

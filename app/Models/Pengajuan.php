@@ -23,6 +23,7 @@ class Pengajuan extends Model
         'sk_mutasi_url',
         'surat_persetujuan_url',
         'secondary_pengajuan_id',
+        'th3_pengajuan_id',
         'status'
     ];
 
@@ -48,10 +49,16 @@ class Pengajuan extends Model
     }
     public function secondary()
     {
-        return $this->belongsTo(Pengajuan::class, "secondary_pengajuan_id");
+        return $this->belongsTo(Pengajuan::class, "secondary_pengajuan_id") ?? $this->belongsTo(Pengajuan::class, "secondary_pengajuan_id")->through("primary");
+    }
+    public function th3()
+    {
+        return $this->belongsTo(Pengajuan::class, "th3_pengajuan_id") ?? $this->belongsTo(Pengajuan::class, "th3_pengajuan_id");
     }
     public function primary()
     {
-        return $this->hasOne(Pengajuan::class, "secondary_pengajuan_id");
+        $alt = $this->hasOne(Pengajuan::class, "secondary_pengajuan_id");
+        if (!$alt->exists()) return $this->hasOne(Pengajuan::class, "th3_pengajuan_id");
+        return $alt;
     }
 }

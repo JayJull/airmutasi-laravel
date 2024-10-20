@@ -43,12 +43,12 @@
             <a href="/rotasi/cabang"
                 class="bg-[#003285] text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-md 2xl:rounded-2xl opacity-90 hover:opacity-100 duration-300"><img
                     src="/images/icons/rotasi.svg" alt="rotasi" />Rotasi</a>
-            <a href="/"
-                class="bg-[#003285] text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-md 2xl:rounded-2xl opacity-65">
-                <img src="/images/icons/demosi.svg" alt="demosi" />Demosi</a>
-            <a href="/"
-                class="bg-[#003285] text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-md 2xl:rounded-2xl opacity-65">
+            <a href="/promosi"
+                class="bg-[#003285] text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-md 2xl:rounded-2xl opacity-90 hover:opacity-100 duration-300">
                 <img src="/images/icons/promosi.svg" alt="promosi" />Promosi</a>
+            <a href="/demosi"
+                class="bg-[#003285] text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-md 2xl:rounded-2xl opacity-90 hover:opacity-100 duration-300">
+                <img src="/images/icons/demosi.svg" alt="demosi" />Demosi</a>
         </div>
     </main>
     @include('components.footer')

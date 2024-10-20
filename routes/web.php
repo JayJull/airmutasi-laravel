@@ -102,3 +102,19 @@ Route::group(['prefix' => 'rotasi', 'middleware' => [
         Route::post("/{id}", [RotasiSelektifAdminController::class, 'selektif']);
     });
 });
+
+Route::group(['prefix' => 'promosi', 'middleware' => [
+    'auth:web'
+]], function () {
+    Route::get('/', function () {
+        return view('notimplemented');
+    })->name('promosi');
+});
+
+Route::group(['prefix' => 'demosi', 'middleware' => [
+    'auth:web'
+]], function () {
+    Route::get('/', function () {
+        return view('notimplemented');
+    })->name('promosi');
+});
