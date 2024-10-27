@@ -81,6 +81,9 @@
                             No.
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Aksi
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             NIK-AirNav
                         </th>
                         <th scope="col" class="px-6 py-3">
@@ -164,6 +167,12 @@
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $loop->iteration }}
                             </th>
+                            <td class="px-6 py-4">
+                                <a href="/personel/pensiun/{{ $personel->id }}">
+                                    {{ $personel->pensiun ? 'Batalkan pensiun' : 'Pensiun' }}
+                                </a>
+                                <a href="/personel/delete/{{ $personel->id }}" class="text-red-500">Hapus</a>
+                            </td>
                             <td class="px-6 py-4">
                                 {{ $personel->nik }}
                             </td>

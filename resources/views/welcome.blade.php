@@ -26,10 +26,10 @@
                         <p class="font-semibold text-2xl text-center">{{ $cabangs->count() }}+</p>
                         <p class="opacity-60 text-center">Branch Offices</p>
                     </div>
-                    <div class="bg-[#003285] text-white p-4 rounded-md">
+                    <a href="/personel" class="bg-[#003285] text-white p-4 rounded-md">
                         <p class="font-semibold text-2xl text-center">{{ $personel }}+</p>
                         <p class="opacity-60 text-center">Employees</p>
-                    </div>
+                    </a>
                 </div>
             </aside>
             <aside class="md:w-2/5 aspect-video flex" id="carousel">
