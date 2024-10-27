@@ -76,14 +76,18 @@ class PersonelController extends Controller
         DB::beginTransaction();
         foreach ($data as $row) {
             $dataPersonel = array_combine($header, $row);
+            if (array_key_exists('KANTOR ' . $dataPersonel['lokasi_kedudukan'], $cabangs) && array_key_exists('KANTOR ' . $dataPersonel['lokasi'], $cabangs) && array_key_exists('KANTOR ' . $dataPersonel['lokasi_induk'], $cabangs)) {
+                $dataPersonel['cabang_id'] = $cabangs["KANTOR " . $dataPersonel['lokasi_kedudukan']];
+                $dataPersonel['lokasi'] = $cabangs['KANTOR ' . $dataPersonel['lokasi']];
+                $dataPersonel['lokasi_induk'] = $cabangs['KANTOR ' . $dataPersonel['lokasi_induk']];
+            } else {
+                continue;
+            }
             $dataPersonel['nik'] = $dataPersonel['nik_airnav'];
             $dataPersonel['name'] = $dataPersonel['nama'];
             $dataPersonel['jabatan'] = "";
             $dataPersonel['masa_kerja'] = $dataPersonel['masa_kerja_jabatan_th'];
             $dataPersonel['level_jabatan'] = $dataPersonel['nama_level_jabatan'];
-            $dataPersonel['cabang_id'] = $cabangs["KANTOR " . $dataPersonel['lokasi_kedudukan']];
-            $dataPersonel['lokasi'] = $cabangs["KANTOR " . $dataPersonel['lokasi']];
-            $dataPersonel['lokasi_induk'] = $cabangs["KANTOR " . $dataPersonel['lokasi_induk']];
             $dataPersonel['posisi'] = $dataPersonel['jabatan'];
             $dataPersonel['pensiun'] = $dataPersonel['sts_karyawan'] === 'Pensiun';
             $dataPersonel['kontak'] = $dataPersonel['kontak'] ?? "-";
