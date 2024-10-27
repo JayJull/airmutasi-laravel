@@ -11,13 +11,20 @@ class PersonelController extends Controller
 {
     public function index()
     {
-        $personels = Personel::all();
+        $page = request()->get('page', 0);
+        $limit = 10;
+        $personels = Personel::limit($limit)->offset($page * $limit)->get();
+        
+        if ($personels->count() === 0) {
+            return redirect()->back();
+        }
+        
         $cabang = Cabang::all();
-
         if (!$cabang) abort(404);
         return view('personel.index', [
             'personels' => $personels,
             'cabang' => $cabang,
+            'page' => $page ?? 0,
         ]);
     }
 

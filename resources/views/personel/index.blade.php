@@ -255,31 +255,13 @@
                 </tbody>
             </table>
         </div>
+        <div class="flex justify-between px-4 py-2">
+            <a @if ($page > 0) href="?page={{ $page - 1 }}" @endif>Back</a>
+            <a href="?page={{ $page + 1 }}">Next</a>
+        </div>
     </main>
     @include('components.footer')
     <script src="/script/nav.js"></script>
-    <script>
-        var activepopup = null;
-        const aksiPopup = document.querySelectorAll('.personels-action');
-        aksiPopup.forEach((element) => {
-            element.addEventListener('click', () => {
-                if (activepopup) {
-                    activepopup.querySelector('div').classList.toggle('max-h-0');
-                    activepopup.querySelector('div').classList.toggle('max-h-[15%]');
-                    activepopup.querySelector('button > img').classList.toggle('rotate-90');
-                }
-                if (activepopup === element) {
-                    activepopup = null;
-                    return;
-                }
-                const dropdown = element.querySelector('div');
-                dropdown.classList.toggle('max-h-0');
-                dropdown.classList.toggle('max-h-[15%]');
-                element.querySelector('button > img').classList.toggle('rotate-90');
-                activepopup = element;
-            });
-        });
-    </script>
     <script src="/script/chatbot.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 </body>
