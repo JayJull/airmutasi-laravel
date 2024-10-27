@@ -9,7 +9,19 @@ use Illuminate\Support\Facades\DB;
 
 class PersonelController extends Controller
 {
-    public function index(Request $request, $id)
+    public function index()
+    {
+        $personels = Personel::all();
+        $cabang = Cabang::all();
+
+        if (!$cabang) abort(404);
+        return view('personel.index', [
+            'personels' => $personels,
+            'cabang' => $cabang,
+        ]);
+    }
+
+    public function cabang(Request $request, $id)
     {
         if ($request->tab === 'ACO') {
             $cabang = Cabang::with(['personels' => function ($query) {
@@ -37,7 +49,7 @@ class PersonelController extends Controller
             }])->find($id);
         }
         if (!$cabang) abort(404);
-        return view('personel.index', [
+        return view('personel.cabang', [
             'cabang' => $cabang,
             'tab' => $request->tab ?? 'ATC',
         ]);
@@ -49,6 +61,44 @@ class PersonelController extends Controller
         return view('personel.input', [
             'cabangs' => $cabangs,
         ]);
+    }
+
+    public function importAllWithCsv(Request $request)
+    {
+        $request->validate([
+            'sheet' => 'required|mimes:csv,txt',
+        ]);
+        $file = $request->file('sheet');
+        $cabangs = Cabang::pluck('id', 'nama')->toArray();
+        $path = $file->getRealPath();
+        $data = array_map('str_getcsv', file($path));
+        $header = array_shift($data);
+        DB::beginTransaction();
+        foreach ($data as $row) {
+            $dataPersonel = array_combine($header, $row);
+            $dataPersonel['nik'] = $dataPersonel['nik_airnav'];
+            $dataPersonel['name'] = $dataPersonel['nama'];
+            $dataPersonel['jabatan'] = "";
+            $dataPersonel['masa_kerja'] = $dataPersonel['masa_kerja_jabatan_th'];
+            $dataPersonel['level_jabatan'] = $dataPersonel['nama_level_jabatan'];
+            $dataPersonel['cabang_id'] = $cabangs[$dataPersonel['lokasi_kedudukan']];
+            $dataPersonel['lokasi'] = $cabangs[$dataPersonel['lokasi']];
+            $dataPersonel['lokasi_induk'] = $cabangs[$dataPersonel['lokasi_induk']];
+            $dataPersonel['posisi'] = $dataPersonel['jabatan'];
+            $dataPersonel['pensiun'] = $dataPersonel['sts_karyawan'] === 'Pensiun';
+            $dataPersonel['kontak'] = $dataPersonel['kontak'] ?? "-";
+
+            $dataPersonel["tgl_lahir"] = $dataPersonel["tgl_lahir"] ? date('Y-m-d', strtotime($dataPersonel["tgl_lahir"])) : "2000-01-01";
+            $dataPersonel["tmt_kerja_airnav"] = $dataPersonel["tmt_kerja_airnav"] ? date('Y-m-d', strtotime($dataPersonel["tmt_kerja_airnav"])) : "2000-01-01";
+            $dataPersonel["tmt_kerja_golongan"] = $dataPersonel["tmt_kerja_golongan"] ? date('Y-m-d', strtotime($dataPersonel["tmt_kerja_golongan"])) : "2000-01-01";
+            $dataPersonel["tmt_pensiun"] = $dataPersonel["tmt_pensiun"] ? date('Y-m-d', strtotime($dataPersonel["tmt_pensiun"])) : "2000-01-01";
+            $dataPersonel["tmt_jabatan"] = $dataPersonel["tmt_jabatan"] ? date('Y-m-d', strtotime($dataPersonel["tmt_jabatan"])) : "2000-01-01";
+            $dataPersonel["tmt_level_jabatan"] = $dataPersonel["tmt_level_jabatan"] ? date('Y-m-d', strtotime($dataPersonel["tmt_level_jabatan"])) : "2000-01-01";
+
+            Personel::updateOrCreate(["nik" => $dataPersonel["nik"]], $dataPersonel);
+        }
+        DB::commit();
+        return redirect()->route('personel')->with('success', 'Personel berhasil diimport');
     }
 
     public function importCsv(Request $request)
@@ -65,6 +115,7 @@ class PersonelController extends Controller
         $dataPersonels = [];
         foreach ($data as $row) {
             $dataPersonel = array_combine($header, $row);
+            $dataPersonel['nik'] = $dataPersonel['nik_airnav'];
             $dataPersonel['cabang_id'] = $request->cabang_id;
             $dataPersonel['posisi'] = $request->posisi;
             $dataPersonels[] = $dataPersonel;
@@ -114,7 +165,8 @@ class PersonelController extends Controller
         return redirect()->route('personel.index', ['id' => $request->cabang_id])->with('success', 'Personel berhasil ditambahkan');
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $personel = Personel::find($id);
         if (!$personel) abort(404);
         $cabang_id = $personel->cabang_id;
@@ -122,7 +174,8 @@ class PersonelController extends Controller
         return redirect()->route('personel.index', ['id' => $cabang_id])->with('success', 'Personel berhasil dihapus');
     }
 
-    public function togglePensiun($id) {
+    public function togglePensiun($id)
+    {
         $personel = Personel::find($id);
         if (!$personel) abort(404);
         $personel->update([

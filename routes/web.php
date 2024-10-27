@@ -56,7 +56,9 @@ Route::group(['prefix' => 'akun', 'middleware' => [
 Route::group(['prefix' => 'personel', 'middleware' => [
     'auth:web'
 ]], function () {
-    Route::get('/cabang/{id}', [PersonelController::class, 'index'])->name('personel.index');
+    Route::get("/", [PersonelController::class, 'index'])->name('personel');
+    Route::post("/import", [PersonelController::class, 'importAllWithCsv'])->name('personel.import');
+    Route::get('/cabang/{id}', [PersonelController::class, 'cabang'])->name('personel.index');
     Route::group(['prefix' => 'add', 'middleware' => [
         'is.admin'
     ]], function () {
