@@ -81,9 +81,9 @@ class PersonelController extends Controller
             $dataPersonel['jabatan'] = "";
             $dataPersonel['masa_kerja'] = $dataPersonel['masa_kerja_jabatan_th'];
             $dataPersonel['level_jabatan'] = $dataPersonel['nama_level_jabatan'];
-            $dataPersonel['cabang_id'] = $cabangs[$dataPersonel['lokasi_kedudukan']];
-            $dataPersonel['lokasi'] = $cabangs[$dataPersonel['lokasi']];
-            $dataPersonel['lokasi_induk'] = $cabangs[$dataPersonel['lokasi_induk']];
+            $dataPersonel['cabang_id'] = $cabangs["KANTOR " . $dataPersonel['lokasi_kedudukan']];
+            $dataPersonel['lokasi'] = $cabangs["KANTOR " . $dataPersonel['lokasi']];
+            $dataPersonel['lokasi_induk'] = $cabangs["KANTOR " . $dataPersonel['lokasi_induk']];
             $dataPersonel['posisi'] = $dataPersonel['jabatan'];
             $dataPersonel['pensiun'] = $dataPersonel['sts_karyawan'] === 'Pensiun';
             $dataPersonel['kontak'] = $dataPersonel['kontak'] ?? "-";
