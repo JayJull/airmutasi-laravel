@@ -31,35 +31,38 @@ class PersonelController extends Controller
 
     public function cabang(Request $request, $id)
     {
+        $page = request()->get('page', 0);
+        $limit = 100;
         if ($request->tab === 'ACO') {
-            $cabang = Cabang::with(['personels' => function ($query) {
-                $query->with(['kompetensis'])->where('posisi', 'ACO')->orWhere('posisi', 'AERONAUTICAL COMMUNICATION OFFICER');
+            $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
+                $query->with(['kompetensis'])->where('posisi', 'ACO')->orWhere('posisi', 'AERONAUTICAL COMMUNICATION OFFICER')->limit($limit)->offset($page * $limit);
             }])->find($id);
         } else if ($request->tab === 'AIS') {
-            $cabang = Cabang::with(['personels' => function ($query) {
-                $query->with(['kompetensis'])->where('posisi', 'AIS')->orWhere('posisi', 'AERONAUTICAL INFORMATION SERVICE');
+            $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
+                $query->with(['kompetensis'])->where('posisi', 'AIS')->orWhere('posisi', 'AERONAUTICAL INFORMATION SERVICE')->limit($limit)->offset($page * $limit);
             }])->find($id);
         } else if ($request->tab === 'ATFM') {
-            $cabang = Cabang::with(['personels' => function ($query) {
-                $query->with(['kompetensis'])->where('posisi', 'ATFM')->orWhere('posisi', 'AIR TRAFFIC FLOW MANAGEMENT');
+            $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
+                $query->with(['kompetensis'])->where('posisi', 'ATFM')->orWhere('posisi', 'AIR TRAFFIC FLOW MANAGEMENT')->limit($limit)->offset($page * $limit);
             }])->find($id);
         } else if ($request->tab === 'TAPOR') {
-            $cabang = Cabang::with(['personels' => function ($query) {
-                $query->with(['kompetensis'])->where('posisi', 'TAPOR')->orWhere('posisi', 'TOWER APPROACH');
+            $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
+                $query->with(['kompetensis'])->where('posisi', 'TAPOR')->orWhere('posisi', 'TOWER APPROACH')->limit($limit)->offset($page * $limit);
             }])->find($id);
         } else if ($request->tab === 'ATSSystem') {
-            $cabang = Cabang::with(['personels' => function ($query) {
-                $query->with(['kompetensis'])->where('posisi', 'ATSSystem')->orWhere('posisi', 'AIR TRAFFIC SERVICES SYSTEM');
+            $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
+                $query->with(['kompetensis'])->where('posisi', 'ATSSystem')->orWhere('posisi', 'AIR TRAFFIC SERVICES SYSTEM')->limit($limit)->offset($page * $limit);
             }])->find($id);
         } else {
-            $cabang = Cabang::with(['personels' => function ($query) {
-                $query->with(['kompetensis'])->whereNotIn('posisi', ['ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem', 'AERONAUTICAL COMMUNICATION OFFICER', 'AERONAUTICAL INFORMATION SERVICE', 'AIR TRAFFIC FLOW MANAGEMENT', 'TOWER APPROACH', 'AIR TRAFFIC SERVICES SYSTEM']);
+            $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
+                $query->with(['kompetensis'])->whereNotIn('posisi', ['ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem', 'AERONAUTICAL COMMUNICATION OFFICER', 'AERONAUTICAL INFORMATION SERVICE', 'AIR TRAFFIC FLOW MANAGEMENT', 'TOWER APPROACH', 'AIR TRAFFIC SERVICES SYSTEM'])->limit($limit)->offset($page * $limit);
             }])->find($id);
         }
         if (!$cabang) abort(404);
         return view('personel.cabang', [
             'cabang' => $cabang,
             'tab' => $request->tab ?? 'ATC',
+            'page' => $page ?? 0,
         ]);
     }
 
