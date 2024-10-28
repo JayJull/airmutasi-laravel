@@ -173,33 +173,33 @@
         document.querySelector('#tab-cabang #summary').addEventListener('click', openSummaryCabang);
     </script>
     <script>
-        var currentPage = 0;
-        const mapContainer = document.getElementById('map');
-        const bannerContainer = document.querySelector('#banner-img');
-        const mapShowBtn = document.getElementById('map-show-btn');
-        const bannerShowBtn = document.getElementById('banner-show-btn');
-        mapShowBtn.addEventListener('click', () => {
-            if (currentPage !== 0) {
-                mapContainer.classList.remove('w-0');
-                mapContainer.classList.add('w-full');
-                bannerContainer.classList.remove('w-full');
-                bannerContainer.classList.add('w-0');
-                currentPage = 0;
-                mapShowBtn.classList.add('bg-[#003285]');
-                bannerShowBtn.classList.remove('bg-[#003285]');
-            }
-        });
-        bannerShowBtn.addEventListener('click', () => {
-            if (currentPage !== 1) {
-                mapContainer.classList.add('w-0');
-                mapContainer.classList.remove('w-full');
-                bannerContainer.classList.add('w-full');
-                bannerContainer.classList.remove('w-0');
-                currentPage = 1;
-                mapShowBtn.classList.remove('bg-[#003285]');
-                bannerShowBtn.classList.add('bg-[#003285]');
-            }
-        });
+        /*var currentPage = 0;
+            const mapContainer = document.getElementById('map');
+            const bannerContainer = document.querySelector('#banner-img');
+            const mapShowBtn = document.getElementById('map-show-btn');
+            const bannerShowBtn = document.getElementById('banner-show-btn');
+            mapShowBtn.addEventListener('click', () => {
+                if (currentPage !== 0) {
+                    mapContainer.classList.remove('w-0');
+                    mapContainer.classList.add('w-full');
+                    bannerContainer.classList.remove('w-full');
+                    bannerContainer.classList.add('w-0');
+                    currentPage = 0;
+                    mapShowBtn.classList.add('bg-[#003285]');
+                    bannerShowBtn.classList.remove('bg-[#003285]');
+                }
+            });
+            bannerShowBtn.addEventListener('click', () => {
+                if (currentPage !== 1) {
+                    mapContainer.classList.add('w-0');
+                    mapContainer.classList.remove('w-full');
+                    bannerContainer.classList.add('w-full');
+                    bannerContainer.classList.remove('w-0');
+                    currentPage = 1;
+                    mapShowBtn.classList.remove('bg-[#003285]');
+                    bannerShowBtn.classList.add('bg-[#003285]');
+                }
+            });*/
     </script>
     <script>
         // set data to aside cabang's summary
@@ -231,8 +231,16 @@
                 cabangItem.addEventListener('click', () => {
                     if (activated) {
                         activated.classList.remove('bg-slate-600');
+                        if (activated.classList.contains('bg-whited')) {
+                            activated.classList.remove('bg-whited');
+                            activated.classList.add('bg-white');
+                        }
                     }
                     cabangItem.classList.add('bg-slate-600');
+                    if (cabangItem.classList.contains('bg-white')) {
+                        cabangItem.classList.remove('bg-white');
+                        cabangItem.classList.add('bg-whited');
+                    }
                     activated = cabangItem;
                     fetch(`/api/rotasi/cabang-summary/${cabangItem.value}`)
                         .then(response => response.json())

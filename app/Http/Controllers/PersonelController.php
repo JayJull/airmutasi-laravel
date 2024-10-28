@@ -6,19 +6,20 @@ use App\Models\Cabang;
 use App\Models\Personel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PersonelController extends Controller
 {
     public function index()
     {
         $page = request()->get('page', 0);
-        $limit = 10;
+        $limit = 100;
         $personels = Personel::limit($limit)->offset($page * $limit)->get();
-        
-        if ($personels->count() === 0) {
+
+        if ($personels->count() === 0 && $page > 0) {
             return redirect()->back();
         }
-        
+
         $cabang = Cabang::all();
         if (!$cabang) abort(404);
         return view('personel.index', [
@@ -32,27 +33,27 @@ class PersonelController extends Controller
     {
         if ($request->tab === 'ACO') {
             $cabang = Cabang::with(['personels' => function ($query) {
-                $query->with(['kompetensis'])->where('posisi', 'ACO');
+                $query->with(['kompetensis'])->where('posisi', 'ACO')->orWhere('posisi', 'AERONAUTICAL COMMUNICATION OFFICER');
             }])->find($id);
         } else if ($request->tab === 'AIS') {
             $cabang = Cabang::with(['personels' => function ($query) {
-                $query->with(['kompetensis'])->where('posisi', 'AIS');
+                $query->with(['kompetensis'])->where('posisi', 'AIS')->orWhere('posisi', 'AERONAUTICAL INFORMATION SERVICE');
             }])->find($id);
         } else if ($request->tab === 'ATFM') {
             $cabang = Cabang::with(['personels' => function ($query) {
-                $query->with(['kompetensis'])->where('posisi', 'ATFM');
+                $query->with(['kompetensis'])->where('posisi', 'ATFM')->orWhere('posisi', 'AIR TRAFFIC FLOW MANAGEMENT');
             }])->find($id);
         } else if ($request->tab === 'TAPOR') {
             $cabang = Cabang::with(['personels' => function ($query) {
-                $query->with(['kompetensis'])->where('posisi', 'TAPOR');
+                $query->with(['kompetensis'])->where('posisi', 'TAPOR')->orWhere('posisi', 'TOWER APPROACH');
             }])->find($id);
         } else if ($request->tab === 'ATSSystem') {
             $cabang = Cabang::with(['personels' => function ($query) {
-                $query->with(['kompetensis'])->where('posisi', 'ATSSystem');
+                $query->with(['kompetensis'])->where('posisi', 'ATSSystem')->orWhere('posisi', 'AIR TRAFFIC SERVICES SYSTEM');
             }])->find($id);
         } else {
             $cabang = Cabang::with(['personels' => function ($query) {
-                $query->with(['kompetensis'])->whereNotIn('posisi', ['ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem']);
+                $query->with(['kompetensis'])->whereNotIn('posisi', ['ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem', 'AERONAUTICAL COMMUNICATION OFFICER', 'AERONAUTICAL INFORMATION SERVICE', 'AIR TRAFFIC FLOW MANAGEMENT', 'TOWER APPROACH', 'AIR TRAFFIC SERVICES SYSTEM']);
             }])->find($id);
         }
         if (!$cabang) abort(404);
@@ -81,35 +82,40 @@ class PersonelController extends Controller
         $data = array_map('str_getcsv', file($path));
         $header = array_shift($data);
         DB::beginTransaction();
-        foreach ($data as $row) {
-            $dataPersonel = array_combine($header, $row);
-            if (array_key_exists('KANTOR ' . $dataPersonel['lokasi_kedudukan'], $cabangs) && array_key_exists('KANTOR ' . $dataPersonel['lokasi'], $cabangs) && array_key_exists('KANTOR ' . $dataPersonel['lokasi_induk'], $cabangs)) {
-                $dataPersonel['cabang_id'] = $cabangs["KANTOR " . $dataPersonel['lokasi_kedudukan']];
-                $dataPersonel['lokasi'] = $cabangs['KANTOR ' . $dataPersonel['lokasi']];
-                $dataPersonel['lokasi_induk'] = $cabangs['KANTOR ' . $dataPersonel['lokasi_induk']];
-            } else {
-                continue;
+        try {
+            foreach ($data as $row) {
+                $dataPersonel = array_combine($header, $row);
+                if (array_key_exists('KANTOR ' . $dataPersonel['lokasi_kedudukan'], $cabangs) && array_key_exists('KANTOR ' . $dataPersonel['lokasi'], $cabangs) && array_key_exists('KANTOR ' . $dataPersonel['lokasi_induk'], $cabangs)) {
+                    $dataPersonel['cabang_id'] = $cabangs["KANTOR " . $dataPersonel['lokasi_kedudukan']];
+                    $dataPersonel['lokasi'] = $cabangs['KANTOR ' . $dataPersonel['lokasi']];
+                    $dataPersonel['lokasi_induk'] = $cabangs['KANTOR ' . $dataPersonel['lokasi_induk']];
+                } else {
+                    continue;
+                }
+                $dataPersonel['posisi'] = $dataPersonel['jabatan'];
+                $dataPersonel['jabatan'] = $dataPersonel['nama_level_jabatan'];
+                $dataPersonel['nik'] = $dataPersonel['nik_airnav'];
+                $dataPersonel['name'] = $dataPersonel['nama'];
+                $dataPersonel['masa_kerja'] = $dataPersonel['masa_kerja_jabatan_th'];
+                $dataPersonel['level_jabatan'] = $dataPersonel['nama_level_jabatan'];
+                $dataPersonel['pensiun'] = $dataPersonel['sts_karyawan'] === 'Pensiun';
+                $dataPersonel['kontak'] = $dataPersonel['kontak'] ?? "-";
+
+                $dataPersonel["tgl_lahir"] = $dataPersonel["tgl_lahir"] ? date('Y-m-d', strtotime($dataPersonel["tgl_lahir"])) : "2000-01-01";
+                $dataPersonel["tmt_kerja_airnav"] = $dataPersonel["tmt_kerja_airnav"] ? date('Y-m-d', strtotime($dataPersonel["tmt_kerja_airnav"])) : "2000-01-01";
+                $dataPersonel["tmt_kerja_golongan"] = $dataPersonel["tmt_kerja_golongan"] ? date('Y-m-d', strtotime($dataPersonel["tmt_kerja_golongan"])) : "2000-01-01";
+                $dataPersonel["tmt_pensiun"] = $dataPersonel["tmt_pensiun"] ? date('Y-m-d', strtotime($dataPersonel["tmt_pensiun"])) : "2000-01-01";
+                $dataPersonel["tmt_jabatan"] = $dataPersonel["tmt_jabatan"] ? date('Y-m-d', strtotime($dataPersonel["tmt_jabatan"])) : "2000-01-01";
+                $dataPersonel["tmt_level_jabatan"] = $dataPersonel["tmt_level_jabatan"] ? date('Y-m-d', strtotime($dataPersonel["tmt_level_jabatan"])) : "2000-01-01";
+
+                Personel::updateOrCreate(["nik" => $dataPersonel["nik"]], $dataPersonel);
             }
-            $dataPersonel['nik'] = $dataPersonel['nik_airnav'];
-            $dataPersonel['name'] = $dataPersonel['nama'];
-            $dataPersonel['jabatan'] = "";
-            $dataPersonel['masa_kerja'] = $dataPersonel['masa_kerja_jabatan_th'];
-            $dataPersonel['level_jabatan'] = $dataPersonel['nama_level_jabatan'];
-            $dataPersonel['posisi'] = $dataPersonel['jabatan'];
-            $dataPersonel['pensiun'] = $dataPersonel['sts_karyawan'] === 'Pensiun';
-            $dataPersonel['kontak'] = $dataPersonel['kontak'] ?? "-";
-
-            $dataPersonel["tgl_lahir"] = $dataPersonel["tgl_lahir"] ? date('Y-m-d', strtotime($dataPersonel["tgl_lahir"])) : "2000-01-01";
-            $dataPersonel["tmt_kerja_airnav"] = $dataPersonel["tmt_kerja_airnav"] ? date('Y-m-d', strtotime($dataPersonel["tmt_kerja_airnav"])) : "2000-01-01";
-            $dataPersonel["tmt_kerja_golongan"] = $dataPersonel["tmt_kerja_golongan"] ? date('Y-m-d', strtotime($dataPersonel["tmt_kerja_golongan"])) : "2000-01-01";
-            $dataPersonel["tmt_pensiun"] = $dataPersonel["tmt_pensiun"] ? date('Y-m-d', strtotime($dataPersonel["tmt_pensiun"])) : "2000-01-01";
-            $dataPersonel["tmt_jabatan"] = $dataPersonel["tmt_jabatan"] ? date('Y-m-d', strtotime($dataPersonel["tmt_jabatan"])) : "2000-01-01";
-            $dataPersonel["tmt_level_jabatan"] = $dataPersonel["tmt_level_jabatan"] ? date('Y-m-d', strtotime($dataPersonel["tmt_level_jabatan"])) : "2000-01-01";
-
-            Personel::updateOrCreate(["nik" => $dataPersonel["nik"]], $dataPersonel);
+            DB::commit();
+            return redirect()->route('personel')->with('success', 'Personel berhasil diimport');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('personel')->with('error', 'Personel gagal diimport');
         }
-        DB::commit();
-        return redirect()->route('personel')->with('success', 'Personel berhasil diimport');
     }
 
     public function importCsv(Request $request)

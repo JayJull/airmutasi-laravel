@@ -55,7 +55,189 @@
                         </div>
                     @endcan --}}
                 </div>
-                <div>
+                <div class="relative overflow-x-auto max-h-[70vh] overflow-y-auto block">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    No.
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Aksi
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    NIK-AirNav
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    E-NIK
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    NIK-AP1
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Nama
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Gelar
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Kelamin
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Tempat, Tanggal Lahir
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Usia
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Status Karyawan
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    TMT Kerja Airnav
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    TMT Kerja Golongan
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    TMT Pensiun
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Lokasi
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Lokasi Induk
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Lokasi Kedudukan
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Unit
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Jabatan
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    TMT Jabatan
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Masa Kerja Jabatan
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Nama Level Jabatan (Level)
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    TMT Level Jabatan
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Masa Kerja Level Jabatan
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Skala Jabatan
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Fungsi
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Job Text
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($cabang->personels as $personel)
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $loop->iteration }}
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        <a href="/personel/pensiun/{{ $personel->id }}">
+                                            {{ $personel->pensiun ? 'Batalkan pensiun' : 'Pensiun' }}
+                                        </a>
+                                        <a href="/personel/delete/{{ $personel->id }}" class="text-red-500">Hapus</a>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->nik }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->e_nik }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->nik_ap1 }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->name }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->gelar }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->kelamin }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->tempat_lahir }}, {{ $personel->tgl_lahir }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->usia_th }} Tahun, {{ $personel->usia_bl }} Bulan
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->sts_karyawan }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->tmt_kerja_airnav }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->tmt_kerja_golongan }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->tmt_pensiun }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->cabang->nama }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->lokasi ? $personel->lokasiCabang->nama : '-' }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->lokasi_induk ? $personel->lokasiInduk->nama : '-' }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->unit }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->posisi }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->tmt_jabatan }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->masa_kerja }} Tahun,
+                                        {{ $personel->masa_kerja_jabatan_bl }} Bulan
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->nama_level_jabatan }} ({{ $personel->level }})
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->tmt_level_jabatan }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->masa_kerja_level_jabatan_th }} Tahun,
+                                        {{ $personel->masa_kerja_level_jabatan_bl }} Bulan
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->skala_jabatan }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->fungsi }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $personel->job_text }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                {{-- <div>
                     @if ($cabang->personels->isEmpty())
                         <p class="p-4 text-center">Tidak ada data</p>
                     @else
@@ -125,7 +307,7 @@
                             @endif
                         </div>
                     @endforeach
-                </div>
+                </div> --}}
             </div>
         </section>
     </main>
