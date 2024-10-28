@@ -89,6 +89,10 @@ class PersonelController extends Controller
                     $dataPersonel['cabang_id'] = $cabangs["KANTOR " . $dataPersonel['lokasi_kedudukan']];
                     $dataPersonel['lokasi'] = $cabangs['KANTOR ' . $dataPersonel['lokasi']];
                     $dataPersonel['lokasi_induk'] = $cabangs['KANTOR ' . $dataPersonel['lokasi_induk']];
+                } else if(array_key_exists($dataPersonel['lokasi_kedudukan'], $cabangs) && array_key_exists($dataPersonel['lokasi'], $cabangs) && array_key_exists($dataPersonel['lokasi_induk'], $cabangs)) {
+                    $dataPersonel['cabang_id'] = $cabangs[$dataPersonel['lokasi_kedudukan']];
+                    $dataPersonel['lokasi'] = $cabangs[$dataPersonel['lokasi']];
+                    $dataPersonel['lokasi_induk'] = $cabangs[$dataPersonel['lokasi_induk']];
                 } else {
                     continue;
                 }
