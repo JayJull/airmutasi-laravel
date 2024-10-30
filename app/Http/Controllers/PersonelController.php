@@ -29,6 +29,12 @@ class PersonelController extends Controller
         ]);
     }
 
+    public function search_by_nik(Request $request) {
+        $nik = $request->nik;
+        $personels = Personel::where('nik', 'like', $nik . '%')->get();
+        return response()->json($personels);
+    }
+
     public function cabang(Request $request, $id)
     {
         $page = request()->get('page', 0);

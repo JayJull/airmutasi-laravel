@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\FileController;
 use App\Http\Controllers\API\Rotasi\CabangController as RotasiCabangController;
 use App\Http\Controllers\API\Rotasi\PengajuanController as RotasiPengajuanController;
+use App\Http\Controllers\PersonelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,5 +35,7 @@ Route::group(['prefix' => 'rotasi'], function () {
 Route::group(['prefix' => 'pengajuan'], function () {
     Route::get('/{id}', [RotasiPengajuanController::class, 'byId']);
 });
+
+Route::get("/personel", [PersonelController::class, 'search_by_nik']);
 
 Route::post('/upload-doc', [FileController::class, 'uploadDoc']);
