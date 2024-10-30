@@ -538,6 +538,14 @@
                 });
         }
 
+        const body = document.querySelector('body');
+        body.addEventListener('click', function(e) {
+            if (!e.target.closest('#nik-suggestion') && !e.target.closest('#nik')) {
+                document.getElementById('nik-suggestion').classList.add('hidden');
+                document.getElementById('nik-suggestion').classList.remove('flex');
+            }
+        });
+
         function debounce(func, timeout = 300){
             let timer;
             return (...args) => {
