@@ -23,7 +23,7 @@
                             <input type="text" name="nik" id="nik"
                                 class="w-full px-2 py-1 mt-1 border-2 border-slate-400 rounded-md peer/nik"
                                 placeholder="Ketik Disini ..." value="{{ old('nik') }}" autocomplete="one-time-code" onkeyup="searchNIKDebounce()" />
-                            <div class="w-full absolute z-20 hidden flex-col items-start border p-1 gap-1 bg-white bg-white max-h-[200px] overflow-y-auto" id="nik-suggestion">
+                            <div class="w-full absolute z-20 hidden flex-col items-start border p-1 gap-1 bg-white max-h-[200px] overflow-y-auto" id="nik-suggestion">
                             </div>
                         </aside>
                         <aside class="w-full">
