@@ -50,6 +50,29 @@
     <main class="min-h-screen">
         <div class="flex justify-between items-center px-4 py-2 bg-gray-100 dark:bg-gray-800">
             <h1 class="text-xl font-semibold text-gray-800 dark:text-white">Personel</h1>
+            <form action="" class="gap-2 flex">
+                <input type="search" name="nik" id="nik-search"
+                    class="min-w-40 px-2 py-1 border-2 border-slate-400 rounded-md" placeholder="NIK"
+                    value="{{ $search['nik'] }}">
+                <input type="search" name="nama" id="nama-search"
+                    class="w-full px-2 py-1 border-2 border-slate-400 rounded-md" placeholder="Nama"
+                    value="{{ $search['name'] }}">
+                <div class="min-w-28 relative">
+                    <input type="hidden" name="cabang_id" value="{{ $search['cabang_id'] }}">
+                    <input type="search" name="cabang" id="cabang-search"
+                        class="w-full px-2 py-1 border-2 border-slate-400 rounded-md" placeholder="Cabang"
+                        onkeyup="searchCabang()" value="{{ $search['cabang'] }}">
+                    <div class="w-[200%] left-[-100%] absolute z-20 hidden flex-col items-start border p-1 gap-1 bg-white max-h-[100px] overflow-y-auto"
+                        id="cabang-suggestion">
+                        @foreach ($cabangs as $cabang)
+                            <button type="button" onclick="selectCabang(this)" data-cabang-id="{{ $cabang->id }}"
+                                class="w-full text-start border hover:border-2 px-2 py-1">{{ $cabang->nama }}</button>
+                        @endforeach
+                    </div>
+                </div>
+                <button
+                    class="flex items-center justify-center px-4 py-2 text-white text-sm bg-blue-500 rounded-md hover:bg-blue-600">Cari</button>
+            </form>
             <div class="flex items center gap-2">
                 <button
                     class="flex items-center justify-center px-4 py-2 text-white text-sm bg-blue-500 rounded-md hover:bg-blue-600"
@@ -75,7 +98,8 @@
         </div>
         <div class="relative overflow-x-auto max-h-[70vh] overflow-y-auto block">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <thead
+                    class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             No.
@@ -263,6 +287,42 @@
     @include('components.footer')
     <script src="/script/nav.js"></script>
     <script src="/script/chatbot.js"></script>
+    <script>
+        function searchCabang() {
+            const cabangSearch = document.getElementById('cabang-search');
+            const cabangSuggestion = document.getElementById('cabang-suggestion');
+            cabangSuggestion.classList.remove('hidden');
+            cabangSuggestion.classList.add('flex');
+            const cabang = cabangSearch.value;
+            const cabangButtons = cabangSuggestion.querySelectorAll('button');
+            cabangButtons.forEach(button => {
+                if (button.innerText.toLowerCase().includes(cabang.toLowerCase())) {
+                    button.classList.remove('hidden');
+                    button.classList.add('flex');
+                } else {
+                    button.classList.add('hidden');
+                    button.classList.remove('flex');
+                }
+            });
+        }
+
+        function selectCabang(e) {
+            const cabangSearch = document.getElementById('cabang-search');
+            const cabangId = document.querySelector('input[name="cabang_id"]');
+            cabangId.value = e.dataset.cabangId;
+            cabangSearch.value = e.innerText;
+            document.getElementById('cabang-suggestion').classList.add('hidden');
+            document.getElementById('cabang-suggestion').classList.remove('flex');
+        }
+
+        const body = document.querySelector('body');
+        body.addEventListener('click', function(e) {
+            if (!e.target.closest('#cabang-suggestion') && !e.target.closest('#cabang-search')) {
+                document.getElementById('cabang-suggestion').classList.add('hidden');
+                document.getElementById('cabang-suggestion').classList.remove('flex');
+            }
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 </body>
 

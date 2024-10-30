@@ -14,22 +14,54 @@ class PersonelController extends Controller
     {
         $page = request()->get('page', 0);
         $limit = 100;
-        $personels = Personel::limit($limit)->offset($page * $limit)->get();
+        $nik = request()->get('nik');
+        $name = request()->get('nama');
+        $cabang_id = request()->get('cabang_id');
+        $cabang = request()->get('cabang');
+        if ($nik == "" && $name == "" && $cabang == "") {
+            $personels = Personel::limit($limit)->offset($page * $limit)->get();
+            $cabangs = Cabang::all();
+            if (!$cabangs) abort(404);
+            return view('personel.index', [
+                'personels' => $personels,
+                'cabangs' => $cabangs,
+                'page' => $page ?? 0,
+                'search' => [
+                    'nik' => $nik,
+                    'name' => $name,
+                    'cabang_id' => $cabang_id,
+                    'cabang' => $cabang,
+                ],
+            ]);
+        }
+        $personels = Personel::where('nik', 'like', $nik . '%')->where('name', 'like', '%' . $name . '%');
+        if ($cabang != "") {
+            $personels = $personels->where('cabang_id', $cabang_id);
+        }
+        $personels = $personels->limit($limit)->offset($page * $limit)->get();
+        $search = [
+            'nik' => $nik,
+            'name' => $name,
+            'cabang_id' => $cabang_id,
+            'cabang' => $cabang,
+        ];
 
         if ($personels->count() === 0 && $page > 0) {
             return redirect()->back();
         }
 
-        $cabang = Cabang::all();
-        if (!$cabang) abort(404);
+        $cabangs = Cabang::all();
+        if (!$cabangs) abort(404);
         return view('personel.index', [
             'personels' => $personels,
-            'cabang' => $cabang,
+            'cabangs' => $cabangs,
             'page' => $page ?? 0,
+            'search' => $search,
         ]);
     }
 
-    public function search_by_nik(Request $request) {
+    public function search_by_nik(Request $request)
+    {
         $nik = $request->nik;
         $personels = Personel::where('nik', 'like', $nik . '%')->get();
         return response()->json($personels);
@@ -98,7 +130,7 @@ class PersonelController extends Controller
                     $dataPersonel['cabang_id'] = $cabangs["KANTOR " . $dataPersonel['lokasi_kedudukan']];
                     $dataPersonel['lokasi'] = $cabangs['KANTOR ' . $dataPersonel['lokasi']];
                     $dataPersonel['lokasi_induk'] = $cabangs['KANTOR ' . $dataPersonel['lokasi_induk']];
-                } else if(array_key_exists($dataPersonel['lokasi_kedudukan'], $cabangs) && array_key_exists($dataPersonel['lokasi'], $cabangs) && array_key_exists($dataPersonel['lokasi_induk'], $cabangs)) {
+                } else if (array_key_exists($dataPersonel['lokasi_kedudukan'], $cabangs) && array_key_exists($dataPersonel['lokasi'], $cabangs) && array_key_exists($dataPersonel['lokasi_induk'], $cabangs)) {
                     $dataPersonel['cabang_id'] = $cabangs[$dataPersonel['lokasi_kedudukan']];
                     $dataPersonel['lokasi'] = $cabangs[$dataPersonel['lokasi']];
                     $dataPersonel['lokasi_induk'] = $cabangs[$dataPersonel['lokasi_induk']];
