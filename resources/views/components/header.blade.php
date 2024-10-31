@@ -17,19 +17,30 @@
                         <hr>
                         <a href="/rotasi/selektif">Selektif Admin</a>
                     @endcan
-                    @auth
-                        <hr>
-                        <a href="/rotasi/notification" class="flex">Notifikasi
-                            @if (auth()->user()->profile->cabang && auth()->user()->profile->cabang->notreadnotifications->count() > 0)
-                                <p class="bg-blue-500 w-2 h-2 rounded-full"></p>
-                            @endif
-                        </a>
-                    @endauth
                 </div>
             </div>
         </div>
         <a class="text-gray-500" href="#">Demosi</a>
         <a class="text-gray-500" href="#">Promosi</a>
+        @auth
+            @php
+                $hasNotification =
+                    auth()->user()->profile->cabang &&
+                    auth()->user()->profile->cabang->notreadnotifications->count() > 0;
+            @endphp
+            <a href="/rotasi/notification"
+                class="flex aspect-square border-2 rounded-full p-1 {{ $hasNotification ? 'border-blue-500' : 'border-gray-800' }}">
+                <svg class="w-6 h-6 {{ $hasNotification ? 'text-blue-500' : 'text-gray-800 dark:text-white' }}"
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                        d="M17.133 12.632v-1.8a5.406 5.406 0 0 0-4.154-5.262.955.955 0 0 0 .021-.106V3.1a1 1 0 0 0-2 0v2.364a.955.955 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C6.867 15.018 5 15.614 5 16.807 5 17.4 5 18 5.538 18h12.924C19 18 19 17.4 19 16.807c0-1.193-1.867-1.789-1.867-4.175ZM8.823 19a3.453 3.453 0 0 0 6.354 0H8.823Z" />
+                </svg>
+                @if (auth()->user()->profile->cabang && auth()->user()->profile->cabang->notreadnotifications->count() > 0)
+                    <p class="bg-blue-500 w-2 h-2 rounded-full"></p>
+                @endif
+            </a>
+        @endauth
     </nav>
     <div id="account" class="hidden xl:flex flex-col sm:flex-row gap-2">
         @auth
