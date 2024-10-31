@@ -55,7 +55,7 @@ class PengajuanController extends Controller
             if (!auth()->user()->profile->cabang_id) {
                 return redirect()->back()->with('invalid', 'Anda tidak memiliki cabang')->withInput();
             }
-            if ($request->lokasi_awal_id !== auth()->user()->profile->cabang_id) {
+            if ($request->lokasi_awal_id != auth()->user()->profile->cabang_id) {
                 return redirect()->back()->with('invalid', 'Cabang asal tidak sesuai')->withInput();
             }
         }

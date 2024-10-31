@@ -17,6 +17,14 @@
                         <hr>
                         <a href="/rotasi/selektif">Selektif Admin</a>
                     @endcan
+                    @auth
+                        <hr>
+                        <a href="/rotasi/notification" class="flex">Notifikasi
+                            @if (auth()->user()->profile->cabang->notreadnotifications->count() > 0)
+                                <p class="bg-blue-500 w-2 h-2 rounded-full"></p>
+                            @endif
+                        </a>
+                    @endauth
                 </div>
             </div>
         </div>

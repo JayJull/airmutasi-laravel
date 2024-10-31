@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Rotasi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Cabang;
+use App\Models\Notification;
 use App\Models\Pengajuan;
 use App\Models\Personel;
 use Carbon\Carbon;
@@ -65,12 +66,30 @@ class SelektifAdminController extends Controller
         $request->validate([
             'status' => 'required|in:dapat,tidak,diterima'
         ]);
+        DB::beginTransaction();
         $pengajuan = Pengajuan::find($id);
         if (!$pengajuan) {
             return response()->json(['message' => 'Data not found'], 404);
         }
+        $notification = Notification::create([
+            'status' => $request->status,
+            'to' => $pengajuan->lokasi_awal_id,
+            'cabang_asal_id' => $pengajuan->lokasi_awal_id,
+            'cabang_tujuan_id' => $pengajuan->lokasi_tujuan_id,
+            'pengajuan_id' => $pengajuan->id
+        ]);
+        $notification->save();
+        if ($pengajuan->lokasi_awal_id != $pengajuan->lokasi_tujuan_id) {
+            $notification = Notification::create([
+                'status' => $request->status,
+                'to' => $pengajuan->lokasi_tujuan_id,
+                'cabang_asal_id' => $pengajuan->lokasi_awal_id,
+                'cabang_tujuan_id' => $pengajuan->lokasi_tujuan_id,
+                'pengajuan_id' => $pengajuan->id
+            ]);
+            $notification->save();
+        }
         if ($request->status == 'dapat') {
-            DB::beginTransaction();
             $personel = Personel::where('nik', $pengajuan->nik)->first();
             if (!$personel) {
                 $personel = new Personel();
@@ -97,11 +116,11 @@ class SelektifAdminController extends Controller
                 $pengajuan->primary->status = 'tidak_dapat';
                 $pengajuan->primary->save();
             }
-            if ($pengajuan->primary->secondary) {
+            if ($pengajuan->primary && $pengajuan->primary->secondary && $pengajuan->primary->secondary_id != $pengajuan->id) {
                 $pengajuan->primary->secondary->status = 'tidak_dapat';
                 $pengajuan->primary->secondary->save();
             }
-            if ($pengajuan->primary->th3) {
+            if ($pengajuan->primary && $pengajuan->primary->th3 && $pengajuan->primary->th3_id != $pengajuan->id) {
                 $pengajuan->primary->th3->status = 'tidak_dapat';
                 $pengajuan->primary->th3->save();
             }
@@ -114,7 +133,6 @@ class SelektifAdminController extends Controller
                 'keterangan' => 'required',
                 'rekomendasi' => 'required'
             ]);
-            DB::beginTransaction();
             $pengajuan->status = 'tidak_dapat';
             $pengajuan->keteranganPenolakan()->create([
                 'tipe' => 'keterangan_penolakan',
@@ -128,7 +146,6 @@ class SelektifAdminController extends Controller
             DB::commit();
             return redirect()->back()->with('success', 'Data berhasil diupdate');
         } else if ($request->status == 'diterima') {
-            DB::beginTransaction();
             $pengajuan->status = 'diterima';
             if ($pengajuan->posisi_sekarang == "ACO") {
                 $pengajuan->lokasiAwal->jumlah_personel_aco -= 1;

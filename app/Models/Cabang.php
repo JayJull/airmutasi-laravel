@@ -32,6 +32,19 @@ class Cabang extends Model
         'frms_ats_system',
     ];
 
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'to');
+    }
+
+    public function notreadnotifications()
+    {
+        return $this->hasMany(
+            Notification::class,
+            'to'
+        )->where("is_read", false);
+    }
+
     public function coord()
     {
         return $this->hasOne(CabangCoord::class);

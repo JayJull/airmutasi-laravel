@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PersonelController;
 // use App\Http\Controllers\Rotasi\HomeController as RotasiHomeController;
 use App\Http\Controllers\Rotasi\CabangController as RotasiCabangController;
@@ -56,8 +57,8 @@ Route::group(['prefix' => 'akun', 'middleware' => [
 Route::group(['prefix' => 'personel', 'middleware' => [
     'auth:web'
 ]], function () {
-    Route::get("/", [PersonelController::class, 'index'])->name('personel');
-    Route::post("/import", [PersonelController::class, 'importAllWithCsv'])->name('personel.import');
+    Route::middleware(['is.admin'])->get("/", [PersonelController::class, 'index'])->name('personel');
+    Route::middleware(['is.admin'])->post("/import", [PersonelController::class, 'importAllWithCsv'])->name('personel.import');
     Route::get('/cabang/{id}', [PersonelController::class, 'cabang'])->name('personel.index');
     Route::group(['prefix' => 'add', 'middleware' => [
         'is.admin'
@@ -103,6 +104,7 @@ Route::group(['prefix' => 'rotasi', 'middleware' => [
         Route::get('/', [RotasiSelektifAdminController::class, 'index'])->name('rotasi.selektif');
         Route::post("/{id}", [RotasiSelektifAdminController::class, 'selektif']);
     });
+    Route::get("/notification", [NotificationController::class, 'index'])->name('rotasi.notifikasi');
 });
 
 Route::group(['prefix' => 'promosi', 'middleware' => [
