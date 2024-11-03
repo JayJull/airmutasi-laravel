@@ -81,19 +81,23 @@ class PersonelController extends Controller
             }])->find($id);
         } else if ($request->tab === 'ATFM') {
             $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
-                $query->with(['kompetensis'])->where('posisi', 'ATFM')->orWhere('posisi', 'AIR TRAFFIC FLOW MANAGEMENT')->limit($limit)->offset($page * $limit);
+                $query->with(['kompetensis'])->where('posisi', 'ATFM')->orWhere('posisi', 'AIR TRAFFIC FLOW MANAGEMENT')->orWhere('posisi', 'STAF ATFM')->limit($limit)->offset($page * $limit);
             }])->find($id);
         } else if ($request->tab === 'TAPOR') {
             $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
-                $query->with(['kompetensis'])->where('posisi', 'TAPOR')->orWhere('posisi', 'TOWER APPROACH')->limit($limit)->offset($page * $limit);
+                $query->with(['kompetensis'])->where('posisi', 'TAPOR')->orWhere('posisi', 'STAF PELAPORAN DATA')->limit($limit)->offset($page * $limit);
             }])->find($id);
         } else if ($request->tab === 'ATSSystem') {
             $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
-                $query->with(['kompetensis'])->where('posisi', 'ATSSystem')->orWhere('posisi', 'AIR TRAFFIC SERVICES SYSTEM')->limit($limit)->offset($page * $limit);
+                $query->with(['kompetensis'])->where('posisi', 'ATSSystem')->orWhere('posisi', 'AIR TRAFFIC SERVICES SYSTEM')->orWhere('posisi', 'SPESIALIS ATS SYSTEM')->limit($limit)->offset($page * $limit);
+            }])->find($id);
+        } else if ($request->tab === 'ATC') {
+            $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
+                $query->with(['kompetensis'])->where('posisi', 'LIKE', 'ATC%')->orWhere('posisi', 'AIR TRAFFIC CONTROLLER')->limit($limit)->offset($page * $limit);
             }])->find($id);
         } else {
             $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
-                $query->with(['kompetensis'])->whereNotIn('posisi', ['ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem', 'AERONAUTICAL COMMUNICATION OFFICER', 'AERONAUTICAL INFORMATION SERVICE', 'AIR TRAFFIC FLOW MANAGEMENT', 'TOWER APPROACH', 'AIR TRAFFIC SERVICES SYSTEM'])->limit($limit)->offset($page * $limit);
+                $query->with(['kompetensis'])->whereNotIn('posisi', ['ATC (APS)', 'ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem', 'AERONAUTICAL COMMUNICATION OFFICER', 'AERONAUTICAL INFORMATION SERVICE', 'AIR TRAFFIC FLOW MANAGEMENT', 'TOWER APPROACH', 'AIR TRAFFIC SERVICES SYSTEM', 'AIR TRAFFIC CONTROLLER'])->limit($limit)->offset($page * $limit);
             }])->find($id);
         }
         if (!$cabang) abort(404);
@@ -122,10 +126,32 @@ class PersonelController extends Controller
         $path = $file->getRealPath();
         $data = array_map('str_getcsv', file($path));
         $header = array_shift($data);
+
+        $map_cabang = [
+            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH JAKARTA" => "KANTOR CABANG JATSC",
+            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH MAKASSAR" => "KANTOR CABANG MATSC",
+            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH DENPASAR" => "KANTOR CABANG DENPASAR",
+            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH SURABAYA" => "KANTOR CABANG SURABAYA",
+            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH MEDAN" => "KANTOR CABANG MEDAN",
+            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH BALIKPAPAN" => "KANTOR CABANG BALIKPAPAN",
+            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH PALEMBANG" => "KANTOR CABANG PALEMBANG",
+            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH MANADO" => "KANTOR CABANG MANADO",
+            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH SORONG" => "KANTOR CABANG SORONG",
+            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH SENTANI" => "KANTOR CABANG SENTANI",
+        ];
         DB::beginTransaction();
         try {
             foreach ($data as $row) {
                 $dataPersonel = array_combine($header, $row);
+                if (array_key_exists($dataPersonel['lokasi_kedudukan'], $map_cabang)) {
+                    $dataPersonel['lokasi_kedudukan'] = $map_cabang[$dataPersonel['lokasi_kedudukan']];
+                }
+                if (array_key_exists($dataPersonel['lokasi'], $map_cabang)) {
+                    $dataPersonel['lokasi'] = $map_cabang[$dataPersonel['lokasi']];
+                }
+                if (array_key_exists($dataPersonel['lokasi_induk'], $map_cabang)) {
+                    $dataPersonel['lokasi_induk'] = $map_cabang[$dataPersonel['lokasi_induk']];
+                }
                 if (array_key_exists('KANTOR ' . $dataPersonel['lokasi_kedudukan'], $cabangs) && array_key_exists('KANTOR ' . $dataPersonel['lokasi'], $cabangs) && array_key_exists('KANTOR ' . $dataPersonel['lokasi_induk'], $cabangs)) {
                     $dataPersonel['cabang_id'] = $cabangs["KANTOR " . $dataPersonel['lokasi_kedudukan']];
                     $dataPersonel['lokasi'] = $cabangs['KANTOR ' . $dataPersonel['lokasi']];

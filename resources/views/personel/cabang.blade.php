@@ -29,7 +29,7 @@
         <section class="p-8">
             <div class="bg-white rounded-lg border-2 border-[#293676]">
                 <div class="grid grid-cols-12 gap-4 items-center p-4 border-b-2 border-[#293676] text-[#293676]">
-                    <aside class="flex gap-4 col-span-6 md:col-span-9 overflow-x-auto">
+                    <aside class="flex gap-4 col-span-12 overflow-x-auto">
                         <a class="flex-grow {{ $tab == 'ATC' ? 'font-semibold underline' : '' }}"
                             href="/personel/cabang/{{ $cabang->id }}?tab=ATC">Personel ATC</a>
                         <a class="flex-grow {{ $tab == 'ACO' ? 'font-semibold underline' : '' }}"
@@ -42,6 +42,8 @@
                             href="/personel/cabang/{{ $cabang->id }}?tab=TAPOR">Personel TAPOR</a>
                         <a class="flex-grow {{ $tab == 'ATSSystem' ? 'font-semibold underline' : '' }}"
                             href="/personel/cabang/{{ $cabang->id }}?tab=ATSSystem">Personel ATS System</a>
+                        <a class="flex-grow {{ $tab == 'lainnya' ? 'font-semibold underline' : '' }}"
+                            href="/personel/cabang/{{ $cabang->id }}?tab=lainnya">Lainnya</a>
                     </aside>
                     {{-- @can('admin')
                         <div class="flex col-span-6 md:col-span-3 gap-2">
@@ -57,7 +59,8 @@
                 </div>
                 <div class="relative overflow-x-auto max-h-[70vh] overflow-y-auto block">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <thead
+                            class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     No.
