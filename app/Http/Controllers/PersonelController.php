@@ -101,6 +101,14 @@ class PersonelController extends Controller
             }])->find($id);
         }
         if (!$cabang) abort(404);
+        if ($cabang->nama === 'PUSAT INFORMASI AERONAUTIKA') {
+            if ($request->tab != "AIS") $cabang->personels = [];
+            else {
+                $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
+                    $query->limit($limit)->offset($page * $limit);
+                }])->find($id);
+            }
+        }
         return view('personel.cabang', [
             'cabang' => $cabang,
             'tab' => $request->tab ?? 'ATC',
