@@ -97,7 +97,7 @@ class PersonelController extends Controller
             }])->find($id);
         } else {
             $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
-                $query->with(['kompetensis'])->whereNotIn('posisi', ['ATC (APS)', 'ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem', 'AERONAUTICAL COMMUNICATION OFFICER', 'AERONAUTICAL INFORMATION SERVICE', 'AIR TRAFFIC FLOW MANAGEMENT', 'TOWER APPROACH', 'AIR TRAFFIC SERVICES SYSTEM', 'AIR TRAFFIC CONTROLLER'])->limit($limit)->offset($page * $limit);
+                $query->with(['kompetensis'])->whereNotIn('posisi', ['ATC (APS)', 'ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem', 'AERONAUTICAL COMMUNICATION OFFICER', 'AERONAUTICAL INFORMATION SERVICE', 'AIR TRAFFIC FLOW MANAGEMENT', 'TOWER APPROACH', 'AIR TRAFFIC SERVICES SYSTEM', 'AIR TRAFFIC CONTROLLER'])->whereNot('posisi', 'LIKE', 'ATC%')->whereNot('posisi', 'LIKE', 'AIS%')->limit($limit)->offset($page * $limit);
             }])->find($id);
         }
         if (!$cabang) abort(404);
