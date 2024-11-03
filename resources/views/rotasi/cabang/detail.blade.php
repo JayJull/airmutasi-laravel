@@ -29,7 +29,7 @@
                     class="p-2 break-all w-full font-sans">{{ $cabang->alamat }}</pre>
                 @can('cabangOwner', $cabang->id)
                     <a class="mt-4 bg-[#003285] hover:bg-white text-white hover:text-black border-2 border-[#003285] duration-200 w-full text-center p-2 rounded-lg font-semibold mb-2"
-                        href="/personel/cabang/{{ $cabang->id }}">Personel</a>
+                        href="/personel/cabang/{{ $cabang->id }}?tab=ATC">Personel</a>
                     <a href="/rotasi/cabang/input/{{ $cabang->id }}"
                         class="bg-[#003285] hover:bg-white text-white hover:text-black border-2 border-[#003285] duration-200 w-full text-center p-2 rounded-lg font-semibold mb-2">Update</a>
                     <a href="/rotasi/cabang/input/{{ $cabang->id }}/delete"

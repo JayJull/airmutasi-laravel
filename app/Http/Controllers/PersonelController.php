@@ -77,7 +77,7 @@ class PersonelController extends Controller
             }])->find($id);
         } else if ($request->tab === 'AIS') {
             $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
-                $query->with(['kompetensis'])->where('posisi', 'AIS')->orWhere('posisi', 'AERONAUTICAL INFORMATION SERVICE')->limit($limit)->offset($page * $limit);
+                $query->with(['kompetensis'])->where('posisi', 'AIS')->orWhere('posisi', 'AERONAUTICAL INFORMATION SERVICE')->orWhere('posisi', 'LIKE', 'AIS%')->limit($limit)->offset($page * $limit);
             }])->find($id);
         } else if ($request->tab === 'ATFM') {
             $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
