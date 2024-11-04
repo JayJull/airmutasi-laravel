@@ -97,7 +97,7 @@ class PersonelController extends Controller
             }])->find($id);
         } else {
             $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
-                $query->with(['kompetensis'])->whereNotIn('posisi', ['ATC (APS)', 'ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem', 'AERONAUTICAL COMMUNICATION OFFICER', 'AERONAUTICAL INFORMATION SERVICE', 'AIR TRAFFIC FLOW MANAGEMENT', 'TOWER APPROACH', 'AIR TRAFFIC SERVICES SYSTEM', 'AIR TRAFFIC CONTROLLER'])->whereNot('posisi', 'LIKE', 'ATC%')->whereNot('posisi', 'LIKE', 'AIS%')->limit($limit)->offset($page * $limit);
+                $query->with(['kompetensis'])->whereNotIn('posisi', ['ATC (APS)', 'ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem', 'AERONAUTICAL COMMUNICATION OFFICER', 'AERONAUTICAL INFORMATION SERVICE', 'AIR TRAFFIC FLOW MANAGEMENT', 'TOWER APPROACH', 'STAF PELAPORAN DATA', 'AIR TRAFFIC SERVICES SYSTEM', 'AIR TRAFFIC CONTROLLER'])->whereNot('posisi', 'LIKE', 'ATC%')->whereNot('posisi', 'LIKE', 'AIS%')->limit($limit)->offset($page * $limit);
             }])->find($id);
         }
         if (!$cabang) abort(404);
@@ -136,16 +136,19 @@ class PersonelController extends Controller
         $header = array_shift($data);
 
         $map_cabang = [
-            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH JAKARTA" => "KANTOR CABANG JATSC",
-            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH MAKASSAR" => "KANTOR CABANG MATSC",
-            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH DENPASAR" => "KANTOR CABANG DENPASAR",
-            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH SURABAYA" => "KANTOR CABANG SURABAYA",
-            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH MEDAN" => "KANTOR CABANG MEDAN",
-            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH BALIKPAPAN" => "KANTOR CABANG BALIKPAPAN",
-            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH PALEMBANG" => "KANTOR CABANG PALEMBANG",
-            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH MANADO" => "KANTOR CABANG MANADO",
-            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH SORONG" => "KANTOR CABANG SORONG",
-            "PELAYANAN INFORMASI AERONAUTIKA WILAYAH SENTANI" => "KANTOR CABANG SENTANI",
+            "UNIT PELAYANAN INFORMASI AERONAUTIKA WILAYAH JAKARTA" => "KANTOR CABANG JATSC",
+            "UNIT PELAYANAN INFORMASI AERONAUTIKA WILAYAH MAKASSAR" => "KANTOR CABANG MATSC",
+            "UNIT PELAYANAN INFORMASI AERONAUTIKA WILAYAH DENPASAR" => "KANTOR CABANG DENPASAR",
+            "UNIT PELAYANAN INFORMASI AERONAUTIKA WILAYAH SURABAYA" => "KANTOR CABANG SURABAYA",
+            "UNIT PELAYANAN INFORMASI AERONAUTIKA WILAYAH MEDAN" => "KANTOR CABANG MEDAN",
+            "UNIT PELAYANAN INFORMASI AERONAUTIKA WILAYAH BALIKPAPAN" => "KANTOR CABANG BALIKPAPAN",
+            "UNIT PELAYANAN INFORMASI AERONAUTIKA WILAYAH PALEMBANG" => "KANTOR CABANG PALEMBANG",
+            "UNIT PELAYANAN INFORMASI AERONAUTIKA WILAYAH MANADO" => "KANTOR CABANG MANADO",
+            "UNIT PELAYANAN INFORMASI AERONAUTIKA WILAYAH SORONG" => "KANTOR CABANG SORONG",
+            "UNIT PELAYANAN INFORMASI AERONAUTIKA WILAYAH SENTANI" => "KANTOR CABANG SENTANI",
+            "KANTOR PUSAT" => "PUSAT AIRNAV INDONESIA",
+            "CABANG YOGYAKARTA" => "CABANG YOGYAKARTA (YIA)",
+            "CABANG PEMBANTU TUAL, KAREL SADSUITUBUN" => "CABANG PEMBANTU TUAL"
         ];
         DB::beginTransaction();
         try {
@@ -160,23 +163,33 @@ class PersonelController extends Controller
                 if (array_key_exists($dataPersonel['lokasi_induk'], $map_cabang)) {
                     $dataPersonel['lokasi_induk'] = $map_cabang[$dataPersonel['lokasi_induk']];
                 }
-                if (array_key_exists('KANTOR ' . $dataPersonel['lokasi_kedudukan'], $cabangs) && array_key_exists('KANTOR ' . $dataPersonel['lokasi'], $cabangs) && array_key_exists('KANTOR ' . $dataPersonel['lokasi_induk'], $cabangs)) {
-                    $dataPersonel['cabang_id'] = $cabangs["KANTOR " . $dataPersonel['lokasi_kedudukan']];
-                    $dataPersonel['lokasi'] = $cabangs['KANTOR ' . $dataPersonel['lokasi']];
-                    $dataPersonel['lokasi_induk'] = $cabangs['KANTOR ' . $dataPersonel['lokasi_induk']];
-                } else if (array_key_exists($dataPersonel['lokasi_kedudukan'], $cabangs) && array_key_exists($dataPersonel['lokasi'], $cabangs) && array_key_exists($dataPersonel['lokasi_induk'], $cabangs)) {
-                    $dataPersonel['cabang_id'] = $cabangs[$dataPersonel['lokasi_kedudukan']];
-                    $dataPersonel['lokasi'] = $cabangs[$dataPersonel['lokasi']];
-                    $dataPersonel['lokasi_induk'] = $cabangs[$dataPersonel['lokasi_induk']];
+                if (array_key_exists('KANTOR ' . $dataPersonel["lokasi_induk"], $cabangs)) {
+                    $dataPersonel['lokasi_induk'] = $cabangs["KANTOR " . $dataPersonel["lokasi_induk"]];
+                } else if (array_key_exists($dataPersonel["lokasi_induk"], $cabangs)) {
+                    $dataPersonel['lokasi_induk'] = $cabangs[$dataPersonel["lokasi_induk"]];
                 } else {
                     continue;
+                }
+                if (array_key_exists('KANTOR ' . $dataPersonel["lokasi_kedudukan"], $cabangs)) {
+                    $dataPersonel['cabang_id'] = $cabangs["KANTOR " . $dataPersonel["lokasi_kedudukan"]];
+                } else if (array_key_exists($dataPersonel["lokasi_kedudukan"], $cabangs)) {
+                    $dataPersonel['cabang_id'] = $cabangs[$dataPersonel["lokasi_kedudukan"]];
+                } else {
+                    $dataPersonel['cabang_id'] = $dataPersonel['lokasi_induk'];
+                }
+                if (array_key_exists('KANTOR ' . $dataPersonel["lokasi"], $cabangs)) {
+                    $dataPersonel['lokasi'] = $cabangs["KANTOR " . $dataPersonel["lokasi"]];
+                } else if (array_key_exists($dataPersonel["lokasi"], $cabangs)) {
+                    $dataPersonel['lokasi'] = $cabangs[$dataPersonel["lokasi"]];
+                } else {
+                    $dataPersonel['lokasi'] = $dataPersonel['lokasi_induk'];
                 }
                 $dataPersonel['posisi'] = $dataPersonel['jabatan'];
                 $dataPersonel['jabatan'] = $dataPersonel['nama_level_jabatan'];
                 $dataPersonel['nik'] = $dataPersonel['nik_airnav'];
                 $dataPersonel['name'] = $dataPersonel['nama'];
                 $dataPersonel['masa_kerja'] = $dataPersonel['masa_kerja_jabatan_th'];
-                $dataPersonel['level_jabatan'] = $dataPersonel['nama_level_jabatan'];
+                $dataPersonel['nama_level_jabatan'] = $dataPersonel['nama_level_jabatan'];
                 $dataPersonel['pensiun'] = $dataPersonel['sts_karyawan'] === 'Pensiun';
                 $dataPersonel['kontak'] = $dataPersonel['kontak'] ?? "-";
 

@@ -256,7 +256,7 @@
                                 {{ $personel->masa_kerja_jabatan_bl }} Bulan
                             </td>
                             <td class="px-6 py-4">
-                                {{ $personel->nama_level_jabatan }} ({{ $personel->level }})
+                                {{ $personel->nama_level_jabatan }} ({{ $personel->level_jabatan }})
                             </td>
                             <td class="px-6 py-4">
                                 {{ $personel->tmt_level_jabatan }}
