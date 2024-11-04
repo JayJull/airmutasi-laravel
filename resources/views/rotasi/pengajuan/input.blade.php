@@ -22,8 +22,10 @@
                             <label class="font-semibold" for="nik">NIK</label><br />
                             <input type="text" name="nik" id="nik"
                                 class="w-full px-2 py-1 mt-1 border-2 border-slate-400 rounded-md peer/nik"
-                                placeholder="Ketik Disini ..." value="{{ old('nik') }}" autocomplete="one-time-code" onkeyup="searchNIKDebounce()" />
-                            <div class="w-full absolute z-20 hidden flex-col items-start border p-1 gap-1 bg-white max-h-[200px] overflow-y-auto" id="nik-suggestion">
+                                placeholder="Ketik Disini ..." value="{{ old('nik') }}" autocomplete="one-time-code"
+                                onkeyup="searchNIKDebounce()" />
+                            <div class="w-full absolute z-20 hidden flex-col items-start border p-1 gap-1 bg-white max-h-[200px] overflow-y-auto"
+                                id="nik-suggestion">
                             </div>
                         </aside>
                         <aside class="w-full">
@@ -150,13 +152,15 @@
                                 {{ old('use_tujuan_alt2') ? 'checked' : '' }}>
                             Tujuan alternatif 2?
                         </label>
-                        @can('admin')
-                            <label class="flex items-center gap-1">
-                                <input type="checkbox" name="abnormal" id="abnormal"
-                                    {{ old('abnormal') ? 'checked' : '' }}>
+                        <label class="flex items-center gap-1">
+                            <input type="checkbox" name="abnormal" id="abnormal"
+                                {{ old('abnormal') ? 'checked' : '' }}>
+                            @can('admin')
                                 Mutasi abnormal?
-                            </label>
-                        @endcan
+                            @else
+                                Pengajuan?
+                            @endcan
+                        </label>
                     </div>
                     <div class="flex justify-end gap-4 w-full">
                         <button type="button"
@@ -546,11 +550,13 @@
             }
         });
 
-        function debounce(func, timeout = 300){
+        function debounce(func, timeout = 300) {
             let timer;
             return (...args) => {
                 clearTimeout(timer);
-                timer = setTimeout(() => { func.apply(this, args); }, timeout);
+                timer = setTimeout(() => {
+                    func.apply(this, args);
+                }, timeout);
             };
         }
         const searchNIKDebounce = debounce(searchNIK, 500);
