@@ -401,86 +401,84 @@
                     });
             }
         });
-        @can('admin')
-            abnormalCheckbox.addEventListener('change', function() {
-                const lokasiAwalID = lokasiAwal.value;
-                if (!this.checked) {
-                    const cabangTujuan = fetch('/api/rotasi/cabang-same-kelas/' + lokasiAwalID)
-                        .then(response => response.json())
-                        .then(data => {
-                            const lokasiTujuan = document.getElementById('lokasi_tujuan');
-                            const lokasiTujuanAlt = document.getElementById('lokasi_tujuan_alt');
-                            const lokasiTujuanAlt2 = document.getElementById('lokasi_tujuan_alt2');
-                            lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
-                            lokasiTujuanAlt.innerHTML =
-                                '<option value>--- Pilih Lokasi Tujuan Alternatif ---</option>';
-                            lokasiTujuanAlt2.innerHTML =
-                                '<option value>--- Pilih Lokasi Tujuan Alternatif 2 ---</option>';
-                            data.forEach(cabang => {
-                                const option = document.createElement('option');
-                                option.id = 'lokasi-tujuan-' + cabang.id;
-                                option.value = cabang.id;
-                                option.innerText = cabang.nama;
-                                option.selected = cabang.id == {{ old('lokasi_tujuan_id') ?? -1 }};
-                                lokasiTujuan.appendChild(option);
+        abnormalCheckbox.addEventListener('change', function() {
+            const lokasiAwalID = lokasiAwal.value;
+            if (!this.checked) {
+                const cabangTujuan = fetch('/api/rotasi/cabang-same-kelas/' + lokasiAwalID)
+                    .then(response => response.json())
+                    .then(data => {
+                        const lokasiTujuan = document.getElementById('lokasi_tujuan');
+                        const lokasiTujuanAlt = document.getElementById('lokasi_tujuan_alt');
+                        const lokasiTujuanAlt2 = document.getElementById('lokasi_tujuan_alt2');
+                        lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
+                        lokasiTujuanAlt.innerHTML =
+                            '<option value>--- Pilih Lokasi Tujuan Alternatif ---</option>';
+                        lokasiTujuanAlt2.innerHTML =
+                            '<option value>--- Pilih Lokasi Tujuan Alternatif 2 ---</option>';
+                        data.forEach(cabang => {
+                            const option = document.createElement('option');
+                            option.id = 'lokasi-tujuan-' + cabang.id;
+                            option.value = cabang.id;
+                            option.innerText = cabang.nama;
+                            option.selected = cabang.id == {{ old('lokasi_tujuan_id') ?? -1 }};
+                            lokasiTujuan.appendChild(option);
 
-                                const optionAlt = document.createElement('option');
-                                optionAlt.id = 'lokasi-tujuan-alt-' + cabang.id;
-                                optionAlt.value = cabang.id;
-                                optionAlt.innerText = cabang.nama;
-                                optionAlt.selected = cabang.id ==
-                                    {{ old('lokasi_tujuan_alt_id') ?? -1 }};
-                                lokasiTujuanAlt.appendChild(optionAlt);
+                            const optionAlt = document.createElement('option');
+                            optionAlt.id = 'lokasi-tujuan-alt-' + cabang.id;
+                            optionAlt.value = cabang.id;
+                            optionAlt.innerText = cabang.nama;
+                            optionAlt.selected = cabang.id ==
+                                {{ old('lokasi_tujuan_alt_id') ?? -1 }};
+                            lokasiTujuanAlt.appendChild(optionAlt);
 
-                                const optionAlt2 = document.createElement('option');
-                                optionAlt2.id = 'lokasi-tujuan-alt2-' + cabang.id;
-                                optionAlt2.value = cabang.id;
-                                optionAlt2.innerText = cabang.nama;
-                                optionAlt2.selected = cabang.id ==
-                                    {{ old('lokasi_tujuan_alt2_id') ?? -1 }};
-                                lokasiTujuanAlt2.appendChild(optionAlt2);
-                            });
+                            const optionAlt2 = document.createElement('option');
+                            optionAlt2.id = 'lokasi-tujuan-alt2-' + cabang.id;
+                            optionAlt2.value = cabang.id;
+                            optionAlt2.innerText = cabang.nama;
+                            optionAlt2.selected = cabang.id ==
+                                {{ old('lokasi_tujuan_alt2_id') ?? -1 }};
+                            lokasiTujuanAlt2.appendChild(optionAlt2);
                         });
-                } else {
-                    const cabangTujuan = fetch('/api/rotasi/cabang')
-                        .then(response => response.json())
-                        .then(data => {
-                            const lokasiTujuan = document.getElementById('lokasi_tujuan');
-                            const lokasiTujuanAlt = document.getElementById('lokasi_tujuan_alt');
-                            const lokasiTujuanAlt2 = document.getElementById('lokasi_tujuan_alt2');
-                            lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
-                            lokasiTujuanAlt.innerHTML =
-                                '<option value>--- Pilih Lokasi Tujuan Alternatif ---</option>';
-                            lokasiTujuanAlt2.innerHTML =
-                                '<option value>--- Pilih Lokasi Tujuan Alternatif 2 ---</option>';
-                            data.forEach(cabang => {
-                                const option = document.createElement('option');
-                                option.id = 'lokasi-tujuan-' + cabang.id;
-                                option.value = cabang.id;
-                                option.innerText = cabang.nama;
-                                option.selected = cabang.id == {{ old('lokasi_tujuan_id') ?? -1 }};
-                                lokasiTujuan.appendChild(option);
+                    });
+            } else {
+                const cabangTujuan = fetch('/api/rotasi/cabang')
+                    .then(response => response.json())
+                    .then(data => {
+                        const lokasiTujuan = document.getElementById('lokasi_tujuan');
+                        const lokasiTujuanAlt = document.getElementById('lokasi_tujuan_alt');
+                        const lokasiTujuanAlt2 = document.getElementById('lokasi_tujuan_alt2');
+                        lokasiTujuan.innerHTML = '<option value>--- Pilih Lokasi Tujuan ---</option>';
+                        lokasiTujuanAlt.innerHTML =
+                            '<option value>--- Pilih Lokasi Tujuan Alternatif ---</option>';
+                        lokasiTujuanAlt2.innerHTML =
+                            '<option value>--- Pilih Lokasi Tujuan Alternatif 2 ---</option>';
+                        data.forEach(cabang => {
+                            const option = document.createElement('option');
+                            option.id = 'lokasi-tujuan-' + cabang.id;
+                            option.value = cabang.id;
+                            option.innerText = cabang.nama;
+                            option.selected = cabang.id == {{ old('lokasi_tujuan_id') ?? -1 }};
+                            lokasiTujuan.appendChild(option);
 
-                                const optionAlt = document.createElement('option');
-                                optionAlt.id = 'lokasi-tujuan-alt-' + cabang.id;
-                                optionAlt.value = cabang.id;
-                                optionAlt.innerText = cabang.nama;
-                                optionAlt.selected = cabang.id ==
-                                    {{ old('lokasi_tujuan_alt_id') ?? -1 }};
-                                lokasiTujuanAlt.appendChild(optionAlt);
+                            const optionAlt = document.createElement('option');
+                            optionAlt.id = 'lokasi-tujuan-alt-' + cabang.id;
+                            optionAlt.value = cabang.id;
+                            optionAlt.innerText = cabang.nama;
+                            optionAlt.selected = cabang.id ==
+                                {{ old('lokasi_tujuan_alt_id') ?? -1 }};
+                            lokasiTujuanAlt.appendChild(optionAlt);
 
-                                const optionAlt2 = document.createElement('option');
-                                optionAlt2.id = 'lokasi-tujuan-alt2-' + cabang.id;
-                                optionAlt2.value = cabang.id;
-                                optionAlt2.innerText = cabang.nama;
-                                optionAlt2.selected = cabang.id ==
-                                    {{ old('lokasi_tujuan_alt2_id') ?? -1 }};
-                                lokasiTujuanAlt2.appendChild(optionAlt2);
-                            });
+                            const optionAlt2 = document.createElement('option');
+                            optionAlt2.id = 'lokasi-tujuan-alt2-' + cabang.id;
+                            optionAlt2.value = cabang.id;
+                            optionAlt2.innerText = cabang.nama;
+                            optionAlt2.selected = cabang.id ==
+                                {{ old('lokasi_tujuan_alt2_id') ?? -1 }};
+                            lokasiTujuanAlt2.appendChild(optionAlt2);
                         });
-                }
-            });
-        @endcan
+                    });
+            }
+        });
     </script>
     <script>
         // counter for kompetensi id

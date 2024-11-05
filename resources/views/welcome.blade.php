@@ -24,11 +24,11 @@
                 <div class="grid md:grid-cols-2 gap-4 mt-4">
                     <div class="bg-[#003285] text-white p-4 rounded-md">
                         <p class="font-semibold text-2xl text-center">{{ $cabangs->count() }}+</p>
-                        <p class="opacity-60 text-center">Branch Offices</p>
+                        <p class="opacity-60 text-center">KANTOR CABANG</p>
                     </div>
                     <a href="/personel" class="bg-[#003285] text-white p-4 rounded-md">
                         <p class="font-semibold text-2xl text-center">{{ $personel }}+</p>
-                        <p class="opacity-60 text-center">Employees</p>
+                        <p class="opacity-60 text-center">SDM OPERASI</p>
                     </a>
                 </div>
             </aside>
@@ -41,14 +41,14 @@
         </section>
         <div class="grid md:grid-cols-3 gap-4">
             <a href="/rotasi/cabang"
-                class="bg-[#003285] text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-md 2xl:rounded-2xl opacity-90 hover:opacity-100 duration-300"><img
-                    src="/images/icons/rotasi.svg" alt="rotasi" />Rotasi</a>
+                class="bg-[#003285] text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center p-8 rounded-md 2xl:rounded-2xl opacity-90 hover:opacity-100 duration-300"><img
+                    src="/images/icons/rotasi.svg" alt="rotasi" class="w-28" />Rotasi</a>
             <a href="/promosi"
-                class="bg-[#003285] text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-md 2xl:rounded-2xl opacity-90 hover:opacity-100 duration-300">
-                <img src="/images/icons/promosi.svg" alt="promosi" />Promosi</a>
+                class="bg-[#003285] text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center p-8 rounded-md 2xl:rounded-2xl opacity-90 hover:opacity-100 duration-300">
+                <img src="/images/icons/promosi.svg" alt="promosi" class="w-28" />Promosi</a>
             <a href="/demosi"
-                class="bg-[#003285] text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center gap-3 p-8 rounded-md 2xl:rounded-2xl opacity-90 hover:opacity-100 duration-300">
-                <img src="/images/icons/demosi.svg" alt="demosi" />Demosi</a>
+                class="bg-[#003285] text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center p-8 rounded-md 2xl:rounded-2xl opacity-90 hover:opacity-100 duration-300">
+                <img src="/images/icons/demosi.svg" alt="demosi" class="w-28" />Demosi</a>
         </div>
     </main>
     @include('components.footer')

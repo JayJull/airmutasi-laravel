@@ -92,7 +92,7 @@
                         <h2 class="font-bold text-xl text-center">ATC</h2>
                         <hr class="border-[1px] my-1">
                         <p class="font-medium ms-4">Jumlah Eksisting {{ $cabang->jumlah_personel }} Orang</p>
-                        <p class="font-medium ms-4">Jumlah FRMS Maksimal {{ $cabang->formasi }} Orang</p>
+                        <p class="font-medium ms-4">Jumlah FRMS Optimal {{ $cabang->formasi }} Orang</p>
                         <p class="font-medium ms-4">Jumlah FRMS Minimal {{ $cabang->frms }} Orang</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1 border-4 border-[#003285] rounded-lg p-2 grid">
@@ -207,7 +207,7 @@
                 {{ $cabang->jumlah_personel_ats_system }},
             ],
         }, {
-            name: 'Maksimal',
+            name: 'Optimal',
             data: [
                 {{ $cabang->formasi }},
                 {{ $cabang->formasi_aco }},

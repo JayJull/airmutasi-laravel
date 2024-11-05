@@ -73,31 +73,45 @@ class PersonelController extends Controller
         $limit = 100;
         if ($request->tab === 'ACO') {
             $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
-                $query->with(['kompetensis'])->where('posisi', 'ACO')->orWhere('posisi', 'AERONAUTICAL COMMUNICATION OFFICER')->limit($limit)->offset($page * $limit);
+                $query->with(['kompetensis'])->where(function ($query) {
+                    $query->where('posisi', 'AERONAUTICAL COMMUNICATION OFFICER')->orWhere('posisi', 'ACO');
+                })->limit($limit)->offset($page * $limit);
             }])->find($id);
         } else if ($request->tab === 'AIS') {
             $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
-                $query->with(['kompetensis'])->where('posisi', 'AIS')->orWhere('posisi', 'AERONAUTICAL INFORMATION SERVICE')->orWhere('posisi', 'LIKE', 'AIS%')->limit($limit)->offset($page * $limit);
+                $query->with(['kompetensis'])->where(function ($query) {
+                    $query->where('posisi', 'AIS')->orWhere('posisi', 'AERONAUTICAL INFORMATION SERVICE')->orWhere('posisi', 'LIKE', 'AIS%');
+                })->limit($limit)->offset($page * $limit);
             }])->find($id);
         } else if ($request->tab === 'ATFM') {
             $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
-                $query->with(['kompetensis'])->where('posisi', 'ATFM')->orWhere('posisi', 'AIR TRAFFIC FLOW MANAGEMENT')->orWhere('posisi', 'STAF ATFM')->limit($limit)->offset($page * $limit);
+                $query->with(['kompetensis'])->where(function ($query) {
+                    $query->where('posisi', 'ATFM')->orWhere('posisi', 'AIR TRAFFIC FLOW MANAGEMENT')->orWhere('posisi', 'STAF ATFM');
+                })->limit($limit)->offset($page * $limit);
             }])->find($id);
         } else if ($request->tab === 'TAPOR') {
             $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
-                $query->with(['kompetensis'])->where('posisi', 'TAPOR')->orWhere('posisi', 'STAF PELAPORAN DATA')->limit($limit)->offset($page * $limit);
+                $query->with(['kompetensis'])->where(function ($query) {
+                    $query->where('posisi', 'TAPOR')->orWhere('posisi', 'STAF PELAPORAN DATA');
+                })->limit($limit)->offset($page * $limit);
             }])->find($id);
         } else if ($request->tab === 'ATSSystem') {
             $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
-                $query->with(['kompetensis'])->where('posisi', 'ATSSystem')->orWhere('posisi', 'AIR TRAFFIC SERVICES SYSTEM')->orWhere('posisi', 'SPESIALIS ATS SYSTEM')->limit($limit)->offset($page * $limit);
+                $query->with(['kompetensis'])->where(function ($query) {
+                    $query->where('posisi', 'ATSSystem')->orWhere('posisi', 'AIR TRAFFIC SERVICES SYSTEM')->orWhere('posisi', 'SPESIALIS ATS SYSTEM');
+                })->limit($limit)->offset($page * $limit);
             }])->find($id);
         } else if ($request->tab === 'ATC') {
             $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
-                $query->with(['kompetensis'])->where('posisi', 'LIKE', 'ATC%')->orWhere('posisi', 'AIR TRAFFIC CONTROLLER')->limit($limit)->offset($page * $limit);
+                $query->with(['kompetensis'])->where(function ($query) {
+                    $query->where('posisi', 'LIKE', 'ATC%')->orWhere('posisi', 'AIR TRAFFIC CONTROLLER');
+                })->limit($limit)->offset($page * $limit);
             }])->find($id);
         } else {
             $cabang = Cabang::with(['personels' => function ($query) use ($limit, $page) {
-                $query->with(['kompetensis'])->whereNotIn('posisi', ['ATC (APS)', 'ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem', 'AERONAUTICAL COMMUNICATION OFFICER', 'AERONAUTICAL INFORMATION SERVICE', 'AIR TRAFFIC FLOW MANAGEMENT', 'TOWER APPROACH', 'STAF PELAPORAN DATA', 'AIR TRAFFIC SERVICES SYSTEM', 'AIR TRAFFIC CONTROLLER'])->whereNot('posisi', 'LIKE', 'ATC%')->whereNot('posisi', 'LIKE', 'AIS%')->limit($limit)->offset($page * $limit);
+                $query->with(['kompetensis'])->where(function ($query) {
+                    $query->whereNotIn('posisi', ['ATC (APS)', 'ACO', 'AIS', 'ATFM', 'TAPOR', 'ATSSystem', 'AERONAUTICAL COMMUNICATION OFFICER', 'AERONAUTICAL INFORMATION SERVICE', 'AIR TRAFFIC FLOW MANAGEMENT', 'TOWER APPROACH', 'STAF PELAPORAN DATA', 'AIR TRAFFIC SERVICES SYSTEM', 'AIR TRAFFIC CONTROLLER'])->whereNot('posisi', 'LIKE', 'ATC%')->whereNot('posisi', 'LIKE', 'AIS%');
+                })->limit($limit)->offset($page * $limit);
             }])->find($id);
         }
         if (!$cabang) abort(404);
