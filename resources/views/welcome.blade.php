@@ -42,13 +42,13 @@
         <div class="grid md:grid-cols-3 gap-4">
             <a href="/rotasi/cabang"
                 class="bg-[#003285] text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center p-8 rounded-md 2xl:rounded-2xl opacity-90 hover:opacity-100 duration-300"><img
-                    src="/images/icons/rotasi.svg" alt="rotasi" class="w-48" />Rotasi</a>
+                    src="/images/icons/rotasi1.svg" alt="rotasi" class="w-48" />Rotasi</a>
             <a href="/promosi"
                 class="bg-[#003285] text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center p-8 rounded-md 2xl:rounded-2xl opacity-90 hover:opacity-100 duration-300">
-                <img src="/images/icons/promosi.svg" alt="promosi" class="w-48" />Promosi</a>
+                <img src="/images/icons/promosi1.svg" alt="promosi" class="w-48" />Promosi</a>
             <a href="/demosi"
                 class="bg-[#003285] text-white font-semibold text-lg 2xl:text-xl flex flex-col justify-center items-center p-8 rounded-md 2xl:rounded-2xl opacity-90 hover:opacity-100 duration-300">
-                <img src="/images/icons/demosi.svg" alt="demosi" class="w-48" />Demosi</a>
+                <img src="/images/icons/demosi1.svg" alt="demosi" class="w-48" />Demosi</a>
         </div>
     </main>
     @include('components.footer')
