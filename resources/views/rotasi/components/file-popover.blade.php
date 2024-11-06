@@ -19,5 +19,8 @@
                 accept="{{ isset($isImage) && $isImage ? '.png,.jpg' : '.pdf,.doc,.docx' }}">
         </label>
         <p id="{{ $id }}_errors" class="text-center text-red-500 text-sm hidden"></p>
+        @if (isset($note))
+            <small class="text-center italic">{{ $note }}</small>
+        @endif
     </div>
 </div>

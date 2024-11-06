@@ -30,8 +30,8 @@
                     auth()->user()->profile->cabang->notreadnotifications->count() > 0;
             @endphp
             <a href="/rotasi/notification"
-                class="flex aspect-square border-2 rounded-full p-1 {{ $hasNotification ? 'border-blue-500' : 'border-gray-800' }}">
-                <svg class="w-6 h-6 {{ $hasNotification ? 'text-blue-500' : 'text-gray-800' }}" aria-hidden="true"
+                class="flex aspect-square border-2 rounded-full p-1 {{ $hasNotification ? 'border-red-500' : 'border-gray-800' }}">
+                <svg class="w-6 h-6 {{ $hasNotification ? 'text-red-500' : 'text-gray-800' }}" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                     viewBox="0 0 24 24">
                     <path

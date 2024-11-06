@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cabang;
+use App\Models\Konsep;
 use App\Models\Personel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -305,5 +306,36 @@ class PersonelController extends Controller
             'pensiun' => !$personel->pensiun
         ]);
         return redirect()->route('personel.index', ['id' => $personel->cabang_id])->with('success', 'Status pensiun personel berhasil diubah');
+    }
+
+    public function konsep()
+    {
+        $konseps = Konsep::all();
+        return view('personel.konsep', ["konseps" => $konseps]);
+    }
+
+    public function uploadKonsep(Request $request)
+    {
+        $request->validate([
+            "name" => "required",
+        ]);
+
+        if ($request->hasFile("berkas")) {
+            $file = $request->file('berkas');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $berkas = "/storage/" . $file->storeAs('files', $fileName, 'public');
+        } else {
+            $request->validate([
+                "url" => "required"
+            ]);
+            $berkas = $request->url;
+        }
+
+        Konsep::create([
+            "name" => $request->name,
+            "berkas" => $berkas
+        ]);
+
+        return redirect()->route("konsep");
     }
 }

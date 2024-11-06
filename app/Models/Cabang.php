@@ -144,13 +144,13 @@ class Cabang extends Model
     public function inAll()
     {
         return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
-            ->whereIn('status', ['dapat', 'diterima'])
+            ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1));
     }
     public function outAll()
     {
         return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
-            ->whereIn('status', ['dapat', 'diterima'])
+            ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
         ;
     }
@@ -158,7 +158,7 @@ class Cabang extends Model
     public function in()
     {
         return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
-            ->whereIn('status', ['dapat', 'diterima'])
+            ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
             ->whereNotIn('posisi_tujuan', ['ACO', 'ATFM', 'AIS', 'TAPOR', 'ATSSystem']);
     }
@@ -166,7 +166,7 @@ class Cabang extends Model
     public function out()
     {
         return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
-            ->whereIn('status', ['dapat', 'diterima'])
+            ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
             ->whereNotIn('posisi_sekarang', ['ACO', 'ATFM', 'AIS', 'TAPOR', 'ATSSystem']);
     }
@@ -174,7 +174,7 @@ class Cabang extends Model
     public function inACO()
     {
         return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
-            ->whereIn('status', ['dapat', 'diterima'])
+            ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
             ->where('posisi_tujuan', '=', 'ACO');
     }
@@ -182,7 +182,7 @@ class Cabang extends Model
     public function outACO()
     {
         return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
-            ->whereIn('status', ['dapat', 'diterima'])
+            ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
             ->where('posisi_sekarang', '=', 'ACO');
     }
@@ -190,7 +190,7 @@ class Cabang extends Model
     public function inAIS()
     {
         return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
-            ->whereIn('status', ['dapat', 'diterima'])
+            ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
             ->where('posisi_tujuan', '=', 'AIS');
     }
@@ -198,7 +198,7 @@ class Cabang extends Model
     public function outAIS()
     {
         return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
-            ->whereIn('status', ['dapat', 'diterima'])
+            ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
             ->where('posisi_sekarang', '=', 'AIS');
     }
@@ -206,7 +206,7 @@ class Cabang extends Model
     public function inATFM()
     {
         return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
-            ->whereIn('status', ['dapat', 'diterima'])
+            ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
             ->where('posisi_tujuan', '=', 'ATFM');
     }
@@ -214,7 +214,7 @@ class Cabang extends Model
     public function outATFM()
     {
         return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
-            ->whereIn('status', ['dapat', 'diterima'])
+            ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
             ->where('posisi_sekarang', '=', 'ATFM');
     }
@@ -222,7 +222,7 @@ class Cabang extends Model
     public function inTAPOR()
     {
         return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
-            ->whereIn('status', ['dapat', 'diterima'])
+            ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
             ->where('posisi_tujuan', '=', 'TAPOR');
     }
@@ -230,7 +230,7 @@ class Cabang extends Model
     public function outTAPOR()
     {
         return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
-            ->whereIn('status', ['dapat', 'diterima'])
+            ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
             ->where('posisi_sekarang', '=', 'TAPOR');
     }
@@ -238,7 +238,7 @@ class Cabang extends Model
     public function inATSSystem()
     {
         return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
-            ->whereIn('status', ['dapat', 'diterima'])
+            ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
             ->where('posisi_tujuan', '=', 'ATSSystem');
     }
@@ -246,7 +246,7 @@ class Cabang extends Model
     public function outATSSystem()
     {
         return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
-            ->whereIn('status', ['dapat', 'diterima'])
+            ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
             ->where('posisi_sekarang', '=', 'ATSSystem');
     }

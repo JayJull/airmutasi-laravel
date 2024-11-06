@@ -15,15 +15,15 @@
         <div class="relative p-4 w-full max-w-2xl max-h-full">
             <!-- Modal content -->
             <form method="POST" action="/personel/import" enctype="multipart/form-data"
-                class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                class="relative bg-white rounded-lg shadow ">
                 @csrf
                 <!-- Modal header -->
-                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
+                    <h3 class="text-xl font-semibold text-gray-900 ">
                         Import Data Personel
                     </h3>
                     <button type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
                         data-modal-hide="import-modal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
@@ -38,18 +38,21 @@
                     <input type="file" name="sheet" id="sheet" required>
                 </div>
                 <!-- Modal footer -->
-                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
                     <button data-modal-hide="import-modal" type="submit"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Kirim</button>
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Kirim</button>
                     <button data-modal-hide="import-modal" type="button"
-                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Batal</button>
+                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Batal</button>
                 </div>
             </form>
         </div>
     </div>
     <main class="min-h-screen">
-        <div class="flex justify-between items-center px-4 py-2 bg-gray-100 dark:bg-gray-800">
-            <h1 class="text-xl font-semibold text-gray-800 dark:text-white">Personel</h1>
+        <div class="text-xl font-semibold text-gray-800 px-4 py-2 bg-gray-100 flex gap-4">
+            <a href="/personel" class="underline">Personel</a>
+            <a href="/personel/konsep">Konsep</a>
+        </div>
+        <div class="flex justify-between items-center px-4 py-2 bg-gray-100">
             <form action="" class="gap-2 flex">
                 <input type="search" name="nik" id="nik-search"
                     class="min-w-40 px-2 py-1 border-2 border-slate-400 rounded-md" placeholder="NIK"
@@ -97,9 +100,9 @@
             </div>
         </div>
         <div class="relative overflow-x-auto max-h-[70vh] overflow-y-auto block">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
                 <thead
-                    class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             No.
@@ -186,9 +189,9 @@
                 </thead>
                 <tbody>
                     @foreach ($personels as $personel)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <tr class="bg-white border-b ">
                             <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                 {{ $loop->iteration }}
                             </th>
                             <td class="px-6 py-4">

@@ -59,6 +59,8 @@ Route::group(['prefix' => 'personel', 'middleware' => [
 ]], function () {
     Route::middleware(['is.admin'])->get("/", [PersonelController::class, 'index'])->name('personel');
     Route::middleware(['is.admin'])->post("/import", [PersonelController::class, 'importAllWithCsv'])->name('personel.import');
+    Route::middleware(['is.admin'])->get('/konsep', [PersonelController::class, 'konsep'])->name("konsep");
+    Route::middleware(['is.admin'])->post('/konsep', [PersonelController::class, 'uploadKonsep']);
     Route::get('/cabang/{id}', [PersonelController::class, 'cabang'])->name('personel.index');
     Route::group(['prefix' => 'add', 'middleware' => [
         'is.admin'

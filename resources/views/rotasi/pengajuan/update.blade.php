@@ -203,6 +203,7 @@
                             'file_url' => old('surat_persetujuan_url')
                                 ? old('surat_persetujuan_url')
                                 : $pengajuan->surat_persetujuan_url,
+                            'note' => '*surat GM, surat pernyataan, berkas data pribadi (CV)'
                         ])
                     </div>
                     <div>

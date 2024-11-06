@@ -11,7 +11,7 @@
     <main>
         <section class="p-8 flex flex-col md:grid md:grid-cols-3 gap-8">
             <aside class="col-span-3 md:col-span-1 sm:h-full flex flex-col">
-                <div class="flex items-center justify-center h-64 rounded-lg">
+                <div class="flex items-center justify-center rounded-lg">
                     <img src="{{ $cabang->thumbnail_url && $cabang->thumbnail_url != 'NULL' ? $cabang->thumbnail_url : '/images/default_tower.jpg' }}"
                         alt="foto cabang" class="w-full h-full object-cover rounded-lg">
                 </div>

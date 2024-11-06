@@ -58,7 +58,7 @@
                         Cabang</a>
                 @endcan
                 <div class="py-2 flex-grow flex flex-col gap-2 rounded-lg overflow-y-auto w-full">
-                    <div class="flex items-center justify-center bg-white h-64 rounded-lg border-8 border-[#003285]">
+                    <div class="flex items-center justify-center bg-white md:h-80 lg:h-[22rem] xl:h-96 rounded-lg border-8 border-[#003285]">
                         <img id="thumbnail-placeholder" src="/images/icons/Full Image.svg" alt="image" />
                         <img id="thumbnail" class="hidden w-full h-full object-cover" />
                     </div>
