@@ -142,6 +142,11 @@
                     </div>
                     <div class="self-end flex items-center gap-4">
                         <label class="flex items-center gap-1">
+                            <input type="checkbox" name="tidak_pindah" id="tidak_pindah"
+                                {{ old('tidak_pindah') ? 'checked' : '' }}>
+                            Tidak Pindah?
+                        </label>
+                        <label class="flex items-center gap-1">
                             <input type="checkbox" name="use_tujuan_alt" id="use_tujuan_alt"
                                 {{ old('use_tujuan_alt') ? 'checked' : '' }}>
                             Tujuan alternatif?

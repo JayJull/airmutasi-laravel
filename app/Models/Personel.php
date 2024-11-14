@@ -19,6 +19,8 @@ class Personel extends Model
         'cabang_id',
         'posisi',
         'pensiun',
+        'tidak_pindah',
+        'expired',
         
         "e_nik",
         "nik_ap1",

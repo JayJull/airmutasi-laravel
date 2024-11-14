@@ -101,8 +101,7 @@
         </div>
         <div class="relative overflow-x-auto max-h-[70vh] overflow-y-auto block">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
-                <thead
-                    class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-50 ">
+                <thead class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             No.
@@ -185,13 +184,15 @@
                         <th scope="col" class="px-6 py-3">
                             Job Text
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            Tidak Pindah
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($personels as $personel)
                         <tr class="bg-white border-b ">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                 {{ $loop->iteration }}
                             </th>
                             <td class="px-6 py-4">
@@ -276,6 +277,9 @@
                             </td>
                             <td class="px-6 py-4">
                                 {{ $personel->job_text }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $personel->tidak_pindah ? 'Tidak pindah sampai ' . date('j F, Y', strtotime($personel->expired)) : '-' }}
                             </td>
                         </tr>
                     @endforeach

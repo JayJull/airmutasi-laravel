@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cabang;
 use App\Models\Notification;
 use App\Models\Pengajuan;
+use App\Models\Personel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -34,12 +35,22 @@ class PengajuanController extends Controller
     public function input(Request $request)
     {
         $request->validate([
-            'lokasi_awal_id' => 'required|numeric|exists:cabangs,id',
-            'lokasi_tujuan_id' => 'required|numeric|exists:cabangs,id',
             'nama_lengkap' => 'required',
             'nik' => 'required|numeric',
             'masa_kerja' => 'required',
             'jabatan' => 'required',
+        ]);
+        if ($request->has('tidak_pindah')) {
+            $personel = Personel::where('nik', $request->nik)->first();
+            $personel->update([
+                'tidak_pindah' => true,
+                'expired' => Carbon::now()->addYear()
+            ]);
+            return redirect()->back()->with('success', 'Data berhasil disimpan');
+        }
+        $request->validate([
+            'lokasi_awal_id' => 'required|numeric|exists:cabangs,id',
+            'lokasi_tujuan_id' => 'required|numeric|exists:cabangs,id',
             'posisi_sekarang' => ['required', Rule::in($this->posisi)],
             'posisi_tujuan' => ['required', Rule::in($this->posisi)],
             'kompetensi' => 'required|array',
