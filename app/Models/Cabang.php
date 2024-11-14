@@ -34,7 +34,7 @@ class Cabang extends Model
 
     public function notifications()
     {
-        return $this->hasMany(Notification::class, 'to');
+        return $this->hasMany(Notification::class, 'to')->orderBy('created_at', 'desc');
     }
 
     public function notreadnotifications()

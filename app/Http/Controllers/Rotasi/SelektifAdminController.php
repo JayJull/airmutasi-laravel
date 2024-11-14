@@ -78,6 +78,14 @@ class SelektifAdminController extends Controller
             'cabang_tujuan_id' => $pengajuan->lokasi_tujuan_id,
             'pengajuan_id' => $pengajuan->id
         ]);
+
+        $notification = Notification::create([
+            'status' => $request->status,
+            'to' => null,
+            'cabang_asal_id' => $pengajuan->lokasi_awal_id,
+            'cabang_tujuan_id' => $pengajuan->lokasi_tujuan_id,
+            'pengajuan_id' => $pengajuan->id
+        ]);
         $notification->save();
         if ($pengajuan->lokasi_awal_id != $pengajuan->lokasi_tujuan_id) {
             $notification = Notification::create([

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Rotasi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Cabang;
+use App\Models\Notification;
 use App\Models\Pengajuan;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -119,6 +120,13 @@ class PengajuanController extends Controller
             ]);
             $pengajuanAlt->kompetensis()->createMany($kompetensi);
             $pengajuan["secondary_pengajuan_id"] = $pengajuanAlt->id;
+            Notification::create([
+                'status' => $pengajuan['status'],
+                'to' => null,
+                'cabang_asal_id' => $pengajuan['lokasi_awal_id'],
+                'cabang_tujuan_id' => $request['lokasi_tujuan_alt_id'],
+                'pengajuan_id' => $pengajuanAlt->id
+            ]);
         } else {
             $pengajuan["secondary_pengajuan_id"] = null;
         }
@@ -140,6 +148,13 @@ class PengajuanController extends Controller
             ]);
             $pengajuanAlt2->kompetensis()->createMany($kompetensi);
             $pengajuan["th3_pengajuan_id"] = $pengajuanAlt2->id;
+            Notification::create([
+                'status' => $pengajuan['status'],
+                'to' => null,
+                'cabang_asal_id' => $pengajuan['lokasi_awal_id'],
+                'cabang_tujuan_id' => $request['lokasi_tujuan_alt2_id'],
+                'pengajuan_id' => $pengajuanAlt2->id
+            ]);
         } else {
             $pengajuan["th3_pengajuan_id"] = null;
         }
@@ -161,6 +176,13 @@ class PengajuanController extends Controller
             'th3_pengajuan_id' => $pengajuan['th3_pengajuan_id']
         ]);
         $pengajuan->kompetensis()->createMany($kompetensi);
+        Notification::create([
+            'status' => $pengajuan['status'],
+            'to' => null,
+            'cabang_asal_id' => $pengajuan['lokasi_awal_id'],
+            'cabang_tujuan_id' => $pengajuan['lokasi_tujuan_id'],
+            'pengajuan_id' => $pengajuan->id
+        ]);
         DB::commit();
 
         return redirect()->back()->with('success', 'Data berhasil disimpan');

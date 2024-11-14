@@ -9,9 +9,9 @@
 <body class="font-sans tracking-wider">
     @include('components.modal-component')
     <main class="h-screen flex justify-between">
-        <img src="/images/thumbnail1.jpeg" alt="bg" class="-z-10 absolute w-screen h-screen object-cover">
+        <img src="/images/backgrounds/LOGIN.jpeg" alt="bg" class="-z-10 absolute w-screen h-screen object-cover">
         <form action="/login" method="post"
-            class="h-full bg-opacity-70 backdrop-blur-lg w-full sm:w-1/2 xl:w-1/3 flex flex-col justify-center gap-4 bg-white px-8 py-16 shadow-black shadow-md">
+            class="h-full bg-opacity-50 backdrop-blur-lg w-full sm:w-1/2 xl:w-1/3 flex flex-col justify-center gap-4 bg-white px-8 py-16 shadow-black shadow-md">
             <a href="/" class="flex justify-center"><img src="/images/logo.svg" alt="logo" class="max-h-12"></a>
             @csrf
             <div

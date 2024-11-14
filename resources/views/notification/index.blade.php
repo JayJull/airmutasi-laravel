@@ -13,11 +13,12 @@
         <h1 class="text-3xl font-semibold mb-2">Notifikasi</h1>
         <section class="flex flex-col gap-4 min-h-[50vh]">
             @forelse ($notifications as $notification)
-                <div class="flex flex-col gap-2 p-4 bg-[#003285] text-white rounded-md">
+                <div
+                    class="flex flex-col gap-2 p-4 {{ $notification->status == 'dapat' ? 'bg-[#003285]' : ($notification->status == 'tidak' ? 'Tidak bg-red-900' : ($notification->status == 'diajukan' ? 'bg-gray-800' : 'bg-green-900')) }} text-white rounded-md">
                     <div class="flex flex-wrap gap-6">
                         <aside>
                             <p>Status:</p>
-                            <strong>{{ $notification->status == 'dapat' ? 'Diterima' : ($notification->status == 'tidak' ? 'Tidak Diterima' : 'Disetujui') }}</strong>
+                            <strong>{{ $notification->status == 'dapat' ? 'Diterima' : ($notification->status == 'tidak' ? 'Tidak Diterima' : ($notification->status == 'diajukan' ? 'Diajukan' : 'Disetujui')) }}</strong>
                         </aside>
                         <aside>
                             <p>Atas nama:</p>
@@ -26,11 +27,13 @@
                         <aside>
                             <p>Dari:</p>
                             <strong>{{ $notification->pengajuan->lokasiAwal->nama }}
-                                ({{ $notification->pengajuan->posisi_sekarang }})</strong>
+                                ({{ $notification->pengajuan->posisi_sekarang }})
+                            </strong>
                         </aside>
                         <aside>
                             <p>Ke:</p>
-                            <strong>{{ $notification->pengajuan->lokasiTujuan->nama }} ({{ $notification->pengajuan->posisi_tujuan }})</strong>
+                            <strong>{{ $notification->pengajuan->lokasiTujuan->nama }}
+                                ({{ $notification->pengajuan->posisi_tujuan }})</strong>
                         </aside>
                     </div>
                     <p class="text-sm opacity-50 self-end">{{ $notification->created_at->diffForHumans() }}</p>
