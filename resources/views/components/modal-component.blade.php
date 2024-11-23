@@ -2,6 +2,7 @@
     @include('components.modal', ['message' => session('success')])
 @endif
 @if ($errors->any())
+    {{$errors->first()}}
     @include('components.modal', [
         'message' => str_contains($errors->first(), 'required')
             ? 'Mohon isi semua kolom'

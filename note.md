@@ -1,0 +1,2 @@
+- [ ] reset konsep + tambah validasi only showable in browser
+- [ ] cek ulang koordinat

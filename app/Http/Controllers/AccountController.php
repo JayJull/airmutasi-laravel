@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cabang;
+use App\Models\PersonelJabatanCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Profile;
@@ -18,7 +19,10 @@ class AccountController extends Controller
         if ($akun->role->name == 'admin') {
             $akuns = Profile::with(['user'])->get();
             $cabangs = Cabang::all();
-            return view('account.index', ['akun' => $akun, 'akuns' => $akuns, 'cabangs' => $cabangs]);
+            $kategori_jabatan = PersonelJabatanCategory::select('category')->distinct()->get();
+            $jabatans = PersonelJabatanCategory::all();
+            $jabatans = $jabatans->groupBy('category');
+            return view('account.index', ['akun' => $akun, 'akuns' => $akuns, 'cabangs' => $cabangs, 'kategori_jabatan' => $kategori_jabatan, 'jabatans' => $jabatans]);
         }
         return view('account.index', ['akun' => $akun]);
     }

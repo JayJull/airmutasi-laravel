@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PersonelController;
 // use App\Http\Controllers\Rotasi\HomeController as RotasiHomeController;
@@ -52,6 +53,8 @@ Route::group(['prefix' => 'akun', 'middleware' => [
     Route::get('/edit', [AccountController::class, 'updateView']);
     Route::post('/edit', [AccountController::class, 'update']);
     Route::middleware(['is.admin'])->post('/assign', [AccountController::class, 'assign']);
+    Route::middleware(['is.admin'])->post('/jabatan', [JabatanController::class, 'store']);
+    Route::middleware(['is.admin'])->get('/jabatan/{id}/delete', [JabatanController::class, 'destroy']);
 });
 
 Route::group(['prefix' => 'personel', 'middleware' => [
