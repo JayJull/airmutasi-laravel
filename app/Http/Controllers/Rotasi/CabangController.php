@@ -211,10 +211,18 @@ class CabangController extends Controller
                 'longitude' => 'required',
             ]);
             $cabang->save();
-            $cabang->coord()->update([
-                'latitude' => $request->latitude,
-                'longitude' => $request->longitude,
-            ]);
+
+            if ($cabang->coord()->exists()) {
+                $cabang->coord()->update([
+                    'latitude' => $request->latitude,
+                    'longitude' => $request->longitude,
+                ]);
+            } else {
+                $cabang->coord()->create([
+                    'latitude' => $request->latitude,
+                    'longitude' => $request->longitude,
+                ]);
+            }
         } else {
             if ($cabang->coord()->exists())
                 $cabang->coord()->delete();
