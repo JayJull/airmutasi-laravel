@@ -241,8 +241,9 @@
                     </table>
                 </div>
                 <div class="flex justify-between px-4 py-2">
-                    <a @if ($page > 0) href="?page={{ $page - 1 }}" @endif>Back</a>
-                    <a href="?page={{ $page + 1 }}">Next</a>
+                    <a
+                        @if ($page > 0) href="?tab={{ $tab }}&page={{ $page - 1 }}" @endif>Back</a>
+                    <a href="?tab={{ $tab }}&page={{ $page + 1 }}">Next</a>
                 </div>
             </div>
         </section>

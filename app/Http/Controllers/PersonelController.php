@@ -72,6 +72,7 @@ class PersonelController extends Controller
     public function cabang(Request $request, $id)
     {
         $page = request()->get('page', 0);
+        $tab = request()->get('tab', 'ATC');
         $limit = 100;
         $jabatan = PersonelJabatanCategory::all()->groupBy('category');
         $jabatan = $jabatan->map(function ($jabatan) {
