@@ -21,6 +21,7 @@ class Personel extends Model
         'pensiun',
         'tidak_pindah',
         'expired',
+        'magang',
         
         "e_nik",
         "nik_ap1",

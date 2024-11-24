@@ -74,6 +74,9 @@
                                         Kategori</button>
                                 </div>
                             @else
+                                <button popovertarget="add-kategori"
+                                    class=" bg-[#7186F3] hover:bg-[#435EEF] duration-200 text-white px-4 py-2 rounded-lg font-semibold text-center mb-2">Tambah
+                                    Kategori</button>
                                 <table class="w-full">
                                     <thead>
                                         <tr>
@@ -87,7 +90,7 @@
                                             <tr>
                                                 <td class="border-2 border-slate-400 px-2 py-1">
                                                     {{ $currKategori->category }}</td>
-                                                <td class="border-2 border-slate-400 px-2 py-1">
+                                                <td class="border-2 border-slate-400 px-2 py-1 flex gap-2 flex-wrap">
                                                     @foreach ($jabatans[$currKategori->category] as $currJabatan)
                                                         <div
                                                             class="flex items-center gap-1 px-2 py-1 mt-1 bg-gray-200 border-2 border-slate-400 rounded-md">
@@ -184,7 +187,7 @@
             return `<div
                 class="flex items-center gap-1 px-2 py-1 mt-1 bg-gray-200 border-2 border-slate-400 rounded-md">
                 ${nama}
-                <input type="hidden" name="jabatan" value="${nama}">
+                <input type="hidden" name="jabatan[]" value="${nama}">
                 <button type="button" onclick="removeJabatan(this)">X</button>
             </div>`;
         }

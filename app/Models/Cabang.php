@@ -32,6 +32,13 @@ class Cabang extends Model
         'frms_ats_system',
     ];
 
+    private $jabatanATC;
+    private $jabatanACO;
+    private $jabatanAIS;
+    private $jabatanATFM;
+    private $jabatanTAPOR;
+    private $jabatanATSSystem;
+
     public function notifications()
     {
         return $this->hasMany(Notification::class, 'to')->orderBy('created_at', 'desc');
@@ -57,44 +64,170 @@ class Cabang extends Model
 
     public function personelPensiunATC()
     {
+        if ($this->jabatanATC == null) {
+            $this->jabatanATC = PersonelJabatanCategory::select('jabatan')->where('category', 'ATC')->get();
+            $this->jabatanATC = $this->jabatanATC->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
+
         return $this->hasMany(Personel::class)
             ->where('pensiun', '=', 1)
-            ->whereNotIn('posisi', ['ACO', 'ATFM', 'AIS', 'TAPOR', 'ATSSystem']);
+            ->whereIn('posisi', $this->jabatanATC);
     }
 
     public function personelPensiunACO()
     {
+        if ($this->jabatanACO == null) {
+            $this->jabatanACO = PersonelJabatanCategory::select('jabatan')->where('category', 'ACO')->get();
+            $this->jabatanACO = $this->jabatanACO->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
+        
         return $this->hasMany(Personel::class)
             ->where('pensiun', '=', 1)
-            ->where('posisi', '=', 'ACO');
+            ->whereIn('posisi', $this->jabatanACO);
     }
 
     public function personelPensiunAIS()
     {
+        if ($this->jabatanAIS == null) {
+            $this->jabatanAIS = PersonelJabatanCategory::select('jabatan')->where('category', 'AIS')->get();
+            $this->jabatanAIS = $this->jabatanAIS->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
+
         return $this->hasMany(Personel::class)
             ->where('pensiun', '=', 1)
-            ->where('posisi', '=', 'AIS');
+            ->whereIn('posisi', $this->jabatanAIS);
     }
 
     public function personelPensiunATFM()
     {
+        if ($this->jabatanATFM == null) {
+            $this->jabatanATFM = PersonelJabatanCategory::select('jabatan')->where('category', 'ATFM')->get();
+            $this->jabatanATFM = $this->jabatanATFM->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
+
         return $this->hasMany(Personel::class)
             ->where('pensiun', '=', 1)
-            ->where('posisi', '=', 'ATFM');
+            ->whereIn('posisi', $this->jabatanATFM);
     }
 
     public function personelPensiunTAPOR()
     {
+        if ($this->jabatanTAPOR == null) {
+            $this->jabatanTAPOR = PersonelJabatanCategory::select('jabatan')->where('category', 'TAPOR')->get();
+            $this->jabatanTAPOR = $this->jabatanTAPOR->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
+
         return $this->hasMany(Personel::class)
             ->where('pensiun', '=', 1)
-            ->where('posisi', '=', 'TAPOR');
+            ->whereIn('posisi', $this->jabatanTAPOR);
     }
 
     public function personelPensiunATSSystem()
     {
+        if ($this->jabatanATSSystem == null) {
+            $this->jabatanATSSystem = PersonelJabatanCategory::select('jabatan')->where('category', 'ATSSystem')->get();
+            $this->jabatanATSSystem = $this->jabatanATSSystem->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
+
         return $this->hasMany(Personel::class)
             ->where('pensiun', '=', 1)
-            ->where('posisi', '=', 'ATSSystem');
+            ->whereIn('posisi', $this->jabatanATSSystem);
+    }
+
+    public function personelMagangATC()
+    {
+        if ($this->jabatanATC == null) {
+            $this->jabatanATC = PersonelJabatanCategory::select('jabatan')->where('category', 'ATC')->get();
+            $this->jabatanATC = $this->jabatanATC->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
+
+        return $this->hasMany(Personel::class)
+            ->where('magang', '=', 1)
+            ->whereIn('posisi', $this->jabatanATC);
+    }
+
+    public function personelMagangACO()
+    {
+        if ($this->jabatanACO == null) {
+            $this->jabatanACO = PersonelJabatanCategory::select('jabatan')->where('category', 'ACO')->get();
+            $this->jabatanACO = $this->jabatanACO->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
+
+        return $this->hasMany(Personel::class)
+            ->where('magang', '=', 1)
+            ->whereIn('posisi', $this->jabatanACO);
+    }
+
+    public function personelMagangAIS()
+    {
+        if ($this->jabatanAIS == null) {
+            $this->jabatanAIS = PersonelJabatanCategory::select('jabatan')->where('category', 'AIS')->get();
+            $this->jabatanAIS = $this->jabatanAIS->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
+
+        return $this->hasMany(Personel::class)
+            ->where('magang', '=', 1)
+            ->whereIn('posisi', $this->jabatanAIS);
+    }
+
+    public function personelMagangATFM()
+    {
+        if ($this->jabatanATFM == null) {
+            $this->jabatanATFM = PersonelJabatanCategory::select('jabatan')->where('category', 'ATFM')->get();
+            $this->jabatanATFM = $this->jabatanATFM->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
+
+        return $this->hasMany(Personel::class)
+            ->where('magang', '=', 1)
+            ->whereIn('posisi', $this->jabatanATFM);
+    }
+
+    public function personelMagangTAPOR()
+    {
+        if ($this->jabatanTAPOR == null) {
+            $this->jabatanTAPOR = PersonelJabatanCategory::select('jabatan')->where('category', 'TAPOR')->get();
+            $this->jabatanTAPOR = $this->jabatanTAPOR->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
+
+        return $this->hasMany(Personel::class)
+            ->where('magang', '=', 1)
+            ->whereIn('posisi', $this->jabatanTAPOR);
+    }
+
+    public function personelMagangATSSystem()
+    {
+        if ($this->jabatanATSSystem == null) {
+            $this->jabatanATSSystem = PersonelJabatanCategory::select('jabatan')->where('category', 'ATSSystem')->get();
+            $this->jabatanATSSystem = $this->jabatanATSSystem->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
+
+        return $this->hasMany(Personel::class)
+            ->where('magang', '=', 1)
+            ->whereIn('posisi', $this->jabatanATSSystem);
     }
 
     public function kelases()
@@ -157,97 +290,169 @@ class Cabang extends Model
 
     public function in()
     {
+        if ($this->jabatanATC == null) {
+            $this->jabatanATC = PersonelJabatanCategory::select('jabatan')->where('category', 'ATC')->get();
+            $this->jabatanATC = $this->jabatanATC->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
         return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
             ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
-            ->whereNotIn('posisi_tujuan', ['ACO', 'ATFM', 'AIS', 'TAPOR', 'ATSSystem']);
+            ->whereIn('posisi_tujuan', $this->jabatanATC);
     }
 
     public function out()
     {
+        if ($this->jabatanATC == null) {
+            $this->jabatanATC = PersonelJabatanCategory::select('jabatan')->where('category', 'ATC')->get();
+            $this->jabatanATC = $this->jabatanATC->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
         return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
             ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
-            ->whereNotIn('posisi_sekarang', ['ACO', 'ATFM', 'AIS', 'TAPOR', 'ATSSystem']);
+            ->whereIn('posisi_sekarang', $this->jabatanATC);
     }
 
     public function inACO()
     {
+        if ($this->jabatanACO == null) {
+            $this->jabatanACO = PersonelJabatanCategory::select('jabatan')->where('category', 'ACO')->get();
+            $this->jabatanACO = $this->jabatanACO->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
         return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
             ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
-            ->where('posisi_tujuan', '=', 'ACO');
+            ->whereIn('posisi_tujuan', $this->jabatanACO);
     }
 
     public function outACO()
     {
+        if ($this->jabatanACO == null) {
+            $this->jabatanACO = PersonelJabatanCategory::select('jabatan')->where('category', 'ACO')->get();
+            $this->jabatanACO = $this->jabatanACO->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
         return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
             ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
-            ->where('posisi_sekarang', '=', 'ACO');
+            ->whereIn('posisi_sekarang', $this->jabatanACO);
     }
 
     public function inAIS()
     {
+        if ($this->jabatanAIS == null) {
+            $this->jabatanAIS = PersonelJabatanCategory::select('jabatan')->where('category', 'AIS')->get();
+            $this->jabatanAIS = $this->jabatanAIS->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
         return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
             ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
-            ->where('posisi_tujuan', '=', 'AIS');
+            ->whereIn('posisi_tujuan', $this->jabatanAIS);
     }
 
     public function outAIS()
     {
+        if ($this->jabatanAIS == null) {
+            $this->jabatanAIS = PersonelJabatanCategory::select('jabatan')->where('category', 'AIS')->get();
+            $this->jabatanAIS = $this->jabatanAIS->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
         return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
             ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
-            ->where('posisi_sekarang', '=', 'AIS');
+            ->whereIn('posisi_sekarang', $this->jabatanAIS);
     }
 
     public function inATFM()
     {
+        if ($this->jabatanATFM == null) {
+            $this->jabatanATFM = PersonelJabatanCategory::select('jabatan')->where('category', 'ATFM')->get();
+            $this->jabatanATFM = $this->jabatanATFM->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
         return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
             ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
-            ->where('posisi_tujuan', '=', 'ATFM');
+            ->whereIn('posisi_tujuan', $this->jabatanATFM);
     }
 
     public function outATFM()
     {
+        if ($this->jabatanATFM == null) {
+            $this->jabatanATFM = PersonelJabatanCategory::select('jabatan')->where('category', 'ATFM')->get();
+            $this->jabatanATFM = $this->jabatanATFM->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
         return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
             ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
-            ->where('posisi_sekarang', '=', 'ATFM');
+            ->whereIn('posisi_sekarang', $this->jabatanATFM);
     }
 
     public function inTAPOR()
     {
+        if ($this->jabatanTAPOR == null) {
+            $this->jabatanTAPOR = PersonelJabatanCategory::select('jabatan')->where('category', 'TAPOR')->get();
+            $this->jabatanTAPOR = $this->jabatanTAPOR->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
         return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
             ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
-            ->where('posisi_tujuan', '=', 'TAPOR');
+            ->whereIn('posisi_tujuan', $this->jabatanTAPOR);
     }
 
     public function outTAPOR()
     {
+        if ($this->jabatanTAPOR == null) {
+            $this->jabatanTAPOR = PersonelJabatanCategory::select('jabatan')->where('category', 'TAPOR')->get();
+            $this->jabatanTAPOR = $this->jabatanTAPOR->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
         return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
             ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
-            ->where('posisi_sekarang', '=', 'TAPOR');
+            ->whereIn('posisi_sekarang', $this->jabatanTAPOR);
     }
 
     public function inATSSystem()
     {
+        if ($this->jabatanATSSystem == null) {
+            $this->jabatanATSSystem = PersonelJabatanCategory::select('jabatan')->where('category', 'ATSSystem')->get();
+            $this->jabatanATSSystem = $this->jabatanATSSystem->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
         return $this->hasMany(Pengajuan::class, 'lokasi_tujuan_id')
             ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
-            ->where('posisi_tujuan', '=', 'ATSSystem');
+            ->whereIn('posisi_tujuan', $this->jabatanATSSystem);
     }
 
     public function outATSSystem()
     {
+        if ($this->jabatanATSSystem == null) {
+            $this->jabatanATSSystem = PersonelJabatanCategory::select('jabatan')->where('category', 'ATSSystem')->get();
+            $this->jabatanATSSystem = $this->jabatanATSSystem->map(function ($item) {
+                return $item->jabatan;
+            });
+        }
         return $this->hasMany(Pengajuan::class, 'lokasi_awal_id')
             ->whereIn('status', ['diterima'])
             ->where('updated_at', '>=', now()->subYears(1))
-            ->where('posisi_sekarang', '=', 'ATSSystem');
+            ->whereIn('posisi_sekarang', $this->jabatanATSSystem);
     }
 }

@@ -185,6 +185,9 @@
                             Job Text
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Status Karyawan
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Tidak Pindah
                         </th>
                     </tr>
@@ -277,6 +280,9 @@
                             </td>
                             <td class="px-6 py-4">
                                 {{ $personel->job_text }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $personel->magang ? "Magang" : "Karyawan" }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ $personel->tidak_pindah ? 'Tidak pindah sampai ' . date('j F, Y', strtotime($personel->expired)) : '-' }}
