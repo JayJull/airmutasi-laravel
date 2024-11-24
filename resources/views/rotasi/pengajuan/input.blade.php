@@ -59,12 +59,29 @@
                                 class="w-full px-2 py-1 mt-1 border-2 border-slate-400 rounded-md"
                                 placeholder="Ketik Disini ..." value="{{ old('jabatan') }}" />
                         </aside>
+                        <input type="hidden" name="tidak_pindah" id="tidak_pindah"
+                            value="{{ old('tidak_pindah') ?? 'tidak'}}">
                     </div>
                     <div class="flex justify-end gap-4 w-full">
                         <button type="button"
                             class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
-                            onclick="changeSection(2)">
+                            onclick="changeSection(0)">
                             Selanjutnya
+                        </button>
+                    </div>
+                </section>
+                <section id="section-0" class="sections hidden flex-col gap-4 p-2 rounded-md">
+                    <label class="font-semibold text-center" for="tidak-pindah">Pilih Pengajun</label>
+                    <div class="flex justify-center gap-2">
+                        <button type="button"
+                            class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                            onclick="tidakpindah()">
+                            Tidak Pindah
+                        </button>
+                        <button type="button"
+                            class="bg-[#003285] opacity-80 hover:opacity-100 duration-200 text-white px-4 py-2 rounded-lg font-semibold"
+                            onclick="changeSection(2)">
+                            Mutasi
                         </button>
                     </div>
                 </section>
@@ -142,11 +159,6 @@
                     </div>
                     <div class="self-end flex items-center gap-4">
                         <label class="flex items-center gap-1">
-                            <input type="checkbox" name="tidak_pindah" id="tidak_pindah"
-                                {{ old('tidak_pindah') ? 'checked' : '' }}>
-                            Tidak Pindah?
-                        </label>
-                        <label class="flex items-center gap-1">
                             <input type="checkbox" name="use_tujuan_alt" id="use_tujuan_alt"
                                 {{ old('use_tujuan_alt') ? 'checked' : '' }}>
                             Tujuan alternatif?
@@ -223,7 +235,7 @@
                             'url' => 'surat_persetujuan_url',
                             'file' => 'surat_persetujuan_file',
                             'file_url' => old('surat_persetujuan_url'),
-                            'note' => '*surat GM, surat pernyataan, berkas data pribadi (CV)'
+                            'note' => '*surat GM, surat pernyataan, berkas data pribadi (CV)',
                         ])
                     </div>
                     <div>
@@ -564,6 +576,11 @@
             };
         }
         const searchNIKDebounce = debounce(searchNIK, 500);
+
+        function tidakpindah() {
+            document.getElementById('tidak_pindah').value = 'ya';
+            document.querySelector('form').submit();
+        }
     </script>
     <script src="/script/chatbot.js"></script>
 </body>

@@ -40,7 +40,7 @@ class PengajuanController extends Controller
             'masa_kerja' => 'required',
             'jabatan' => 'required',
         ]);
-        if ($request->has('tidak_pindah')) {
+        if ($request->has('tidak_pindah') && $request->tidak_pindah == 'ya') {
             $personel = Personel::where('nik', $request->nik)->first();
             $personel->update([
                 'tidak_pindah' => true,
