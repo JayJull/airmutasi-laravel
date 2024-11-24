@@ -13,7 +13,7 @@
         <form action="/akun/edit" method="POST" class="flex justify-center gap-16">
             @csrf
             <aside class="w-2/5">
-                <img class="h-full object-cover rounded-md" src="/images/backgrounds/LOGIN.png" alt="illustration">
+                <img class="h-full object-cover rounded-md" src="/images/backgrounds/LOGIN.jpeg" alt="illustration">
             </aside>
             <aside class="w-3/5 flex flex-col gap-4">
                 <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
