@@ -15,4 +15,9 @@ class KelasCabang extends Model
     {
         return $this->belongsTo(Kelas::class);
     }
+
+    public function cabang()
+    {
+        return $this->belongsTo(Cabang::class);
+    }
 }

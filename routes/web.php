@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JabatanController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PersonelController;
 // use App\Http\Controllers\Rotasi\HomeController as RotasiHomeController;
@@ -38,6 +39,15 @@ Route::middleware("auth:web")->get("/logout", [AuthController::class, 'logout'])
 
 Route::group(['prefix' => 'download', 'middleware' => ["auth:web"]], function () {
     Route::middleware('is.admin')->get('/pengajuan/{id}', [RotasiPengajuanController::class, 'document']);
+});
+
+Route::group(['prefix' => 'kelas', 'middleware' => [
+    'auth:web',
+    'is.admin'
+]], function () {
+    Route::get('/', [KelasController::class, 'index'])->name('kelas');
+    Route::post('/', [KelasController::class, 'input']);
+    Route::get('/{cabang_id}/{kelas_id}/delete', [KelasController::class, 'destroy']);
 });
 
 Route::group(['prefix' => 'akun', 'middleware' => [

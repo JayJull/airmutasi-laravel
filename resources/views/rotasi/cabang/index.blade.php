@@ -53,12 +53,17 @@
             </aside>
             <aside class="col-span-2 sm:col-span-1 flex flex-col gap-2 sm:max-h-[70vh]">
                 @can('admin')
-                    <a href="/rotasi/cabang/input"
-                        class="bg-[#003285] text-white opacity-80 hover:opacity-100 duration-300 w-full text-center text-lg p-2 rounded-lg font-semibold">Tambah
-                        Cabang</a>
+                    <div class="grid grid-cols-4 gap-2">
+                        <a href="/rotasi/cabang/input"
+                            class="col-span-4 lg:col-span-3 bg-[#003285] text-white opacity-80 hover:opacity-100 duration-300 w-full text-center text-lg p-2 rounded-lg font-semibold">Tambah
+                            Cabang</a>
+                        <a href="/kelas"
+                            class="col-span-4 lg:col-span-1 bg-[#003285] text-white opacity-80 hover:opacity-100 duration-300 w-full text-center text-lg p-2 rounded-lg font-semibold">Atur Kelas</a>
+                    </div>
                 @endcan
                 <div class="py-2 flex-grow flex flex-col gap-2 rounded-lg overflow-y-auto w-full">
-                    <div class="flex items-center justify-center bg-white md:h-80 lg:h-[22rem] xl:h-96 rounded-lg border-8 border-[#003285]">
+                    <div
+                        class="flex items-center justify-center bg-white md:h-80 lg:h-[22rem] xl:h-96 rounded-lg border-8 border-[#003285]">
                         <img id="thumbnail-placeholder" src="/images/icons/Full Image.svg" alt="image" />
                         <img id="thumbnail" class="hidden w-full h-full object-cover" />
                     </div>
@@ -174,32 +179,32 @@
     </script>
     <script>
         /*var currentPage = 0;
-            const mapContainer = document.getElementById('map');
-            const bannerContainer = document.querySelector('#banner-img');
-            const mapShowBtn = document.getElementById('map-show-btn');
-            const bannerShowBtn = document.getElementById('banner-show-btn');
-            mapShowBtn.addEventListener('click', () => {
-                if (currentPage !== 0) {
-                    mapContainer.classList.remove('w-0');
-                    mapContainer.classList.add('w-full');
-                    bannerContainer.classList.remove('w-full');
-                    bannerContainer.classList.add('w-0');
-                    currentPage = 0;
-                    mapShowBtn.classList.add('bg-[#003285]');
-                    bannerShowBtn.classList.remove('bg-[#003285]');
-                }
-            });
-            bannerShowBtn.addEventListener('click', () => {
-                if (currentPage !== 1) {
-                    mapContainer.classList.add('w-0');
-                    mapContainer.classList.remove('w-full');
-                    bannerContainer.classList.add('w-full');
-                    bannerContainer.classList.remove('w-0');
-                    currentPage = 1;
-                    mapShowBtn.classList.remove('bg-[#003285]');
-                    bannerShowBtn.classList.add('bg-[#003285]');
-                }
-            });*/
+                const mapContainer = document.getElementById('map');
+                const bannerContainer = document.querySelector('#banner-img');
+                const mapShowBtn = document.getElementById('map-show-btn');
+                const bannerShowBtn = document.getElementById('banner-show-btn');
+                mapShowBtn.addEventListener('click', () => {
+                    if (currentPage !== 0) {
+                        mapContainer.classList.remove('w-0');
+                        mapContainer.classList.add('w-full');
+                        bannerContainer.classList.remove('w-full');
+                        bannerContainer.classList.add('w-0');
+                        currentPage = 0;
+                        mapShowBtn.classList.add('bg-[#003285]');
+                        bannerShowBtn.classList.remove('bg-[#003285]');
+                    }
+                });
+                bannerShowBtn.addEventListener('click', () => {
+                    if (currentPage !== 1) {
+                        mapContainer.classList.add('w-0');
+                        mapContainer.classList.remove('w-full');
+                        bannerContainer.classList.add('w-full');
+                        bannerContainer.classList.remove('w-0');
+                        currentPage = 1;
+                        mapShowBtn.classList.remove('bg-[#003285]');
+                        bannerShowBtn.classList.add('bg-[#003285]');
+                    }
+                });*/
     </script>
     <script>
         // set data to aside cabang's summary
