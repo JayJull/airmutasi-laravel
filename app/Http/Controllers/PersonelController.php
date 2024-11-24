@@ -173,7 +173,7 @@ class PersonelController extends Controller
             "UNIT PELAYANAN INFORMASI AERONAUTIKA WILAYAH MANADO" => "KANTOR CABANG MANADO",
             "UNIT PELAYANAN INFORMASI AERONAUTIKA WILAYAH SORONG" => "KANTOR CABANG SORONG",
             "UNIT PELAYANAN INFORMASI AERONAUTIKA WILAYAH SENTANI" => "KANTOR CABANG SENTANI",
-            "KANTOR PUSAT" => "PUSAT AIRNAV INDONESIA",
+            "KANTOR PUSAT" => "KANTOR PUSAT AIRNAV INDONESIA",
             "CABANG YOGYAKARTA" => "CABANG YOGYAKARTA (YIA)",
             "CABANG PEMBANTU TUAL, KAREL SADSUITUBUN" => "CABANG PEMBANTU TUAL"
         ];
@@ -197,17 +197,17 @@ class PersonelController extends Controller
                 } else {
                     continue;
                 }
-                if (array_key_exists('KANTOR ' . $dataPersonel["lokasi_kedudukan"], $cabangs)) {
-                    $dataPersonel['cabang_id'] = $cabangs["KANTOR " . $dataPersonel["lokasi_kedudukan"]];
-                } else if (array_key_exists($dataPersonel["lokasi_kedudukan"], $cabangs)) {
-                    $dataPersonel['cabang_id'] = $cabangs[$dataPersonel["lokasi_kedudukan"]];
+                if (array_key_exists('KANTOR ' . $dataPersonel["lokasi"], $cabangs)) {
+                    $dataPersonel['cabang_id'] = $cabangs["KANTOR " . $dataPersonel["lokasi"]];
+                } else if (array_key_exists($dataPersonel["lokasi"], $cabangs)) {
+                    $dataPersonel['cabang_id'] = $cabangs[$dataPersonel["lokasi"]];
                 } else {
                     $dataPersonel['cabang_id'] = $dataPersonel['lokasi_induk'];
                 }
-                if (array_key_exists('KANTOR ' . $dataPersonel["lokasi"], $cabangs)) {
-                    $dataPersonel['lokasi'] = $cabangs["KANTOR " . $dataPersonel["lokasi"]];
-                } else if (array_key_exists($dataPersonel["lokasi"], $cabangs)) {
-                    $dataPersonel['lokasi'] = $cabangs[$dataPersonel["lokasi"]];
+                if (array_key_exists('KANTOR ' . $dataPersonel["lokasi_kedudukan"], $cabangs)) {
+                    $dataPersonel['lokasi'] = $cabangs["KANTOR " . $dataPersonel["lokasi_kedudukan"]];
+                } else if (array_key_exists($dataPersonel["lokasi_kedudukan"], $cabangs)) {
+                    $dataPersonel['lokasi'] = $cabangs[$dataPersonel["lokasi_kedudukan"]];
                 } else {
                     $dataPersonel['lokasi'] = $dataPersonel['lokasi_induk'];
                 }
