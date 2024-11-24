@@ -332,6 +332,7 @@ class PersonelController extends Controller
     {
         $request->validate([
             "name" => "required",
+            "berkas" => "file|mimes:pdf,jpg,jpeg,png"
         ]);
 
         if ($request->hasFile("berkas")) {
