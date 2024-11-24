@@ -22,7 +22,7 @@ class PengajuanController extends Controller
     public function inputView()
     {
         if (auth()->user()->role->name !== 'admin') {
-            if (!auth()->user()->profile->cabang_id) {
+            if (!auth()->user()->profile || !auth()->user()->profile->cabang_id) {
                 return redirect()->back();
             }
             $usersCabangs = Cabang::where('id', auth()->user()->profile->cabang_id)->get();
