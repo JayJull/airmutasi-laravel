@@ -10,6 +10,7 @@ class Konsep extends Model
     use HasFactory;
     protected $fillable = [
         "name",
-        "berkas"
+        "berkas",
+        "cabang_id",
     ];
 }

@@ -106,6 +106,8 @@ Route::group(['prefix' => 'rotasi', 'middleware' => [
 
         Route::get('/', [RotasiCabangController::class, 'index'])->name('rotasi.cabang');
         Route::get("/{id}", [RotasiCabangController::class, 'detail']);
+        Route::get('/konsep/{id}', [RotasiCabangController::class, 'konsep']);
+        Route::post('/konsep/{id}', [RotasiCabangController::class, 'uploadKonsep']);
     });
     Route::group(['prefix' => 'pengajuan'], function () {
         Route::get('/', [RotasiPengajuanController::class, 'inputView']);

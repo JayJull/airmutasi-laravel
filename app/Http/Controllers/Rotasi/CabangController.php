@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Cabang;
 use App\Models\Kelas;
+use App\Models\Konsep;
 use Illuminate\Support\Facades\DB;
 
 class CabangController extends Controller
@@ -248,5 +249,37 @@ class CabangController extends Controller
         }
         $cabang->delete();
         return redirect()->route("rotasi.cabang")->with('success', 'Cabang berhasil dihapus');
+    }
+
+    public function konsep($id)
+    {
+        $konseps = Konsep::where('cabang_id', $id)->get();
+        return view('rotasi.cabang.konsep', ['konseps' => $konseps, 'cabang_id' => $id]);
+    }
+
+    public function uploadKonsep($id, Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'berkas' => 'file|mimes:pdf|max:2048',
+        ]);
+
+        if ($request->hasFile("berkas")) {
+            $file = $request->file('berkas');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $berkas = "/storage/" . $file->storeAs('files', $fileName, 'public');
+        } else {
+            $request->validate([
+                "url" => "required"
+            ]);
+            $berkas = $request->url;
+        }
+
+        $konsep = new Konsep();
+        $konsep->name = $request->name;
+        $konsep->cabang_id = $id;
+        $konsep->berkas = $berkas;
+        $konsep->save();
+        return redirect()->back()->with('success', 'Konsep berhasil ditambahkan');
     }
 }

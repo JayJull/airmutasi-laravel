@@ -328,7 +328,7 @@ class PersonelController extends Controller
 
     public function konsep()
     {
-        $konseps = Konsep::all();
+        $konseps = Konsep::where('cabang_id', null)->get();
         return view('personel.konsep', ["konseps" => $konseps]);
     }
 
@@ -352,7 +352,8 @@ class PersonelController extends Controller
 
         Konsep::create([
             "name" => $request->name,
-            "berkas" => $berkas
+            "berkas" => $berkas,
+            "caban_id" => null
         ]);
 
         return redirect()->route("konsep");
