@@ -222,6 +222,10 @@ class PersonelController extends Controller
                 $dataPersonel['magang'] = $dataPersonel['sts_karyawan'] === 'Magang' || $dataPersonel['sts_karyawan'] === 'MAGANG';
                 $dataPersonel['kontak'] = $dataPersonel['kontak'] ?? "-";
 
+                $dataPersonel['masa_kerja_level_jabatan_th'] = $dataPersonel['masa_kerja_level_jabatan_th'] ? $dataPersonel['masa_kerja_level_jabatan_th'] : "0";
+                $dataPersonel['masa_kerja_level_jabatan_bl'] = $dataPersonel['masa_kerja_level_jabatan_bl'] ? $dataPersonel['masa_kerja_level_jabatan_bl'] : "0";
+                $dataPersonel['skala_jabatan'] = $dataPersonel['skala_jabatan'] ? $dataPersonel['skala_jabatan'] : "0";
+
                 $dataPersonel["tgl_lahir"] = $dataPersonel["tgl_lahir"] ? date('Y-m-d', strtotime($dataPersonel["tgl_lahir"])) : "2000-01-01";
                 $dataPersonel["tmt_kerja_airnav"] = $dataPersonel["tmt_kerja_airnav"] ? date('Y-m-d', strtotime($dataPersonel["tmt_kerja_airnav"])) : "2000-01-01";
                 $dataPersonel["tmt_kerja_golongan"] = $dataPersonel["tmt_kerja_golongan"] ? date('Y-m-d', strtotime($dataPersonel["tmt_kerja_golongan"])) : "2000-01-01";
